@@ -21375,7 +21375,6 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
             Release (MUEC)
             Return (Local1)
-            Return (Ones)
         }
 
         Method (WBAT, 3, Serialized)
@@ -21406,7 +21405,6 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
             Release (MUEC)
             Return (Local1)
-            Return (Ones)
         }
 
         Method (FNCT, 2, Serialized)
