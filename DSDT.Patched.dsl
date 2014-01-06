@@ -4632,7 +4632,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         0x02002E4F, 
                         0x130FD041
                     })
-                    Name (CID2, Package (0x01)
+                    Name (CID2, Package (One)
                     {
                         0x130FD041
                     })
@@ -5857,7 +5857,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -5885,7 +5885,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                         Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                         {
-                            Name (PLDP, Package (0x01)
+                            Name (PLDP, Package (One)
                             {
                                 Buffer (0x10)
                                 {
@@ -5914,7 +5914,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                         Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                         {
-                            Name (PLDP, Package (0x01)
+                            Name (PLDP, Package (One)
                             {
                                 Buffer (0x10)
                                 {
@@ -5943,7 +5943,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                         Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                         {
-                            Name (PLDP, Package (0x01)
+                            Name (PLDP, Package (One)
                             {
                                 Buffer (0x10)
                                 {
@@ -5978,7 +5978,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                         Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                         {
-                            Name (PLDP, Package (0x01)
+                            Name (PLDP, Package (One)
                             {
                                 Buffer (0x10)
                                 {
@@ -6066,7 +6066,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                         Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                         {
-                            Name (PLDP, Package (0x01)
+                            Name (PLDP, Package (One)
                             {
                                 Buffer (0x10)
                                 {
@@ -6154,7 +6154,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                         Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                         {
-                            Name (PLDP, Package (0x01)
+                            Name (PLDP, Package (One)
                             {
                                 Buffer (0x10)
                                 {
@@ -6242,7 +6242,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                         Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                         {
-                            Name (PLDP, Package (0x01)
+                            Name (PLDP, Package (One)
                             {
                                 Buffer (0x10)
                                 {
@@ -6330,7 +6330,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                         Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                         {
-                            Name (PLDP, Package (0x01)
+                            Name (PLDP, Package (One)
                             {
                                 Buffer (0x10)
                                 {
@@ -6448,7 +6448,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -6476,7 +6476,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                         Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                         {
-                            Name (PLDP, Package (0x01)
+                            Name (PLDP, Package (One)
                             {
                                 Buffer (0x10)
                                 {
@@ -6505,7 +6505,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                         Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                         {
-                            Name (PLDP, Package (0x01)
+                            Name (PLDP, Package (One)
                             {
                                 Buffer (0x10)
                                 {
@@ -6593,7 +6593,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                         Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                         {
-                            Name (PLDP, Package (0x01)
+                            Name (PLDP, Package (One)
                             {
                                 Buffer (0x10)
                                 {
@@ -6687,7 +6687,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                         Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                         {
-                            Name (PLDP, Package (0x01)
+                            Name (PLDP, Package (One)
                             {
                                 Buffer (0x10)
                                 {
@@ -6716,7 +6716,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                         Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                         {
-                            Name (PLDP, Package (0x01)
+                            Name (PLDP, Package (One)
                             {
                                 Buffer (0x10)
                                 {
@@ -6745,7 +6745,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                         Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                         {
-                            Name (PLDP, Package (0x01)
+                            Name (PLDP, Package (One)
                             {
                                 Buffer (0x10)
                                 {
@@ -6772,14 +6772,14 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             {
                 If (LEqual (S0ID, One))
                 {
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         PEPD
                     })
                 }
                 Else
                 {
-                    Return (Package (0x00) {})
+                    Return (Package (One) {})
                 }
             }
 
@@ -7359,7 +7359,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -7408,7 +7408,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -7457,7 +7457,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -7506,7 +7506,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -7555,7 +7555,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -7604,7 +7604,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -7653,7 +7653,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -7702,7 +7702,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -7751,7 +7751,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -7827,7 +7827,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -7898,7 +7898,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -7969,7 +7969,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -8040,7 +8040,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -8100,7 +8100,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -8160,7 +8160,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -8220,7 +8220,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -8280,7 +8280,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -8340,7 +8340,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -8400,7 +8400,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -8460,7 +8460,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -8520,7 +8520,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -8689,7 +8689,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         0x00000FEC,         // Address Length
                         _Y1D)
                 })
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Store (ResourceTemplate ()
                         {
@@ -8908,7 +8908,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Return (CRID)
                 }
 
-                Method (PTD3, 0, NotSerialized)
+                Method (PTD3, 0, Serialized)
                 {
                     If (LNotEqual (^^SIRC.CNTR (One), Zero))
                     {
@@ -8963,7 +8963,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     If (LEqual (S0ID, One))
                     {
                         ADBG ("I2C0 DEP")
-                        Return (Package (0x01)
+                        Return (Package (One)
                         {
                             PEPD
                         })
@@ -8971,11 +8971,11 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Else
                     {
                         ADBG ("I2C0 DEP NULL")
-                        Return (Package (0x00) {})
+                        Return (Package (Zero) {Zero})
                     }
                 }
 
-                Method (SSCN, 0, NotSerialized)
+                Method (SSCN, 0, Serialized)
                 {
                     Name (PKG, Package (0x03)
                     {
@@ -8989,7 +8989,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Return (PKG)
                 }
 
-                Method (FMCN, 0, NotSerialized)
+                Method (FMCN, 0, Serialized)
                 {
                     Name (PKG, Package (0x03)
                     {
@@ -9003,7 +9003,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Return (PKG)
                 }
 
-                Method (FPCN, 0, NotSerialized)
+                Method (FPCN, 0, Serialized)
                 {
                     Name (PKG, Package (0x03)
                     {
@@ -9017,9 +9017,9 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Return (PKG)
                 }
 
-                Method (M0D3, 0, NotSerialized)
+                Method (M0D3, 0, Serialized)
                 {
-                    Name (PKG, Package (0x01)
+                    Name (PKG, Package (One)
                     {
                         0xC8
                     })
@@ -9027,9 +9027,9 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Return (PKG)
                 }
 
-                Method (M1D3, 0, NotSerialized)
+                Method (M1D3, 0, Serialized)
                 {
-                    Name (PKG, Package (0x01)
+                    Name (PKG, Package (One)
                     {
                         0x07D0
                     })
@@ -9037,9 +9037,9 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Return (PKG)
                 }
 
-                Method (M0D0, 0, NotSerialized)
+                Method (M0D0, 0, Serialized)
                 {
-                    Name (PKG, Package (0x01)
+                    Name (PKG, Package (One)
                     {
                         Zero
                     })
@@ -9058,7 +9058,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         0x00000015,
                     }
                 })
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (DBUF, ResourceTemplate ()
                     {
@@ -9152,7 +9152,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     If (LEqual (S0ID, One))
                     {
                         ADBG ("I2C1 DEP")
-                        Return (Package (0x01)
+                        Return (Package (One)
                         {
                             PEPD
                         })
@@ -9160,11 +9160,11 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Else
                     {
                         ADBG ("I2C1 DEP NULL")
-                        Return (Package (0x00) {})
+                        Return (Package (Zero) {Zero})
                     }
                 }
 
-                Method (SSCN, 0, NotSerialized)
+                Method (SSCN, 0, Serialized)
                 {
                     Name (PKG, Package (0x03)
                     {
@@ -9178,7 +9178,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Return (PKG)
                 }
 
-                Method (FMCN, 0, NotSerialized)
+                Method (FMCN, 0, Serialized)
                 {
                     Name (PKG, Package (0x03)
                     {
@@ -9192,7 +9192,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Return (PKG)
                 }
 
-                Method (FPCN, 0, NotSerialized)
+                Method (FPCN, 0, Serialized)
                 {
                     Name (PKG, Package (0x03)
                     {
@@ -9206,9 +9206,9 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Return (PKG)
                 }
 
-                Method (M0D3, 0, NotSerialized)
+                Method (M0D3, 0, Serialized)
                 {
-                    Name (PKG, Package (0x01)
+                    Name (PKG, Package (One)
                     {
                         0xC8
                     })
@@ -9216,9 +9216,9 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Return (PKG)
                 }
 
-                Method (M1D3, 0, NotSerialized)
+                Method (M1D3, 0, Serialized)
                 {
-                    Name (PKG, Package (0x01)
+                    Name (PKG, Package (One)
                     {
                         0x07D0
                     })
@@ -9226,9 +9226,9 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Return (PKG)
                 }
 
-                Method (M0D0, 0, NotSerialized)
+                Method (M0D0, 0, Serialized)
                 {
-                    Name (PKG, Package (0x01)
+                    Name (PKG, Package (One)
                     {
                         Zero
                     })
@@ -9247,7 +9247,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         0x00000015,
                     }
                 })
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (DBUF, ResourceTemplate ()
                     {
@@ -9332,9 +9332,9 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Name (_CID, "INT33C0")  // _CID: Compatible ID
                 Name (_UID, One)  // _UID: Unique ID
                 Name (_ADR, 0x00150003)  // _ADR: Address
-                Method (M0D3, 0, NotSerialized)
+                Method (M0D3, 0, Serialized)
                 {
-                    Name (PKG, Package (0x01)
+                    Name (PKG, Package (One)
                     {
                         0xC8
                     })
@@ -9342,9 +9342,9 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Return (PKG)
                 }
 
-                Method (M1D3, 0, NotSerialized)
+                Method (M1D3, 0, Serialized)
                 {
-                    Name (PKG, Package (0x01)
+                    Name (PKG, Package (One)
                     {
                         0x07D0
                     })
@@ -9435,9 +9435,9 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Name (_CID, "INT33C1")  // _CID: Compatible ID
                 Name (_UID, 0x02)  // _UID: Unique ID
                 Name (_ADR, 0x00150004)  // _ADR: Address
-                Method (M0D3, 0, NotSerialized)
+                Method (M0D3, 0, Serialized)
                 {
-                    Name (PKG, Package (0x01)
+                    Name (PKG, Package (One)
                     {
                         0xC8
                     })
@@ -9445,9 +9445,9 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Return (PKG)
                 }
 
-                Method (M1D3, 0, NotSerialized)
+                Method (M1D3, 0, Serialized)
                 {
-                    Name (PKG, Package (0x01)
+                    Name (PKG, Package (One)
                     {
                         0x07D0
                     })
@@ -9466,7 +9466,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         0x00000015,
                     }
                 })
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (DBUF, ResourceTemplate ()
                     {
@@ -9556,7 +9556,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     If (LEqual (S0ID, One))
                     {
                         ADBG ("UA00 DEP")
-                        Return (Package (0x01)
+                        Return (Package (One)
                         {
                             PEPD
                         })
@@ -9564,13 +9564,13 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Else
                     {
                         ADBG ("UA00 DEP NULL")
-                        Return (Package (0x00) {})
+                        Return (Package (Zero) {Zero})
                     }
                 }
 
-                Method (M0D3, 0, NotSerialized)
+                Method (M0D3, 0, Serialized)
                 {
-                    Name (PKG, Package (0x01)
+                    Name (PKG, Package (One)
                     {
                         0xC8
                     })
@@ -9578,9 +9578,9 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Return (PKG)
                 }
 
-                Method (M1D3, 0, NotSerialized)
+                Method (M1D3, 0, Serialized)
                 {
-                    Name (PKG, Package (0x01)
+                    Name (PKG, Package (One)
                     {
                         0xC8
                     })
@@ -9677,7 +9677,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     If (LEqual (S0ID, One))
                     {
                         ADBG ("UA01 DEP")
-                        Return (Package (0x01)
+                        Return (Package (One)
                         {
                             PEPD
                         })
@@ -9685,13 +9685,13 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Else
                     {
                         ADBG ("UA01 DEP NULL")
-                        Return (Package (0x00) {})
+                        Return (Package (Zero) {Zero})
                     }
                 }
 
-                Method (M0D3, 0, NotSerialized)
+                Method (M0D3, 0, Serialized)
                 {
-                    Name (PKG, Package (0x01)
+                    Name (PKG, Package (One)
                     {
                         0xC8
                     })
@@ -9699,9 +9699,9 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Return (PKG)
                 }
 
-                Method (M1D3, 0, NotSerialized)
+                Method (M1D3, 0, Serialized)
                 {
-                    Name (PKG, Package (0x01)
+                    Name (PKG, Package (One)
                     {
                         0xC8
                     })
@@ -9720,7 +9720,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         0x00000015,
                     }
                 })
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (DBUF, ResourceTemplate ()
                     {
@@ -9810,7 +9810,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     If (LEqual (S0ID, One))
                     {
                         ADBG ("SDHC DEP")
-                        Return (Package (0x01)
+                        Return (Package (One)
                         {
                             PEPD
                         })
@@ -9818,7 +9818,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Else
                     {
                         ADBG ("SDHC DEP NULL")
-                        Return (Package (0x00) {})
+                        Return (Package (Zero) {Zero})
                     }
                 }
 
@@ -10138,7 +10138,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Return (Zero)
                 }
 
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (SBFI, ResourceTemplate ()
                     {
@@ -10216,7 +10216,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Return (Zero)
                 }
 
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (SBFI, ResourceTemplate ()
                     {
@@ -10286,7 +10286,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     }
                 }
 
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (SBFI, ResourceTemplate ()
                     {
@@ -10400,7 +10400,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     }
                 }
 
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (SBFI, ResourceTemplate ()
                     {
@@ -10435,7 +10435,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     }
                 }
 
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (SBFI, ResourceTemplate ()
                     {
@@ -10512,7 +10512,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     }
                 }
 
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (SBFI, ResourceTemplate ()
                     {
@@ -10590,7 +10590,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     }
                 }
 
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (SBFI, ResourceTemplate ()
                     {
@@ -10668,7 +10668,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     }
                 }
 
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (SBFI, ResourceTemplate ()
                     {
@@ -11275,7 +11275,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Device (BTH0)
             {
                 Name (_HID, "INT33E0")  // _HID: Hardware ID
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (UBUF, ResourceTemplate ()
                     {
@@ -11307,7 +11307,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Device (BTH1)
             {
                 Name (_HID, "INT33E0")  // _HID: Hardware ID
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (UBUF, ResourceTemplate ()
                     {
@@ -11357,7 +11357,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     }
                 }
 
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (UBUF, ResourceTemplate ()
                     {
@@ -11477,7 +11477,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 If (LEqual (S0ID, One))
                 {
                     ADBG ("ADSP DEP")
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         PEPD
                     })
@@ -11485,7 +11485,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Else
                 {
                     ADBG ("ADSP DEP NULL")
-                    Return (Package (0x00) {})
+                    Return (Package (Zero) {Zero})
                 }
             }
 
@@ -11633,7 +11633,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         ), Zero)))
                     {
                         ADBG ("SAT0 DEP")
-                        Return (Package (0x01)
+                        Return (Package (One)
                         {
                             PEPD
                         })
@@ -11641,7 +11641,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 }
 
                 ADBG ("SAT0 DEP NULL")
-                Return (Package (0x00) {})
+                Return (Package (Zero) {Zero})
             }
 
             Device (PRT0)
@@ -12538,7 +12538,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 If (LEqual (S0ID, One))
                 {
                     ADBG ("CPU0 DEP")
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         \_SB.PEPD
                     })
@@ -12546,7 +12546,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Else
                 {
                     ADBG ("CPU0 DEP NULL")
-                    Return (Package (0x00) {})
+                    Return (Package (Zero) {Zero})
                 }
             }
         }
@@ -12559,7 +12559,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 If (LEqual (S0ID, One))
                 {
                     ADBG ("CPU1 DEP")
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         \_SB.PEPD
                     })
@@ -12567,7 +12567,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Else
                 {
                     ADBG ("CPU1 DEP NULL")
-                    Return (Package (0x00) {})
+                    Return (Package (Zero) {Zero})
                 }
             }
         }
@@ -12580,7 +12580,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 If (LEqual (S0ID, One))
                 {
                     ADBG ("CPU2 DEP")
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         \_SB.PEPD
                     })
@@ -12588,7 +12588,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Else
                 {
                     ADBG ("CPU2 DEP NULL")
-                    Return (Package (0x00) {})
+                    Return (Package (Zero) {Zero})
                 }
             }
         }
@@ -12601,7 +12601,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 If (LEqual (S0ID, One))
                 {
                     ADBG ("CPU3 DEP")
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         \_SB.PEPD
                     })
@@ -12609,7 +12609,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Else
                 {
                     ADBG ("CPU3 DEP NULL")
-                    Return (Package (0x00) {})
+                    Return (Package (Zero) {Zero})
                 }
             }
         }
@@ -12622,7 +12622,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 If (LEqual (S0ID, One))
                 {
                     ADBG ("CPU4 DEP")
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         \_SB.PEPD
                     })
@@ -12630,7 +12630,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Else
                 {
                     ADBG ("CPU4 DEP NULL")
-                    Return (Package (0x00) {})
+                    Return (Package (Zero) {Zero})
                 }
             }
         }
@@ -12643,7 +12643,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 If (LEqual (S0ID, One))
                 {
                     ADBG ("CPU5 DEP")
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         \_SB.PEPD
                     })
@@ -12651,7 +12651,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Else
                 {
                     ADBG ("CPU5 DEP NULL")
-                    Return (Package (0x00) {})
+                    Return (Package (Zero) {Zero})
                 }
             }
         }
@@ -12664,7 +12664,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 If (LEqual (S0ID, One))
                 {
                     ADBG ("CPU6 DEP")
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         \_SB.PEPD
                     })
@@ -12672,7 +12672,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Else
                 {
                     ADBG ("CPU6 DEP NULL")
-                    Return (Package (0x00) {})
+                    Return (Package (Zero) {Zero})
                 }
             }
         }
@@ -12685,7 +12685,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 If (LEqual (S0ID, One))
                 {
                     ADBG ("CPU7 DEP")
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         \_SB.PEPD
                     })
@@ -12693,7 +12693,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Else
                 {
                     ADBG ("CPU7 DEP NULL")
-                    Return (Package (0x00) {})
+                    Return (Package (Zero) {Zero})
                 }
             }
         }
@@ -12751,8 +12751,8 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         }
     }
 
-    Mutex (MUTX, 0x00)
-    Name (SLTP, 0x00)
+    Mutex (MUTX, Zero)
+    Name (SLTP, Zero)
     OperationRegion (DEB0, SystemIO, 0x80, One)
     Field (DEB0, ByteAcc, NoLock, Preserve)
     {
@@ -12773,12 +12773,12 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
     Method (P8XH, 2, Serialized)
     {
-        If (LEqual (Arg0, 0x00))
+        If (LEqual (Arg0, Zero))
         {
             Store (Or (And (P80D, 0xFFFFFF00), Arg1), P80D)
         }
 
-        If (LEqual (Arg0, 0x01))
+        If (LEqual (Arg0, One))
         {
             Store (Or (And (P80D, 0xFFFF00FF), ShiftLeft (Arg1, 0x08)
                 ), P80D)
@@ -12804,7 +12804,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         If (CondRefOf (MDBG))
         {
             Store (Arg0, MDBG)
-            Return
+            Return (Zero)
         }
 
         Return (Zero)
@@ -12870,18 +12870,18 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         ADBG ("_WAK")
         If (And (ICNF, 0x10))
         {
-            If (And (\_SB.PCI0.IGPU.TCHE, 0x0100))
+            If (And (\_SB.PCI0.GFX0.TCHE, 0x0100))
             {
                 If (LEqual (\_SB.IAOE.ITMR, One))
                 {
                     If (LAnd (And (\_SB.IAOE.IBT1, One), LOr (And (\_SB.IAOE.WKRS, 0x02
                         ), And (\_SB.IAOE.WKRS, 0x10))))
                     {
-                        Store (Or (And (\_SB.PCI0.IGPU.STAT, 0xFFFFFFFFFFFFFFFC), One), \_SB.PCI0.IGPU.STAT)
+                        Store (Or (And (\_SB.PCI0.GFX0.STAT, 0xFFFFFFFFFFFFFFFC), One), \_SB.PCI0.GFX0.STAT)
                     }
                     Else
                     {
-                        Store (And (\_SB.PCI0.IGPU.STAT, 0xFFFFFFFFFFFFFFFC), \_SB.PCI0.IGPU.STAT)
+                        Store (And (\_SB.PCI0.GFX0.STAT, 0xFFFFFFFFFFFFFFFC), \_SB.PCI0.GFX0.STAT)
                     }
                 }
                 Else
@@ -12889,11 +12889,11 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     If (LAnd (And (\_SB.IAOE.IBT1, One), LOr (And (\_SB.IAOE.WKRS, 0x02
                         ), And (\_SB.IAOE.WKRS, 0x10))))
                     {
-                        Store (Or (And (\_SB.PCI0.IGPU.STAT, 0xFFFFFFFFFFFFFFFC), One), \_SB.PCI0.IGPU.STAT)
+                        Store (Or (And (\_SB.PCI0.GFX0.STAT, 0xFFFFFFFFFFFFFFFC), One), \_SB.PCI0.GFX0.STAT)
                     }
                     Else
                     {
-                        Store (And (\_SB.PCI0.IGPU.STAT, 0xFFFFFFFFFFFFFFFC), \_SB.PCI0.IGPU.STAT)
+                        Store (And (\_SB.PCI0.GFX0.STAT, 0xFFFFFFFFFFFFFFFC), \_SB.PCI0.GFX0.STAT)
                     }
                 }
             }
@@ -12949,7 +12949,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             {
                 If (LEqual (Arg2, Zero))
                 {
-                    Store (Buffer (0x01)
+                    Store (Buffer (One)
                         {
                              0x03
                         }, Arg4)
@@ -12963,7 +12963,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             }
         }
 
-        Store (Buffer (0x01)
+        Store (Buffer (One)
             {
                  0x00
             }, Arg4)
@@ -13416,12 +13416,12 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Name (DEVS, Package (0x03)
             {
                 0x02, 
-                Package (0x01)
+                Package (One)
                 {
-                    "\\_SB.PCI0.IGPU"
+                    "\\_SB.PCI0.GFX0"
                 }, 
 
-                Package (0x01)
+                Package (One)
                 {
                     "\\_SB.PCI0.SAT0.PRT1"
                 }
@@ -13430,7 +13430,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             {
                 Package (0x02)
                 {
-                    "\\_SB.PCI0.IGPU", 
+                    "\\_SB.PCI0.GFX0", 
                     0xFFFFFFFF
                 }, 
 
@@ -13540,7 +13540,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Package (0x03)
                 {
-                    "\\_SB.PCI0.IGPU", 
+                    "\\_SB.PCI0.GFX0", 
                     One, 
                     Package (0x02)
                     {
@@ -13757,7 +13757,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.SAT0", 
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -13785,7 +13785,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.SAT0.PRT0", 
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -13813,7 +13813,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.SAT0.PRT1", 
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -13841,7 +13841,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.SAT0.PRT2", 
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -13869,7 +13869,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Package (0x02)
                 {
                     "\\_SB.PCI0.SAT0.PRT3", 
-                    Package (0x01)
+                    Package (One)
                     {
                         Package (0x03)
                         {
@@ -13945,9 +13945,9 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                                     Return (Package (0x02)
                                     {
                                         One, 
-                                        Package (0x01)
+                                        Package (One)
                                         {
-                                            "\\_SB.PCI0.IGPU"
+                                            "\\_SB.PCI0.GFX0"
                                         }
                                     })
                                 }
@@ -13958,7 +13958,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                                         Return (Package (0x02)
                                         {
                                             One, 
-                                            Package (0x01)
+                                            Package (One)
                                             {
                                                 "\\_SB.PCI0.SAT0.PRT1"
                                             }
@@ -13972,7 +13972,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                                         }
                                         Else
                                         {
-                                            Return (Package (0x01)
+                                            Return (Package (One)
                                             {
                                                 Zero
                                             })
@@ -14367,9 +14367,9 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
         Method (_L66, 0, NotSerialized)  // _Lxx: Level-Triggered GPE
         {
-            If (LAnd (\_SB.PCI0.IGPU.GSSE, LNot (GSMI)))
+            If (LAnd (\_SB.PCI0.GFX0.GSSE, LNot (GSMI)))
             {
-                \_SB.PCI0.IGPU.GSCI ()
+                \_SB.PCI0.GFX0.GSCI ()
             }
         }
 
@@ -14384,7 +14384,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             {
                 ADBG ("Rotation Lock")
                 Sleep (0x03E8)
-                \_SB.PCI0.IGPU.IUEH (0x04)
+                \_SB.PCI0.GFX0.IUEH (0x04)
             }
         }
     }
@@ -14406,7 +14406,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
         Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
         {
-            Name (PLDP, Package (0x01)
+            Name (PLDP, Package (One)
             {
                 Buffer (0x14)
                 {
@@ -15558,7 +15558,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         Name (OS15, 0x0130)
         Name (OS16, 0x0140)
         Name (OS17, 0x0150)
-        Method (MCTH, 2, NotSerialized)
+        Method (MCTH, 2, Serialized)
         {
             If (LLess (SizeOf (Arg0), SizeOf (Arg1)))
             {
@@ -15635,9 +15635,9 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         Name (ONAM, "ASUSTeK")
         Method (ADVG, 0, NotSerialized)
         {
-            If (\_SB.PCI0.IGPU.PRST ())
+            If (\_SB.PCI0.GFX0.PRST ())
             {
-                Return (\_SB.PCI0.IGPU.ADVD ())
+                Return (\_SB.PCI0.GFX0.ADVD ())
             }
 
             Return (0x03)
@@ -15645,9 +15645,9 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
         Method (GCDM, 0, NotSerialized)
         {
-            If (\_SB.PCI0.IGPU.PRST ())
+            If (\_SB.PCI0.GFX0.PRST ())
             {
-                Return (\_SB.PCI0.IGPU.GCDS ())
+                Return (\_SB.PCI0.GFX0.GCDS ())
             }
 
             Return (One)
@@ -15655,9 +15655,9 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
         Method (SWHG, 1, Serialized)
         {
-            If (\_SB.PCI0.IGPU.PRST ())
+            If (\_SB.PCI0.GFX0.PRST ())
             {
-                \_SB.PCI0.IGPU.SWHD (Arg0)
+                \_SB.PCI0.GFX0.SWHD (Arg0)
                 Return (One)
             }
 
@@ -15666,9 +15666,9 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
         Method (NATK, 0, NotSerialized)
         {
-            If (\_SB.PCI0.IGPU.PRST ())
+            If (\_SB.PCI0.GFX0.PRST ())
             {
-                Return (\_SB.PCI0.IGPU.NATK ())
+                Return (\_SB.PCI0.GFX0.NATK ())
             }
 
             Return (One)
@@ -15780,7 +15780,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 /* 0018 */   0xC2, 0xE3, 0xED, 0x45, 0x91, 0xC2, 0x4C, 0x5A,
                 /* 0020 */   0x6D, 0x19, 0x5D, 0x1C, 0xFF, 0x00, 0x01, 0x08
             })
-            Method (WMNB, 3, NotSerialized)
+            Method (WMNB, 3, Serialized)
             {
                 CreateDWordField (Arg2, Zero, IIA0)
                 CreateDWordField (Arg2, 0x04, IIA1)
@@ -17540,7 +17540,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Return (^^LPCB.EC0.ACAP ())
             }
 
-            Name (_PCL, Package (0x01)  // _PCL: Power Consumer List
+            Name (_PCL, Package (One)  // _PCL: Power Consumer List
             {
                 PCI0
             })
@@ -17561,7 +17561,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         {
             Name (_HID, EisaId ("PNP0C0A"))  // _HID: Hardware ID
             Name (_UID, Zero)  // _UID: Unique ID
-            Name (_PCL, Package (0x01)  // _PCL: Power Consumer List
+            Name (_PCL, Package (One)  // _PCL: Power Consumer List
             {
                 PCI0
             })
@@ -18192,7 +18192,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Local0)
         }
 
-        Method (BIF9, 0, NotSerialized)
+        Method (BIF9, 0, Serialized)
         {
             Name (BSTR, Buffer (0x20) {})
             Store (SMBR (RDBL, BADR, 0x21), Local0)
@@ -18565,7 +18565,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 0x80000000, 
                 0x80000000
             })
-            Method (TSDD, 0, NotSerialized)
+            Method (TSDD, 0, Serialized)
             {
                 Name (TMPC, Zero)
                 Store (^^PCI0.LPCB.EC0.ECPU, TMPC)
@@ -18580,7 +18580,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Return (Ones)
             }
 
-            Method (PSDD, 0, NotSerialized)
+            Method (PSDD, 0, Serialized)
             {
                 Name (PWRC, Zero)
                 Store (PWRG (), PWRC)
@@ -18595,7 +18595,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Return (Ones)
             }
 
-            Method (OSDD, 0, NotSerialized)
+            Method (OSDD, 0, Serialized)
             {
                 Name (OSDC, Zero)
                 Store (OSDG (), OSDC)
@@ -18663,7 +18663,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Return (MBOX)
             }
 
-            Method (WPMD, 1, NotSerialized)
+            Method (WPMD, 1, Serialized)
             {
                 If (LNotEqual (SizeOf (Arg0), 0x1A))
                 {
@@ -18733,7 +18733,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Store (Zero, CYCT)
             }
 
-            Method (RPCS, 0, NotSerialized)
+            Method (RPCS, 0, Serialized)
             {
                 Name (TPCS, Zero)
                 If (LGreater (CYCT, Zero))
@@ -18749,7 +18749,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Return (TPCS)
             }
 
-            Method (RPEC, 0, NotSerialized)
+            Method (RPEC, 0, Serialized)
             {
                 Name (TPEC, Zero)
                 Store (ERRN, TPEC)
@@ -18822,7 +18822,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (GVER, 2, NotSerialized)
+        Method (GVER, 2, Serialized)
         {
             OperationRegion (\FGVR, SystemMemory, Arg0, Arg1)
             Field (FGVR, DWordAcc, NoLock, Preserve)
@@ -18835,7 +18835,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (MF30, 3, NotSerialized)
+        Method (MF30, 3, Serialized)
         {
             OperationRegion (FM30, SystemMemory, Arg0, 0x08)
             Field (FM30, DWordAcc, NoLock, Preserve)
@@ -18871,7 +18871,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (G30V, 2, NotSerialized)
+        Method (G30V, 2, Serialized)
         {
             If (LLess (Arg1, 0x0C))
             {
@@ -18891,7 +18891,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (EC01, 2, NotSerialized)
+        Method (EC01, 2, Serialized)
         {
             If (LLess (Arg1, 0x10))
             {
@@ -18919,7 +18919,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (DerefOf (Index (Local0, Zero)))
         }
 
-        Method (EC02, 2, NotSerialized)
+        Method (EC02, 2, Serialized)
         {
             If (LLess (Arg1, 0x30))
             {
@@ -18976,7 +18976,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
     Scope (_SB.ATKD)
     {
-        Method (MF1X, 4, NotSerialized)
+        Method (MF1X, 4, Serialized)
         {
             OperationRegion (FM1X, SystemMemory, Arg0, 0x08)
             Field (FM1X, DWordAcc, NoLock, Preserve)
@@ -19068,7 +19068,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Local0)
         }
 
-        Method (G10V, 2, NotSerialized)
+        Method (G10V, 2, Serialized)
         {
             If (LLess (Arg1, 0x0C))
             {
@@ -19088,7 +19088,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (SRTC, 2, NotSerialized)
+        Method (SRTC, 2, Serialized)
         {
             If (LLess (Arg1, 0x0C))
             {
@@ -19137,7 +19137,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Local0)
         }
 
-        Method (G11V, 2, NotSerialized)
+        Method (G11V, 2, Serialized)
         {
             If (LLess (Arg1, 0x0C))
             {
@@ -19157,7 +19157,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (GBAT, 2, NotSerialized)
+        Method (GBAT, 2, Serialized)
         {
             If (LLess (Arg1, 0x0A))
             {
@@ -19177,7 +19177,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (ASBR, 2, NotSerialized)
+        Method (ASBR, 2, Serialized)
         {
             If (LLess (Arg1, 0x30))
             {
@@ -19323,7 +19323,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (0x10)
         }
 
-        Method (BTCR, 2, NotSerialized)
+        Method (BTCR, 2, Serialized)
         {
             If (LLess (Arg1, 0x09))
             {
@@ -19362,7 +19362,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Local0)
         }
 
-        Method (G12V, 2, NotSerialized)
+        Method (G12V, 2, Serialized)
         {
             If (LLess (Arg1, 0x0C))
             {
@@ -19382,7 +19382,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (GLDI, 2, NotSerialized)
+        Method (GLDI, 2, Serialized)
         {
             If (LLess (Arg1, 0x10))
             {
@@ -19404,7 +19404,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (LDCR, 2, NotSerialized)
+        Method (LDCR, 2, Serialized)
         {
             If (LLess (Arg1, 0x0A))
             {
@@ -19474,7 +19474,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Local0)
         }
 
-        Method (G13V, 2, NotSerialized)
+        Method (G13V, 2, Serialized)
         {
             If (LLess (Arg1, 0x0C))
             {
@@ -19494,7 +19494,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (GTSI, 2, NotSerialized)
+        Method (GTSI, 2, Serialized)
         {
             If (LLess (Arg1, 0x0C))
             {
@@ -19534,7 +19534,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (GTSV, 2, NotSerialized)
+        Method (GTSV, 2, Serialized)
         {
             If (LLess (Arg1, 0x0A))
             {
@@ -19584,7 +19584,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (0x10)
         }
 
-        Method (GVSN, 2, NotSerialized)
+        Method (GVSN, 2, Serialized)
         {
             If (LLess (Arg1, 0x09))
             {
@@ -19602,7 +19602,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (GVSV, 2, NotSerialized)
+        Method (GVSV, 2, Serialized)
         {
             If (LLess (Arg1, 0x0B))
             {
@@ -19625,7 +19625,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (GFNN, 2, NotSerialized)
+        Method (GFNN, 2, Serialized)
         {
             If (LLess (Arg1, 0x09))
             {
@@ -19643,7 +19643,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (GFNS, 2, NotSerialized)
+        Method (GFNS, 2, Serialized)
         {
             If (LLess (Arg1, 0x0D))
             {
@@ -19668,7 +19668,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (SFNS, 2, NotSerialized)
+        Method (SFNS, 2, Serialized)
         {
             If (LLess (Arg1, 0x0A))
             {
@@ -19713,7 +19713,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Local0)
         }
 
-        Method (G14V, 2, NotSerialized)
+        Method (G14V, 2, Serialized)
         {
             If (LLess (Arg1, 0x0C))
             {
@@ -19733,7 +19733,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (GNBT, 2, NotSerialized)
+        Method (GNBT, 2, Serialized)
         {
             If (LLess (Arg1, 0x09))
             {
@@ -19751,7 +19751,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (GBTS, 2, NotSerialized)
+        Method (GBTS, 2, Serialized)
         {
             If (LLess (Arg1, 0x0A))
             {
@@ -19865,7 +19865,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Local0)
         }
 
-        Method (G15V, 2, NotSerialized)
+        Method (G15V, 2, Serialized)
         {
             If (LLess (Arg1, 0x0C))
             {
@@ -19885,7 +19885,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (GLDB, 2, NotSerialized)
+        Method (GLDB, 2, Serialized)
         {
             If (LLess (Arg1, 0x0A))
             {
@@ -19905,7 +19905,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (SLDB, 2, NotSerialized)
+        Method (SLDB, 2, Serialized)
         {
             If (LLess (Arg1, 0x0A))
             {
@@ -19940,7 +19940,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (0x11)
         }
 
-        Method (GDPI, 2, NotSerialized)
+        Method (GDPI, 2, Serialized)
         {
             If (LLess (Arg1, 0x10))
             {
@@ -19963,7 +19963,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (SODP, 2, NotSerialized)
+        Method (SODP, 2, Serialized)
         {
             If (LLess (Arg1, 0x0C))
             {
@@ -20011,7 +20011,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Local0)
         }
 
-        Method (G16V, 2, NotSerialized)
+        Method (G16V, 2, Serialized)
         {
             If (LLess (Arg1, 0x0C))
             {
@@ -20031,7 +20031,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (SFBD, 2, NotSerialized)
+        Method (SFBD, 2, Serialized)
         {
             If (LLess (Arg1, 0x0A))
             {
@@ -20098,7 +20098,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Local0)
         }
 
-        Method (G17V, 2, NotSerialized)
+        Method (G17V, 2, Serialized)
         {
             If (LLess (Arg1, 0x0C))
             {
@@ -20118,7 +20118,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (GMDL, 2, NotSerialized)
+        Method (GMDL, 2, Serialized)
         {
             If (LLess (Arg1, 0x19))
             {
@@ -20155,7 +20155,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (GBSI, 2, NotSerialized)
+        Method (GBSI, 2, Serialized)
         {
             If (LLess (Arg1, 0x19))
             {
@@ -20192,7 +20192,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (GECI, 2, NotSerialized)
+        Method (GECI, 2, Serialized)
         {
             If (LLess (Arg1, 0x19))
             {
@@ -20218,7 +20218,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (GFII, 2, NotSerialized)
+        Method (GFII, 2, Serialized)
         {
             If (LLess (Arg1, 0x10))
             {
@@ -20262,7 +20262,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Local0)
         }
 
-        Method (G18V, 2, NotSerialized)
+        Method (G18V, 2, Serialized)
         {
             If (LLess (Arg1, 0x0C))
             {
@@ -20282,7 +20282,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (GDVI, 2, NotSerialized)
+        Method (GDVI, 2, Serialized)
         {
             If (LLess (Arg1, 0x18))
             {
@@ -20301,7 +20301,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (GDVS, 2, NotSerialized)
+        Method (GDVS, 2, Serialized)
         {
             If (LLess (Arg1, 0x0A))
             {
@@ -20325,7 +20325,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (SDPW, 2, NotSerialized)
+        Method (SDPW, 2, Serialized)
         {
             If (LLess (Arg1, 0x0A))
             {
@@ -20375,7 +20375,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Local0)
         }
 
-        Method (G19V, 2, NotSerialized)
+        Method (G19V, 2, Serialized)
         {
             If (LLess (Arg1, 0x0C))
             {
@@ -20401,7 +20401,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (CSIN, 2, NotSerialized)
+        Method (CSIN, 2, Serialized)
         {
             If (LLess (Arg1, 0x0A))
             {
@@ -20419,7 +20419,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (NVIN, 2, NotSerialized)
+        Method (NVIN, 2, Serialized)
         {
             OperationRegion (FM1F, SystemMemory, Arg0, Arg1)
             Field (FM1F, DWordAcc, NoLock, Preserve)
@@ -20431,7 +20431,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (ANVI (AM1F))
         }
 
-        Method (BATF, 1, NotSerialized)
+        Method (BATF, 1, Serialized)
         {
             Store (GNBF, Local0)
             OperationRegion (FMAD, SystemMemory, Local0, 0x10)
@@ -20484,7 +20484,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
     Scope (_SB.ATKD)
     {
-        Method (OFBD, 1, NotSerialized)
+        Method (OFBD, 1, Serialized)
         {
             Name (FBDT, Package (0x52)
             {
@@ -20606,7 +20606,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Store (Arg1, Local1)
         }
 
-        Method (MF42, 3, NotSerialized)
+        Method (MF42, 3, Serialized)
         {
             OperationRegion (FM42, SystemMemory, Arg0, 0x08)
             Field (FM42, DWordAcc, NoLock, Preserve)
@@ -20642,7 +20642,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (SFBO, 2, NotSerialized)
+        Method (SFBO, 2, Serialized)
         {
             OperationRegion (\F421, SystemMemory, Arg0, Arg1)
             Field (F421, DWordAcc, NoLock, Preserve)
@@ -20654,7 +20654,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (SAOC, 2, NotSerialized)
+        Method (SAOC, 2, Serialized)
         {
             OperationRegion (\F422, SystemMemory, Arg0, Arg1)
             Field (F422, DWordAcc, NoLock, Preserve)
@@ -20666,7 +20666,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Zero)
         }
 
-        Method (GBST, 2, NotSerialized)
+        Method (GBST, 2, Serialized)
         {
             OperationRegion (\F423, SystemMemory, Arg0, Arg1)
             Field (F423, DWordAcc, NoLock, Preserve)
@@ -21212,7 +21212,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                             ShiftLeft (Local4, 0x04, Local4)
                             Store (LBTN, Local3)
                             Store (Add (Local4, Local3), Local3)
-                            ^^^IGPU.AINT (One, Divide (Multiply (DerefOf (Index (PWAC, Local3)), 0x64
+                            ^^^GFX0.AINT (One, Divide (Multiply (DerefOf (Index (PWAC, Local3)), 0x64
                                 ), 0xFF, ))
                         }
                     }
@@ -21580,7 +21580,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
         Method (SMBW, 5, Serialized)
         {
-            Store (Package (0x01)
+            Store (Package (One)
                 {
                     0x07
                 }, Local0)
@@ -22642,7 +22642,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         If (LEqual (MSOS (), OSW7))
                         {
                             Store (RALS (), Local0)
-                            ^^^IGPU.AINT (Zero, Local0)
+                            ^^^GFX0.AINT (Zero, Local0)
                         }
                         Else
                         {
@@ -22962,9 +22962,9 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         Name (ASBN, Zero)
         Method (SBRN, 0, Serialized)
         {
-            If (^^^IGPU.PRST ())
+            If (^^^GFX0.PRST ())
             {
-                Store (^^^IGPU.GCBL (^^^IGPU.CBLV), Local0)
+                Store (^^^GFX0.GCBL (^^^GFX0.CBLV), Local0)
                 Subtract (0x0A, Local0, Local1)
                 If (LNotEqual (Local1, LBTN))
                 {
@@ -23493,7 +23493,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 If (And (VGAF, One))
                 {
-                    Store (One, ^^PCI0.IGPU.CLID)
+                    Store (One, ^^PCI0.GFX0.CLID)
                 }
 
                 Return (Local0)
@@ -23529,9 +23529,9 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             {
                 Store (GLID (), Local0)
                 Store (Local0, LIDS)
-                If (CondRefOf (\_SB.PCI0.IGPU.GLID))
+                If (CondRefOf (\_SB.PCI0.GFX0.GLID))
                 {
-                    ^^^IGPU.GLID (LIDS)
+                    ^^^GFX0.GLID (LIDS)
                 }
             }
         }
@@ -23715,7 +23715,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Local0)
         }
 
-        Method (RBPE, 1, NotSerialized)
+        Method (RBPE, 1, Serialized)
         {
             Acquire (MUTE, 0xFFFF)
             Add (Arg0, PEBS, Local0)
@@ -23729,7 +23729,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (XCFG)
         }
 
-        Method (RWPE, 1, NotSerialized)
+        Method (RWPE, 1, Serialized)
         {
             Acquire (MUTE, 0xFFFF)
             And (Arg0, 0xFFFFFFFE, Arg0)
@@ -23744,7 +23744,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (XCFG)
         }
 
-        Method (RDPE, 1, NotSerialized)
+        Method (RDPE, 1, Serialized)
         {
             Acquire (MUTE, 0xFFFF)
             And (Arg0, 0xFFFFFFFC, Arg0)
@@ -23759,7 +23759,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (XCFG)
         }
 
-        Method (WBPE, 2, NotSerialized)
+        Method (WBPE, 2, Serialized)
         {
             Acquire (MUTE, 0xFFFF)
             Add (Arg0, PEBS, Local0)
@@ -23773,7 +23773,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Release (MUTE)
         }
 
-        Method (WWPE, 2, NotSerialized)
+        Method (WWPE, 2, Serialized)
         {
             Acquire (MUTE, 0xFFFF)
             And (Arg0, 0xFFFFFFFE, Arg0)
@@ -23788,7 +23788,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Release (MUTE)
         }
 
-        Method (WDPE, 2, NotSerialized)
+        Method (WDPE, 2, Serialized)
         {
             Acquire (MUTE, 0xFFFF)
             And (Arg0, 0xFFFFFFFC, Arg0)
@@ -23803,7 +23803,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Release (MUTE)
         }
 
-        Method (RWDP, 3, NotSerialized)
+        Method (RWDP, 3, Serialized)
         {
             Acquire (MUTE, 0xFFFF)
             And (Arg0, 0xFFFFFFFC, Arg0)
@@ -25231,7 +25231,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
     Scope (_SB.PCI0.XHC.RHUB.HS05)
     {
-        Name (CAPD, Package (0x01)
+        Name (CAPD, Package (One)
         {
             Buffer (0x14)
             {
@@ -25350,27 +25350,27 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
     })
     Name (_S0, Package (0x03)  // _S0_: S0 System State
     {
-        0x00, 
-        0x00, 
-        0x00
+        Zero, 
+        Zero, 
+        Zero
     })
     Name (_S3, Package (0x03)  // _S3_: S3 System State
     {
         0x05, 
         0x05, 
-        0x00
+        Zero
     })
     Name (_S4, Package (0x03)  // _S4_: S4 System State
     {
         0x06, 
         0x06, 
-        0x00
+        Zero
     })
     Name (_S5, Package (0x03)  // _S5_: S5 System State
     {
         0x07, 
         0x07, 
-        0x00
+        Zero
     })
     Method (_TTS, 1, NotSerialized)  // _TTS: Transition To State
     {
@@ -25705,7 +25705,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             }
         }
 
-        Device (IGPU)
+        Device (GFX0)
         {
             Name (_ADR, 0x00020000)  // _ADR: Address
             OperationRegion (VSID, PCI_Config, Zero, 0x04)
@@ -25716,19 +25716,19 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
             Method (DEP, 0, NotSerialized)
             {
-                ADBG ("IGPU DEP Call")
+                ADBG ("GFX0 DEP Call")
                 If (LEqual (S0ID, One))
                 {
-                    ADBG ("IGPU DEP")
-                    Return (Package (0x01)
+                    ADBG ("GFX0 DEP")
+                    Return (Package (One)
                     {
                         PEPD
                     })
                 }
                 Else
                 {
-                    ADBG ("IGPU DEP NULL")
-                    Return (Package (0x00) {})
+                    ADBG ("GFX0 DEP NULL")
+                    Return (Package (Zero) {Zero})
                 }
             }
 
@@ -25751,7 +25751,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 }
             }
 
-            Method (_DOD, 0, NotSerialized)  // _DOD: Display Output Devices
+            Method (_DOD, 0, Serialized)  // _DOD: Display Output Devices
             {
                 If (CondRefOf (IDAB))
                 {
@@ -25838,7 +25838,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 If (LEqual (NDID, One))
                 {
-                    Name (TMP1, Package (0x01)
+                    Name (TMP1, Package (One)
                     {
                         Ones
                     })
@@ -26196,7 +26196,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Return (TMPF)
                 }
 
-                Return (Package (0x01)
+                Return (Package (One)
                 {
                     0x0400
                 })
@@ -27063,7 +27063,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     }
                 }
 
-                Method (_BCL, 0, NotSerialized)  // _BCL: Brightness Control Levels
+                Method (_BCL, 0, Serialized)  // _BCL: Brightness Control Levels
                 {
                     If (LGreaterEqual (MSOS (), OSW8))
                     {
@@ -27873,7 +27873,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     }
                     Else
                     {
-                        Notify (IGPU, Arg1)
+                        Notify (GFX0, Arg1)
                     }
                 }
 
@@ -27883,7 +27883,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 }
                 Else
                 {
-                    Notify (IGPU, 0x80)
+                    Notify (GFX0, 0x80)
                 }
 
                 Return (Zero)
@@ -28970,7 +28970,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     }
 
                     ISMI (0x94)
-                    Notify (IGPU, 0x81)
+                    Notify (GFX0, 0x81)
                 }
                 Else
                 {
@@ -28985,7 +28985,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         }
                         Else
                         {
-                            Notify (IGPU, Zero)
+                            Notify (GFX0, Zero)
                         }
 
                         Sleep (0x03E8)
@@ -28993,7 +28993,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                     Store (AF2D (Arg0), NSTE)
                     WNDD (NSTE)
-                    Notify (IGPU, 0x80)
+                    Notify (GFX0, 0x80)
                 }
 
                 Return (Zero)
@@ -29135,18 +29135,18 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         Method (SAOS, 1, NotSerialized)
         {
             Store (One, IIST)
-            If (And (\_SB.PCI0.IGPU.TCHE, 0x0100))
+            If (And (\_SB.PCI0.GFX0.TCHE, 0x0100))
             {
                 If (LEqual (ITMR, One))
                 {
                     If (LAnd (LAnd (And (IBT1, One), LOr (And (\_SB.IAOE.WKRS, 
                         0x02), And (\_SB.IAOE.WKRS, 0x10))), LNot (And (Arg0, One))))
                     {
-                        If (LNot (\_SB.PCI0.IGPU.PARD ()))
+                        If (LNot (\_SB.PCI0.GFX0.PARD ()))
                         {
-                            Store (And (\_SB.PCI0.IGPU.STAT, 0xFFFFFFFC), \_SB.PCI0.IGPU.STAT)
-                            Store (Or (\_SB.PCI0.IGPU.ASLC, 0x0100), \_SB.PCI0.IGPU.ASLC)
-                            Store (One, \_SB.PCI0.IGPU.ASLE)
+                            Store (And (\_SB.PCI0.GFX0.STAT, 0xFFFFFFFC), \_SB.PCI0.GFX0.STAT)
+                            Store (Or (\_SB.PCI0.GFX0.ASLC, 0x0100), \_SB.PCI0.GFX0.ASLC)
+                            Store (One, \_SB.PCI0.GFX0.ASLE)
                         }
                     }
                 }
@@ -29155,11 +29155,11 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     If (LAnd (LAnd (And (IBT1, One), LOr (And (\_SB.IAOE.WKRS, 
                         0x02), And (\_SB.IAOE.WKRS, 0x10))), LNot (And (Arg0, One))))
                     {
-                        If (LNot (\_SB.PCI0.IGPU.PARD ()))
+                        If (LNot (\_SB.PCI0.GFX0.PARD ()))
                         {
-                            Store (And (\_SB.PCI0.IGPU.STAT, 0xFFFFFFFC), \_SB.PCI0.IGPU.STAT)
-                            Store (Or (\_SB.PCI0.IGPU.ASLC, 0x0100), \_SB.PCI0.IGPU.ASLC)
-                            Store (One, \_SB.PCI0.IGPU.ASLE)
+                            Store (And (\_SB.PCI0.GFX0.STAT, 0xFFFFFFFC), \_SB.PCI0.GFX0.STAT)
+                            Store (Or (\_SB.PCI0.GFX0.ASLC, 0x0100), \_SB.PCI0.GFX0.ASLC)
+                            Store (One, \_SB.PCI0.GFX0.ASLE)
                         }
                     }
                 }
@@ -31063,7 +31063,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
     Scope (_SB.IETM)
     {
-        Name (CTSP, Package (0x01)
+        Name (CTSP, Package (One)
         {
             Buffer (0x10)
             {
@@ -31089,7 +31089,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             }
             Else
             {
-                Return (Package (0x01)
+                Return (Package (One)
                 {
                     Zero
                 })
@@ -31103,7 +31103,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Store (CPNU (\_PR.PL10, One), AAAA)
             Store (CPNU (\_PR.PL11, One), BBBB)
             Store (CPNU (\_PR.PL12, One), CCCC)
-            Name (TMP1, Package (0x01)
+            Name (TMP1, Package (One)
             {
                 Package (0x05)
                 {
@@ -31508,7 +31508,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
     Scope (_SB.IETM)
     {
-        Name (LPSP, Package (0x01)
+        Name (LPSP, Package (One)
         {
             Buffer (0x10)
             {
@@ -32019,13 +32019,13 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
             Method (_BCL, 0, NotSerialized)  // _BCL: Brightness Control Levels
             {
-                If (CondRefOf (\_SB.PCI0.IGPU.LCDD._BCL))
+                If (CondRefOf (\_SB.PCI0.GFX0.LCDD._BCL))
                 {
-                    Return (^^IGPU.LCDD._BCL ())
+                    Return (^^GFX0.LCDD._BCL ())
                 }
                 Else
                 {
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         Zero
                     })
@@ -32034,17 +32034,17 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
             Method (_BCM, 1, NotSerialized)  // _BCM: Brightness Control Method
             {
-                If (CondRefOf (\_SB.PCI0.IGPU.LCDD._BCM))
+                If (CondRefOf (\_SB.PCI0.GFX0.LCDD._BCM))
                 {
-                    ^^IGPU.LCDD._BCM (Arg0)
+                    ^^GFX0.LCDD._BCM (Arg0)
                 }
             }
 
             Method (_BQC, 0, NotSerialized)  // _BQC: Brightness Query Current
             {
-                If (CondRefOf (\_SB.PCI0.IGPU.LCDD._BQC))
+                If (CondRefOf (\_SB.PCI0.GFX0.LCDD._BQC))
                 {
-                    Return (^^IGPU.LCDD._BQC ())
+                    Return (^^GFX0.LCDD._BQC ())
                 }
                 Else
                 {
@@ -32054,9 +32054,9 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
             Method (_DCS, 0, NotSerialized)  // _DCS: Display Current Status
             {
-                If (CondRefOf (\_SB.PCI0.IGPU.LCDD._DCS))
+                If (CondRefOf (\_SB.PCI0.GFX0.LCDD._DCS))
                 {
-                    Return (^^IGPU.LCDD._DCS ())
+                    Return (^^GFX0.LCDD._DCS ())
                 }
                 Else
                 {
@@ -32068,7 +32068,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
     Scope (_SB.IETM)
     {
-        Name (DPSP, Package (0x01)
+        Name (DPSP, Package (One)
         {
             Buffer (0x10)
             {
@@ -32076,7 +32076,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 /* 0008 */   0xA8, 0x4B, 0x4A, 0x8C, 0xE7, 0x90, 0x27, 0xD3
             }
         })
-        Name (DASP, Package (0x01)
+        Name (DASP, Package (One)
         {
             Buffer (0x10)
             {
@@ -32084,7 +32084,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 /* 0008 */   0xA5, 0x26, 0xC5, 0x2C, 0x88, 0x62, 0x6B, 0xAE
             }
         })
-        Name (DCSP, Package (0x01)
+        Name (DCSP, Package (One)
         {
             Buffer (0x10)
             {
@@ -32092,7 +32092,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 /* 0008 */   0xB8, 0xC9, 0x5D, 0xA8, 0x1D, 0x60, 0x6E, 0x0A
             }
         })
-        Name (DMSP, Package (0x01)
+        Name (DMSP, Package (One)
         {
             Buffer (0x10)
             {
@@ -32249,7 +32249,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         If (Arg0)
         {
             \_SB.PCI0.NPTS (Arg0)
-            \_SB.PCI0.IGPU.OPTS (Arg0)
+            \_SB.PCI0.GFX0.OPTS (Arg0)
             OEMS (Arg0)
         }
     }
@@ -32258,7 +32258,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
     {
         \_SB.PCI0.NWAK (Arg0)
         \_SB.ATKD.GENW (Arg0)
-        \_SB.PCI0.IGPU.OWAK (Arg0)
+        \_SB.PCI0.GFX0.OWAK (Arg0)
         OEMW (Arg0)
     }
 
