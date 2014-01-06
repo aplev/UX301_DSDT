@@ -9,7 +9,7 @@ CPU: i7-4558U (2 x 2,8 + 2HT) (Haswell-ULT)
 (Cache: L1=128KB L2=512KB L3=4MB)
 
 GPU: Intel Iris 5100 (Dev=0A2E Ven=8086)
-RAM: DDR3L-1600 (2x Elpida 4GB / Onboard)
+<br>RAM: DDR3L-1600 (2x Elpida 4GB / Onboard)
 Chipset: Intel Lynx Point-LP / HM87 / ICH8(m)
 Audio: Intel HD (ALC282)
 SSD: 2x Sandisk X110(SD6) 128GB (M.2/NGFF)
