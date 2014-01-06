@@ -8,7 +8,7 @@ UX301_DSDT
 <br>CPU: i7-4558U (2 x 2,8 + 2HT) (Haswell-ULT)
 <br>(Cache: L1=128KB L2=512KB L3=4MB)
 
-GPU: Intel Iris 5100 (Dev=0A2E Ven=8086)
+<br>GPU: Intel Iris 5100 (Dev=0A2E Ven=8086)
 <br>RAM: DDR3L-1600 (2x Elpida 4GB / Onboard)
 <br>Chipset: Intel Lynx Point-LP / HM87 / ICH8(m)
 <br>Audio: Intel HD (ALC282)
@@ -35,18 +35,18 @@ Whats Working:
 <br>Backlight Display: Working with Patched DSDT
 <br>Battery: Working!
 <br>SD Reader: Working OTB (But no entry in Systemprofiler)
-Touchscreen: Working with Touch-Base drivers!
-KeyboardFN Keys: Working with AsusFNKeys
-
-To-Do:
-Sleep: GoToSleep Working / WakeFromSleep causes Shutdown/Reboot
-USB: RehabMan GenericUSB - Working, but crashes on some Devices like (Wifi-dongle plug-out)
-HD WebCam: Working OTB (But doesnt turns off after you used it)
+<br>Touchscreen: Working with Touch-Base drivers!
+<br>KeyboardFN Keys: Working with AsusFNKeys
+<br>
+<br>To-Do:
+<br>Sleep: GoToSleep Working / WakeFromSleep causes Shutdown/Reboot
+<br>USB: RehabMan GenericUSB - Working, but crashes on some Devices like (Wifi-dongle plug-out)
+<br>HD WebCam: Working OTB (But doesnt turns off after you used it)
 
 ==============
 
 
-All help is Welcome.
-If you want contact me, just email me at: a.kaplan@oilrec.de
+<br>All help is Welcome.
+<br>If you want contact me, just email me at: a.kaplan@oilrec.de
 
-IN PROGRESS...
+<br>IN PROGRESS...
