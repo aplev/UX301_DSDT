@@ -3,7 +3,7 @@
  * AML Disassembler version 20130823-64 [Aug 30 2013]
  * Copyright (c) 2000 - 2013 Intel Corporation
  * 
- * Disassembly of iASLcztvP1.aml, Mon Jan  6 05:48:24 2014
+ * Disassembly of iASLevpr8R.aml, Mon Jan  6 15:48:14 2014
  *
  * Original Table Header:
  *     Signature        "DSDT"
@@ -16,7 +16,7 @@
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20130823 (538118179)
  */
-DefinitionBlock ("iASLcztvP1.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
+DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 {
     /*
      * iASL Warning: There were 6 external control methods found during
@@ -10761,7 +10761,7 @@ DefinitionBlock ("iASLcztvP1.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     })
                     If (LEqual (GR13, One))
                     {
-                        CreateByteField (SBFI, \_SB.PCI0.I2C1.TPD0._CRS._Y27._INT, VAL3)  // _INT: Interrupts
+                        CreateDWordField (SBFI, \_SB.PCI0.I2C1.TPD0._CRS._Y27._INT, VAL3)  // _INT: Interrupts
                         Store (0x1B, VAL3)
                     }
 
@@ -10845,7 +10845,7 @@ DefinitionBlock ("iASLcztvP1.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     })
                     If (LEqual (GR13, One))
                     {
-                        CreateByteField (SBFI, \_SB.PCI0.I2C1.TPD1._CRS._Y28._INT, VAL3)  // _INT: Interrupts
+                        CreateDWordField (SBFI, \_SB.PCI0.I2C1.TPD1._CRS._Y28._INT, VAL3)  // _INT: Interrupts
                         Store (0x1B, VAL3)
                     }
 
@@ -10929,7 +10929,7 @@ DefinitionBlock ("iASLcztvP1.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     })
                     If (LEqual (GR13, One))
                     {
-                        CreateByteField (SBFI, \_SB.PCI0.I2C1.TPD2._CRS._Y29._INT, VAL3)  // _INT: Interrupts
+                        CreateDWordField (SBFI, \_SB.PCI0.I2C1.TPD2._CRS._Y29._INT, VAL3)  // _INT: Interrupts
                         Store (0x1B, VAL3)
                     }
 
@@ -11013,7 +11013,7 @@ DefinitionBlock ("iASLcztvP1.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     })
                     If (LEqual (GR13, One))
                     {
-                        CreateByteField (SBFI, \_SB.PCI0.I2C1.TPD3._CRS._Y2A._INT, VAL3)  // _INT: Interrupts
+                        CreateDWordField (SBFI, \_SB.PCI0.I2C1.TPD3._CRS._Y2A._INT, VAL3)  // _INT: Interrupts
                         Store (0x1B, VAL3)
                     }
 
@@ -11109,7 +11109,7 @@ DefinitionBlock ("iASLcztvP1.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     })
                     If (LEqual (GR13, One))
                     {
-                        CreateByteField (SBFI, \_SB.PCI0.I2C1.TPD7._CRS._Y2B._INT, VAL3)  // _INT: Interrupts
+                        CreateDWordField (SBFI, \_SB.PCI0.I2C1.TPD7._CRS._Y2B._INT, VAL3)  // _INT: Interrupts
                         Store (0x1B, VAL3)
                     }
 
@@ -11229,7 +11229,7 @@ DefinitionBlock ("iASLcztvP1.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     })
                     If (LEqual (GR13, One))
                     {
-                        CreateByteField (SBFI, \_SB.PCI0.I2C1.TPD8._CRS._Y2C._INT, VAL3)  // _INT: Interrupts
+                        CreateDWordField (SBFI, \_SB.PCI0.I2C1.TPD8._CRS._Y2C._INT, VAL3)  // _INT: Interrupts
                         Store (0x1B, VAL3)
                     }
 
@@ -12752,6 +12752,7 @@ DefinitionBlock ("iASLcztvP1.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
     }
 
     Mutex (MUTX, 0x00)
+    Name (SLTP, 0x00)
     OperationRegion (DEB0, SystemIO, 0x80, One)
     Field (DEB0, ByteAcc, NoLock, Preserve)
     {
@@ -12763,7 +12764,7 @@ DefinitionBlock ("iASLcztvP1.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
     {
         DBG9,   16
     }
-
+    
     OperationRegion (PRT0, SystemIO, 0x80, 0x04)
     Field (PRT0, DWordAcc, Lock, Preserve)
     {
@@ -12772,12 +12773,12 @@ DefinitionBlock ("iASLcztvP1.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
     Method (P8XH, 2, Serialized)
     {
-        If (LEqual (Arg0, Zero))
+        If (LEqual (Arg0, 0x00))
         {
             Store (Or (And (P80D, 0xFFFFFF00), Arg1), P80D)
         }
 
-        If (LEqual (Arg0, One))
+        If (LEqual (Arg0, 0x01))
         {
             Store (Or (And (P80D, 0xFFFF00FF), ShiftLeft (Arg1, 0x08)
                 ), P80D)
@@ -12803,7 +12804,7 @@ DefinitionBlock ("iASLcztvP1.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         If (CondRefOf (MDBG))
         {
             Store (Arg0, MDBG)
-            Return (Zero)
+            Return
         }
 
         Return (Zero)
@@ -12948,7 +12949,7 @@ DefinitionBlock ("iASLcztvP1.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             {
                 If (LEqual (Arg2, Zero))
                 {
-                    Store (Buffer (One)
+                    Store (Buffer (0x01)
                         {
                              0x03
                         }, Arg4)
@@ -12962,13 +12963,13 @@ DefinitionBlock ("iASLcztvP1.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             }
         }
 
-        Store (Buffer (One)
+        Store (Buffer (0x01)
             {
                  0x00
             }, Arg4)
         Return (Zero)
     }
-
+    
     Method (PNOT, 0, Serialized)
     {
         If (CondRefOf (\_SB.PCCD.PENB))
@@ -25349,34 +25350,34 @@ DefinitionBlock ("iASLcztvP1.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             0x05DC
         }
     })
-    Name (_S0, Package (0x04)  // _S0_: S0 System State
+    Name (_S0, Package (0x03)  // _S0_: S0 System State
     {
-        Zero, 
-        Zero, 
-        Zero, 
-        Zero
+        0x00, 
+        0x00, 
+        0x00
     })
-    Name (_S3, Package (0x04)  // _S3_: S3 System State
+    Name (_S3, Package (0x03)  // _S3_: S3 System State
     {
         0x05, 
-        Zero, 
-        Zero, 
-        Zero
+        0x05, 
+        0x00
     })
-    Name (_S4, Package (0x04)  // _S4_: S4 System State
+    Name (_S4, Package (0x03)  // _S4_: S4 System State
     {
         0x06, 
-        Zero, 
-        Zero, 
-        Zero
+        0x06, 
+        0x00
     })
-    Name (_S5, Package (0x04)  // _S5_: S5 System State
+    Name (_S5, Package (0x03)  // _S5_: S5 System State
     {
         0x07, 
-        Zero, 
-        Zero, 
-        Zero
+        0x07, 
+        0x00
     })
+    Method (_TTS, 1, NotSerialized)  // _TTS: Transition To State
+    {
+        Store (Arg0, SLTP)
+    }
     OperationRegion (SANV, SystemMemory, 0xCEAFDE18, 0x016D)
     Field (SANV, AnyAcc, Lock, Preserve)
     {
@@ -32270,4 +32271,3 @@ DefinitionBlock ("iASLcztvP1.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         Return (Local0)
     }
 }
-
