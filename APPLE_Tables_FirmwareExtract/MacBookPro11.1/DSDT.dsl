@@ -3,7 +3,7 @@
  * AML Disassembler version 20130117-64 [Jan 19 2013]
  * Copyright (c) 2000 - 2013 Intel Corporation
  * 
- * Disassembly of AML/DSDT.aml, Mon Jan  6 01:06:45 2014
+ * Disassembly of AML/DSDT.aml, Mon Jan  6 23:23:50 2014
  *
  * Original Table Header:
  *     Signature        "DSDT"
