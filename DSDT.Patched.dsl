@@ -11773,6 +11773,17 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Return (PIB2)
                 }
             }
+            Method (_DSM, 4, NotSerialized)
+            {
+                If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
+                Return (Package()
+                {
+                    "device-id", Buffer() { 0x03, 0x8c, 0x00, 0x00 },
+                    "compatible", Buffer() { "pci8086,8c03" },
+                    "IOName", Buffer() { "pci8086,8c03" },
+                    "name", Buffer() { "pci8086,8c03" },
+                })
+            }
         }
 
         Device (SAT1)
@@ -29018,7 +29029,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
             Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
             {
-                Store (Package (0x10)
+                Store (Package (0x0E)
                     {
                         "graphic-options", 
                         Buffer (0x04)
@@ -29043,12 +29054,6 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         {
                              0x2E, 0x0A, 0x00, 0x00
                         },
-                        
-                        "AAPL,snb-platform-id", 
-                        Buffer (0x04)
-                        {
-                         0x00, 0x00, 0x01, 0x00
-                        }, 
 
                         "AAPL,ig-platform-id", 
                         Buffer (0x04)
@@ -29071,6 +29076,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
                 Return (Local0)
             }
+
         }
     }
 
