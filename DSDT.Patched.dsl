@@ -8587,7 +8587,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         "layout-id", 
                         Buffer (0x04)
                         {
-                             0x1C, 0x00, 0x00, 0x00
+                             0x01, 0x00, 0x00, 0x00
                         }, 
 
                         "PinConfigurations", 
@@ -29018,7 +29018,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
             Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
             {
-                Store (Package (0x0E)
+                Store (Package (0x10)
                     {
                         "graphic-options", 
                         Buffer (0x04)
@@ -29042,6 +29042,12 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         Buffer (0x04)
                         {
                              0x2E, 0x0A, 0x00, 0x00
+                        },
+                        
+                        "AAPL,snb-platform-id", 
+                        Buffer (0x04)
+                        {
+                         0x00, 0x00, 0x01, 0x00
                         }, 
 
                         "AAPL,ig-platform-id", 
