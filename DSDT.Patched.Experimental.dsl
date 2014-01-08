@@ -17253,6 +17253,20 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Return (Zero)
             }
+            
+            Method (ALSS, 0, NotSerialized)
+            {
+                Return (^^PCI0.LPCB.EC0.RALS ())
+            }
+
+            Method (SKBL, 1, NotSerialized)
+            {
+                Store (Arg0, Local0)
+                Store (DerefOf (Index (PWKB, Local0)), Local1)
+                ^^PCI0.LPCB.EC0.WRAM (0x04B1, Local1)
+                Return (One)
+            }
+
         }
     }
 
@@ -21758,12 +21772,40 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Add (Local0, Local1, Local0)
                     Multiply (Local0, 0x03E8, Local1)
                     Divide (Local1, ALSA, Local2, Local3)
-                    Return (Local3)
                 }
                 Else
                 {
                     Return (0x012C)
                 }
+
+                If (LLessEqual (Local3, 0x3C))
+                {
+                    ^^^^ATKD.SKBL (0x03)
+                    Store (One, Local4)
+                }
+                Else
+                {
+                    If (LLessEqual (Local3, 0x82))
+                    {
+                        ^^^^ATKD.SKBL (0x02)
+                        Store (0x02, Local4)
+                    }
+                    Else
+                    {
+                        If (LLessEqual (Local3, 0xFF))
+                        {
+                            ^^^^ATKD.SKBL (One)
+                            Store (0x03, Local4)
+                        }
+                        Else
+                        {
+                            ^^^^ATKD.SKBL (Zero)
+                            Store (0x04, Local4)
+                        }
+                    }
+                }
+
+                Return (Local4)
             }
             Else
             {
@@ -22717,128 +22759,18 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
         Method (_Q0E, 0, NotSerialized)  // _Qxx: EC Query
         {
-            If (LLess (MSOS (), OSW8))
+            If (ATKP)
             {
-                SBRN ()
+                ^^^^ATKD.IANE (0x20)
             }
-
-            If (LGreaterEqual (MSOS (), OSVT))
-            {
-                Store (LBTN, Local0)
-                If (^^^IGPU.PRST ())
-                {
-                    If (LNotEqual (^^^IGPU.LCDD._DCS (), 0x1F))
-                    {
-                        Return (One)
-                    }
-
-                    ^^^IGPU.DWBL ()
-                    Store (One, ASBN)
-                }
-
-                Store (Zero, ASBN)
-                If (ATKP)
-                {
-                    If (LGreaterEqual (MSOS (), OSW8)) {}
-                    Else
-                    {
-                        If (LGreater (Local0, Zero))
-                        {
-                            Decrement (Local0)
-                        }
-
-                        If (LGreater (Local0, 0x0A))
-                        {
-                            Store (0x0A, Local0)
-                        }
-
-                        Store (Local0, LBTN)
-                        ^^^^ATKD.IANE (Add (Local0, 0x20))
-                    }
-                }
-            }
-            Else
-            {
-                If (LGreater (LBTN, Zero))
-                {
-                    Decrement (LBTN)
-                }
-
-                If (LGreater (LBTN, 0x0A))
-                {
-                    Store (0x0A, LBTN)
-                }
-
-                STBR ()
-                If (ATKP)
-                {
-                    ^^^^ATKD.IANE (Add (LBTN, 0x20))
-                }
-            }
-
-            Return (One)
         }
 
         Method (_Q0F, 0, NotSerialized)  // _Qxx: EC Query
         {
-            If (LLess (MSOS (), OSW8))
+            If (ATKP)
             {
-                SBRN ()
+                ^^^^ATKD.IANE (0x10)
             }
-
-            If (LGreaterEqual (MSOS (), OSVT))
-            {
-                Store (LBTN, Local0)
-                If (^^^IGPU.PRST ())
-                {
-                    If (LNotEqual (^^^IGPU.LCDD._DCS (), 0x1F))
-                    {
-                        Return (One)
-                    }
-
-                    ^^^IGPU.UPBL ()
-                    Store (One, ASBN)
-                }
-
-                Store (Zero, ASBN)
-                If (ATKP)
-                {
-                    If (LGreaterEqual (MSOS (), OSW8)) {}
-                    Else
-                    {
-                        If (LLess (Local0, 0x0A))
-                        {
-                            Increment (Local0)
-                        }
-                        Else
-                        {
-                            Store (0x0A, Local0)
-                        }
-
-                        Store (Local0, LBTN)
-                        ^^^^ATKD.IANE (Add (Local0, 0x10))
-                    }
-                }
-            }
-            Else
-            {
-                If (LLess (LBTN, 0x0A))
-                {
-                    Increment (LBTN)
-                }
-                Else
-                {
-                    Store (0x0A, LBTN)
-                }
-
-                STBR ()
-                If (ATKP)
-                {
-                    ^^^^ATKD.IANE (Add (LBTN, 0x10))
-                }
-            }
-
-            Return (One)
         }
 
         Method (_Q10, 0, NotSerialized)  // _Qxx: EC Query
