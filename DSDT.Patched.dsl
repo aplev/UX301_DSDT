@@ -5019,9 +5019,29 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Return (GPRW (0x69, 0x04))
                 }
 
-                Device (GLAN)
+                Device (LAN0)
                 {
                     Name (_ADR, Zero)  // _ADR: Address
+                    Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                    {
+                    Store (Package (0x04)
+                        {
+                            "built-in", 
+                            Buffer (One)
+                            {
+                                 0x01
+                            }, 
+
+                            "device_type", 
+                            Buffer (0x09)
+                            {
+                                "ethernet"
+                            }
+                        }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
+                    }
+                    
                     Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                     {
                         Return (Zero)
@@ -5040,6 +5060,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     {
                         Return (GPRW (0x69, 0x04))
                     }
+                    
                 }
             }
 
@@ -8576,13 +8597,19 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
             Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
             {
-                Store (Package (0x06)
+                Store (Package (0x08)
                     {
                         "hda-gfx", 
                         Buffer (0x0A)
                         {
                             "onboard-1"
                         }, 
+                        
+                        "device-type", 
+                        Buffer (0x10)
+                        {
+                             "Realtek ALC282"
+                        },
 
                         "layout-id", 
                         Buffer (0x04)
@@ -14304,9 +14331,9 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Notify (\_SB.PCI0.HDEF, 0x02)
             }
 
-            If (CondRefOf (\_SB.PCI0.RP03.GLAN))
+            If (CondRefOf (\_SB.PCI0.RP03.LAN0))
             {
-                Notify (\_SB.PCI0.RP03.GLAN, 0x02)
+                Notify (\_SB.PCI0.RP03.LAN0, 0x02)
             }
         }
 
