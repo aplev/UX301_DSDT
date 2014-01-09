@@ -1790,10 +1790,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                                     }
                                 }
 
-                                }
+                                Break
+                            }
                         }
 
-                        
+                        Break
                     }
 
                     Return (Buffer (One)
@@ -2047,10 +2048,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                                     }
                                 }
 
-                                }
+                                Break
+                            }
                         }
 
-                        
+                        Break
                     }
 
                     Return (Buffer (One)
@@ -2294,10 +2296,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                                     }
                                 }
 
-                                }
+                                Break
+                            }
                         }
 
-                        
+                        Break
                     }
 
                     Return (Buffer (One)
@@ -2541,10 +2544,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                                     }
                                 }
 
-                                }
+                                Break
+                            }
                         }
 
-                        
+                        Break
                     }
 
                     Return (Buffer (One)
@@ -2788,10 +2792,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                                     }
                                 }
 
-                                }
+                                Break
+                            }
                         }
 
-                        
+                        Break
                     }
 
                     Return (Buffer (One)
@@ -3035,10 +3040,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                                     }
                                 }
 
-                                }
+                                Break
+                            }
                         }
 
-                        
+                        Break
                     }
 
                     Return (Buffer (One)
@@ -4898,10 +4904,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                                     }
                                 }
 
-                                }
+                                Break
+                            }
                         }
 
-                        
+                        Break
                     }
 
                     Return (Buffer (One)
@@ -5168,10 +5175,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                                     }
                                 }
 
-                                }
+                                Break
+                            }
                         }
 
-                        
+                        Break
                     }
 
                     Return (Buffer (One)
@@ -5956,7 +5964,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                                         }
                                     }
 
-                                        }
+                                    Break
+                                }
                             }
 
                             Return (Zero)
@@ -6043,7 +6052,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                                         }
                                     }
 
-                                        }
+                                    Break
+                                }
                             }
 
                             Return (Zero)
@@ -6130,7 +6140,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                                         }
                                     }
 
-                                        }
+                                    Break
+                                }
                             }
 
                             Return (Zero)
@@ -6217,7 +6228,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                                         }
                                     }
 
-                                        }
+                                    Break
+                                }
                             }
 
                             Return (Zero)
@@ -6438,7 +6450,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                                         }
                                     }
 
-                                        }
+                                    Break
+                                }
                             }
 
                             Return (Zero)
@@ -6531,7 +6544,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                                         }
                                     }
 
-                                        }
+                                    Break
+                                }
                             }
 
                             Return (Zero)
@@ -6794,7 +6808,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                             }
                         }
 
-                        
+                        Break
                     }
                 }
                 Else
@@ -6863,7 +6877,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                             }
                         }
 
-                        
+                        Break
                     }
                 }
                 Return (Zero)
@@ -8652,7 +8666,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                             }
                         }
 
-                        
+                        Break
                     }
                 }
             }
@@ -11362,7 +11376,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         }
                     }
 
-                    
+                    Break
                 }
 
                 Return (RBUF)
@@ -12033,7 +12047,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 }
             }
 
-            
+            Break
         }
 
         Return (Local0)
@@ -12274,7 +12288,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 }
             }
 
-            
+            Break
         }
     }
 
@@ -13746,7 +13760,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                                     }
                                 }
 
-                                }
+                                Break
+                            }
                         }
 
                         If (LEqual (Arg1, One))
@@ -14422,7 +14437,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         }
                     }
 
-                 
+                    Break
                 }
             }
             Else
@@ -14470,6 +14485,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                             }
                         }
 
+                        Break
                     }
                 }
             }
@@ -14581,123 +14597,142 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         If (LEqual (T_0, 0xF7))
                         {
                             Store (Zero, TEMP)
+                            Break
                         }
                         Else
                         {
                             If (LEqual (T_0, One))
                             {
                                 Store (Zero, TEMP)
-                                }
+                                Break
+                            }
                             Else
                             {
                                 If (LEqual (T_0, 0x02))
                                 {
                                     Store (Zero, TEMP)
-                                        }
+                                    Break
+                                }
                                 Else
                                 {
                                     If (LEqual (T_0, 0xA1))
                                     {
                                         Store (Subtract (Arg1, One), TEMP)
-                                                }
+                                        Break
+                                    }
                                     Else
                                     {
                                         If (LEqual (T_0, 0xA2))
                                         {
                                             Store (Subtract (Arg1, One), TEMP)
-                                                        }
+                                            Break
+                                        }
                                         Else
                                         {
                                             If (LEqual (T_0, 0xB1))
                                             {
                                                 Store (Subtract (Arg1, One), TEMP)
-                                                                }
+                                                Break
+                                            }
                                             Else
                                             {
                                                 If (LEqual (T_0, 0xB2))
                                                 {
                                                     Store (Subtract (Arg1, One), TEMP)
-                                                                        }
+                                                    Break
+                                                }
                                                 Else
                                                 {
                                                     If (LEqual (T_0, 0x61))
                                                     {
                                                         Store (Subtract (Arg1, One), TEMP)
-                                                                                }
+                                                        Break
+                                                    }
                                                     Else
                                                     {
                                                         If (LEqual (T_0, 0x62))
                                                         {
                                                             Store (Subtract (Arg1, One), TEMP)
-                                                                                        }
+                                                            Break
+                                                        }
                                                         Else
                                                         {
                                                             If (LEqual (T_0, 0xE1))
                                                             {
                                                                 Store (Subtract (Arg1, One), TEMP)
-                                                                                                }
+                                                                Break
+                                                            }
                                                             Else
                                                             {
                                                                 If (LEqual (T_0, 0xE2))
                                                                 {
                                                                     Store (Subtract (Arg1, One), TEMP)
-                                                                                                        }
+                                                                    Break
+                                                                }
                                                                 Else
                                                                 {
                                                                     If (LEqual (T_0, 0xA5))
                                                                     {
                                                                         Or (HCTL, 0x40, HCTL)
                                                                         Store (Subtract (Arg1, 0x02), TEMP)
-                                                                                                                }
+                                                                        Break
+                                                                    }
                                                                     Else
                                                                     {
                                                                         If (LEqual (T_0, 0xA6))
                                                                         {
                                                                             Or (HCTL, 0x40, HCTL)
                                                                             Store (Subtract (Arg1, 0x02), TEMP)
-                                                                                                                        }
+                                                                            Break
+                                                                        }
                                                                         Else
                                                                         {
                                                                             If (LEqual (T_0, 0xB5))
                                                                             {
                                                                                 Or (HCTL, 0x40, HCTL)
                                                                                 Store (Subtract (Arg1, 0x02), TEMP)
-                                                                                                                                }
+                                                                                Break
+                                                                            }
                                                                             Else
                                                                             {
                                                                                 If (LEqual (T_0, 0xB6))
                                                                                 {
                                                                                     Or (HCTL, 0x40, HCTL)
                                                                                     Store (Subtract (Arg1, 0x02), TEMP)
-                                                                                                                                        }
+                                                                                    Break
+                                                                                }
                                                                                 Else
                                                                                 {
                                                                                     If (LEqual (T_0, 0x65))
                                                                                     {
                                                                                         Or (HCTL, 0x40, HCTL)
                                                                                         Store (Subtract (Arg1, 0x02), TEMP)
-                                                                                                                                                }
+                                                                                        Break
+                                                                                    }
                                                                                     Else
                                                                                     {
                                                                                         If (LEqual (T_0, 0x66))
                                                                                         {
                                                                                             Or (HCTL, 0x40, HCTL)
                                                                                             Store (Subtract (Arg1, 0x02), TEMP)
-                                                                                                                                                        }
+                                                                                            Break
+                                                                                        }
                                                                                         Else
                                                                                         {
                                                                                             If (LEqual (T_0, 0xE5))
                                                                                             {
                                                                                                 Or (HCTL, 0x40, HCTL)
                                                                                                 Store (Subtract (Arg1, 0x02), TEMP)
-                                                                                                                                                                }
+                                                                                                Break
+                                                                                            }
                                                                                             Else
                                                                                             {
                                                                                                 If (LEqual (T_0, 0xE6))
                                                                                                 {
                                                                                                     Or (HCTL, 0x40, HCTL)
                                                                                                     Store (Subtract (Arg1, 0x02), TEMP)
-                                                                                                                                                                        }
+                                                                                                    Break
+                                                                                                }
                                                                                                 Else
                                                                                                 {
                                                                                                     And (PBSY, 0xFE, PBSY)
@@ -14722,7 +14757,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                             }
                         }
 
-                        
+                        Break
                     }
                 }
 
@@ -14779,7 +14814,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     If (And (HSTS, 0x02))
                     {
                         Store (0x02, HSTS)
-                        
+                        Break
                     }
                 }
 
@@ -14826,10 +14861,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Offset (0x8A), 
                 HKEN,   1, 
                 Offset (0x93), 
-                TH00,   8, 
-                TH01,   8, 
-                TH10,   8, 
-                TH11,   8, 
+                TAH0,   16, 
+                TAH1,   16, 
                 TSTP,   8, 
                 Offset (0x9C), 
                 CDT4,   8, 
@@ -14854,8 +14887,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 B0TM,   16, 
                 B0C1,   16, 
                 B0C2,   16, 
-                BC30,   8, 
-                BC31,   8, 
+                B0C3,   16, 
                 B0C4,   16, 
                 Offset (0xD0), 
                 B1PN,   16, 
@@ -14873,15 +14905,13 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Offset (0xF0), 
                 Offset (0xF2), 
                 Offset (0xF4), 
-                B0S0,   8, 
-                B0S1,   8, 
+                B0SN,   16, 
                 Offset (0xF8), 
                 Offset (0xFA), 
                 Offset (0xFC), 
-                B1S0,   8, 
-                B1S1,   8
+                B1SN,   16
             }
-            
+
             Name (SMBF, Zero)
             OperationRegion (SMBX, EmbeddedControl, 0x18, 0x28)
             Field (SMBX, ByteAcc, NoLock, Preserve)
@@ -14936,8 +14966,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Field (SMBX, ByteAcc, NoLock, Preserve)
             {
                 Offset (0x04), 
-                DTB0,   8, 
-                DTB1,   8
+                DT2B,   16
             }
 
             OperationRegion (NSBS, EmbeddedControl, 0x40, 0x04)
@@ -16976,7 +17005,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         }
                     }
 
-                    
+                    Break
                 }
 
                 If (CondRefOf (\_SB.PCCD.PENB))
@@ -17732,7 +17761,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         0x0F))
                 }
 
-                Store (B1B2 (^^LPCB.EC0.BC30, ^^LPCB.EC0.BC31), Index (BIXT, 0x08))
+                Store (^^LPCB.EC0.B0C3, Index (BIXT, 0x08))
                 Store (0x0001869F, Index (BIXT, 0x09))
                 Return (BIXT)
             }
@@ -17971,11 +18000,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             {
                 If (BSLF)
                 {
-                    Store (B1B2 (B1S0, B1S1), Local0)
+                    Store (B1SN, Local0)
                 }
                 Else
                 {
-                    Store (B1B2 (B0S0, B0S1), Local0)
+                    Store (B0SN, Local0)
                 }
             }
             Else
@@ -21314,7 +21343,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     If (LEqual (Arg0, RDWD))
                     {
                         Store (0x02, Index (Local0, One))
-                        Store (B1B2 (DTB0, DTB1), Index (Local0, 0x02))
+                        Store (DT2B, Index (Local0, 0x02))
                     }
 
                     If (LEqual (Arg0, RDBT))
@@ -21402,9 +21431,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 If (LEqual (Arg0, WRWD))
                 {
-                    Store (Arg4, Local4)
-                    Store (Local4, DTB0)
-                    Store (ShiftRight (Local4, 0x08), DTB1)
+                    Store (Arg4, DT2B)
                 }
 
                 If (LEqual (Arg0, WRBT))
@@ -22295,19 +22322,23 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Store (Arg0, T_0)
                     If (LEqual (T_0, Zero))
                     {
-                        Store (B1B2 (TH00, TH01), Local0)
+                        Store (TAH0, Local0)
+                        Break
                     }
                     Else
                     {
                         If (LEqual (T_0, One))
                         {
-                            Store (B1B2 (TH10, TH11), Local0)
+                            Store (TAH1, Local0)
+                            Break
                         }
                         Else
                         {
                             Return (Ones)
                         }
                     }
+
+                    Break
                 }
 
                 Multiply (Local0, 0x02, Local0)
@@ -22854,7 +22885,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                                         }
                                     }
 
-                                        }
+                                    Break
+                                }
                             }
                         }
                     }
@@ -25199,14 +25231,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         \_SB.PCI0.IGPU.OWAK (Arg0)
         OEMW (Arg0)
     }
-    
-    Method (B1B2, 2, NotSerialized)
-    {
-        ShiftLeft (Arg1, 0x08, Local0)
-        Or (Arg0, Local0, Local0)
-        Return (Local0)
-    }
-
     Method (DTGP, 5, NotSerialized)
     {
         If (LEqual (Arg0, Buffer (0x10)
