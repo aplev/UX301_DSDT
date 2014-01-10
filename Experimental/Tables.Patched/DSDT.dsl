@@ -22749,6 +22749,67 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             {
                 ^^^^ATKD.IANE (0x20)
             }
+            
+            If (LLess (MSOS (), OSW8))
+            {
+                SBRN ()
+            }
+
+            If (LGreaterEqual (MSOS (), OSVT))
+            {
+                Store (LBTN, Local0)
+                If (^^^IGPU.PRST ())
+                {
+                    If (LNotEqual (^^^IGPU.LCDD._DCS (), 0x1F))
+                    {
+                        Return (One)
+                    }
+
+                    ^^^IGPU.DWBL ()
+                    Store (One, ASBN)
+                }
+
+                Store (Zero, ASBN)
+                If (ATKP)
+                {
+                    If (LGreaterEqual (MSOS (), OSW8)) {}
+                    Else
+                    {
+                        If (LGreater (Local0, Zero))
+                        {
+                            Decrement (Local0)
+                        }
+
+                        If (LGreater (Local0, 0x0A))
+                        {
+                            Store (0x0A, Local0)
+                        }
+
+                        Store (Local0, LBTN)
+                        ^^^^ATKD.IANE (Add (Local0, 0x20))
+                    }
+                }
+            }
+            Else
+            {
+                If (LGreater (LBTN, Zero))
+                {
+                    Decrement (LBTN)
+                }
+
+                If (LGreater (LBTN, 0x0A))
+                {
+                    Store (0x0A, LBTN)
+                }
+
+                STBR ()
+                If (ATKP)
+                {
+                    ^^^^ATKD.IANE (Add (LBTN, 0x20))
+                }
+            }
+
+            Return (One)
         }
 
         Method (_Q0F, 0, NotSerialized)  // _Qxx: EC Query
@@ -22757,8 +22818,67 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             {
                 ^^^^ATKD.IANE (0x10)
             }
+            
+            If (LLess (MSOS (), OSW8))
+            {
+                SBRN ()
+            }
+
+            If (LGreaterEqual (MSOS (), OSVT))
+            {
+                Store (LBTN, Local0)
+                If (^^^IGPU.PRST ())
+                {
+                    If (LNotEqual (^^^IGPU.LCDD._DCS (), 0x1F))
+                    {
+                        Return (One)
+                    }
+
+                    ^^^IGPU.UPBL ()
+                    Store (One, ASBN)
+                }
+
+                Store (Zero, ASBN)
+                If (ATKP)
+                {
+                    If (LGreaterEqual (MSOS (), OSW8)) {}
+                    Else
+                    {
+                        If (LLess (Local0, 0x0A))
+                        {
+                            Increment (Local0)
+                        }
+                        Else
+                        {
+                            Store (0x0A, Local0)
+                        }
+
+                        Store (Local0, LBTN)
+                        ^^^^ATKD.IANE (Add (Local0, 0x10))
+                    }
+                }
+            }
+            Else
+            {
+                If (LLess (LBTN, 0x0A))
+                {
+                    Increment (LBTN)
+                }
+                Else
+                {
+                    Store (0x0A, LBTN)
+                }
+
+                STBR ()
+                If (ATKP)
+                {
+                    ^^^^ATKD.IANE (Add (LBTN, 0x10))
+                }
+            }
+
+            Return (One)
         }
-        
+
         Method (_Q10, 0, NotSerialized)  // _Qxx: EC Query
         {
             If (LEqual (BLCT, Zero))
