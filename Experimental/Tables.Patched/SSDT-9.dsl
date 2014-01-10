@@ -40,6 +40,7 @@ DefinitionBlock ("SSDT-9.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
     External (_SB_.SSTE, FieldUnitObj)
     External (_SB_.VBIF, FieldUnitObj)
     External (_SB_.VGAF, FieldUnitObj)
+    External (DTGP, MethodObj)
     External (ADBG, MethodObj)    // 1 Arguments
     External (BRTI, FieldUnitObj)
     External (DSEN, FieldUnitObj)
@@ -394,6 +395,38 @@ DefinitionBlock ("SSDT-9.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
             {
                 REG0,   32
             }
+            
+             Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                {
+                    Store (Package (0x08)
+                    {
+                        "device-id", 
+                        Buffer (0x04)
+                        {
+                             0x2E, 0x0A, 0x00, 0x00
+                        },
+
+                        "AAPL,ig-platform-id", 
+                        Buffer (0x04)
+                        {
+                             0x08, 0x00, 0x2E, 0x0A
+                        }, 
+
+                        "hda-gfx", 
+                        Buffer (0x0A)
+                        {
+                            "onboard-1"
+                        }, 
+
+                        "model", 
+                        Buffer (0x19)
+                        {
+                            "Intel Iris Graphics 5100"
+                        }
+                    }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
+                }
 
             Method (_DEP, 0, NotSerialized)  // _DEP: Dependencies
             {
