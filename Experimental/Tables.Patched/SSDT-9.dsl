@@ -398,8 +398,26 @@ DefinitionBlock ("SSDT-9.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
             
              Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                 {
-                    Store (Package (0x08)
+                    Store (Package (0x0E)
                     {
+                        "graphic-options", 
+                        Buffer (0x04)
+                        {
+                             0x0C, 0x00, 0x00, 0x00
+                        }, 
+
+                        "AAPL00,DualLink", 
+                        Buffer (0x04)
+                        {
+                             0x01, 0x00, 0x00, 0x00
+                        }, 
+
+                        "AAPL01,DualLink", 
+                        Buffer (0x04)
+                        {
+                             0x01, 0x00, 0x00, 0x00
+                        }, 
+
                         "device-id", 
                         Buffer (0x04)
                         {
