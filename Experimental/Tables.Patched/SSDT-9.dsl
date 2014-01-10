@@ -386,7 +386,7 @@ DefinitionBlock ("SSDT-9.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
             }
         }
 
-        Device (GFX0)
+        Device (IGPU)
         {
             Name (_ADR, 0x00020000)  // _ADR: Address
             OperationRegion (VSID, PCI_Config, Zero, 0x04)
@@ -397,10 +397,10 @@ DefinitionBlock ("SSDT-9.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
 
             Method (_DEP, 0, NotSerialized)  // _DEP: Dependencies
             {
-                ADBG ("GFX0 DEP Call")
+                ADBG ("IGPU DEP Call")
                 If (LEqual (S0ID, One))
                 {
-                    ADBG ("GFX0 DEP")
+                    ADBG ("IGPU DEP")
                     Return (Package (0x01)
                     {
                         \_SB.PEPD
@@ -408,7 +408,7 @@ DefinitionBlock ("SSDT-9.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
                 }
                 Else
                 {
-                    ADBG ("GFX0 DEP NULL")
+                    ADBG ("IGPU DEP NULL")
                     Return (Package (0x00) {})
                 }
             }
@@ -1797,7 +1797,7 @@ DefinitionBlock ("SSDT-9.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
                     Subtract (0x0A, Local0, LBTN)
                     If (BRNC)
                     {
-                        \_SB.PCI0.GFX0.AINT (One, Arg0)
+                        \_SB.PCI0.IGPU.AINT (One, Arg0)
                     }
                     Else
                     {
@@ -2550,13 +2550,13 @@ DefinitionBlock ("SSDT-9.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
                     }
                     Else
                     {
-                        Notify (\_SB.PCI0.GFX0, Arg1)
+                        Notify (\_SB.PCI0.IGPU, Arg1)
                     }
                 }
                 
                 Else
                 {
-                    Notify (\_SB.PCI0.GFX0, 0x80)
+                    Notify (\_SB.PCI0.IGPU, 0x80)
                 }
 
                 Return (Zero)
@@ -2773,7 +2773,7 @@ DefinitionBlock ("SSDT-9.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
                         Store (One, GSES)
                     }
 
-                    Store (One, \_SB.PCI0.GFX0.CLID)
+                    Store (One, \_SB.PCI0.IGPU.CLID)
                 }
             }
 
@@ -3643,12 +3643,12 @@ DefinitionBlock ("SSDT-9.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
                     }
 
                     ISMI (0x94)
-                    Notify (\_SB.PCI0.GFX0, 0x81)
+                    Notify (\_SB.PCI0.IGPU, 0x81)
                 }
                 Else
                 {
-                    Store (One, \_SB.PCI0.GFX0.CEVT)
-                    Store (0x03, \_SB.PCI0.GFX0.CSTS)
+                    Store (One, \_SB.PCI0.IGPU.CEVT)
+                    Store (0x03, \_SB.PCI0.IGPU.CSTS)
                     If (LNotEqual (\_SB.OCAD, \_SB.OPAD))
                     {
                         Store (\_SB.OCAD, \_SB.OPAD)
@@ -3658,7 +3658,7 @@ DefinitionBlock ("SSDT-9.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
                         }
                         Else
                         {
-                            Notify (\_SB.PCI0.GFX0, Zero)
+                            Notify (\_SB.PCI0.IGPU, Zero)
                         }
 
                         Sleep (0x03E8)
@@ -3666,7 +3666,7 @@ DefinitionBlock ("SSDT-9.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
 
                     Store (AF2D (Arg0), \_SB.NSTE)
                     WNDD (\_SB.NSTE)
-                    Notify (\_SB.PCI0.GFX0, 0x80)
+                    Notify (\_SB.PCI0.IGPU, 0x80)
                 }
 
                 Return (Zero)
