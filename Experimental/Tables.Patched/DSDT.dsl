@@ -17238,6 +17238,20 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Return (Zero)
             }
+            
+            Method (ALSS, 0, NotSerialized)
+            {
+                Return (^^PCI0.LPCB.EC0.RALS ())
+            }
+
+            Method (SKBL, 1, NotSerialized)
+            {
+                Store (Arg0, Local0)
+                Store (DerefOf (Index (PWKB, Local0)), Local1)
+                ^^PCI0.LPCB.EC0.WRAM (0x04B1, Local1)
+                Return (One)
+            }
+
         }
     }
 
@@ -21749,6 +21763,35 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 {
                     Return (0x012C)
                 }
+                
+                If (LLessEqual (Local3, 0x3C))
+                {
+                    ^^^^ATKD.SKBL (0x03)
+                    Store (One, Local4)
+                }
+                Else
+                {
+                    If (LLessEqual (Local3, 0x82))
+                    {
+                        ^^^^ATKD.SKBL (0x02)
+                        Store (0x02, Local4)
+                    }
+                    Else
+                    {
+                        If (LLessEqual (Local3, 0xFF))
+                        {
+                            ^^^^ATKD.SKBL (One)
+                            Store (0x03, Local4)
+                        }
+                        Else
+                        {
+                            ^^^^ATKD.SKBL (Zero)
+                            Store (0x04, Local4)
+                        }
+                    }
+                }
+
+                Return (Local4)
             }
             Else
             {
@@ -22702,6 +22745,11 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
         Method (_Q0E, 0, NotSerialized)  // _Qxx: EC Query
         {
+            If (ATKP)
+            {
+                ^^^^ATKD.IANE (0x20)
+            }
+            
             If (LLess (MSOS (), OSW8))
             {
                 SBRN ()
@@ -22766,6 +22814,11 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
         Method (_Q0F, 0, NotSerialized)  // _Qxx: EC Query
         {
+            If (ATKP)
+            {
+                ^^^^ATKD.IANE (0x10)
+            }
+            
             If (LLess (MSOS (), OSW8))
             {
                 SBRN ()
