@@ -3,7 +3,7 @@
  * AML Disassembler version 20130823-64 [Aug 30 2013]
  * Copyright (c) 2000 - 2013 Intel Corporation
  * 
- * Disassembly of SSDT-10.aml, Fri Jan 10 05:21:36 2014
+ * Disassembly of SSDT8.aml, Sat Jan 11 00:26:36 2014
  *
  * Original Table Header:
  *     Signature        "SSDT"
@@ -16,15 +16,15 @@
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20120711 (538052369)
  */
-DefinitionBlock ("SSDT-10.aml", "SSDT", 1, "Intel_", "IsctTabl", 0x00001000)
+DefinitionBlock ("SSDT8.aml", "SSDT", 1, "Intel_", "IsctTabl", 0x00001000)
 {
 
     External (_SB_.IFFS.FFSS)
-    External (_SB_.PCI0.IGPU.ASLC, FieldUnitObj)
-    External (_SB_.PCI0.IGPU.ASLE, FieldUnitObj)
-    External (_SB_.PCI0.IGPU.PARD, MethodObj)    // 0 Arguments
-    External (_SB_.PCI0.IGPU.STAT, FieldUnitObj)
-    External (_SB_.PCI0.IGPU.TCHE, FieldUnitObj)
+    External (_SB_.PCI0.GFX0.ASLC, FieldUnitObj)
+    External (_SB_.PCI0.GFX0.ASLE, FieldUnitObj)
+    External (_SB_.PCI0.GFX0.PARD, MethodObj)    // 0 Arguments
+    External (_SB_.PCI0.GFX0.STAT, FieldUnitObj)
+    External (_SB_.PCI0.GFX0.TCHE, FieldUnitObj)
     External (_SB_.PCI0.LPCB.EC0_.RPIN, MethodObj)    // 1 Arguments
     External (_SB_.PCI0.LPCB.EC0_.SCTF, MethodObj)    // 2 Arguments
     External (ICNF, FieldUnitObj)
@@ -98,18 +98,18 @@ DefinitionBlock ("SSDT-10.aml", "SSDT", 1, "Intel_", "IsctTabl", 0x00001000)
             Method (SAOS, 1, NotSerialized)
             {
                 Store (One, IIST)
-                If (And (\_SB.PCI0.IGPU.TCHE, 0x0100))
+                If (And (\_SB.PCI0.GFX0.TCHE, 0x0100))
                 {
                     If (LEqual (ITMR, One))
                     {
                         If (LAnd (LAnd (And (IBT1, One), LOr (And (\_SB.IAOE.WKRS, 
                             0x02), And (\_SB.IAOE.WKRS, 0x10))), LNot (And (Arg0, One))))
                         {
-                            If (LNot (\_SB.PCI0.IGPU.PARD ()))
+                            If (LNot (\_SB.PCI0.GFX0.PARD ()))
                             {
-                                Store (And (\_SB.PCI0.IGPU.STAT, 0xFFFFFFFC), \_SB.PCI0.IGPU.STAT)
-                                Store (Or (\_SB.PCI0.IGPU.ASLC, 0x0100), \_SB.PCI0.IGPU.ASLC)
-                                Store (One, \_SB.PCI0.IGPU.ASLE)
+                                Store (And (\_SB.PCI0.GFX0.STAT, 0xFFFFFFFC), \_SB.PCI0.GFX0.STAT)
+                                Store (Or (\_SB.PCI0.GFX0.ASLC, 0x0100), \_SB.PCI0.GFX0.ASLC)
+                                Store (One, \_SB.PCI0.GFX0.ASLE)
                             }
                         }
                     }
@@ -118,11 +118,11 @@ DefinitionBlock ("SSDT-10.aml", "SSDT", 1, "Intel_", "IsctTabl", 0x00001000)
                         If (LAnd (LAnd (And (IBT1, One), LOr (And (\_SB.IAOE.WKRS, 
                             0x02), And (\_SB.IAOE.WKRS, 0x10))), LNot (And (Arg0, One))))
                         {
-                            If (LNot (\_SB.PCI0.IGPU.PARD ()))
+                            If (LNot (\_SB.PCI0.GFX0.PARD ()))
                             {
-                                Store (And (\_SB.PCI0.IGPU.STAT, 0xFFFFFFFC), \_SB.PCI0.IGPU.STAT)
-                                Store (Or (\_SB.PCI0.IGPU.ASLC, 0x0100), \_SB.PCI0.IGPU.ASLC)
-                                Store (One, \_SB.PCI0.IGPU.ASLE)
+                                Store (And (\_SB.PCI0.GFX0.STAT, 0xFFFFFFFC), \_SB.PCI0.GFX0.STAT)
+                                Store (Or (\_SB.PCI0.GFX0.ASLC, 0x0100), \_SB.PCI0.GFX0.ASLC)
+                                Store (One, \_SB.PCI0.GFX0.ASLE)
                             }
                         }
                     }

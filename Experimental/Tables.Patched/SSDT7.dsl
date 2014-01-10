@@ -3,7 +3,7 @@
  * AML Disassembler version 20130823-64 [Aug 30 2013]
  * Copyright (c) 2000 - 2013 Intel Corporation
  * 
- * Disassembly of iASLcVNAyP.aml, Mon Jan  6 06:02:54 2014
+ * Disassembly of SSDT7.aml, Sat Jan 11 00:25:34 2014
  *
  * Original Table Header:
  *     Signature        "SSDT"
@@ -16,50 +16,49 @@
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20091112 (537465106)
  */
-DefinitionBlock ("iASLcVNAyP.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
+DefinitionBlock ("SSDT7.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
 {
     /*
-     * iASL Warning: There were 7 external control methods found during
-     * disassembly, but additional ACPI tables to resolve these externals
-     * were not specified. This resulting disassembler output file may not
-     * compile because the disassembler did not know how many arguments
-     * to assign to these methods. To specify the tables needed to resolve
-     * external control method references, use the one of the following
-     * example iASL invocations:
-     *     iasl -e <ssdt1.aml,ssdt2.aml...> -d <dsdt.aml>
-     *     iasl -e <dsdt.aml,ssdt2.aml...> -d <ssdt1.aml>
+     * iASL Warning: There were 9 external control methods found during
+     * disassembly, but only 6 were resolved (3 unresolved). Additional
+     * ACPI tables are required to properly disassemble the code. This
+     * resulting disassembler output file may not compile because the
+     * disassembler did not know how many arguments to assign to the
+     * unresolved methods.
      */
-    External (_SB_.PCI0.LPCB.EC0_.STBR, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
-    External (ADBG, MethodObj)    // Warning: Unresolved Method, guessing 1 arguments (may be incorrect, see warning above)
-    External (GUAM, MethodObj)    // Warning: Unresolved Method, guessing 1 arguments (may be incorrect, see warning above)
     External (HDOS, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
     External (HNOT, MethodObj)    // Warning: Unresolved Method, guessing 1 arguments (may be incorrect, see warning above)
     External (IDAB, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
-    External (ISMI, MethodObj)    // Warning: Unresolved Method, guessing 1 arguments (may be incorrect, see warning above)
 
-    External (_SB_.CSTE, IntObj)
-    External (_SB_.NSTE, IntObj)
-    External (_SB_.OCAD, IntObj)
-    External (_SB_.OPAD)
+    External (_SB_.CSTE, FieldUnitObj)
+    External (_SB_.NSTE, FieldUnitObj)
+    External (_SB_.OCAD, FieldUnitObj)
+    External (_SB_.OPAD, FieldUnitObj)
     External (_SB_.PCI0, DeviceObj)
-    External (_SB_.PCI0.LPCB.EC0_.PWAC)
+    External (_SB_.PCI0.LPCB.EC0_.PWAC, BuffObj)
+    External (_SB_.PCI0.LPCB.EC0_.STBR, MethodObj)    // 0 Arguments
     External (_SB_.PEPD)
-    External (_SB_.SFUN)
-    External (_SB_.SSTE)
-    External (_SB_.VBIF, IntObj)
-    External (_SB_.VGAF)
-    External (BRTI, IntObj)
-    External (DSEN)
-    External (LBTN, IntObj)
-    External (MSOS)
-    External (NATK, IntObj)
-    External (OSFG)
-    External (OSW8)
-    External (OSXP)
-    External (OSYS)
-    External (PNHM)
-    External (S0ID)
-    External (SCIS)
+    External (_SB_.SFUN, FieldUnitObj)
+    External (_SB_.SSTE, FieldUnitObj)
+    External (_SB_.VBIF, FieldUnitObj)
+    External (_SB_.VGAF, FieldUnitObj)
+    External (ADBG, MethodObj)    // 1 Arguments
+    External (BRTI, FieldUnitObj)
+    External (CSTE, FieldUnitObj)
+    External (DSEN, FieldUnitObj)
+    External (GUAM, MethodObj)    // 1 Arguments
+    External (ISMI, MethodObj)    // 1 Arguments
+    External (LBTN, FieldUnitObj)
+    External (MSOS, MethodObj)    // 0 Arguments
+    External (NATK, MethodObj)    // 0 Arguments
+    External (NSTE, FieldUnitObj)
+    External (OSFG, IntObj)
+    External (OSW8, IntObj)
+    External (OSXP, IntObj)
+    External (OSYS, FieldUnitObj)
+    External (PNHM, FieldUnitObj)
+    External (S0ID, FieldUnitObj)
+    External (SCIS, FieldUnitObj)
     External (SNXD)
 
     OperationRegion (SANV, SystemMemory, 0xDA99FE18, 0x016D)
@@ -1751,7 +1750,7 @@ DefinitionBlock ("iASLcVNAyP.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
 
                 Method (_BCL, 0, NotSerialized)  // _BCL: Brightness Control Levels
                 {
-                    If (LGreaterEqual (\MSOS, \OSW8))
+                    If (LGreaterEqual (\MSOS (), \OSW8))
                     {
                         Add (0x64, One, Local0)
                         Add (Local0, 0x02, Local0)
@@ -1816,7 +1815,7 @@ DefinitionBlock ("iASLcVNAyP.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
 
                 Method (_BQC, 0, NotSerialized)  // _BQC: Brightness Query Current
                 {
-                    If (LGreaterEqual (\MSOS, \OSW8))
+                    If (LGreaterEqual (\MSOS (), \OSW8))
                     {
                         And (CBLV, 0x7FFFFFFF, Local0)
                         Return (Local0)
@@ -3270,7 +3269,7 @@ DefinitionBlock ("iASLcVNAyP.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
                         Store (One, Local1)
                     }
 
-                    If (LLess (\MSOS, \OSW8))
+                    If (LLess (\MSOS (), \OSW8))
                     {
                         While (LAnd (LNot (BCMD), Local2))
                         {
@@ -3296,7 +3295,7 @@ DefinitionBlock ("iASLcVNAyP.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
 
                     If (LAnd (LNot (BCMD), Local1))
                     {
-                        If (LLess (\MSOS, \OSW8))
+                        If (LLess (\MSOS (), \OSW8))
                         {
                             Store (GCBL (CBLV), Local3)
                             Subtract (0x0A, Local3, Local3)
@@ -3343,7 +3342,7 @@ DefinitionBlock ("iASLcVNAyP.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
                         Store (One, Local1)
                     }
 
-                    If (LLess (\MSOS, \OSW8))
+                    If (LLess (\MSOS (), \OSW8))
                     {
                         While (LAnd (LNot (BCMD), Local2))
                         {
@@ -3369,7 +3368,7 @@ DefinitionBlock ("iASLcVNAyP.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
 
                     If (LAnd (LNot (BCMD), Local1))
                     {
-                        If (LLess (\MSOS, \OSW8))
+                        If (LLess (\MSOS (), \OSW8))
                         {
                             Store (GCBL (CBLV), Local3)
                             Subtract (0x0A, Local3, Local3)
@@ -3409,7 +3408,7 @@ DefinitionBlock ("iASLcVNAyP.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
                     OGCD ()
                 }
 
-                If (\NATK)
+                If (\NATK ())
                 {
                     If (UPDN)
                     {
@@ -3639,7 +3638,7 @@ DefinitionBlock ("iASLcVNAyP.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
                 Store (One, UPDN)
                 If (LEqual (DOSF, One))
                 {
-                    If (\NATK)
+                    If (\NATK ())
                     {
                         Store (Zero, \_SB.SFUN)
                     }
@@ -3649,7 +3648,7 @@ DefinitionBlock ("iASLcVNAyP.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
                     }
 
                     Store (Arg0, \_SB.SSTE)
-                    If (\NATK)
+                    If (\NATK ())
                     {
                         Store (AF2D (Arg0), \_SB.NSTE)
                         Store (\_SB.NSTE, \_SB.SSTE)

@@ -3,7 +3,7 @@
  * AML Disassembler version 20130823-64 [Aug 30 2013]
  * Copyright (c) 2000 - 2013 Intel Corporation
  * 
- * Disassembly of iASLzXUs7T.aml, Mon Jan  6 05:56:57 2014
+ * Disassembly of DSDT.aml, Tue Jan  7 23:18:48 2014
  *
  * Original Table Header:
  *     Signature        "DSDT"
@@ -16,60 +16,56 @@
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20120711 (538052369)
  */
-DefinitionBlock ("iASLzXUs7T.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
+DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 {
     /*
-     * iASL Warning: There were 15 external control methods found during
-     * disassembly, but additional ACPI tables to resolve these externals
-     * were not specified. This resulting disassembler output file may not
-     * compile because the disassembler did not know how many arguments
-     * to assign to these methods. To specify the tables needed to resolve
-     * external control method references, use the one of the following
-     * example iASL invocations:
-     *     iasl -e <ssdt1.aml,ssdt2.aml...> -d <dsdt.aml>
-     *     iasl -e <dsdt.aml,ssdt2.aml...> -d <ssdt1.aml>
+     * iASL Warning: There were 20 external control methods found during
+     * disassembly, but only 15 were resolved (5 unresolved). Additional
+     * ACPI tables are required to properly disassemble the code. This
+     * resulting disassembler output file may not compile because the
+     * disassembler did not know how many arguments to assign to the
+     * unresolved methods.
      */
-    External (_SB_.PCI0.GFX0.AINT, MethodObj)    // Warning: Unresolved Method, guessing 2 arguments (may be incorrect, see warning above)
-    External (_SB_.PCI0.GFX0.DWBL, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
-    External (_SB_.PCI0.GFX0.GLID, MethodObj)    // Warning: Unresolved Method, guessing 1 arguments (may be incorrect, see warning above)
-    External (_SB_.PCI0.GFX0.GSCI, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
-    External (_SB_.PCI0.GFX0.IUEH, MethodObj)    // Warning: Unresolved Method, guessing 1 arguments (may be incorrect, see warning above)
-    External (_SB_.PCI0.GFX0.OPTS, MethodObj)    // Warning: Unresolved Method, guessing 2 arguments (may be incorrect, see warning above)
-    External (_SB_.PCI0.GFX0.OWAK, MethodObj)    // Warning: Unresolved Method, guessing 2 arguments (may be incorrect, see warning above)
-    External (_SB_.PCI0.GFX0.SWHD, MethodObj)    // Warning: Unresolved Method, guessing 1 arguments (may be incorrect, see warning above)
-    External (_SB_.PCI0.GFX0.UPBL, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
     External (_SB_.PCI0.PAUD.PUAM, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
     External (_SB_.PCI0.XHC_.DUAM, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
     External (_SB_.TPM_.PTS_, MethodObj)    // Warning: Unresolved Method, guessing 1 arguments (may be incorrect, see warning above)
-    External (LIDS, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
     External (PS0X, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
     External (PS3X, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
 
-    External (_PR_.CPU0._PPC)
-    External (_PR_.CPU0._PSS)
+    External (_PR_.CPU0._PPC, IntObj)
+    External (_PR_.CPU0._PSS, PkgObj)
     External (_SB_.IAOE)
-    External (_SB_.IAOE.ECTM)
-    External (_SB_.IAOE.FFSE)
-    External (_SB_.IAOE.IBT1)
-    External (_SB_.IAOE.IIST)
-    External (_SB_.IAOE.ITMR)
-    External (_SB_.IAOE.PTSL)
-    External (_SB_.IAOE.RCTM)
-    External (_SB_.IAOE.WKRS)
+    External (_SB_.IAOE.ECTM, FieldUnitObj)
+    External (_SB_.IAOE.FFSE, FieldUnitObj)
+    External (_SB_.IAOE.IBT1, IntObj)
+    External (_SB_.IAOE.IIST, IntObj)
+    External (_SB_.IAOE.ITMR, FieldUnitObj)
+    External (_SB_.IAOE.PTSL, IntObj)
+    External (_SB_.IAOE.RCTM, FieldUnitObj)
+    External (_SB_.IAOE.WKRS, FieldUnitObj)
     External (_SB_.IFFS.FFSS)
     External (_SB_.PCCD)
     External (_SB_.PCCD.PENB)
-    External (_SB_.PCI0.GFX0.ADVD, IntObj)
-    External (_SB_.PCI0.GFX0.CBLV)
-    External (_SB_.PCI0.GFX0.CLID)
-    External (_SB_.PCI0.GFX0.GCBL, IntObj)
-    External (_SB_.PCI0.GFX0.GCDS, IntObj)
-    External (_SB_.PCI0.GFX0.GSSE)
-    External (_SB_.PCI0.GFX0.LCDD._DCS)
-    External (_SB_.PCI0.GFX0.NATK, IntObj)
-    External (_SB_.PCI0.GFX0.PRST, IntObj)
-    External (_SB_.PCI0.GFX0.STAT)
-    External (_SB_.PCI0.GFX0.TCHE)
+    External (_SB_.PCI0.GFX0.ADVD, MethodObj)    // 0 Arguments
+    External (_SB_.PCI0.GFX0.AINT, MethodObj)    // 2 Arguments
+    External (_SB_.PCI0.GFX0.CBLV, FieldUnitObj)
+    External (_SB_.PCI0.GFX0.CLID, FieldUnitObj)
+    External (_SB_.PCI0.GFX0.DWBL, MethodObj)    // 0 Arguments
+    External (_SB_.PCI0.GFX0.GCBL, MethodObj)    // 1 Arguments
+    External (_SB_.PCI0.GFX0.GCDS, MethodObj)    // 0 Arguments
+    External (_SB_.PCI0.GFX0.GLID, MethodObj)    // 1 Arguments
+    External (_SB_.PCI0.GFX0.GSCI, MethodObj)    // 0 Arguments
+    External (_SB_.PCI0.GFX0.GSSE, FieldUnitObj)
+    External (_SB_.PCI0.GFX0.IUEH, MethodObj)    // 1 Arguments
+    External (_SB_.PCI0.GFX0.LCDD._DCS, MethodObj)    // 0 Arguments
+    External (_SB_.PCI0.GFX0.NATK, MethodObj)    // 0 Arguments
+    External (_SB_.PCI0.GFX0.OPTS, MethodObj)    // 1 Arguments
+    External (_SB_.PCI0.GFX0.OWAK, MethodObj)    // 1 Arguments
+    External (_SB_.PCI0.GFX0.PRST, MethodObj)    // 0 Arguments
+    External (_SB_.PCI0.GFX0.STAT, FieldUnitObj)
+    External (_SB_.PCI0.GFX0.SWHD, MethodObj)    // 1 Arguments
+    External (_SB_.PCI0.GFX0.TCHE, FieldUnitObj)
+    External (_SB_.PCI0.GFX0.UPBL, MethodObj)    // 0 Arguments
     External (_SB_.PCI0.I2C0.PS0X)
     External (_SB_.PCI0.I2C0.PS3X)
     External (_SB_.PCI0.I2C1.PS0X)
@@ -78,18 +74,19 @@ DefinitionBlock ("iASLzXUs7T.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
     External (_SB_.PCI0.SDHC.WI01.PS3X)
     External (_SB_.PCI0.XHC_.PS0X)
     External (_SB_.PCI0.XHC_.PS3X)
-    External (GSMI)
+    External (GSMI, FieldUnitObj)
+    External (LIDS, FieldUnitObj)
     External (MDBG, IntObj)
     External (PCCD)
-    External (PDC0)
-    External (PDC1)
-    External (PDC2)
-    External (PDC3)
-    External (PDC4)
-    External (PDC5)
-    External (PDC6)
-    External (PDC7)
-    External (SGMD)
+    External (PDC0, IntObj)
+    External (PDC1, IntObj)
+    External (PDC2, IntObj)
+    External (PDC3, IntObj)
+    External (PDC4, IntObj)
+    External (PDC5, IntObj)
+    External (PDC6, IntObj)
+    External (PDC7, IntObj)
+    External (SGMD, FieldUnitObj)
 
     Name (SMBS, 0x0580)
     Name (SMBL, 0x20)
@@ -15364,9 +15361,9 @@ DefinitionBlock ("iASLzXUs7T.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         Name (ONAM, "ASUSTeK")
         Method (ADVG, 0, NotSerialized)
         {
-            If (\_SB.PCI0.GFX0.PRST)
+            If (\_SB.PCI0.GFX0.PRST ())
             {
-                Return (\_SB.PCI0.GFX0.ADVD)
+                Return (\_SB.PCI0.GFX0.ADVD ())
             }
 
             Return (0x03)
@@ -15374,9 +15371,9 @@ DefinitionBlock ("iASLzXUs7T.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
         Method (GCDM, 0, NotSerialized)
         {
-            If (\_SB.PCI0.GFX0.PRST)
+            If (\_SB.PCI0.GFX0.PRST ())
             {
-                Return (\_SB.PCI0.GFX0.GCDS)
+                Return (\_SB.PCI0.GFX0.GCDS ())
             }
 
             Return (One)
@@ -15384,7 +15381,7 @@ DefinitionBlock ("iASLzXUs7T.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
         Method (SWHG, 1, Serialized)
         {
-            If (\_SB.PCI0.GFX0.PRST)
+            If (\_SB.PCI0.GFX0.PRST ())
             {
                 \_SB.PCI0.GFX0.SWHD (Arg0)
                 Return (One)
@@ -15395,9 +15392,9 @@ DefinitionBlock ("iASLzXUs7T.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
         Method (NATK, 0, NotSerialized)
         {
-            If (\_SB.PCI0.GFX0.PRST)
+            If (\_SB.PCI0.GFX0.PRST ())
             {
-                Return (\_SB.PCI0.GFX0.NATK)
+                Return (\_SB.PCI0.GFX0.NATK ())
             }
 
             Return (One)
@@ -22659,10 +22656,9 @@ DefinitionBlock ("iASLzXUs7T.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         Name (ASBN, Zero)
         Method (SBRN, 0, Serialized)
         {
-            If (^^^GFX0.PRST)
+            If (^^^GFX0.PRST ())
             {
-                Store (^^^GFX0.GCBL, ^^^GFX0.CBLV)
-                Local0
+                Store (^^^GFX0.GCBL (^^^GFX0.CBLV), Local0)
                 Subtract (0x0A, Local0, Local1)
                 If (LNotEqual (Local1, LBTN))
                 {
@@ -22681,9 +22677,9 @@ DefinitionBlock ("iASLzXUs7T.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             If (LGreaterEqual (MSOS (), OSVT))
             {
                 Store (LBTN, Local0)
-                If (^^^GFX0.PRST)
+                If (^^^GFX0.PRST ())
                 {
-                    If (LNotEqual (^^^GFX0.LCDD._DCS, 0x1F))
+                    If (LNotEqual (^^^GFX0.LCDD._DCS (), 0x1F))
                     {
                         Return (One)
                     }
@@ -22745,9 +22741,9 @@ DefinitionBlock ("iASLzXUs7T.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             If (LGreaterEqual (MSOS (), OSVT))
             {
                 Store (LBTN, Local0)
-                If (^^^GFX0.PRST)
+                If (^^^GFX0.PRST ())
                 {
-                    If (LNotEqual (^^^GFX0.LCDD._DCS, 0x1F))
+                    If (LNotEqual (^^^GFX0.LCDD._DCS (), 0x1F))
                     {
                         Return (One)
                     }
@@ -23385,7 +23381,7 @@ DefinitionBlock ("iASLzXUs7T.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Store (Local0, LIDS)
                 If (CondRefOf (\_SB.PCI0.GFX0.GLID))
                 {
-                    ^^^GFX0.GLID (LIDS ())
+                    ^^^GFX0.GLID (LIDS)
                 }
             }
         }
@@ -25243,7 +25239,8 @@ DefinitionBlock ("iASLzXUs7T.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         If (Arg0)
         {
             \_SB.PCI0.NPTS (Arg0)
-            \_SB.PCI0.GFX0.OPTS (Arg0, OEMS (Arg0))
+            \_SB.PCI0.GFX0.OPTS (Arg0)
+            OEMS (Arg0)
         }
     }
 
@@ -25251,7 +25248,8 @@ DefinitionBlock ("iASLzXUs7T.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
     {
         \_SB.PCI0.NWAK (Arg0)
         \_SB.ATKD.GENW (Arg0)
-        \_SB.PCI0.GFX0.OWAK (Arg0, OEMW (Arg0))
+        \_SB.PCI0.GFX0.OWAK (Arg0)
+        OEMW (Arg0)
     }
 }
 

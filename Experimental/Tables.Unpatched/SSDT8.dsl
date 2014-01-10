@@ -3,48 +3,37 @@
  * AML Disassembler version 20130823-64 [Aug 30 2013]
  * Copyright (c) 2000 - 2013 Intel Corporation
  * 
- * Disassembly of iASLPMWM0f.aml, Mon Jan  6 06:03:26 2014
+ * Disassembly of SSDT8.aml, Sat Jan 11 00:26:36 2014
  *
  * Original Table Header:
  *     Signature        "SSDT"
  *     Length           0x000006B9 (1721)
  *     Revision         0x01
- *     Checksum         0x40
+ *     Checksum         0x70
  *     OEM ID           "Intel_"
  *     OEM Table ID     "IsctTabl"
  *     OEM Revision     0x00001000 (4096)
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20120711 (538052369)
  */
-DefinitionBlock ("iASLPMWM0f.aml", "SSDT", 1, "Intel_", "IsctTabl", 0x00001000)
+DefinitionBlock ("SSDT8.aml", "SSDT", 1, "Intel_", "IsctTabl", 0x00001000)
 {
-    /*
-     * iASL Warning: There were 1 external control methods found during
-     * disassembly, but additional ACPI tables to resolve these externals
-     * were not specified. This resulting disassembler output file may not
-     * compile because the disassembler did not know how many arguments
-     * to assign to these methods. To specify the tables needed to resolve
-     * external control method references, use the one of the following
-     * example iASL invocations:
-     *     iasl -e <ssdt1.aml,ssdt2.aml...> -d <dsdt.aml>
-     *     iasl -e <dsdt.aml,ssdt2.aml...> -d <ssdt1.aml>
-     */
-    External (_SB_.PCI0.LPCB.EC0_.SCTF, MethodObj)    // Warning: Unresolved Method, guessing 2 arguments (may be incorrect, see warning above)
 
     External (_SB_.IFFS.FFSS)
-    External (_SB_.PCI0.GFX0.ASLC)
-    External (_SB_.PCI0.GFX0.ASLE)
-    External (_SB_.PCI0.GFX0.PARD)
-    External (_SB_.PCI0.GFX0.STAT)
-    External (_SB_.PCI0.GFX0.TCHE)
-    External (_SB_.PCI0.LPCB.EC0_.RPIN, IntObj)
-    External (ICNF, IntObj)
+    External (_SB_.PCI0.GFX0.ASLC, FieldUnitObj)
+    External (_SB_.PCI0.GFX0.ASLE, FieldUnitObj)
+    External (_SB_.PCI0.GFX0.PARD, MethodObj)    // 0 Arguments
+    External (_SB_.PCI0.GFX0.STAT, FieldUnitObj)
+    External (_SB_.PCI0.GFX0.TCHE, FieldUnitObj)
+    External (_SB_.PCI0.LPCB.EC0_.RPIN, MethodObj)    // 1 Arguments
+    External (_SB_.PCI0.LPCB.EC0_.SCTF, MethodObj)    // 2 Arguments
+    External (ICNF, FieldUnitObj)
 
     Scope (\_SB)
     {
         Device (IAOE)
         {
-            OperationRegion (ISCT, SystemMemory, 0xD992AD98, 0x0011)
+            OperationRegion (ISCT, SystemMemory, 0xD9927D98, 0x0011)
             Field (ISCT, AnyAcc, Lock, Preserve)
             {
                 WKRS,   8, 
@@ -116,7 +105,7 @@ DefinitionBlock ("iASLPMWM0f.aml", "SSDT", 1, "Intel_", "IsctTabl", 0x00001000)
                         If (LAnd (LAnd (And (IBT1, One), LOr (And (\_SB.IAOE.WKRS, 
                             0x02), And (\_SB.IAOE.WKRS, 0x10))), LNot (And (Arg0, One))))
                         {
-                            If (LNot (\_SB.PCI0.GFX0.PARD))
+                            If (LNot (\_SB.PCI0.GFX0.PARD ()))
                             {
                                 Store (And (\_SB.PCI0.GFX0.STAT, 0xFFFFFFFC), \_SB.PCI0.GFX0.STAT)
                                 Store (Or (\_SB.PCI0.GFX0.ASLC, 0x0100), \_SB.PCI0.GFX0.ASLC)
@@ -129,7 +118,7 @@ DefinitionBlock ("iASLPMWM0f.aml", "SSDT", 1, "Intel_", "IsctTabl", 0x00001000)
                         If (LAnd (LAnd (And (IBT1, One), LOr (And (\_SB.IAOE.WKRS, 
                             0x02), And (\_SB.IAOE.WKRS, 0x10))), LNot (And (Arg0, One))))
                         {
-                            If (LNot (\_SB.PCI0.GFX0.PARD))
+                            If (LNot (\_SB.PCI0.GFX0.PARD ()))
                             {
                                 Store (And (\_SB.PCI0.GFX0.STAT, 0xFFFFFFFC), \_SB.PCI0.GFX0.STAT)
                                 Store (Or (\_SB.PCI0.GFX0.ASLC, 0x0100), \_SB.PCI0.GFX0.ASLC)
@@ -343,8 +332,7 @@ DefinitionBlock ("iASLPMWM0f.aml", "SSDT", 1, "Intel_", "IsctTabl", 0x00001000)
 
             Method (GPCS, 0, NotSerialized)
             {
-                Return (\_SB.PCI0.LPCB.EC0.RPIN)
-                0x11
+                Return (\_SB.PCI0.LPCB.EC0.RPIN (0x11))
             }
 
             Method (GAWD, 0, NotSerialized)

@@ -3,7 +3,7 @@
  * AML Disassembler version 20130823-64 [Aug 30 2013]
  * Copyright (c) 2000 - 2013 Intel Corporation
  * 
- * Disassembly of SSDT-9.aml, Fri Jan 10 05:16:59 2014
+ * Disassembly of SSDT7.aml, Sat Jan 11 00:25:34 2014
  *
  * Original Table Header:
  *     Signature        "SSDT"
@@ -16,7 +16,7 @@
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20091112 (537465106)
  */
-DefinitionBlock ("SSDT-9.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
+DefinitionBlock ("SSDT7.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
 {
     /*
      * iASL Warning: There were 9 external control methods found during
@@ -26,6 +26,8 @@ DefinitionBlock ("SSDT-9.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
      * disassembler did not know how many arguments to assign to the
      * unresolved methods.
      */
+    External (HDOS, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
+    External (HNOT, MethodObj)    // Warning: Unresolved Method, guessing 1 arguments (may be incorrect, see warning above)
     External (IDAB, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
 
     External (_SB_.CSTE, FieldUnitObj)
@@ -40,15 +42,16 @@ DefinitionBlock ("SSDT-9.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
     External (_SB_.SSTE, FieldUnitObj)
     External (_SB_.VBIF, FieldUnitObj)
     External (_SB_.VGAF, FieldUnitObj)
-    External (DTGP, MethodObj)
     External (ADBG, MethodObj)    // 1 Arguments
     External (BRTI, FieldUnitObj)
+    External (CSTE, FieldUnitObj)
     External (DSEN, FieldUnitObj)
     External (GUAM, MethodObj)    // 1 Arguments
     External (ISMI, MethodObj)    // 1 Arguments
     External (LBTN, FieldUnitObj)
     External (MSOS, MethodObj)    // 0 Arguments
     External (NATK, MethodObj)    // 0 Arguments
+    External (NSTE, FieldUnitObj)
     External (OSFG, IntObj)
     External (OSW8, IntObj)
     External (OSXP, IntObj)
@@ -387,7 +390,7 @@ DefinitionBlock ("SSDT-9.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
             }
         }
 
-        Device (IGPU)
+        Device (GFX0)
         {
             Name (_ADR, 0x00020000)  // _ADR: Address
             OperationRegion (VSID, PCI_Config, Zero, 0x04)
@@ -395,63 +398,13 @@ DefinitionBlock ("SSDT-9.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
             {
                 REG0,   32
             }
-            
-             Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
-                {
-                    Store (Package (0x0E)
-                    {
-                        "graphic-options", 
-                        Buffer (0x04)
-                        {
-                             0x0C, 0x00, 0x00, 0x00
-                        }, 
-
-                        "AAPL00,DualLink", 
-                        Buffer (0x04)
-                        {
-                             0x01, 0x00, 0x00, 0x00
-                        }, 
-
-                        "AAPL01,DualLink", 
-                        Buffer (0x04)
-                        {
-                             0x01, 0x00, 0x00, 0x00
-                        }, 
-
-                        "device-id", 
-                        Buffer (0x04)
-                        {
-                             0x2E, 0x0A, 0x00, 0x00
-                        },
-
-                        "AAPL,ig-platform-id", 
-                        Buffer (0x04)
-                        {
-                             0x08, 0x00, 0x2E, 0x0A
-                        }, 
-
-                        "hda-gfx", 
-                        Buffer (0x0A)
-                        {
-                            "onboard-1"
-                        }, 
-
-                        "model", 
-                        Buffer (0x19)
-                        {
-                            "Intel Iris Graphics 5100"
-                        }
-                    }, Local0)
-                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
-                    Return (Local0)
-                }
 
             Method (_DEP, 0, NotSerialized)  // _DEP: Dependencies
             {
-                ADBG ("IGPU DEP Call")
+                ADBG ("GFX0 DEP Call")
                 If (LEqual (S0ID, One))
                 {
-                    ADBG ("IGPU DEP")
+                    ADBG ("GFX0 DEP")
                     Return (Package (0x01)
                     {
                         \_SB.PEPD
@@ -459,7 +412,7 @@ DefinitionBlock ("SSDT-9.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
                 }
                 Else
                 {
-                    ADBG ("IGPU DEP NULL")
+                    ADBG ("GFX0 DEP NULL")
                     Return (Package (0x00) {})
                 }
             }
@@ -469,6 +422,10 @@ DefinitionBlock ("SSDT-9.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
                 Store (And (Arg0, 0x07), DSEN)
                 If (LEqual (And (Arg0, 0x03), Zero))
                 {
+                    If (CondRefOf (HDOS))
+                    {
+                        HDOS ()
+                    }
                 }
 
                 If (DRDY)
@@ -1848,7 +1805,7 @@ DefinitionBlock ("SSDT-9.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
                     Subtract (0x0A, Local0, LBTN)
                     If (BRNC)
                     {
-                        \_SB.PCI0.IGPU.AINT (One, Arg0)
+                        \_SB.PCI0.GFX0.AINT (One, Arg0)
                     }
                     Else
                     {
@@ -2601,13 +2558,17 @@ DefinitionBlock ("SSDT-9.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
                     }
                     Else
                     {
-                        Notify (\_SB.PCI0.IGPU, Arg1)
+                        Notify (\_SB.PCI0.GFX0, Arg1)
                     }
                 }
-                
+
+                If (CondRefOf (HNOT))
+                {
+                    HNOT (Arg0)
+                }
                 Else
                 {
-                    Notify (\_SB.PCI0.IGPU, 0x80)
+                    Notify (\_SB.PCI0.GFX0, 0x80)
                 }
 
                 Return (Zero)
@@ -2824,7 +2785,7 @@ DefinitionBlock ("SSDT-9.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
                         Store (One, GSES)
                     }
 
-                    Store (One, \_SB.PCI0.IGPU.CLID)
+                    Store (One, \_SB.PCI0.GFX0.CLID)
                 }
             }
 
@@ -3694,12 +3655,12 @@ DefinitionBlock ("SSDT-9.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
                     }
 
                     ISMI (0x94)
-                    Notify (\_SB.PCI0.IGPU, 0x81)
+                    Notify (\_SB.PCI0.GFX0, 0x81)
                 }
                 Else
                 {
-                    Store (One, \_SB.PCI0.IGPU.CEVT)
-                    Store (0x03, \_SB.PCI0.IGPU.CSTS)
+                    Store (One, \_SB.PCI0.GFX0.CEVT)
+                    Store (0x03, \_SB.PCI0.GFX0.CSTS)
                     If (LNotEqual (\_SB.OCAD, \_SB.OPAD))
                     {
                         Store (\_SB.OCAD, \_SB.OPAD)
@@ -3709,7 +3670,7 @@ DefinitionBlock ("SSDT-9.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
                         }
                         Else
                         {
-                            Notify (\_SB.PCI0.IGPU, Zero)
+                            Notify (\_SB.PCI0.GFX0, Zero)
                         }
 
                         Sleep (0x03E8)
@@ -3717,7 +3678,7 @@ DefinitionBlock ("SSDT-9.aml", "SSDT", 1, "SaSsdt", "SaSsdt ", 0x00003000)
 
                     Store (AF2D (Arg0), \_SB.NSTE)
                     WNDD (\_SB.NSTE)
-                    Notify (\_SB.PCI0.IGPU, 0x80)
+                    Notify (\_SB.PCI0.GFX0, 0x80)
                 }
 
                 Return (Zero)

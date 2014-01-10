@@ -3,7 +3,7 @@
  * AML Disassembler version 20130823-64 [Aug 30 2013]
  * Copyright (c) 2000 - 2013 Intel Corporation
  * 
- * Disassembly of iASLXsRQFu.aml, Mon Jan  6 06:01:59 2014
+ * Disassembly of SSDT5.aml, Sat Jan 11 00:23:36 2014
  *
  * Original Table Header:
  *     Signature        "SSDT"
@@ -16,96 +16,85 @@
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20120711 (538052369)
  */
-DefinitionBlock ("iASLXsRQFu.aml", "SSDT", 1, "DptfTa", "DptfTabl", 0x00001000)
+DefinitionBlock ("SSDT5.aml", "SSDT", 1, "DptfTa", "DptfTabl", 0x00001000)
 {
-    /*
-     * iASL Warning: There were 2 external control methods found during
-     * disassembly, but additional ACPI tables to resolve these externals
-     * were not specified. This resulting disassembler output file may not
-     * compile because the disassembler did not know how many arguments
-     * to assign to these methods. To specify the tables needed to resolve
-     * external control method references, use the one of the following
-     * example iASL invocations:
-     *     iasl -e <ssdt1.aml,ssdt2.aml...> -d <dsdt.aml>
-     *     iasl -e <dsdt.aml,ssdt2.aml...> -d <ssdt1.aml>
-     */
-    External (_SB_.PCI0.GFX0.LCDD._BCM, MethodObj)    // Warning: Unresolved Method, guessing 1 arguments (may be incorrect, see warning above)
-    External (PWRS, MethodObj)    // Warning: Unresolved Method, guessing 1 arguments (may be incorrect, see warning above)
 
-    External (_PR_.AAC0, IntObj)
-    External (_PR_.ACRT, IntObj)
-    External (_PR_.APSV, IntObj)
-    External (_PR_.CBMI)
-    External (_PR_.CFGD)
-    External (_PR_.CLVL, IntObj)
-    External (_PR_.CPU0)
-    External (_PR_.CPU0._PPC)
-    External (_PR_.CPU0._PSS, IntObj)
+    External (_PR_.AAC0, FieldUnitObj)
+    External (_PR_.ACRT, FieldUnitObj)
+    External (_PR_.APSV, FieldUnitObj)
+    External (_PR_.CBMI, FieldUnitObj)
+    External (_PR_.CFGD, FieldUnitObj)
+    External (_PR_.CLVL, FieldUnitObj)
+    External (_PR_.CPU0, ProcessorObj)
+    External (_PR_.CPU0._PPC, IntObj)
+    External (_PR_.CPU0._PSS, PkgObj)
     External (_PR_.CPU0._TPC, IntObj)
-    External (_PR_.CPU0._TSD, IntObj)
-    External (_PR_.CPU0._TSS, IntObj)
-    External (_PR_.CPU0.TSMC)
-    External (_PR_.CPU0.TSMF)
-    External (_PR_.CPU1)
-    External (_PR_.CPU2)
-    External (_PR_.CPU3)
-    External (_PR_.CPU4)
-    External (_PR_.CPU5)
-    External (_PR_.CPU6)
-    External (_PR_.CPU7)
-    External (_PR_.CTC0, IntObj)
-    External (_PR_.CTC1, IntObj)
-    External (_PR_.CTC2, IntObj)
-    External (_PR_.PL10)
-    External (_PR_.PL11)
-    External (_PR_.PL12)
-    External (_PR_.PL20)
-    External (_PR_.PL21)
-    External (_PR_.PL22)
-    External (_PR_.PLW0, IntObj)
-    External (_PR_.PLW1, IntObj)
-    External (_PR_.PLW2, IntObj)
-    External (_PR_.TAR0)
-    External (_PR_.TAR1)
-    External (_PR_.TAR2)
+    External (_PR_.CPU0._TSD, MethodObj)    // 0 Arguments
+    External (_PR_.CPU0._TSS, MethodObj)    // 0 Arguments
+    External (_PR_.CPU0.TSMC, PkgObj)
+    External (_PR_.CPU0.TSMF, PkgObj)
+    External (_PR_.CPU1, ProcessorObj)
+    External (_PR_.CPU2, ProcessorObj)
+    External (_PR_.CPU3, ProcessorObj)
+    External (_PR_.CPU4, ProcessorObj)
+    External (_PR_.CPU5, ProcessorObj)
+    External (_PR_.CPU6, ProcessorObj)
+    External (_PR_.CPU7, ProcessorObj)
+    External (_PR_.CTC0, FieldUnitObj)
+    External (_PR_.CTC1, FieldUnitObj)
+    External (_PR_.CTC2, FieldUnitObj)
+    External (_PR_.PL10, FieldUnitObj)
+    External (_PR_.PL11, FieldUnitObj)
+    External (_PR_.PL12, FieldUnitObj)
+    External (_PR_.PL20, FieldUnitObj)
+    External (_PR_.PL21, FieldUnitObj)
+    External (_PR_.PL22, FieldUnitObj)
+    External (_PR_.PLW0, FieldUnitObj)
+    External (_PR_.PLW1, FieldUnitObj)
+    External (_PR_.PLW2, FieldUnitObj)
+    External (_PR_.TAR0, FieldUnitObj)
+    External (_PR_.TAR1, FieldUnitObj)
+    External (_PR_.TAR2, FieldUnitObj)
     External (_SB_.PCCD.PENB)
     External (_SB_.PCI0, DeviceObj)
     External (_SB_.PCI0.B0D4, DeviceObj)
-    External (_SB_.PCI0.GFX0.LCDD._BCL, IntObj)
-    External (_SB_.PCI0.GFX0.LCDD._BQC, IntObj)
-    External (_SB_.PCI0.GFX0.LCDD._DCS, IntObj)
+    External (_SB_.PCI0.GFX0.LCDD._BCL, MethodObj)    // 0 Arguments
+    External (_SB_.PCI0.GFX0.LCDD._BCM, MethodObj)    // 1 Arguments
+    External (_SB_.PCI0.GFX0.LCDD._BQC, MethodObj)    // 0 Arguments
+    External (_SB_.PCI0.GFX0.LCDD._DCS, MethodObj)    // 0 Arguments
     External (_SB_.PCI0.LPCB.EC0_, DeviceObj)
-    External (_SB_.PCI0.LPCB.EC0_.RRAM, IntObj)
-    External (_SB_.PCI0.LPCB.EC0_.TH1L, IntObj)
-    External (_SB_.PCI0.LPCB.EC0_.TH1R, IntObj)
-    External (_SB_.PCI0.MHBR, IntObj)
+    External (_SB_.PCI0.LPCB.EC0_.RRAM, MethodObj)    // 1 Arguments
+    External (_SB_.PCI0.LPCB.EC0_.TH1L, FieldUnitObj)
+    External (_SB_.PCI0.LPCB.EC0_.TH1R, FieldUnitObj)
+    External (_SB_.PCI0.MHBR, FieldUnitObj)
     External (_TZ_.THRM)
     External (B0D4)
-    External (CTDP)
-    External (DCMP)
-    External (DISE)
-    External (DPAP)
-    External (DPCP)
-    External (DPPP)
-    External (DPTF)
-    External (ECEU, IntObj)
-    External (LPER, IntObj)
-    External (LPMP)
-    External (LPMV, IntObj)
-    External (LPOE, IntObj)
-    External (LPOP, IntObj)
-    External (LPOS, IntObj)
-    External (LPOW, IntObj)
-    External (MEMD)
-    External (MHBR)
-    External (MPLT, IntObj)
-    External (PCHD)
-    External (PDC0)
-    External (PPSZ, IntObj)
-    External (SADE)
-    External (TCNT, IntObj)
-    External (TGFG, IntObj)
-    External (TSOD, IntObj)
+    External (CTDP, FieldUnitObj)
+    External (DCMP, FieldUnitObj)
+    External (DISE, FieldUnitObj)
+    External (DPAP, FieldUnitObj)
+    External (DPCP, FieldUnitObj)
+    External (DPPP, FieldUnitObj)
+    External (DPTF, FieldUnitObj)
+    External (ECEU, FieldUnitObj)
+    External (LPER, FieldUnitObj)
+    External (LPMP, FieldUnitObj)
+    External (LPMV, FieldUnitObj)
+    External (LPOE, FieldUnitObj)
+    External (LPOP, FieldUnitObj)
+    External (LPOS, FieldUnitObj)
+    External (LPOW, FieldUnitObj)
+    External (MEMD, FieldUnitObj)
+    External (MHBR, FieldUnitObj)
+    External (MPLT, FieldUnitObj)
+    External (PCHD, FieldUnitObj)
+    External (PDC0, IntObj)
+    External (PPSZ, FieldUnitObj)
+    External (PWRS, FieldUnitObj)
+    External (SADE, FieldUnitObj)
+    External (TCNT, FieldUnitObj)
+    External (TGFG, FieldUnitObj)
+    External (TSOD, FieldUnitObj)
 
     Scope (\_SB)
     {
@@ -403,7 +392,10 @@ DefinitionBlock ("iASLXsRQFu.aml", "SSDT", 1, "DptfTa", "DptfTabl", 0x00001000)
             Method (PDRT, 0, NotSerialized)
             {
                 \_SB.PCI0.B0D4.PCCC ()
-                If (\PWRS (PDAC ())) {}
+                If (\PWRS)
+                {
+                    PDAC ()
+                }
                 Else
                 {
                     PDDC ()
@@ -806,8 +798,7 @@ DefinitionBlock ("iASLXsRQFu.aml", "SSDT", 1, "DptfTa", "DptfTabl", 0x00001000)
             Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
             If (LAnd (LEqual (XPCC, Zero), CondRefOf (\_PR.CBMI)))
             {
-                Store (\_SB.PCI0.LPCB.EC0.RRAM, 0x01BF)
-                Local0
+                Store (\_SB.PCI0.LPCB.EC0.RRAM (0x01BF), Local0)
                 While (One)
                 {
                     Store (Local0, _T_0)
@@ -1609,7 +1600,7 @@ DefinitionBlock ("iASLXsRQFu.aml", "SSDT", 1, "DptfTa", "DptfTabl", 0x00001000)
         {
             If (CondRefOf (\_PR.CPU0._TSS))
             {
-                Return (\_PR.CPU0._TSS)
+                Return (\_PR.CPU0._TSS ())
             }
             Else
             {
@@ -1728,7 +1719,7 @@ DefinitionBlock ("iASLXsRQFu.aml", "SSDT", 1, "DptfTa", "DptfTabl", 0x00001000)
         {
             If (CondRefOf (\_PR.CPU0._TSD))
             {
-                Return (\_PR.CPU0._TSD)
+                Return (\_PR.CPU0._TSD ())
             }
             Else
             {
@@ -2386,7 +2377,7 @@ DefinitionBlock ("iASLXsRQFu.aml", "SSDT", 1, "DptfTa", "DptfTabl", 0x00001000)
             {
                 If (CondRefOf (\_PR.CPU0._TSS))
                 {
-                    Return (\_PR.CPU0._TSS)
+                    Return (\_PR.CPU0._TSS ())
                 }
                 Else
                 {
@@ -2505,7 +2496,7 @@ DefinitionBlock ("iASLXsRQFu.aml", "SSDT", 1, "DptfTa", "DptfTabl", 0x00001000)
             {
                 If (CondRefOf (\_PR.CPU0._TSD))
                 {
-                    Return (\_PR.CPU0._TSD)
+                    Return (\_PR.CPU0._TSD ())
                 }
                 Else
                 {
@@ -2747,7 +2738,7 @@ DefinitionBlock ("iASLXsRQFu.aml", "SSDT", 1, "DptfTa", "DptfTabl", 0x00001000)
             {
                 If (CondRefOf (\_SB.PCI0.GFX0.LCDD._BCL))
                 {
-                    Return (\_SB.PCI0.GFX0.LCDD._BCL)
+                    Return (\_SB.PCI0.GFX0.LCDD._BCL ())
                 }
                 Else
                 {
@@ -2770,7 +2761,7 @@ DefinitionBlock ("iASLXsRQFu.aml", "SSDT", 1, "DptfTa", "DptfTabl", 0x00001000)
             {
                 If (CondRefOf (\_SB.PCI0.GFX0.LCDD._BQC))
                 {
-                    Return (\_SB.PCI0.GFX0.LCDD._BQC)
+                    Return (\_SB.PCI0.GFX0.LCDD._BQC ())
                 }
                 Else
                 {
@@ -2782,7 +2773,7 @@ DefinitionBlock ("iASLXsRQFu.aml", "SSDT", 1, "DptfTa", "DptfTabl", 0x00001000)
             {
                 If (CondRefOf (\_SB.PCI0.GFX0.LCDD._DCS))
                 {
-                    Return (\_SB.PCI0.GFX0.LCDD._DCS)
+                    Return (\_SB.PCI0.GFX0.LCDD._DCS ())
                 }
                 Else
                 {

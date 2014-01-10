@@ -3,7 +3,7 @@
  * AML Disassembler version 20130823-64 [Aug 30 2013]
  * Copyright (c) 2000 - 2013 Intel Corporation
  * 
- * Disassembly of iASLoxLQUT.aml, Mon Jan  6 06:02:25 2014
+ * Disassembly of SSDT6.aml, Sat Jan 11 00:24:36 2014
  *
  * Original Table Header:
  *     Signature        "SSDT"
@@ -16,7 +16,7 @@
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20120711 (538052369)
  */
-DefinitionBlock ("iASLoxLQUT.aml", "SSDT", 1, "SataRe", "SataTabl", 0x00001000)
+DefinitionBlock ("SSDT6.aml", "SSDT", 1, "SataRe", "SataTabl", 0x00001000)
 {
 
     External (_SB_.PCI0.SAT0, DeviceObj)
