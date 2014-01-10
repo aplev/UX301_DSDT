@@ -14847,8 +14847,10 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Offset (0x8A), 
                 HKEN,   1, 
                 Offset (0x93), 
-                TAH0,   16, 
-                TAH1,   16, 
+                TH00, 8,
+TH01, 8, 
+                TH10, 8,
+TH11, 8, 
                 TSTP,   8, 
                 Offset (0x9C), 
                 CDT4,   8, 
@@ -14873,7 +14875,8 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 B0TM,   16, 
                 B0C1,   16, 
                 B0C2,   16, 
-                B0C3,   16, 
+                BC30, 8,
+BC31, 8, 
                 B0C4,   16, 
                 Offset (0xD0), 
                 B1PN,   16, 
@@ -14891,11 +14894,13 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Offset (0xF0), 
                 Offset (0xF2), 
                 Offset (0xF4), 
-                B0SN,   16, 
+                B0S0, 8,
+B0S1, 8, 
                 Offset (0xF8), 
                 Offset (0xFA), 
                 Offset (0xFC), 
-                B1SN,   16
+                B1S0, 8,
+B1S1, 8
             }
 
             Name (SMBF, Zero)
@@ -14952,7 +14957,8 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Field (SMBX, ByteAcc, NoLock, Preserve)
             {
                 Offset (0x04), 
-                DT2B,   16
+                DTB0, 8,
+DTB1, 8
             }
 
             OperationRegion (NSBS, EmbeddedControl, 0x40, 0x04)
@@ -17507,7 +17513,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 BATO ()
                 BATS (Zero)
-                Store (^^LPCB.EC0.BIF9 (), Index (PBIF, 0x09))
+                 
                 Store (ONAM, Index (PBIF, 0x0C))
                 Store (^^LPCB.EC0.BIF0 (), Local0)
                 Store (^^LPCB.EC0.BIF1 (), Local1)
@@ -17746,7 +17752,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         0x0F))
                 }
 
-                Store (^^LPCB.EC0.B0C3, Index (BIXT, 0x08))
+                Store (B1B2 (^^LPCB.EC0.BC30, ^^LPCB.EC0.BC31), Index (BIXT, 0x08))
                 Store (0x0001869F, Index (BIXT, 0x09))
                 Return (BIXT)
             }
@@ -17985,11 +17991,11 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             {
                 If (BSLF)
                 {
-                    Store (B1SN, Local0)
+                    Store (B1B2 (B1S0, B1S1), Local0)
                 }
                 Else
                 {
-                    Store (B0SN, Local0)
+                    Store (B1B2 (B0S0, B0S1), Local0)
                 }
             }
             Else
@@ -21328,7 +21334,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     If (LEqual (Arg0, RDWD))
                     {
                         Store (0x02, Index (Local0, One))
-                        Store (DT2B, Index (Local0, 0x02))
+                        Store (B1B2 (DTB0, DTB1), Index (Local0, 0x02))
                     }
 
                     If (LEqual (Arg0, RDBT))
@@ -21416,7 +21422,9 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 If (LEqual (Arg0, WRWD))
                 {
-                    Store (Arg4, DT2B)
+                    Store (Arg4, Local4)
+Store (Local4, DTB0)
+Store (ShiftRight (Local4, 8), DTB1) 
                 }
 
                 If (LEqual (Arg0, WRBT))
@@ -22307,14 +22315,14 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Store (Arg0, T_0)
                     If (LEqual (T_0, Zero))
                     {
-                        Store (TAH0, Local0)
+                        Store (B1B2 (TH00, TH01), Local0)
                         Break
                     }
                     Else
                     {
                         If (LEqual (T_0, One))
                         {
-                            Store (TAH1, Local0)
+                            Store (B1B2 (TH10, TH11), Local0)
                             Break
                         }
                         Else
@@ -25250,5 +25258,11 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         \_SB.ATKD.GENW (Arg0)
         \_SB.PCI0.IGPU.OWAK (Arg0)
         OEMW (Arg0)
+    }
+    Method (B1B2, 2, NotSerialized)
+    {
+        ShiftLeft (Arg1, 8, Local0)
+        Or (Arg0, Local0, Local0)
+        Return (Local0)
     }
 }
