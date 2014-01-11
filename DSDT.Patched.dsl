@@ -1640,7 +1640,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 }
             }
 
-            Device (B0D4)
+            Device (PEGP)
             {
                 Name (_ADR, 0x00040000)  // _ADR: Address
             }
@@ -29709,7 +29709,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
             Method (PDRT, 0, NotSerialized)
             {
-                ^^PCI0.B0D4.PCCC ()
+                ^^PCI0.PEGP.PCCC ()
                 If (PWRS)
                 {
                     PDAC ()
@@ -29728,7 +29728,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Package (0x04)
                     {
                         0x50, 
-                        ^^PCI0.B0D4, 
+                        ^^PCI0.PEGP, 
                         0x09, 
                         Package (0x02)
                         {
@@ -29740,7 +29740,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Package (0x04)
                     {
                         0x3C, 
-                        ^^PCI0.B0D4, 
+                        ^^PCI0.PEGP, 
                         0x09, 
                         Package (0x02)
                         {
@@ -29752,7 +29752,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Package (0x04)
                     {
                         0x37, 
-                        ^^PCI0.B0D4, 
+                        ^^PCI0.PEGP, 
                         0x09, 
                         Package (0x02)
                         {
@@ -29764,7 +29764,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Package (0x04)
                     {
                         0x32, 
-                        ^^PCI0.B0D4, 
+                        ^^PCI0.PEGP, 
                         0x09, 
                         Package (0x02)
                         {
@@ -29776,7 +29776,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Package (0x04)
                     {
                         0x32, 
-                        ^^PCI0.B0D4, 
+                        ^^PCI0.PEGP, 
                         Zero, 
                         Package (0x02)
                         {
@@ -29812,7 +29812,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Package (0x04)
                     {
                         0x1E, 
-                        ^^PCI0.B0D4, 
+                        ^^PCI0.PEGP, 
                         Zero, 
                         Package (0x02)
                         {
@@ -29824,7 +29824,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Package (0x04)
                     {
                         0x14, 
-                        ^^PCI0.B0D4, 
+                        ^^PCI0.PEGP, 
                         Zero, 
                         Package (0x02)
                         {
@@ -29842,8 +29842,8 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         {
                             If (LAnd (LGreaterEqual (\_PR.CLVL, One), LLessEqual (\_PR.CLVL, 0x03)))
                             {
-                                Store (^^PCI0.B0D4.CPNU (\_PR.PL20, One), Local0)
-                                Store (^^PCI0.B0D4.MIN4 (\_PR.PL10), Local1)
+                                Store (^^PCI0.PEGP.CPNU (\_PR.PL20, One), Local0)
+                                Store (^^PCI0.PEGP.MIN4 (\_PR.PL10), Local1)
                             }
                         }
                         Else
@@ -29852,8 +29852,8 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                             {
                                 If (LOr (LEqual (\_PR.CLVL, 0x02), LEqual (\_PR.CLVL, 0x03)))
                                 {
-                                    Store (^^PCI0.B0D4.CPNU (\_PR.PL21, One), Local0)
-                                    Store (^^PCI0.B0D4.MIN4 (\_PR.PL11), Local1)
+                                    Store (^^PCI0.PEGP.CPNU (\_PR.PL21, One), Local0)
+                                    Store (^^PCI0.PEGP.MIN4 (\_PR.PL11), Local1)
                                 }
                             }
                             Else
@@ -29862,8 +29862,8 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                                 {
                                     If (LEqual (\_PR.CLVL, 0x03))
                                     {
-                                        Store (^^PCI0.B0D4.CPNU (\_PR.PL22, One), Local0)
-                                        Store (^^PCI0.B0D4.MIN4 (\_PR.PL12), Local1)
+                                        Store (^^PCI0.PEGP.CPNU (\_PR.PL22, One), Local0)
+                                        Store (^^PCI0.PEGP.MIN4 (\_PR.PL12), Local1)
                                     }
                                 }
                             }
@@ -29873,7 +29873,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     }
                 }
 
-                Store (DerefOf (Index (DerefOf (Index (^^PCI0.B0D4.PCCX, One)), Zero)), 
+                Store (DerefOf (Index (DerefOf (Index (^^PCI0.PEGP.PCCX, One)), Zero)), 
                     Local2)
                 Store (Local0, Index (DerefOf (Index (DerefOf (Index (TMPD, Zero)), 
                     0x03)), One))
@@ -29892,7 +29892,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Package (0x04)
                     {
                         0x64, 
-                        ^^PCI0.B0D4, 
+                        ^^PCI0.PEGP, 
                         0x09, 
                         Package (0x02)
                         {
@@ -29904,7 +29904,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Package (0x04)
                     {
                         0x64, 
-                        ^^PCI0.B0D4, 
+                        ^^PCI0.PEGP, 
                         0x09, 
                         Package (0x02)
                         {
@@ -29916,7 +29916,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Package (0x04)
                     {
                         0x64, 
-                        ^^PCI0.B0D4, 
+                        ^^PCI0.PEGP, 
                         0x09, 
                         Package (0x02)
                         {
@@ -29928,7 +29928,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Package (0x04)
                     {
                         0x64, 
-                        ^^PCI0.B0D4, 
+                        ^^PCI0.PEGP, 
                         0x09, 
                         Package (0x02)
                         {
@@ -29940,7 +29940,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Package (0x04)
                     {
                         0x64, 
-                        ^^PCI0.B0D4, 
+                        ^^PCI0.PEGP, 
                         Zero, 
                         Package (0x02)
                         {
@@ -29976,7 +29976,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Package (0x04)
                     {
                         0x64, 
-                        ^^PCI0.B0D4, 
+                        ^^PCI0.PEGP, 
                         Zero, 
                         Package (0x02)
                         {
@@ -29994,8 +29994,8 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         {
                             If (LAnd (LGreaterEqual (\_PR.CLVL, One), LLessEqual (\_PR.CLVL, 0x03)))
                             {
-                                Store (^^PCI0.B0D4.CPNU (\_PR.PL20, One), Local0)
-                                Store (^^PCI0.B0D4.CPNU (\_PR.PL10, One), Local1)
+                                Store (^^PCI0.PEGP.CPNU (\_PR.PL20, One), Local0)
+                                Store (^^PCI0.PEGP.CPNU (\_PR.PL10, One), Local1)
                             }
                         }
                         Else
@@ -30004,8 +30004,8 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                             {
                                 If (LOr (LEqual (\_PR.CLVL, 0x02), LEqual (\_PR.CLVL, 0x03)))
                                 {
-                                    Store (^^PCI0.B0D4.CPNU (\_PR.PL21, One), Local0)
-                                    Store (^^PCI0.B0D4.CPNU (\_PR.PL11, One), Local1)
+                                    Store (^^PCI0.PEGP.CPNU (\_PR.PL21, One), Local0)
+                                    Store (^^PCI0.PEGP.CPNU (\_PR.PL11, One), Local1)
                                 }
                             }
                             Else
@@ -30014,8 +30014,8 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                                 {
                                     If (LEqual (\_PR.CLVL, 0x03))
                                     {
-                                        Store (^^PCI0.B0D4.CPNU (\_PR.PL22, One), Local0)
-                                        Store (^^PCI0.B0D4.CPNU (\_PR.PL12, One), Local1)
+                                        Store (^^PCI0.PEGP.CPNU (\_PR.PL22, One), Local0)
+                                        Store (^^PCI0.PEGP.CPNU (\_PR.PL12, One), Local1)
                                     }
                                 }
                             }
@@ -30025,7 +30025,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     }
                 }
 
-                Store (DerefOf (Index (DerefOf (Index (^^PCI0.B0D4.PCCX, One)), One)), 
+                Store (DerefOf (Index (DerefOf (Index (^^PCI0.PEGP.PCCX, One)), One)), 
                     Local2)
                 Store (Local0, Index (DerefOf (Index (DerefOf (Index (TMPD, Zero)), 
                     0x03)), One))
@@ -30040,7 +30040,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         }
     }
 
-    Scope (_SB.PCI0.B0D4)
+    Scope (_SB.PCI0.PEGP)
     {
         Method (_STA, 0, NotSerialized)  // _STA: Status
         {
@@ -30231,7 +30231,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     If (LEqual (T_4, Zero))
                     {
                         Store (Zero, MAXT)
-                        Notify (B0D4, 0x84)
+                        Notify (PEGP, 0x84)
                     }
                     Else
                     {
@@ -30262,7 +30262,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                                 Return (Zero)
                             }
 
-                            Notify (B0D4, 0x84)
+                            Notify (PEGP, 0x84)
                         }
                         Else
                         {
@@ -30293,7 +30293,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                                     Return (Zero)
                                 }
 
-                                Notify (B0D4, 0x84)
+                                Notify (PEGP, 0x84)
                             }
                         }
                     }
@@ -30873,7 +30873,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         Method (_DTI, 1, NotSerialized)  // _DTI: Device Temperature Indication
         {
             Store (Arg0, LSTM)
-            Notify (B0D4, 0x91)
+            Notify (PEGP, 0x91)
         }
 
         Method (_NTT, 0, NotSerialized)  // _NTT: Notification Temperature Threshold
@@ -31108,7 +31108,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         })
     }
 
-    Scope (_SB.PCI0.B0D4)
+    Scope (_SB.PCI0.PEGP)
     {
         Method (TDPL, 0, Serialized)
         {
@@ -31455,7 +31455,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Return (Zero)
             }
 
-            Notify (B0D4, 0x83)
+            Notify (PEGP, 0x83)
         }
     }
 
@@ -31463,19 +31463,19 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
     {
         Method (_Q7F, 0, NotSerialized)  // _Qxx: EC Query
         {
-            Increment (^^^B0D4.MAXT)
-            If (LGreaterEqual (^^^B0D4.MAXT, 0x03))
+            Increment (^^^PEGP.MAXT)
+            If (LGreaterEqual (^^^PEGP.MAXT, 0x03))
             {
-                Store (Zero, ^^^B0D4.MAXT)
+                Store (Zero, ^^^PEGP.MAXT)
             }
 
-            Notify (B0D4, 0x84)
+            Notify (PEGP, 0x84)
         }
 
         Method (_QB7, 0, NotSerialized)  // _Qxx: EC Query
         {
-            Store (Zero, ^^^B0D4.MAXT)
-            Notify (B0D4, 0x84)
+            Store (Zero, ^^^PEGP.MAXT)
+            Notify (PEGP, 0x84)
         }
 
         Method (_QB8, 0, Serialized)  // _Qxx: EC Query
@@ -31486,19 +31486,19 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Store (\_PR.CLVL, T_0)
                 If (LEqual (T_0, 0x03))
                 {
-                    Store (One, ^^^B0D4.MAXT)
+                    Store (One, ^^^PEGP.MAXT)
                 }
                 Else
                 {
                     If (LEqual (T_0, 0x02))
                     {
-                        Store (Zero, ^^^B0D4.MAXT)
+                        Store (Zero, ^^^PEGP.MAXT)
                     }
                     Else
                     {
                         If (LEqual (T_0, One))
                         {
-                            Store (Zero, ^^^B0D4.MAXT)
+                            Store (Zero, ^^^PEGP.MAXT)
                         }
                     }
                 }
@@ -31506,7 +31506,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Return (Zero)
             }
 
-            Notify (B0D4, 0x84)
+            Notify (PEGP, 0x84)
         }
 
         Method (_QB9, 0, Serialized)  // _Qxx: EC Query
@@ -31517,19 +31517,19 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Store (\_PR.CLVL, T_0)
                 If (LEqual (T_0, 0x03))
                 {
-                    Store (0x02, ^^^B0D4.MAXT)
+                    Store (0x02, ^^^PEGP.MAXT)
                 }
                 Else
                 {
                     If (LEqual (T_0, 0x02))
                     {
-                        Store (One, ^^^B0D4.MAXT)
+                        Store (One, ^^^PEGP.MAXT)
                     }
                     Else
                     {
                         If (LEqual (T_0, One))
                         {
-                            Store (Zero, ^^^B0D4.MAXT)
+                            Store (Zero, ^^^PEGP.MAXT)
                         }
                     }
                 }
@@ -31537,7 +31537,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Return (Zero)
             }
 
-            Notify (B0D4, 0x84)
+            Notify (PEGP, 0x84)
         }
     }
 
@@ -31553,7 +31553,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         })
         Method (CLPM, 0, NotSerialized)
         {
-            If (LEqual (^^PCI0.B0D4.LPMS, Zero))
+            If (LEqual (^^PCI0.PEGP.LPMS, Zero))
             {
                 Return (Zero)
             }
