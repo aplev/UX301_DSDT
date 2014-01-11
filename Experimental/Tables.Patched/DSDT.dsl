@@ -4735,6 +4735,19 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         }
                         EndDependentFn ()
                     })
+                    Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                    {
+                        Store (Package (0x02)
+                            {
+                                "AAPL,has-embedded-fn-keys", 
+                                Buffer (0x04)
+                                {
+                                     0x01, 0x00, 0x00, 0x00
+                                }
+                            }, Local0)
+                        DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                        Return (Local0)
+                    }
                 }
             }
 
@@ -11546,6 +11559,17 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     })
                     Return (PIB2)
                 }
+            }
+            Method (_DSM, 4, NotSerialized)
+            {
+                If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
+                Return (Package()
+                {
+                    "device-id", Buffer() { 0x03, 0x8c, 0x00, 0x00 },
+                    "compatible", Buffer() { "pci8086,8c03" },
+                    "IOName", Buffer() { "pci8086,8c03" },
+                    "name", Buffer() { "pci8086,8c03" },
+                })
             }
         }
 
