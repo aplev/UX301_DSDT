@@ -29,8 +29,6 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
     External (_SB_.PCI0.PAUD.PUAM, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
     External (_SB_.PCI0.XHC_.DUAM, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
     External (_SB_.TPM_.PTS_, MethodObj)    // Warning: Unresolved Method, guessing 1 arguments (may be incorrect, see warning above)
-    External (PS0X, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
-    External (PS3X, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
     External (HDOS, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
     External (HNOT, MethodObj)    // Warning: Unresolved Method, guessing 1 arguments (may be incorrect, see warning above)
     External (IDAB, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
@@ -74,14 +72,6 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
     External (_SB_.IFFS.FFSS)
     External (_SB_.PCCD)
     External (_SB_.PCCD.PENB)
-    External (_SB_.PCI0.I2C0.PS0X)
-    External (_SB_.PCI0.I2C0.PS3X)
-    External (_SB_.PCI0.I2C1.PS0X)
-    External (_SB_.PCI0.SDHC.PS0X)
-    External (_SB_.PCI0.SDHC.WI01.PS0X)
-    External (_SB_.PCI0.SDHC.WI01.PS3X)
-    External (_SB_.PCI0.XHC_.PS0X)
-    External (_SB_.PCI0.XHC_.PS3X)
     External (MDBG, IntObj)
     External (PCCD)
     External (PDC0, IntObj)
@@ -6975,11 +6965,6 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Store (One, AX15)
                 }
 
-                If (CondRefOf (\_SB.PCI0.XHC.PS0X))
-                {
-                    PS0X()
-                }
-
                 If (LEqual (Local3, 0x03))
                 {
                     Store (0x03, D0D3)
@@ -7039,11 +7024,6 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 If (LEqual (PCHS, 0x02))
                 {
                     Store (Zero, AX15)
-                }
-
-                If (CondRefOf (\_SB.PCI0.XHC.PS3X))
-                {
-                    PS3X()
                 }
 
                 If (LEqual (Local3, 0x03))
@@ -8922,10 +8902,6 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         Store (TEMP, Local0)
                     }
 
-                    If (CondRefOf (\_SB.PCI0.I2C0.PS0X))
-                    {
-                        PS0X()
-                    }
                 }
 
                 Method (_PS3, 0, Serialized)  // _PS3: Power State 3
@@ -8942,11 +8918,6 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                         Or (TEMP, 0x03, TEMP)
                         Store (TEMP, Local0)
-                    }
-
-                    If (CondRefOf (\_SB.PCI0.I2C0.PS3X))
-                    {
-                        PS3X()
                     }
                 }
             }
@@ -9106,11 +9077,6 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     ADBG ("I2C1 Ctrlr D0")
                     If (LNotEqual (^^SIRC.CNTR (0x03), Zero))
                     {
-                        If (CondRefOf (\_SB.PCI0.I2C1.PS0X))
-                        {
-                            PS0X()
-                        }
-
                         Add (^^SIRC.CNTR (0x03), 0x84, Local0)
                         OperationRegion (ICB1, SystemMemory, Local0, 0x04)
                         Field (ICB1, DWordAcc, NoLock, Preserve)
@@ -9690,10 +9656,6 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         Store (TEMP, Local0)
                     }
 
-                    If (CondRefOf (\_SB.PCI0.SDHC.PS0X))
-                    {
-                        PS0X()
-                    }
                 }
 
                 Method (_PS3, 0, Serialized)  // _PS3: Power State 3
@@ -11215,10 +11177,6 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Method (_PS0, 0, Serialized)  // _PS0: Power State 0
                 {
                     ADBG ("WiFi1 Enter D0")
-                    If (CondRefOf (\_SB.PCI0.SDHC.WI01.PS0X))
-                    {
-                        PS0X()
-                    }
                 }
 
                 Method (_PS2, 0, Serialized)  // _PS2: Power State 2
@@ -11229,10 +11187,6 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Method (_PS3, 0, Serialized)  // _PS3: Power State 3
                 {
                     ADBG ("WiFi1 Enter D3")
-                    If (CondRefOf (\_SB.PCI0.SDHC.WI01.PS3X))
-                    {
-                        PS3X()
-                    }
                 }
 
                 Name (RBUF, ResourceTemplate ()
@@ -31919,6 +31873,39 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 /* 0008 */   0xB1, 0xC1, 0x1B, 0x8A, 0x19, 0x13, 0xD5, 0x31
             }
         })
+    }
+    
+    Method (DTGP, 5, NotSerialized)
+    {
+        If (LEqual (Arg0, Buffer (0x10)
+                {
+                    /* 0000 */   0xC6, 0xB7, 0xB5, 0xA0, 0x18, 0x13, 0x1C, 0x44,
+                    /* 0008 */   0xB0, 0xC9, 0xFE, 0x69, 0x5E, 0xAF, 0x94, 0x9B
+                }))
+        {
+            If (LEqual (Arg1, One))
+            {
+                If (LEqual (Arg2, Zero))
+                {
+                    Store (Buffer (0x01)
+                        {
+                             0x03
+                        }, Arg4)
+                    Return (One)
+                }
+
+                If (LEqual (Arg2, One))
+                {
+                    Return (One)
+                }
+            }
+        }
+
+        Store (Buffer (0x01)
+            {
+                 0x00
+            }, Arg4)
+        Return (Zero)
     }
 
 
