@@ -21870,7 +21870,6 @@ Store (ShiftRight (Local4, 8), DTB1)
                     Add (Local0, Local1, Local0)
                     Multiply (Local0, 0x03E8, Local1)
                     Divide (Local1, ALSA, Local2, Local3)
-                    Return (Local3)
                 }
                 Else
                 {
