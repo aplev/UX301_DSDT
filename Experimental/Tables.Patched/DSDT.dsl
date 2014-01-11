@@ -12759,7 +12759,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             {
                 If (LAnd (And (ICNF, 0x10), LEqual (\_SB.IAOE.ITMR, Zero)))
                 {
-                    \_SB.PCI0.LPCB.EC0.SCTF (Zero, 0x03)
+                    \_SB.PCI0.LPCB.EC.SCTF (Zero, 0x03)
                 }
 
                 If (LAnd (And (ICNF, 0x10), CondRefOf (\_SB.IFFS.FFSS)))
@@ -12837,8 +12837,8 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         If (LOr (LEqual (Arg0, 0x03), LEqual (Arg0, 0x04)))
         {
             \_SB.PCI0.XHC.XWAK ()
-            \_SB.PCI0.LPCB.EC0.WRAM (0x0533, 0x69)
-            \_SB.PCI0.LPCB.EC0.WRAM (0x0534, 0x64)
+            \_SB.PCI0.LPCB.EC.WRAM (0x0533, 0x69)
+            \_SB.PCI0.LPCB.EC.WRAM (0x0534, 0x64)
         }
 
         Return (Package (0x02)
@@ -13009,7 +13009,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Store (LAnd (Arg0, Not (PWRS)), UAMS)
             If (Arg0)
             {
-                \_SB.PCI0.LPCB.EC0.CSEE (0xAE)
+                \_SB.PCI0.LPCB.EC.CSEE (0xAE)
                 P8XH (Zero, 0xC5)
                 P8XH (One, Zero)
                 ADBG ("Enter CS")
@@ -13029,7 +13029,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             }
             Else
             {
-                \_SB.PCI0.LPCB.EC0.CSEE (0xAF)
+                \_SB.PCI0.LPCB.EC.CSEE (0xAF)
                 P8XH (Zero, 0xB0)
                 P8XH (One, 0xAB)
                 ADBG ("Exit CS")
@@ -14599,7 +14599,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
     Scope (_SB.PCI0.LPCB)
     {
-        Device (EC0)
+        Device (EC)
         {
             Name (_HID, EisaId ("PNP0C09"))  // _HID: Hardware ID
             Name (_CRS, ResourceTemplate ()  // _CRS: Current Resource Settings
@@ -15718,7 +15718,7 @@ DTB1, 8
                         FSMI (0x05)
                         If (LEqual (FSTA, 0x03))
                         {
-                            Store (And (^^PCI0.LPCB.EC0.STA8 (Zero), 0x03), Local0)
+                            Store (And (^^PCI0.LPCB.EC.STA8 (Zero), 0x03), Local0)
                         }
 
                         If (Ones)
@@ -15744,7 +15744,7 @@ DTB1, 8
 
                     If (LEqual (IIA0, 0x00060026))
                     {
-                        Store (^^PCI0.LPCB.EC0.STA8 (Zero), Local0)
+                        Store (^^PCI0.LPCB.EC.STA8 (Zero), Local0)
                         And (Local0, 0x04, Local0)
                         If (LEqual (Local0, 0x04))
                         {
@@ -15963,8 +15963,8 @@ DTB1, 8
 
                     If (LEqual (IIA0, 0x00120041))
                     {
-                        Store (^^PCI0.LPCB.EC0.ST8E (0x16, Zero), Local0)
-                        Store (^^PCI0.LPCB.EC0.ST8E (0x17, Zero), Local1)
+                        Store (^^PCI0.LPCB.EC.ST8E (0x16, Zero), Local0)
+                        Store (^^PCI0.LPCB.EC.ST8E (0x17, Zero), Local1)
                         ShiftLeft (Local1, 0x08, Local1)
                         If (LEqual (And (Local1, 0x8000), 0x8000))
                         {
@@ -15980,8 +15980,8 @@ DTB1, 8
 
                     If (LEqual (IIA0, 0x00120042))
                     {
-                        Store (^^PCI0.LPCB.EC0.ST8E (0x18, Zero), Local0)
-                        Store (^^PCI0.LPCB.EC0.ST8E (0x19, Zero), Local1)
+                        Store (^^PCI0.LPCB.EC.ST8E (0x18, Zero), Local0)
+                        Store (^^PCI0.LPCB.EC.ST8E (0x19, Zero), Local1)
                         ShiftLeft (Local1, 0x08, Local1)
                         If (LEqual (And (Local1, 0x8000), 0x8000))
                         {
@@ -15997,29 +15997,29 @@ DTB1, 8
 
                     If (LEqual (IIA0, 0x00120043))
                     {
-                        Store (^^PCI0.LPCB.EC0.BIFW (0x13), Local0)
+                        Store (^^PCI0.LPCB.EC.BIFW (0x13), Local0)
                         Return (Local0)
                     }
 
                     If (LEqual (IIA0, 0x00120044))
                     {
-                        If (And (^^PCI0.LPCB.EC0.EPWS, 0x06))
+                        If (And (^^PCI0.LPCB.EC.EPWS, 0x06))
                         {
-                            And (^^PCI0.LPCB.EC0.EPWS, 0x06, Local0)
+                            And (^^PCI0.LPCB.EC.EPWS, 0x06, Local0)
                             Store (Zero, Local1)
                             If (LEqual (Local0, 0x02))
                             {
-                                Store (^^PCI0.LPCB.EC0.B0RC, Local1)
+                                Store (^^PCI0.LPCB.EC.B0RC, Local1)
                             }
                             Else
                             {
                                 If (LEqual (Local0, 0x04))
                                 {
-                                    Store (^^PCI0.LPCB.EC0.B1RC, Local1)
+                                    Store (^^PCI0.LPCB.EC.B1RC, Local1)
                                 }
                                 Else
                                 {
-                                    Store (Add (^^PCI0.LPCB.EC0.B0RC, ^^PCI0.LPCB.EC0.B1RC), Local1)
+                                    Store (Add (^^PCI0.LPCB.EC.B0RC, ^^PCI0.LPCB.EC.B1RC), Local1)
                                 }
                             }
 
@@ -16031,10 +16031,10 @@ DTB1, 8
 
                     If (LEqual (IIA0, 0x00120045))
                     {
-                        If (And (^^PCI0.LPCB.EC0.EPWS, 0x02))
+                        If (And (^^PCI0.LPCB.EC.EPWS, 0x02))
                         {
-                            Store (^^PCI0.LPCB.EC0.ST8E (0x24, Zero), Local0)
-                            Store (^^PCI0.LPCB.EC0.ST8E (0x25, Zero), Local1)
+                            Store (^^PCI0.LPCB.EC.ST8E (0x24, Zero), Local0)
+                            Store (^^PCI0.LPCB.EC.ST8E (0x25, Zero), Local1)
                             ShiftLeft (Local1, 0x08, Local1)
                             Store (Add (Local1, Local0), Local2)
                             If (LEqual (Local2, Zero))
@@ -16050,10 +16050,10 @@ DTB1, 8
 
                     If (LEqual (IIA0, 0x00120046))
                     {
-                        If (And (^^PCI0.LPCB.EC0.EPWS, 0x02))
+                        If (And (^^PCI0.LPCB.EC.EPWS, 0x02))
                         {
-                            Store (^^PCI0.LPCB.EC0.ST8E (0x26, Zero), Local0)
-                            Store (^^PCI0.LPCB.EC0.ST8E (0x27, Zero), Local1)
+                            Store (^^PCI0.LPCB.EC.ST8E (0x26, Zero), Local0)
+                            Store (^^PCI0.LPCB.EC.ST8E (0x27, Zero), Local1)
                             ShiftLeft (Local1, 0x08, Local1)
                             Store (Add (Local1, Local0), Local2)
                             If (LEqual (Local2, Zero))
@@ -16069,22 +16069,22 @@ DTB1, 8
 
                     If (LEqual (IIA0, 0x00120047))
                     {
-                        If (And (^^PCI0.LPCB.EC0.EPWS, 0x06))
+                        If (And (^^PCI0.LPCB.EC.EPWS, 0x06))
                         {
                             Store (Zero, Local1)
                             If (LEqual (Local0, 0x02))
                             {
-                                Store (^^PCI0.LPCB.EC0.B0DV, Local1)
+                                Store (^^PCI0.LPCB.EC.B0DV, Local1)
                             }
                             Else
                             {
                                 If (LEqual (Local0, 0x04))
                                 {
-                                    Store (^^PCI0.LPCB.EC0.B1DV, Local1)
+                                    Store (^^PCI0.LPCB.EC.B1DV, Local1)
                                 }
                                 Else
                                 {
-                                    Store (Add (^^PCI0.LPCB.EC0.B0DV, ^^PCI0.LPCB.EC0.B1DV), Local1)
+                                    Store (Add (^^PCI0.LPCB.EC.B0DV, ^^PCI0.LPCB.EC.B1DV), Local1)
                                 }
                             }
 
@@ -16096,22 +16096,22 @@ DTB1, 8
 
                     If (LEqual (IIA0, 0x00120049))
                     {
-                        If (And (^^PCI0.LPCB.EC0.EPWS, 0x06))
+                        If (And (^^PCI0.LPCB.EC.EPWS, 0x06))
                         {
                             Store (Zero, Local1)
                             If (LEqual (Local0, 0x02))
                             {
-                                Store (^^PCI0.LPCB.EC0.B0FC, Local1)
+                                Store (^^PCI0.LPCB.EC.B0FC, Local1)
                             }
                             Else
                             {
                                 If (LEqual (Local0, 0x04))
                                 {
-                                    Store (^^PCI0.LPCB.EC0.B1FC, Local1)
+                                    Store (^^PCI0.LPCB.EC.B1FC, Local1)
                                 }
                                 Else
                                 {
-                                    Store (Add (^^PCI0.LPCB.EC0.B0FC, ^^PCI0.LPCB.EC0.B1FC), Local1)
+                                    Store (Add (^^PCI0.LPCB.EC.B0FC, ^^PCI0.LPCB.EC.B1FC), Local1)
                                 }
                             }
 
@@ -16159,7 +16159,7 @@ DTB1, 8
                         Store (Ones, Index (BSTD, 0x02))
                         Store (Ones, Index (BSTD, 0x03))
                         Store (Ones, Index (BSTD, 0x04))
-                        If (LNot (^^PCI0.LPCB.EC0.BATP (Zero)))
+                        If (LNot (^^PCI0.LPCB.EC.BATP (Zero)))
                         {
                             Return (Package (0x05)
                             {
@@ -16182,7 +16182,7 @@ DTB1, 8
 
                     If (LEqual (IIA0, 0x00120051))
                     {
-                        If (LNot (^^PCI0.LPCB.EC0.BATP (Zero)))
+                        If (LNot (^^PCI0.LPCB.EC.BATP (Zero)))
                         {
                             Return (Package (0x05)
                             {
@@ -16199,7 +16199,7 @@ DTB1, 8
 
                     If (LEqual (IIA0, 0x00120052))
                     {
-                        If (LNot (^^PCI0.LPCB.EC0.BATP (Zero)))
+                        If (LNot (^^PCI0.LPCB.EC.BATP (Zero)))
                         {
                             Return (Package (0x05)
                             {
@@ -16259,22 +16259,22 @@ DTB1, 8
                         }
 
                         And (IIA1, 0xFF, Local0)
-                        ^^PCI0.LPCB.EC0.STA9 (One, Local0)
+                        ^^PCI0.LPCB.EC.STA9 (One, Local0)
                         ShiftRight (IIA1, 0x08, Local0)
-                        Store (^^PCI0.LPCB.EC0.STA8 (Zero), Local1)
+                        Store (^^PCI0.LPCB.EC.STA8 (Zero), Local1)
                         If (LEqual (And (Local0, One), One))
                         {
                             Or (Local1, 0x02, Local1)
                             And (Local1, 0x0F, Local2)
                             Store (Local2, USBC)
-                            ^^PCI0.LPCB.EC0.STA9 (Zero, Local1)
+                            ^^PCI0.LPCB.EC.STA9 (Zero, Local1)
                         }
                         Else
                         {
                             And (Local1, 0xFD, Local1)
                             And (Local1, 0x0F, Local2)
                             Store (Local2, USBC)
-                            ^^PCI0.LPCB.EC0.STA9 (Zero, Local1)
+                            ^^PCI0.LPCB.EC.STA9 (Zero, Local1)
                         }
 
                         Store (0xFFFF, FSTA)
@@ -16299,20 +16299,20 @@ DTB1, 8
                         Store (0xFFFF, FSTA)
                         Store (0x55534243, FADR)
                         FSMI (0x05)
-                        Store (^^PCI0.LPCB.EC0.STA8 (Zero), Local0)
+                        Store (^^PCI0.LPCB.EC.STA8 (Zero), Local0)
                         If (LEqual (IIA1, One))
                         {
                             Or (0x04, USBC, Local2)
                             Store (Local2, USBC)
                             Or (Local0, 0x04, Local0)
-                            ^^PCI0.LPCB.EC0.STA9 (Zero, Local0)
+                            ^^PCI0.LPCB.EC.STA9 (Zero, Local0)
                         }
                         Else
                         {
                             And (0xFB, USBC, Local2)
                             Store (Local2, USBC)
                             And (Local0, 0xFB, Local0)
-                            ^^PCI0.LPCB.EC0.STA9 (Zero, Local0)
+                            ^^PCI0.LPCB.EC.STA9 (Zero, Local0)
                         }
 
                         Store (0xFFFF, FSTA)
@@ -16370,8 +16370,8 @@ DTB1, 8
                     {
                         If (LEqual (IIA1, 0x02))
                         {
-                            ^^PCI0.LPCB.EC0.SPIN (0x72, One)
-                            Store (One, ^^PCI0.LPCB.EC0.BLCT)
+                            ^^PCI0.LPCB.EC.SPIN (0x72, One)
+                            Store (One, ^^PCI0.LPCB.EC.BLCT)
                         }
 
                         Return (One)
@@ -16480,7 +16480,7 @@ DTB1, 8
 
                     If (LEqual (IIA0, 0x00100021))
                     {
-                        ^^PCI0.LPCB.EC0._Q0B ()
+                        ^^PCI0.LPCB.EC._Q0B ()
                         Return (One)
                     }
 
@@ -16488,8 +16488,8 @@ DTB1, 8
                     {
                         If (And (IIA1, 0x02))
                         {
-                            ^^PCI0.LPCB.EC0.STB1 (0x04)
-                            ^^PCI0.LPCB.EC0.STB1 (0x05)
+                            ^^PCI0.LPCB.EC.STB1 (0x04)
+                            ^^PCI0.LPCB.EC.STB1 (0x05)
                             Store (One, FNIV)
                             Return (One)
                         }
@@ -16655,13 +16655,13 @@ DTB1, 8
 
                 If (LEqual (Local0, 0x59454B48))
                 {
-                    Store (^^PCI0.LPCB.EC0.CDT1, Local0)
+                    Store (^^PCI0.LPCB.EC.CDT1, Local0)
                     Return (One)
                 }
 
                 If (LEqual (Local0, 0x5446424B))
                 {
-                    Store (IIA0, ^^PCI0.LPCB.EC0.HKEN)
+                    Store (IIA0, ^^PCI0.LPCB.EC.HKEN)
                     Return (One)
                 }
 
@@ -16694,7 +16694,7 @@ DTB1, 8
             {
                 Store (IKFG, Local0)
                 Or (Local0, ShiftLeft (IKF2, 0x08), Local0)
-                Store (^^PCI0.LPCB.EC0.RRAM (0x04FE), Local1)
+                Store (^^PCI0.LPCB.EC.RRAM (0x04FE), Local1)
                 Store (Zero, Local2)
                 If (LEqual (Local1, 0x35))
                 {
@@ -16727,7 +16727,7 @@ DTB1, 8
                 }
                 Else
                 {
-                    Store (^^PCI0.LPCB.EC0.RRAM (0x04FE), Local0)
+                    Store (^^PCI0.LPCB.EC.RRAM (0x04FE), Local0)
                     If (LEqual (And (Local0, 0xFF), 0x34))
                     {
                         Store (0x05, Local0)
@@ -16821,7 +16821,7 @@ DTB1, 8
             Method (SPLV, 1, NotSerialized)
             {
                 Store (Arg0, LBTN)
-                ^^PCI0.LPCB.EC0.STBR ()
+                ^^PCI0.LPCB.EC.STBR ()
                 Return (One)
             }
 
@@ -16971,12 +16971,12 @@ DTB1, 8
             {
                 If (Arg0)
                 {
-                    ^^PCI0.LPCB.EC0.TALS (One)
-                    Store (^^PCI0.LPCB.EC0.RALS (), Local0)
+                    ^^PCI0.LPCB.EC.TALS (One)
+                    Store (^^PCI0.LPCB.EC.RALS (), Local0)
                 }
                 Else
                 {
-                    ^^PCI0.LPCB.EC0.TALS (Zero)
+                    ^^PCI0.LPCB.EC.TALS (Zero)
                     Store (0x0190, Local0)
                 }
 
@@ -17031,12 +17031,12 @@ DTB1, 8
 
                 If (LEqual (Arg0, One))
                 {
-                    ^^PCI0.LPCB.EC0.ST98 (QFAN)
+                    ^^PCI0.LPCB.EC.ST98 (QFAN)
                 }
 
                 If (LEqual (Arg0, 0x02))
                 {
-                    ^^PCI0.LPCB.EC0.ST98 (0xFF)
+                    ^^PCI0.LPCB.EC.ST98 (0xFF)
                 }
 
                 Return (One)
@@ -17198,23 +17198,23 @@ DTB1, 8
                 ShiftRight (Arg0, 0x08, Local2)
                 And (Local2, 0xFF, Local2)
                 And (Arg0, 0xFF, Local3)
-                Acquire (^^PCI0.LPCB.EC0.MUEC, 0xFFFF)
-                Store (Local0, ^^PCI0.LPCB.EC0.CDT3)
-                Store (Local1, ^^PCI0.LPCB.EC0.CDT2)
-                Store (Local2, ^^PCI0.LPCB.EC0.CDT1)
-                Store (Local3, ^^PCI0.LPCB.EC0.CMD1)
+                Acquire (^^PCI0.LPCB.EC.MUEC, 0xFFFF)
+                Store (Local0, ^^PCI0.LPCB.EC.CDT3)
+                Store (Local1, ^^PCI0.LPCB.EC.CDT2)
+                Store (Local2, ^^PCI0.LPCB.EC.CDT1)
+                Store (Local3, ^^PCI0.LPCB.EC.CMD1)
                 Store (0x05, Local0)
-                While (LAnd (Local0, ^^PCI0.LPCB.EC0.CMD1))
+                While (LAnd (Local0, ^^PCI0.LPCB.EC.CMD1))
                 {
                     Sleep (One)
                     Decrement (Local0)
                 }
 
-                Store (^^PCI0.LPCB.EC0.CDT3, Local0)
-                Store (^^PCI0.LPCB.EC0.CDT2, Local1)
-                Store (^^PCI0.LPCB.EC0.CDT1, Local2)
-                Store (^^PCI0.LPCB.EC0.CMD1, Local3)
-                Release (^^PCI0.LPCB.EC0.MUEC)
+                Store (^^PCI0.LPCB.EC.CDT3, Local0)
+                Store (^^PCI0.LPCB.EC.CDT2, Local1)
+                Store (^^PCI0.LPCB.EC.CDT1, Local2)
+                Store (^^PCI0.LPCB.EC.CMD1, Local3)
+                Release (^^PCI0.LPCB.EC.MUEC)
                 ShiftLeft (Local0, 0x08, Local0)
                 Or (Local0, Local1, Local0)
                 ShiftLeft (Local0, 0x08, Local0)
@@ -17243,7 +17243,7 @@ DTB1, 8
             {
                 If (LEqual (Arg0, One))
                 {
-                    Store (^^PCI0.LPCB.EC0.RRAM (0x04B0), Local0)
+                    Store (^^PCI0.LPCB.EC.RRAM (0x04B0), Local0)
                     And (Local0, 0x80, Local0)
                     If (Local0)
                     {
@@ -17269,11 +17269,11 @@ DTB1, 8
                                 And (LSTP, One, Local0)
                                 If (LEqual (Local0, Zero))
                                 {
-                                    Store (^^PCI0.LPCB.EC0.ST8E (0x31, Zero), Local0)
+                                    Store (^^PCI0.LPCB.EC.ST8E (0x31, Zero), Local0)
                                 }
                                 Else
                                 {
-                                    Store (^^PCI0.LPCB.EC0.RRAM (0x04C9), Local0)
+                                    Store (^^PCI0.LPCB.EC.RRAM (0x04C9), Local0)
                                 }
 
                                 If (LLessEqual (Local0, 0x03))
@@ -17324,7 +17324,7 @@ DTB1, 8
                     Store (Zero, Local0)
                 }
 
-                ^^PCI0.LPCB.EC0.WRAM (0x04B1, Local0)
+                ^^PCI0.LPCB.EC.WRAM (0x04B1, Local0)
                 Return (One)
             }
 
@@ -17353,14 +17353,14 @@ DTB1, 8
             }
             Method (ALSS, 0, NotSerialized)
             {
-                Return (^^PCI0.LPCB.EC0.RALS ())
+                Return (^^PCI0.LPCB.EC.RALS ())
             }
 
             Method (SKBL, 1, NotSerialized)
             {
                 Store (Arg0, Local0)
                 Store (DerefOf (Index (PWKB, Local0)), Local1)
-                ^^PCI0.LPCB.EC0.WRAM (0x04B1, Local1)
+                ^^PCI0.LPCB.EC.WRAM (0x04B1, Local1)
                 Return (One)
             }
         }
@@ -17416,7 +17416,7 @@ DTB1, 8
             Name (_HID, "ACPI0003")  // _HID: Hardware ID
             Method (_PSR, 0, NotSerialized)  // _PSR: Power Source
             {
-                Return (^^LPCB.EC0.ACAP ())
+                Return (^^LPCB.EC.ACAP ())
             }
 
             Name (_PCL, Package (0x01)  // _PCL: Power Consumer List
@@ -17426,7 +17426,7 @@ DTB1, 8
         }
     }
 
-    Scope (_SB.PCI0.LPCB.EC0)
+    Scope (_SB.PCI0.LPCB.EC)
     {
         Method (ACAP, 0, Serialized)
         {
@@ -17446,7 +17446,7 @@ DTB1, 8
             })
             Method (_STA, 0, NotSerialized)  // _STA: Status
             {
-                If (^^LPCB.EC0.BATP (Zero))
+                If (^^LPCB.EC.BATP (Zero))
                 {
                     Return (0x1F)
                 }
@@ -17606,12 +17606,12 @@ DTB1, 8
 
             Method (_BIF, 0, NotSerialized)  // _BIF: Battery Information
             {
-                If (LNot (^^LPCB.EC0.BATP (Zero)))
+                If (LNot (^^LPCB.EC.BATP (Zero)))
                 {
                     Return (NBIF)
                 }
 
-                If (LEqual (^^LPCB.EC0.GBTT (Zero), 0xFF))
+                If (LEqual (^^LPCB.EC.GBTT (Zero), 0xFF))
                 {
                     Return (NBIF)
                 }
@@ -17620,11 +17620,11 @@ DTB1, 8
                 BATS (Zero)
                  
                 Store (ONAM, Index (PBIF, 0x0C))
-                Store (^^LPCB.EC0.BIF0 (), Local0)
-                Store (^^LPCB.EC0.BIF1 (), Local1)
-                Store (^^LPCB.EC0.BIF2 (), Local2)
-                Store (^^LPCB.EC0.BIF3 (), Local3)
-                Store (^^LPCB.EC0.BIF4 (), Local4)
+                Store (^^LPCB.EC.BIF0 (), Local0)
+                Store (^^LPCB.EC.BIF1 (), Local1)
+                Store (^^LPCB.EC.BIF2 (), Local2)
+                Store (^^LPCB.EC.BIF3 (), Local3)
+                Store (^^LPCB.EC.BIF4 (), Local4)
                 If (LNotEqual (Local0, Ones))
                 {
                     If (LNotEqual (Local1, Ones))
@@ -17657,7 +17657,7 @@ DTB1, 8
             {
                 And (Arg1, 0xFFFF, Local1)
                 Store (Zero, Local0)
-                If (^^LPCB.EC0.ACAP ())
+                If (^^LPCB.EC.ACAP ())
                 {
                     Store (One, Local0)
                 }
@@ -17684,7 +17684,7 @@ DTB1, 8
                     Or (Local0, Local2, Local0)
                 }
 
-                If (And (^^LPCB.EC0.EB0S, 0x08))
+                If (And (^^LPCB.EC.EB0S, 0x08))
                 {
                     ShiftLeft (One, 0x02, Local2)
                     Or (Local0, Local2, Local0)
@@ -17698,7 +17698,7 @@ DTB1, 8
                 Store (Arg2, Local2)
                 If (LEqual (PUNT, Zero))
                 {
-                    Multiply (Local1, ^^LPCB.EC0.B0DV, Local1)
+                    Multiply (Local1, ^^LPCB.EC.B0DV, Local1)
                     Multiply (Local2, 0x0A, Local2)
                 }
 
@@ -17722,7 +17722,7 @@ DTB1, 8
                     }
                 }
 
-                If (LNot (^^LPCB.EC0.ACAP ()))
+                If (LNot (^^LPCB.EC.ACAP ()))
                 {
                     Divide (Local2, MBLF, Local3, Local4)
                     If (LLess (Local1, Local4))
@@ -17741,7 +17741,7 @@ DTB1, 8
             {
                 If (PUNT)
                 {
-                    Store (^^LPCB.EC0.B0DV, Index (PBST, 0x03))
+                    Store (^^LPCB.EC.B0DV, Index (PBST, 0x03))
                     Store (DerefOf (Index (PBST, 0x03)), Local0)
                     Multiply (DerefOf (Index (PBST, One)), Local0, Index (PBST, One
                         ))
@@ -17760,12 +17760,12 @@ DTB1, 8
                 Store (Ones, Index (PBST, One))
                 Store (Ones, Index (PBST, 0x02))
                 Store (Ones, Index (PBST, 0x03))
-                If (LNot (^^LPCB.EC0.BATP (Zero)))
+                If (LNot (^^LPCB.EC.BATP (Zero)))
                 {
                     Return (PBST)
                 }
 
-                If (LEqual (^^LPCB.EC0.GBTT (Zero), 0xFF))
+                If (LEqual (^^LPCB.EC.GBTT (Zero), 0xFF))
                 {
                     Return (PBST)
                 }
@@ -17778,10 +17778,10 @@ DTB1, 8
 
                 BATO ()
                 BATS (Zero)
-                Store (^^LPCB.EC0.BSTS (), Local0)
-                Store (^^LPCB.EC0.BCRT (), Local1)
-                Store (^^LPCB.EC0.BRCP (), Local2)
-                Store (^^LPCB.EC0.BVOT (), Local3)
+                Store (^^LPCB.EC.BSTS (), Local0)
+                Store (^^LPCB.EC.BCRT (), Local1)
+                Store (^^LPCB.EC.BRCP (), Local2)
+                Store (^^LPCB.EC.BVOT (), Local3)
                 If (LNotEqual (Local0, Ones))
                 {
                     If (LNotEqual (Local1, Ones))
@@ -17803,12 +17803,12 @@ DTB1, 8
 
             Method (_BIX, 0, NotSerialized)  // _BIX: Battery Information Extended
             {
-                If (LNot (^^LPCB.EC0.BATP (Zero)))
+                If (LNot (^^LPCB.EC.BATP (Zero)))
                 {
                     Return (NBIX)
                 }
 
-                If (LEqual (^^LPCB.EC0.GBTT (Zero), 0xFF))
+                If (LEqual (^^LPCB.EC.GBTT (Zero), 0xFF))
                 {
                     Return (NBIX)
                 }
@@ -17857,25 +17857,25 @@ DTB1, 8
                         0x0F))
                 }
 
-                Store (B1B2 (^^LPCB.EC0.BC30, ^^LPCB.EC0.BC31), Index (BIXT, 0x08))
+                Store (B1B2 (^^LPCB.EC.BC30, ^^LPCB.EC.BC31), Index (BIXT, 0x08))
                 Store (0x0001869F, Index (BIXT, 0x09))
                 Return (BIXT)
             }
 
             Method (_BTP, 1, NotSerialized)  // _BTP: Battery Trip Point
             {
-                ^^LPCB.EC0.ST8E (0x29, 0xFF)
-                ^^LPCB.EC0.ST8E (0x2A, 0xFF)
-                ^^LPCB.EC0.ST8E (0x28, 0x0F)
+                ^^LPCB.EC.ST8E (0x29, 0xFF)
+                ^^LPCB.EC.ST8E (0x2A, 0xFF)
+                ^^LPCB.EC.ST8E (0x28, 0x0F)
                 If (LNotEqual (Arg0, Zero))
                 {
                     Store (DerefOf (Index (PBIF, 0x04)), Local0)
                     Multiply (Arg0, 0x03E8, Local1)
                     Divide (Local1, Local0, Local2, Local3)
-                    ^^LPCB.EC0.ST9E (0x29, 0xFF, And (Local3, 0xFF))
+                    ^^LPCB.EC.ST9E (0x29, 0xFF, And (Local3, 0xFF))
                     ShiftRight (Local3, 0x08, Local2)
                     And (Local2, 0xFF, Local2)
-                    ^^LPCB.EC0.ST9E (0x2A, 0xFF, Local2)
+                    ^^LPCB.EC.ST9E (0x2A, 0xFF, Local2)
                 }
             }
         }
@@ -17889,7 +17889,7 @@ DTB1, 8
         {
             BATO ()
             BATS (Arg0)
-            Store (^LPCB.EC0.BCRT (), Local0)
+            Store (^LPCB.EC.BCRT (), Local0)
             BATR ()
             If (LEqual (Local0, Ones))
             {
@@ -17922,7 +17922,7 @@ DTB1, 8
         }
     }
 
-    Scope (_SB.PCI0.LPCB.EC0)
+    Scope (_SB.PCI0.LPCB.EC)
     {
         Name (BADR, 0x0B)
         Name (CADR, 0x09)
@@ -18177,7 +18177,7 @@ DTB1, 8
     {
         Method (CHGS, 1, Serialized)
         {
-            Store (\_SB.PCI0.LPCB.EC0.BCHG (Arg0), Local0)
+            Store (\_SB.PCI0.LPCB.EC.BCHG (Arg0), Local0)
             Return (Local0)
         }
 
@@ -18208,7 +18208,7 @@ DTB1, 8
         Name (BLLO, Zero)
     }
 
-    Scope (_SB.PCI0.LPCB.EC0)
+    Scope (_SB.PCI0.LPCB.EC)
     {
         Method (_QA1, 0, NotSerialized)  // _Qxx: EC Query
         {
@@ -18294,7 +18294,7 @@ DTB1, 8
             }
 
             SBRS (Arg0)
-            \_SB.PCI0.LPCB.EC0.EC0S (Arg0)
+            \_SB.PCI0.LPCB.EC.EC0S (Arg0)
             Store (Arg0, \_SB.SLPN)
             DIAG (Add (Arg0, 0xD0))
             PPRJ (Arg0)
@@ -18307,15 +18307,15 @@ DTB1, 8
             PRJS (Arg0)
             If (LEqual (Arg0, 0x03))
             {
-                \_SB.PCI0.LPCB.EC0.ST8E (0x12, 0xFF)
-                \_SB.PCI0.LPCB.EC0.ST9E (0x12, 0x05, One)
+                \_SB.PCI0.LPCB.EC.ST8E (0x12, 0xFF)
+                \_SB.PCI0.LPCB.EC.ST9E (0x12, 0x05, One)
                 If (LAnd (LEqual (\_SB.DP3S, One), LEqual (\_SB.ACPF, Zero)))
                 {
-                    \_SB.PCI0.LPCB.EC0.ST9E (Zero, 0x08, One)
+                    \_SB.PCI0.LPCB.EC.ST9E (Zero, 0x08, One)
                 }
                 Else
                 {
-                    \_SB.PCI0.LPCB.EC0.ST8E (Zero, 0x08)
+                    \_SB.PCI0.LPCB.EC.ST8E (Zero, 0x08)
                 }
             }
 
@@ -18326,7 +18326,7 @@ DTB1, 8
         {
             ISMI (0xAA)
             Store (Zero, \_SB.SLPT)
-            \_SB.PCI0.LPCB.EC0.EC0W (Arg0)
+            \_SB.PCI0.LPCB.EC.EC0W (Arg0)
             If (LEqual (Arg0, 0x04))
             {
                 If (LLessEqual (MSOS (), OSME))
@@ -18448,9 +18448,9 @@ DTB1, 8
             Method (TSDD, 0, NotSerialized)
             {
                 Name (TMPC, Zero)
-                Store (^^PCI0.LPCB.EC0.ECPU, TMPC)
+                Store (^^PCI0.LPCB.EC.ECPU, TMPC)
                 Store (TMPC, Index (TMPV, Zero))
-                Store (^^PCI0.LPCB.EC0.ECPU, TMPC)
+                Store (^^PCI0.LPCB.EC.ECPU, TMPC)
                 Store (TMPC, Index (TMPV, One))
                 Return (TMPV)
             }
@@ -18519,7 +18519,7 @@ DTB1, 8
             })
             Method (PADT, 0, NotSerialized)
             {
-                And (^^PCI0.LPCB.EC0.PBSY, 0x80, Local0)
+                And (^^PCI0.LPCB.EC.PBSY, 0x80, Local0)
                 If (LEqual (Local0, Zero))
                 {
                     Return (PADD)
@@ -18591,7 +18591,7 @@ DTB1, 8
                     Sleep (Local0)
                 }
 
-                Store (^^PCI0.LPCB.EC0.PECI (CADR, WLEN, RLEN, CAMD, OBUF, IBUF, ERRN), Local0)
+                Store (^^PCI0.LPCB.EC.PECI (CADR, WLEN, RLEN, CAMD, OBUF, IBUF, ERRN), Local0)
                 If (LEqual (Local0, One))
                 {
                     If (LGreater (CYCT, Zero))
@@ -18790,7 +18790,7 @@ DTB1, 8
                 EDA5,   8
             }
 
-            Store (^^PCI0.LPCB.EC0.ECXT (ECMD, EDA1, EDA2, EDA3, EDA4, EDA5), Local0)
+            Store (^^PCI0.LPCB.EC.ECXT (ECMD, EDA1, EDA2, EDA3, EDA4, EDA5), Local0)
             Store (DerefOf (Index (Local0, One)), EDA1)
             Store (DerefOf (Index (Local0, 0x02)), EDA2)
             Store (DerefOf (Index (Local0, 0x03)), EDA3)
@@ -18828,7 +18828,7 @@ DTB1, 8
                 }, Local1)
             Store (BLEN, Index (Local1, Zero))
             Store (BLKK, Index (Local1, One))
-            Store (^^PCI0.LPCB.EC0.ECSB (BUSN, PROT, DADD, DREG, DAT0, DAT1, Local1), Local0)
+            Store (^^PCI0.LPCB.EC.ECSB (BUSN, PROT, DADD, DREG, DAT0, DAT1, Local1), Local0)
             If (LEqual (DerefOf (Index (Local0, Zero)), Zero))
             {
                 Store (DerefOf (Index (Local0, One)), DAT0)
@@ -19091,7 +19091,7 @@ DTB1, 8
 
             If (LEqual (BATA, Zero))
             {
-                Store (^^PCI0.LPCB.EC0.SMBR (^^PCI0.LPCB.EC0.RDWD, ^^PCI0.LPCB.EC0.BADR, REGS), Local0)
+                Store (^^PCI0.LPCB.EC.SMBR (^^PCI0.LPCB.EC.RDWD, ^^PCI0.LPCB.EC.BADR, REGS), Local0)
                 Store (DerefOf (Index (Local0, 0x02)), BDAT)
                 Store (DerefOf (Index (Local0, Zero)), Local2)
                 And (Local2, 0x1F, Local2)
@@ -19105,7 +19105,7 @@ DTB1, 8
 
             If (LEqual (BATA, One))
             {
-                Store (^^PCI0.LPCB.EC0.SMBW (^^PCI0.LPCB.EC0.WRWD, ^^PCI0.LPCB.EC0.BADR, REGS, 0x02, BDAT), Local0)
+                Store (^^PCI0.LPCB.EC.SMBW (^^PCI0.LPCB.EC.WRWD, ^^PCI0.LPCB.EC.BADR, REGS, 0x02, BDAT), Local0)
                 Store (DerefOf (Index (Local0, Zero)), Local2)
                 And (Local2, 0x1F, Local2)
                 If (Local2)
@@ -19118,7 +19118,7 @@ DTB1, 8
 
             If (LEqual (BATA, 0x02))
             {
-                Store (^^PCI0.LPCB.EC0.SMBR (^^PCI0.LPCB.EC0.RDBL, ^^PCI0.LPCB.EC0.BADR, REGS), Local0)
+                Store (^^PCI0.LPCB.EC.SMBR (^^PCI0.LPCB.EC.RDBL, ^^PCI0.LPCB.EC.BADR, REGS), Local0)
                 Name (BKUF, Buffer (0x20) {})
                 CreateDWordField (BKUF, Zero, DAT1)
                 CreateDWordField (BKUF, 0x04, DAT2)
@@ -19175,7 +19175,7 @@ DTB1, 8
 
             If (LEqual (BATA, Zero))
             {
-                Store (^^PCI0.LPCB.EC0.RBEP (REGS), Local2)
+                Store (^^PCI0.LPCB.EC.RBEP (REGS), Local2)
                 And (Local2, 0xFF, Local3)
                 Store (Local3, BDAT)
                 ShiftRight (Local2, 0x08, Local2)
@@ -19190,7 +19190,7 @@ DTB1, 8
 
             If (LEqual (BATA, One))
             {
-                Store (^^PCI0.LPCB.EC0.WBEP (REGS, BDAT), Local2)
+                Store (^^PCI0.LPCB.EC.WBEP (REGS, BDAT), Local2)
                 And (Local2, 0x1F, Local2)
                 If (Local2)
                 {
@@ -19568,7 +19568,7 @@ DTB1, 8
                 Return (0x10)
             }
 
-            ^^PCI0.LPCB.EC0.SFNV (FNNB, FNSP)
+            ^^PCI0.LPCB.EC.SFNV (FNNB, FNSP)
             Return (Zero)
         }
 
@@ -19693,7 +19693,7 @@ DTB1, 8
             Store (DerefOf (Index (BTTB, Local0)), Local1)
             If (LEqual (DerefOf (Index (Local1, One)), Zero))
             {
-                Store (^^PCI0.LPCB.EC0.RPIN (DerefOf (Index (Local1, Zero))), Local2)
+                Store (^^PCI0.LPCB.EC.RPIN (DerefOf (Index (Local1, Zero))), Local2)
             }
 
             If (LEqual (DerefOf (Index (Local1, One)), One))
@@ -19813,7 +19813,7 @@ DTB1, 8
 
             If (LEqual (LTPE, One))
             {
-                ^^PCI0.LPCB.EC0.SBRV (LCDL)
+                ^^PCI0.LPCB.EC.SBRV (LCDL)
                 Return (Zero)
             }
 
@@ -20567,7 +20567,7 @@ DTB1, 8
         }
     }
 
-    Scope (_SB.PCI0.LPCB.EC0)
+    Scope (_SB.PCI0.LPCB.EC)
     {
         OperationRegion (ECID, SystemIO, 0x0257, One)
         Field (ECID, ByteAcc, NoLock, Preserve)
@@ -22105,9 +22105,9 @@ Store (ShiftRight (Local4, 8), DTB1)
         Name (FANS, Zero)
         Method (RTMP, 0, NotSerialized)
         {
-            If (\_SB.PCI0.LPCB.EC0.ECAV ())
+            If (\_SB.PCI0.LPCB.EC.ECAV ())
             {
-                Store (\_SB.PCI0.LPCB.EC0.ECPU, Local0)
+                Store (\_SB.PCI0.LPCB.EC.ECPU, Local0)
                 If (LLess (Local0, 0x80))
                 {
                     Store (Local0, LTMP)
@@ -22119,9 +22119,9 @@ Store (ShiftRight (Local4, 8), DTB1)
 
         Method (RCRT, 0, NotSerialized)
         {
-            If (\_SB.PCI0.LPCB.EC0.ECAV ())
+            If (\_SB.PCI0.LPCB.EC.ECAV ())
             {
-                Store (\_SB.PCI0.LPCB.EC0.ECRT, Local0)
+                Store (\_SB.PCI0.LPCB.EC.ECRT, Local0)
                 If (LLess (Local0, 0x80))
                 {
                     Store (Local0, \_SB.TCRT)
@@ -22131,9 +22131,9 @@ Store (ShiftRight (Local4, 8), DTB1)
 
         Method (RPSV, 0, NotSerialized)
         {
-            If (\_SB.PCI0.LPCB.EC0.ECAV ())
+            If (\_SB.PCI0.LPCB.EC.ECAV ())
             {
-                Store (\_SB.PCI0.LPCB.EC0.EPSV, Local0)
+                Store (\_SB.PCI0.LPCB.EC.EPSV, Local0)
                 If (LLess (Local0, 0x80))
                 {
                     Store (Local0, \_SB.TPSV)
@@ -22143,15 +22143,15 @@ Store (ShiftRight (Local4, 8), DTB1)
 
         Method (RFAN, 1, NotSerialized)
         {
-            If (\_SB.PCI0.LPCB.EC0.ECAV ())
+            If (\_SB.PCI0.LPCB.EC.ECAV ())
             {
-                Store (\_SB.PCI0.LPCB.EC0.ST83 (Arg0), Local0)
+                Store (\_SB.PCI0.LPCB.EC.ST83 (Arg0), Local0)
                 If (LEqual (Local0, 0xFF))
                 {
                     Return (Local0)
                 }
 
-                Store (\_SB.PCI0.LPCB.EC0.TACH (Arg0), Local0)
+                Store (\_SB.PCI0.LPCB.EC.TACH (Arg0), Local0)
                 Divide (Local0, 0x64, Local1, Local0)
                 Add (Local0, One, Local0)
                 If (LLessEqual (Local0, 0x3C))
@@ -22173,9 +22173,9 @@ Store (ShiftRight (Local4, 8), DTB1)
 
         Method (RFSE, 0, NotSerialized)
         {
-            If (\_SB.PCI0.LPCB.EC0.ECAV ())
+            If (\_SB.PCI0.LPCB.EC.ECAV ())
             {
-                Store (\_SB.PCI0.LPCB.EC0.ST83 (Zero), Local1)
+                Store (\_SB.PCI0.LPCB.EC.ST83 (Zero), Local1)
                 If (LLess (Local1, 0x80))
                 {
                     If (LLess (Local1, 0x0A))
@@ -22224,7 +22224,7 @@ Store (ShiftRight (Local4, 8), DTB1)
         }
     }
 
-    Scope (_SB.PCI0.LPCB.EC0)
+    Scope (_SB.PCI0.LPCB.EC)
     {
         Name (PWAC, Buffer (0x40)
         {
@@ -23336,7 +23336,7 @@ Store (ShiftRight (Local4, 8), DTB1)
             Name (LUXL, Zero)
             Method (_ALI, 0, NotSerialized)  // _ALI: Ambient Light Illuminance
             {
-                Return (^^PCI0.LPCB.EC0.RALS ())
+                Return (^^PCI0.LPCB.EC.RALS ())
             }
 
             Method (_ALR, 0, NotSerialized)  // _ALR: Ambient Light Response
@@ -23354,7 +23354,7 @@ Store (ShiftRight (Local4, 8), DTB1)
             Method (_LID, 0, NotSerialized)  // _LID: Lid Status
             {
                 Store (One, Local0)
-                Store (^^PCI0.LPCB.EC0.RPIN (0x11), Local0)
+                Store (^^PCI0.LPCB.EC.RPIN (0x11), Local0)
                 If (LEqual (Local0, Ones))
                 {
                     Store (One, Local0)
@@ -23374,7 +23374,7 @@ Store (ShiftRight (Local4, 8), DTB1)
     {
     }
 
-    Scope (_SB.PCI0.LPCB.EC0)
+    Scope (_SB.PCI0.LPCB.EC)
     {
         Name (KLDT, Zero)
         Method (_Q80, 0, NotSerialized)  // _Qxx: EC Query
@@ -23547,7 +23547,7 @@ Store (ShiftRight (Local4, 8), DTB1)
         Name (ULCK, Zero)
     }
 
-    Scope (_SB.PCI0.LPCB.EC0)
+    Scope (_SB.PCI0.LPCB.EC)
     {
         Method (_Q79, 0, NotSerialized)  // _Qxx: EC Query
         {
@@ -24817,7 +24817,7 @@ Store (ShiftRight (Local4, 8), DTB1)
         Method (PRJW, 1, Serialized)
         {
             KINI ()
-            \_SB.PCI0.LPCB.EC0.STBR ()
+            \_SB.PCI0.LPCB.EC.STBR ()
             If (LEqual (Arg0, 0x03))
             {
                 If (CondRefOf (\_SB.IAOE))
@@ -24835,7 +24835,7 @@ Store (ShiftRight (Local4, 8), DTB1)
 
         Method (GLID, 0, Serialized)
         {
-            Return (\_SB.PCI0.LPCB.EC0.RPIN (0x11))
+            Return (\_SB.PCI0.LPCB.EC.RPIN (0x11))
         }
 
         Method (TLID, 0, Serialized)
@@ -24924,11 +24924,11 @@ Store (ShiftRight (Local4, 8), DTB1)
             Store (Arg0, \_SB.TGST)
             If (Arg0)
             {
-                Store (\_SB.PCI0.LPCB.EC0.ST87 (0x40, 0xFF), Local0)
+                Store (\_SB.PCI0.LPCB.EC.ST87 (0x40, 0xFF), Local0)
             }
             Else
             {
-                Store (\_SB.PCI0.LPCB.EC0.ST87 (0x20, 0xFF), Local0)
+                Store (\_SB.PCI0.LPCB.EC.ST87 (0x20, 0xFF), Local0)
             }
 
             Return (One)
@@ -24936,7 +24936,7 @@ Store (ShiftRight (Local4, 8), DTB1)
 
         Method (OHWS, 0, Serialized)
         {
-            Store (\_SB.PCI0.LPCB.EC0.RPIN (0x27), Local0)
+            Store (\_SB.PCI0.LPCB.EC.RPIN (0x27), Local0)
             If (Local0)
             {
                 Return (Zero)
@@ -25032,12 +25032,12 @@ Store (ShiftRight (Local4, 8), DTB1)
 
         Method (GBTL, 0, Serialized)
         {
-            Return (\_SB.PCI0.LPCB.EC0.RPIN (0x73))
+            Return (\_SB.PCI0.LPCB.EC.RPIN (0x73))
         }
 
         Method (SBTL, 1, Serialized)
         {
-            \_SB.PCI0.LPCB.EC0.SPIN (0x73, Arg0)
+            \_SB.PCI0.LPCB.EC.SPIN (0x73, Arg0)
         }
 
         Method (BL2C, 0, NotSerialized)
@@ -25049,7 +25049,7 @@ Store (ShiftRight (Local4, 8), DTB1)
         {
             If (LEqual (Arg0, One))
             {
-                \_SB.PCI0.LPCB.EC0.FNCT (0x84, Zero)
+                \_SB.PCI0.LPCB.EC.FNCT (0x84, Zero)
             }
         }
 
@@ -25061,14 +25061,14 @@ Store (ShiftRight (Local4, 8), DTB1)
 
         Method (DCPS, 1, Serialized)
         {
-            Store (\_SB.PCI0.LPCB.EC0.RPIN (0x26), Local0)
+            Store (\_SB.PCI0.LPCB.EC.RPIN (0x26), Local0)
             XOr (Local0, One, Local0)
             Return (Local0)
         }
 
         Method (ACPS, 0, Serialized)
         {
-            Store (\_SB.PCI0.LPCB.EC0.RPIN (0x10), Local0)
+            Store (\_SB.PCI0.LPCB.EC.RPIN (0x10), Local0)
             XOr (Local0, One, Local0)
             Return (Local0)
         }
@@ -25077,14 +25077,14 @@ Store (ShiftRight (Local4, 8), DTB1)
         {
             If (LGreaterEqual (MSOS (), OSW8))
             {
-                \_SB.PCI0.LPCB.EC0.STB1 (0x02)
-                \_SB.PCI0.LPCB.EC0.STB1 (0x04)
+                \_SB.PCI0.LPCB.EC.STB1 (0x02)
+                \_SB.PCI0.LPCB.EC.STB1 (0x04)
                 Store (Zero, \_SB.FNIV)
             }
             Else
             {
-                \_SB.PCI0.LPCB.EC0.STB1 (0x02)
-                \_SB.PCI0.LPCB.EC0.STB1 (0x03)
+                \_SB.PCI0.LPCB.EC.STB1 (0x02)
+                \_SB.PCI0.LPCB.EC.STB1 (0x03)
                 Store (Zero, \_SB.FNIV)
             }
         }
@@ -25094,7 +25094,7 @@ Store (ShiftRight (Local4, 8), DTB1)
     {
     }
 
-    Scope (_SB.PCI0.LPCB.EC0)
+    Scope (_SB.PCI0.LPCB.EC)
     {
     }
 
@@ -26954,7 +26954,7 @@ Store (ShiftRight (Local4, 8), DTB1)
                     {
                         Store (BRTI, Local1)
                         ShiftLeft (Local1, 0x04, Local1)
-                        Store (DerefOf (Index (\_SB.PCI0.LPCB.EC0.PWAC, Local1)), Local0)
+                        Store (DerefOf (Index (\_SB.PCI0.LPCB.EC.PWAC, Local1)), Local0)
                         Or (TCHE, 0x08, TCHE)
                         Or (ASLC, 0x08, ASLC)
                         Store (Local0, PFMB)
@@ -27002,7 +27002,7 @@ Store (ShiftRight (Local4, 8), DTB1)
                             Subtract (0x0B, Local0, Local3)
                             Subtract (Local3, One, Local3)
                             Store (Add (Local4, Local3), Local3)
-                            Store (DerefOf (Index (\_SB.PCI0.LPCB.EC0.PWAC, Local3)), Local1)
+                            Store (DerefOf (Index (\_SB.PCI0.LPCB.EC.PWAC, Local3)), Local1)
                             Store (Divide (Multiply (Local1, 0x64), 0xFF, ), Local2)
                             Store (Local2, Index (PCTG, Local0))
                             Increment (Local0)
@@ -27024,7 +27024,7 @@ Store (ShiftRight (Local4, 8), DTB1)
                     }
                     Else
                     {
-                        \_SB.PCI0.LPCB.EC0.STBR ()
+                        \_SB.PCI0.LPCB.EC.STBR ()
                     }
                 }
 
@@ -27041,7 +27041,7 @@ Store (ShiftRight (Local4, 8), DTB1)
                         ShiftLeft (Local1, 0x04, Local1)
                         Store (LBTN, Local2)
                         Store (Add (Local1, Local2), Local2)
-                        Store (Multiply (DerefOf (Index (\_SB.PCI0.LPCB.EC0.PWAC, Local2)), 0x64), Local3)
+                        Store (Multiply (DerefOf (Index (\_SB.PCI0.LPCB.EC.PWAC, Local2)), 0x64), Local3)
                         Store (Divide (Local3, 0xFF, ), Local3)
                         Return (Local3)
                     }
@@ -28529,7 +28529,7 @@ Store (ShiftRight (Local4, 8), DTB1)
                         Store (0x0F, LBTN)
                     }
 
-                    \_SB.PCI0.LPCB.EC0.STBR ()
+                    \_SB.PCI0.LPCB.EC.STBR ()
                 }
 
                 Return (Zero)
@@ -28603,7 +28603,7 @@ Store (ShiftRight (Local4, 8), DTB1)
                         Store (0x0F, LBTN)
                     }
 
-                    \_SB.PCI0.LPCB.EC0.STBR ()
+                    \_SB.PCI0.LPCB.EC.STBR ()
                 }
 
                 Return (Zero)
@@ -28986,7 +28986,7 @@ Store (ShiftRight (Local4, 8), DTB1)
                     If (Local0) {}
                     Else
                     {
-                        \_SB.PCI0.LPCB.EC0.SCTF (Zero, Zero)
+                        \_SB.PCI0.LPCB.EC.SCTF (Zero, Zero)
                     }
 
                     Or (Local0, And (IMDS, 0x02), Local0)
@@ -28999,7 +28999,7 @@ Store (ShiftRight (Local4, 8), DTB1)
                     If (Local0) {}
                     Else
                     {
-                        \_SB.PCI0.LPCB.EC0.SCTF (Zero, Zero)
+                        \_SB.PCI0.LPCB.EC.SCTF (Zero, Zero)
                     }
 
                     Or (Local0, And (IMDS, 0x02), Local0)
@@ -29111,7 +29111,7 @@ Store (ShiftRight (Local4, 8), DTB1)
                     }
 
                     Store (Local0, IBT1)
-                    \_SB.PCI0.LPCB.EC0.SCTF (One, Local0)
+                    \_SB.PCI0.LPCB.EC.SCTF (One, Local0)
                 }
                 Else
                 {
@@ -29127,7 +29127,7 @@ Store (ShiftRight (Local4, 8), DTB1)
                     }
 
                     Store (Local0, IBT1)
-                    \_SB.PCI0.LPCB.EC0.SCTF (One, Local0)
+                    \_SB.PCI0.LPCB.EC.SCTF (One, Local0)
                 }
             }
 
@@ -29244,7 +29244,7 @@ Store (ShiftRight (Local4, 8), DTB1)
 
             Method (GPCS, 0, NotSerialized)
             {
-                Return (\_SB.PCI0.LPCB.EC0.RPIN (0x11))
+                Return (\_SB.PCI0.LPCB.EC.RPIN (0x11))
             }
 
             Method (GAWD, 0, NotSerialized)
@@ -29961,7 +29961,7 @@ Store (ShiftRight (Local4, 8), DTB1)
             Name (T_0, Zero)  // _T_x: Emitted by ASL Compiler
             If (LAnd (LEqual (XPCC, Zero), CondRefOf (\_PR.CBMI)))
             {
-                Store (\_SB.PCI0.LPCB.EC0.RRAM (0x01BF), Local0)
+                Store (\_SB.PCI0.LPCB.EC.RRAM (0x01BF), Local0)
                 While (One)
                 {
                     Store (Local0, T_0)
@@ -31304,7 +31304,7 @@ Store (ShiftRight (Local4, 8), DTB1)
         }
     }
 
-    Scope (\_SB.PCI0.LPCB.EC0)
+    Scope (\_SB.PCI0.LPCB.EC)
     {
         Method (_Q7F, 0, NotSerialized)  // _Qxx: EC Query
         {
@@ -31813,24 +31813,24 @@ Store (ShiftRight (Local4, 8), DTB1)
             {
                 If (\TSOD)
                 {
-                    If (LGreater (\_SB.PCI0.LPCB.EC0.TH1R, \_SB.PCI0.LPCB.EC0.TH1L))
+                    If (LGreater (\_SB.PCI0.LPCB.EC.TH1R, \_SB.PCI0.LPCB.EC.TH1L))
                     {
-                        Store (\_SB.PCI0.LPCB.EC0.TH1R, Local1)
+                        Store (\_SB.PCI0.LPCB.EC.TH1R, Local1)
                     }
                     Else
                     {
-                        Store (\_SB.PCI0.LPCB.EC0.TH1L, Local1)
+                        Store (\_SB.PCI0.LPCB.EC.TH1L, Local1)
                     }
                 }
                 Else
                 {
-                    If (LGreater (\_SB.PCI0.LPCB.EC0.TH1R, \_SB.PCI0.LPCB.EC0.TH1L))
+                    If (LGreater (\_SB.PCI0.LPCB.EC.TH1R, \_SB.PCI0.LPCB.EC.TH1L))
                     {
-                        Store (\_SB.PCI0.LPCB.EC0.TH1R, Local1)
+                        Store (\_SB.PCI0.LPCB.EC.TH1R, Local1)
                     }
                     Else
                     {
-                        Store (\_SB.PCI0.LPCB.EC0.TH1L, Local1)
+                        Store (\_SB.PCI0.LPCB.EC.TH1L, Local1)
                     }
                 }
 
