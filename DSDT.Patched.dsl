@@ -25510,7 +25510,7 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
     {
         Name (LTRS, Zero)
         Name (OBFS, Zero)
-        Device (B0D3)
+        Device (HDAU)
         {
             Name (_ADR, 0x00030000)  // _ADR: Address
             Name (BARA, 0x80000000)
@@ -25713,6 +25713,29 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         }
                     }
                 }
+            }
+            
+            Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+            {
+                Store (Package (0x06)
+                    {
+                        "hda-gfx", 
+                        Buffer (0x0A)
+                        {
+                            "onboard-1"
+                        }, 
+
+                        "layout-id", 
+                        Buffer (0x04)
+                        {
+                             0x01, 0x00, 0x00, 0x00
+                        }, 
+
+                        "PinConfigurations", 
+                        Buffer (Zero) {}
+                    }, Local0)
+                DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                Return (Local0)
             }
         }
 
@@ -27812,11 +27835,11 @@ DefinitionBlock ("iASLevpr8R.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         If (LEqual (PARM, One))
                         {
                             Or (AUDE, 0x20, AUDE)
-                            ^^^B0D3.ABWA (One)
-                            ^^^B0D3.ASTR ()
-                            ^^^B0D3.AINI ()
-                            ^^^B0D3.CXDC ()
-                            ^^^B0D3.ABWA (Zero)
+                            ^^^HDAU.ABWA (One)
+                            ^^^HDAU.ASTR ()
+                            ^^^HDAU.AINI ()
+                            ^^^HDAU.CXDC ()
+                            ^^^HDAU.ABWA (Zero)
                             Notify (PCI0, Zero)
                         }
 
