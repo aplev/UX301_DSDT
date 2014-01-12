@@ -5010,7 +5010,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 {
                     Return (GPRW (0x69, 0x04))
                 }
-
+                
                 Device (GLAN)
                 {
                     Name (_ADR, Zero)  // _ADR: Address
@@ -5335,7 +5335,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 }
             }
 
-            Device (USB2)
+            Device (EHC3)
             {
                 Name (_ADR, 0x001D0000)  // _ADR: Address
                 Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
