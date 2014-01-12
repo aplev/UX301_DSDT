@@ -22633,19 +22633,19 @@ Store (ShiftRight (Local4, 8), DTB1)
                                 Store (DerefOf (Index (WBTL, Local0)), Local1)
                                 If (LEqual (Local0, Zero))
                                 {
-                                    OWLD (Zero)
+                                    OWLD (One)
                                     ^^^^ATKD.IANE (0x5F)
                                     Sleep (0x0DAC)
-                                    OBTD (Zero)
+                                    OBTD (One)
                                     ^^^^ATKD.IANE (0x7E)
                                 }
 
                                 If (LEqual (Local0, One))
                                 {
-                                    OWLD (One)
+                                    OWLD (Zero)
                                     ^^^^ATKD.IANE (0x5E)
                                     Sleep (0x0DAC)
-                                    OBTD (One)
+                                    OBTD (Zero)
                                     ^^^^ATKD.IANE (0x7D)
                                 }
         }
