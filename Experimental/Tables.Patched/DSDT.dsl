@@ -220,7 +220,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         CMAP,   8, 
         CMBP,   8, 
         LPTP,   8, 
-        FDCP,   8,
+        FDCP,   8, 
         CMCP,   8, 
         CIRP,   8, 
         SMSC,   8, 
@@ -22634,19 +22634,19 @@ Store (ShiftRight (Local4, 8), DTB1)
                                 If (LEqual (Local0, Zero))
                                 {
                                     OWLD (Zero)
-                                    ^^^^ATKD.IANE (0x5E)
+                                    ^^^^ATKD.IANE (0x5F)
                                     Sleep (0x0DAC)
                                     OBTD (Zero)
-                                    ^^^^ATKD.IANE (0x7D)
+                                    ^^^^ATKD.IANE (0x7E)
                                 }
 
                                 If (LEqual (Local0, One))
                                 {
                                     OWLD (One)
-                                    ^^^^ATKD.IANE (0x5F)
+                                    ^^^^ATKD.IANE (0x5E)
                                     Sleep (0x0DAC)
                                     OBTD (One)
-                                    ^^^^ATKD.IANE (0x7E)
+                                    ^^^^ATKD.IANE (0x7D)
                                 }
         }
         
