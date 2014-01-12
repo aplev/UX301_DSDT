@@ -12417,22 +12417,34 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         {
             Store (PM0H, PA0H)
             Store (PM1H, PA1H)
+            Store (PM1L, PA1L)
             Store (PM2H, PA2H)
+            Store (PM2L, PA2L)
             Store (PM3H, PA3H)
+            Store (PM3L, PA3L)
             Store (PM4H, PA4H)
+            Store (PM4L, PA4L)
             Store (PM5H, PA5H)
+            Store (PM5L, PA5L)
             Store (PM6H, PA6H)
+            Store (PM6L, PA6L)
         }
 
         Method (NWAK, 1, NotSerialized)
         {
             Store (PA0H, PM0H)
             Store (PA1H, PM1H)
+            Store (PA1L, PM1L)
             Store (PA2H, PM2H)
+            Store (PA2L, PM2L)
             Store (PA3H, PM3H)
+            Store (PA3L, PM3L)
             Store (PA4H, PM4H)
+            Store (PA4L, PM4L)
             Store (PA5H, PM5H)
+            Store (PA5L, PM5L)
             Store (PA6H, PM6H)
+            Store (PA6L, PM6L)
         }
     }
 
@@ -12732,11 +12744,103 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
     Method (_PTS, 1, NotSerialized)  // _PTS: Prepare To Sleep
     {
         PTS (Arg0)
+        ADBG (Concatenate ("_PTS=", ToHexString (Arg0)))
+        If (And (ICNF, 0x10))
+        {
+            If (CondRefOf (\_SB.IAOE.PTSL))
+            {
+                Store (Arg0, \_SB.IAOE.PTSL)
+            }
+        }
+
+        If (LEqual (Arg0, 0x03))
+        {
+            If (And (ICNF, One))
+            {
+                If (LAnd (And (ICNF, 0x10), LEqual (\_SB.IAOE.ITMR, Zero)))
+                {
+                    \_SB.PCI0.LPCB.EC0.SCTF (Zero, 0x03)
+                }
+
+                If (LAnd (And (ICNF, 0x10), CondRefOf (\_SB.IFFS.FFSS)))
+                {
+                    If (And (\_SB.IFFS.FFSS, One))
+                    {
+                        Store (One, \_SB.IAOE.FFSE)
+                    }
+                    Else
+                    {
+                        Store (Zero, \_SB.IAOE.FFSE)
+                    }
+                }
+            }
+        }
+
+        If (LOr (LEqual (Arg0, 0x03), LEqual (Arg0, 0x04))) {}
+        If (CondRefOf (\_SB.TPM.PTS))
+        {
+            \_SB.TPM.PTS (Arg0)
+        }
     }
 
     Method (_WAK, 1, Serialized)  // _WAK: Wake
     {
         WAK (Arg0)
+        ADBG ("_WAK")
+        If (And (ICNF, 0x10))
+        {
+            If (And (\_SB.PCI0.IGPU.TCHE, 0x0100))
+            {
+                If (LEqual (\_SB.IAOE.ITMR, One))
+                {
+                    If (LAnd (And (\_SB.IAOE.IBT1, One), LOr (And (\_SB.IAOE.WKRS, 0x02
+                        ), And (\_SB.IAOE.WKRS, 0x10))))
+                    {
+                        Store (Or (And (\_SB.PCI0.IGPU.STAT, 0xFFFFFFFFFFFFFFFC), One), \_SB.PCI0.IGPU.STAT)
+                    }
+                    Else
+                    {
+                        Store (And (\_SB.PCI0.IGPU.STAT, 0xFFFFFFFFFFFFFFFC), \_SB.PCI0.IGPU.STAT)
+                    }
+                }
+                Else
+                {
+                    If (LAnd (And (\_SB.IAOE.IBT1, One), LOr (And (\_SB.IAOE.WKRS, 0x02
+                        ), And (\_SB.IAOE.WKRS, 0x10))))
+                    {
+                        Store (Or (And (\_SB.PCI0.IGPU.STAT, 0xFFFFFFFFFFFFFFFC), One), \_SB.PCI0.IGPU.STAT)
+                    }
+                    Else
+                    {
+                        Store (And (\_SB.PCI0.IGPU.STAT, 0xFFFFFFFFFFFFFFFC), \_SB.PCI0.IGPU.STAT)
+                    }
+                }
+            }
+
+            If (CondRefOf (\_SB.IAOE.PTSL))
+            {
+                Store (Zero, \_SB.IAOE.PTSL)
+            }
+
+            If (LEqual (\_SB.IAOE.ITMR, Zero)) {}
+            If (CondRefOf (\_SB.IAOE.ECTM))
+            {
+                Store (Zero, \_SB.IAOE.ECTM)
+            }
+
+            If (CondRefOf (\_SB.IAOE.RCTM))
+            {
+                Store (Zero, \_SB.IAOE.RCTM)
+            }
+        }
+
+        If (LOr (LEqual (Arg0, 0x03), LEqual (Arg0, 0x04)))
+        {
+            \_SB.PCI0.XHC.XWAK ()
+            \_SB.PCI0.LPCB.EC0.WRAM (0x0533, 0x69)
+            \_SB.PCI0.LPCB.EC0.WRAM (0x0534, 0x64)
+        }
+
         Return (Package (0x02)
         {
             Zero, 
@@ -18205,7 +18309,7 @@ DTB1, 8
             {
                 \_SB.PCI0.LPCB.EC0.ST8E (0x12, 0xFF)
                 \_SB.PCI0.LPCB.EC0.ST9E (0x12, 0x05, One)
-                If (LEqual (\_SB.DP3S, One))
+                If (LAnd (LEqual (\_SB.DP3S, One), LEqual (\_SB.ACPF, Zero)))
                 {
                     \_SB.PCI0.LPCB.EC0.ST9E (Zero, 0x08, One)
                 }
@@ -18220,7 +18324,7 @@ DTB1, 8
 
         Method (OEMW, 1, NotSerialized)
         {
-            ISMI (0x9E)
+            ISMI (0xAA)
             Store (Zero, \_SB.SLPT)
             \_SB.PCI0.LPCB.EC0.EC0W (Arg0)
             If (LEqual (Arg0, 0x04))
@@ -18245,7 +18349,7 @@ DTB1, 8
             DIAG (Add (Arg0, 0xF0))
         }
     }
-    
+
     Scope (_SB.PCI0.LPCB.TPM)
     {
         Method (_HID, 0, NotSerialized)  // _HID: Hardware ID
@@ -31741,6 +31845,7 @@ Store (ShiftRight (Local4, 8), DTB1)
         If (Arg0)
         {
             \_SB.PCI0.NPTS (Arg0)
+            \_SB.PCI0.IGPU.OPTS (Arg0)
             OEMS (Arg0)
         }
     }
@@ -31748,6 +31853,8 @@ Store (ShiftRight (Local4, 8), DTB1)
     Method (WAK, 1, NotSerialized)
     {
         \_SB.PCI0.NWAK (Arg0)
+        \_SB.ATKD.GENW (Arg0)
+        \_SB.PCI0.IGPU.OWAK (Arg0)
         OEMW (Arg0)
     }
     Method (B1B2, 2, NotSerialized)
