@@ -11692,10 +11692,10 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
                 Return (Package()
                 {
-                    "device-id", Buffer() { 0x03, 0x9c, 0x00, 0x00 },
-                    "compatible", Buffer() { "pci8086,9c03" },
-                    "IOName", Buffer() { "pci8086,9c03" },
-                    "name", Buffer() { "pci8086,9c03" },
+                    "device-id", Buffer() { 0x03, 0x8c, 0x00, 0x00 },
+                    "compatible", Buffer() { "pci8086,8c03" },
+                    "IOName", Buffer() { "pci8086,8c03" },
+                    "name", Buffer() { "pci8086,8c03" },
                 })
             }
         }
