@@ -4756,7 +4756,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         "device-id",
                         Buffer (0x04)
                         {
-                            0x22, 0x9C, 0x00, 0x00
+                            0x43, 0x9C, 0x00, 0x00
                         }
                     }, Local0)
                     DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
