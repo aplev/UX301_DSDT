@@ -12785,6 +12785,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
     Method (_WAK, 1, Serialized)  // _WAK: Wake
     {
+        \RMDT.P2("Method _WAK", Arg0)
         WAK (Arg0)
         ADBG ("_WAK")
         If (And (ICNF, 0x10))
@@ -12793,25 +12794,29 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             {
                 If (LEqual (\_SB.IAOE.ITMR, One))
                 {
-                    If (LAnd (And (\_SB.IAOE.IBT1, One), LOr (And (\_SB.IAOE.WKRS, 0x02
-                        ), And (\_SB.IAOE.WKRS, 0x10))))
+                    If (LAnd (And (\_SB.IAOE.IBT1, One), LOr (And (\_SB.IAOE.WKRS, 0x02), And (\_SB.IAOE.WKRS, 0x10))))
                     {
+                        \RMDT.P1("_WAK _100")
                         Store (Or (And (\_SB.PCI0.IGPU.STAT, 0xFFFFFFFFFFFFFFFC), One), \_SB.PCI0.IGPU.STAT)
                     }
                     Else
                     {
+                        \RMDT.P1("_WAK _101")
                         Store (And (\_SB.PCI0.IGPU.STAT, 0xFFFFFFFFFFFFFFFC), \_SB.PCI0.IGPU.STAT)
                     }
                 }
                 Else
                 {
+                    \RMDT.P1("_WAK _102")
                     If (LAnd (And (\_SB.IAOE.IBT1, One), LOr (And (\_SB.IAOE.WKRS, 0x02
                         ), And (\_SB.IAOE.WKRS, 0x10))))
                     {
+                        \RMDT.P1("_WAK _103")
                         Store (Or (And (\_SB.PCI0.IGPU.STAT, 0xFFFFFFFFFFFFFFFC), One), \_SB.PCI0.IGPU.STAT)
                     }
                     Else
                     {
+                        \RMDT.P1("_WAK _104")
                         Store (And (\_SB.PCI0.IGPU.STAT, 0xFFFFFFFFFFFFFFFC), \_SB.PCI0.IGPU.STAT)
                     }
                 }
@@ -12819,23 +12824,27 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
             If (CondRefOf (\_SB.IAOE.PTSL))
             {
+                \RMDT.P1("_WAK _105")
                 Store (Zero, \_SB.IAOE.PTSL)
             }
 
             If (LEqual (\_SB.IAOE.ITMR, Zero)) {}
             If (CondRefOf (\_SB.IAOE.ECTM))
             {
+                \RMDT.P1("_WAK _106")
                 Store (Zero, \_SB.IAOE.ECTM)
             }
 
             If (CondRefOf (\_SB.IAOE.RCTM))
             {
+                \RMDT.P1("_WAK _107")
                 Store (Zero, \_SB.IAOE.RCTM)
             }
         }
 
         If (LOr (LEqual (Arg0, 0x03), LEqual (Arg0, 0x04)))
         {
+            \RMDT.P1("_WAK _108")
             \_SB.PCI0.XHC.XWAK ()
             \_SB.PCI0.LPCB.EC.WRAM (0x0533, 0x69)
             \_SB.PCI0.LPCB.EC.WRAM (0x0534, 0x64)
@@ -18281,6 +18290,7 @@ DTB1, 8
         Name (MES4, Zero)
         Method (OEMS, 1, NotSerialized)
         {
+            \RMDT.P2("Method OEMS", Arg0)
             If (LEqual (Arg0, 0x03))
             {
                 If (LLessEqual (MSOS (), OSME))
@@ -18320,11 +18330,11 @@ DTB1, 8
             }
 
             ISMI (0x9D)
-            \RMDT.P2("Method OEMS", Arg0)
         }
 
         Method (OEMW, 1, NotSerialized)
         {
+            \RMDT.P2("Method OEMW", Arg0)
             ISMI (0xAA)
             Store (Zero, \_SB.SLPT)
             \_SB.PCI0.LPCB.EC.EC0W (Arg0)
@@ -18348,7 +18358,6 @@ DTB1, 8
 
             PRJW (Arg0)
             DIAG (Add (Arg0, 0xF0))
-            \RMDT.P2("Method OEMW", Arg0)
         }
     }
 
