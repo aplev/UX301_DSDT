@@ -17411,7 +17411,7 @@ DTB1, 8
 
     Scope (_SB.PCI0)
     {
-        Device (AC0)
+        Device (ADP1)
         {
             Name (_HID, "ACPI0003")  // _HID: Hardware ID
             Method (_PSR, 0, NotSerialized)  // _PSR: Power Source
@@ -18250,7 +18250,7 @@ DTB1, 8
                 Else
                 {
                     Notify (BAT0, 0x81)
-                    Notify (AC0, 0x80)
+                    Notify (ADP1, 0x80)
                 }
             }
         }
@@ -23025,7 +23025,7 @@ Store (ShiftRight (Local4, 8), DTB1)
                 STBR ()
             }
 
-            Notify (AC0, 0x80)
+            Notify (ADP1, 0x80)
             If (ATKP)
             {
                 ^^^^ATKD.IANE (Local0)
