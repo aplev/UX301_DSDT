@@ -31873,7 +31873,6 @@ Field (IGD2, AnyAcc, NoLock, Preserve)
     {
         Device (PNLF)
         {
-            // normal PNLF declares (note some of this probably not necessary)
             Name (_ADR, Zero)
             Name (_HID, EisaId ("APP0002"))
             Name (_CID, "backlight")
@@ -31962,30 +31961,30 @@ Field (IGD2, AnyAcc, NoLock, Preserve)
             Name (XOPT, Zero)
             // XRGL/XRGH: defines the valid range
             Name (XRGL, 1)
-            Name (XRGH, 2777)
+            Name (XRGH, 1400)
             // _BCL: returns list of valid brightness levels
             // first two entries describe ac/battery power levels
             Name (_BCL, Package()
             {
-                2777,
-                748,
+                780,
+                320,
                 0,
-                35, 39, 44, 50,
-                58, 67, 77, 88,
-                101, 115, 130, 147,
-                165, 184, 204, 226,
-                249, 273, 299, 326,
-                354, 383, 414, 446,
-                479, 514, 549, 587,
-                625, 665, 706, 748,
-                791, 836, 882, 930,
-                978, 1028, 1079, 1132,
-                1186, 1241, 1297, 1355,
-                1414, 1474, 1535, 1598,
-                1662, 1728, 1794, 1862,
-                1931, 2002, 2074, 2147,
-                2221, 2296, 2373, 2452,
-                2531, 2612, 2694, 2777,
+                2, 4, 6, 9,
+                12, 15, 19, 23,
+                27, 32, 37, 42,
+                48, 54, 60, 67,
+                74, 82, 90, 99,
+                108, 118, 130, 143,
+                157, 172, 188, 205,
+                223, 242, 262, 283,
+                305, 328, 352, 377,
+                403, 430, 458, 487,
+                517, 547, 577, 609,
+                641, 674, 708, 743,
+                779, 810, 845, 880,
+                915, 950, 985, 1020,
+                1055, 1095, 1140, 1190,
+                1240, 1290, 1340, 1400,
             })
         }
     }
