@@ -3617,50 +3617,8 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                             0x00000400,         // Address Length
                             _Y0F)
                     })
-
-                    Method (_STA, 0, NotSerialized)  // _STA: Status
-                    {
-                        If (LGreaterEqual (OSYS, 0x07D1))
-                        {
-                            If (HPAE)
-                            {
-                                Return (0x0F)
-                            }
-                        }
-                        Else
-                        {
-                            If (HPAE)
-                            {
-                                Return (0x0B)
-                            }
-                        }
-
-                        Return (Zero)
-                    }
-
-                    Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
-                    {
-                        If (HPAE)
-                        {
-                            CreateDWordField (BUF0, \_SB.PCI0.LPCB.HPET._Y0F._BAS, HPT0)  // _BAS: Base Address
-                            If (LEqual (HPAS, One))
-                            {
-                                Store (0xFED01000, HPT0)
-                            }
-
-                            If (LEqual (HPAS, 0x02))
-                            {
-                                Store (0xFED02000, HPT0)
-                            }
-
-                            If (LEqual (HPAS, 0x03))
-                            {
-                                Store (0xFED03000, HPT0)
-                            }
-                        }
-
-                        Return (BUF0)
-                    }
+                    Name (_STA, 0x0F)
+                    Method (_CRS, 0, NotSerialized) { Return (BUF0) }
                 }
 
                 Device (IPIC)
@@ -3770,8 +3728,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                             0x01,               // Alignment
                             0x02,               // Length
                             )
-                            IRQNoFlags ()
-                            {2}                        
+                                                    
                     })
                 }
 
@@ -3960,7 +3917,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                             0x0070,             // Range Minimum
                             0x0070,             // Range Maximum
                             0x01,               // Alignment
-                            0x08,               // Length
+                            0x02,               // Length
                             )
                         
                     })
@@ -5396,6 +5353,19 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Device (MCHC)
             {
                 Name (_ADR, Zero)
+            }
+            Device (IMEI)
+            {
+                Name (_ADR, 0x00160000)
+                Method (_DSM, 4, NotSerialized)
+                {
+                    If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
+                    Return (Package()
+                    {
+                        "device-id", Buffer() { 0x3A, 0x9C, 0x00, 0x00 },
+                        "name", Buffer() { "pci8086,9c3a" },
+                    })
+                }
             }
         }
     }
@@ -12050,16 +12020,12 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Name (_CID, "diagsvault")
                     Method (_DSM, 4, NotSerialized)
                     {
-                        Store (Package (0x02)
-                        {
-                            "address",
-                            0x57
-                        }, Local0)
-                        DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
-                        Return (Local0)
+                        If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
+                        Return (Package() { "address", 0x57 })
                     }
                 }
             }
+            
         }
     }
 
@@ -12743,6 +12709,9 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
     Method (_PTS, 1, NotSerialized)  // _PTS: Prepare To Sleep
     {
+        If (LEqual (Arg0, 0x05)) {}
+    Else
+    {
         PTS (Arg0)
         ADBG (Concatenate ("_PTS=", ToHexString (Arg0)))
         If (And (ICNF, 0x10))
@@ -12781,11 +12750,14 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         {
             \_SB.TPM.PTS (Arg0)
         }
+      }
+
     }
 
     Method (_WAK, 1, Serialized)  // _WAK: Wake
     {
-        WAK (Arg0)
+        If (LOr(LLess(Arg0,1),LGreater(Arg0,5))) { Store(3,Arg0) }
+WAK (Arg0)
         ADBG ("_WAK")
         If (And (ICNF, 0x10))
         {
@@ -13133,7 +13105,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Store (0x07D3, OSYS)
                 }
 
-                If (_OSI ("Windows 2006"))
+                If (LOr (_OSI ("Darwin"), _OSI ("Windows 2006")))
                 {
                     Store (0x07D6, OSYS)
                 }
@@ -17423,6 +17395,7 @@ DTB1, 8
             {
                 PCI0
             })
+            Name (_PRW, Package() { 0x18, 0x03 })
         }
     }
 
