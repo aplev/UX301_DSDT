@@ -23111,14 +23111,14 @@ Store (ShiftRight (Local4, 8), DTB1)
         {
             Method (_HID, 0, NotSerialized)  // _HID: Hardware ID
             {
-                If (LGreaterEqual (MSOS (), OSW7))
-                {
+       //         If (LGreaterEqual (MSOS (), OSW7))
+       //         {
                     Return ("ACPI0008")
-                }
-                Else
-                {
-                    Return ("PNP0C02")
-                }
+       //         }
+       //         Else
+       //         {
+       //             Return ("PNP0C02")
+       //         }
             }
 
             Method (_STA, 0, NotSerialized)  // _STA: Status
