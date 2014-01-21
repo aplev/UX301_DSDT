@@ -12757,7 +12757,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
     Method (_WAK, 1, Serialized)  // _WAK: Wake
     {
         If (LOr(LLess(Arg0,1),LGreater(Arg0,5))) { Store(3,Arg0) }
-WAK (Arg0)
+        WAK (Arg0)
         ADBG ("_WAK")
         If (And (ICNF, 0x10))
         {
