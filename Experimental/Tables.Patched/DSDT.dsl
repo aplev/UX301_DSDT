@@ -31895,7 +31895,7 @@ Field (IGD2, AnyAcc, NoLock, Preserve)
                 // Because this laptop starts at full brightness, I just set it right
                 // here.  This is to insure _BQC and XBQC return the correct level
                 // at startup.
-                Store(0x5780578, LEVX)
+                Store(0xad90ad9, LEVX)
             }
             // _BCM/_BQC: set/get for brightness level
             Method (_BCM, 1, NotSerialized)
