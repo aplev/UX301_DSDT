@@ -31961,5 +31961,25 @@ Field (IGD2, AnyAcc, NoLock, Preserve)
             })
         }
     }
+    Device (RMNE)
+    {
+        Name (_ADR, Zero)
+        // The NullEthernet kext matches on this HID
+        Name (_HID, "NULE0000")
+        // This is the MAC address returned by the kext. Modify if necessary.
+        Name (MAC, Buffer() { 0xF4, 0xEC, 0x3E, 0x7A, 0x1D, 0x76 })
+        Method (_DSM, 4, NotSerialized)
+        {
+            If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
+            Return (Package()
+            {
+                "built-in", Buffer() { 0x00 },
+                "IOName", "ethernet",
+                "name", Buffer() { "ethernet" },
+                "model", Buffer() { "RM-NullEthernet-1001" },
+                "device_type", Buffer() { "ethernet" },
+            })
+        }
+    }
 }
 
