@@ -15,7 +15,7 @@ You can find a full GUIDE Here:
 <br>RehabMan's Usb-Driver: https://code.google.com/p/os-x-generic-usb3/downloads/list
 <br>EmlyDinesh ElanTouchpad Driver: http://forum.osxlatitude.com/index.php?/topic/1948-elan-touchpad-driver-mac-os-x/
 <br>EmlyDinesh Keyboard-FN-Driver: http://forum.osxlatitude.com/index.php?/topic/1968-fn-hotkey-driver-for-asus-notebooks/
-<br>Mirone's AppleHDA & HDAenabler (Here)
+<br>Mirone's AppleHDA (Here)
 <br>
 <br>Cheers :-)
 <br>
