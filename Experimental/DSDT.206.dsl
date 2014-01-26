@@ -8425,6 +8425,27 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             {
                 Return (GPRW (0x6D, 0x04))
             }
+            
+            Method (_DSM, 4, NotSerialized)
+            {
+                Store (Package (0x06)
+                {
+                    "hda-gfx",
+                    Buffer (0x0A)
+                    {
+                        "onboard-1"
+                    },
+                    "layout-id",
+                    Buffer (0x04)
+                    {
+                        0x01, 0x00, 0x00, 0x00
+                    },
+                    "PinConfigurations",
+                    Buffer (Zero) {}
+                }, Local0)
+                DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                Return (Local0)
+            }
         }
 
         Scope (\_SB.PCI0)
@@ -28407,6 +28428,29 @@ Store (ShiftRight (Local4, 8), DTB1)
                     }
                 }
             }
+            
+            Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+            {
+                Store (Package (0x06)
+                    {
+                        "hda-gfx", 
+                        Buffer (0x0A)
+                        {
+                            "onboard-1"
+                        }, 
+
+                        "layout-id", 
+                        Buffer (0x04)
+                        {
+                             0x01, 0x00, 0x00, 0x00
+                        }, 
+
+                        "PinConfigurations", 
+                        Buffer (Zero) {}
+                    }, Local0)
+                DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                Return (Local0)
+            }
         }
 
         Device (IGPU)
@@ -31718,6 +31762,29 @@ Store (ShiftRight (Local4, 8), DTB1)
                 }
 
                 Return (D2AF (\_SB.CSTE))
+            }
+            Method (_DSM, 4, NotSerialized)
+            {
+                Store (Package (0x06)
+                {
+                    "AAPL,ig-platform-id",
+                    Buffer (0x04)
+                    {
+                        0x08, 0x00, 0x2E, 0x0A
+                    },
+                    "hda-gfx",
+                    Buffer (0x0A)
+                    {
+                    "onboard-1"
+                    },
+                    "model", 
+                    Buffer (0x19)
+                    {
+                    "Intel Iris(TM) Graphics 5100"
+                    }
+                }, Local0)
+                DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                Return (Local0)
             }
         }
     }
