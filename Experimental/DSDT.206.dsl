@@ -28203,7 +28203,7 @@ Store (ShiftRight (Local4, 8), DTB1)
     {
         Name (LTRS, Zero)
         Name (OBFS, Zero)
-        Device (B0D3)
+        Device (HDAU)
         {
             Name (_ADR, 0x00030000)  // _ADR: Address
             Name (BARA, 0x80000000)
@@ -30505,11 +30505,11 @@ Store (ShiftRight (Local4, 8), DTB1)
                         If (LEqual (PARM, One))
                         {
                             Or (\_SB.PCI0.AUDE, 0x20, \_SB.PCI0.AUDE)
-                            \_SB.PCI0.B0D3.ABWA (One)
-                            \_SB.PCI0.B0D3.ASTR ()
-                            \_SB.PCI0.B0D3.AINI ()
-                            \_SB.PCI0.B0D3.CXDC ()
-                            \_SB.PCI0.B0D3.ABWA (Zero)
+                            \_SB.PCI0.HDAU.ABWA (One)
+                            \_SB.PCI0.HDAU.ASTR ()
+                            \_SB.PCI0.HDAU.AINI ()
+                            \_SB.PCI0.HDAU.CXDC ()
+                            \_SB.PCI0.HDAU.ABWA (Zero)
                             Notify (\_SB.PCI0, Zero)
                         }
 
