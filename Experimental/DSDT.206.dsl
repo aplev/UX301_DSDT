@@ -12800,18 +12800,18 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         ADBG ("_WAK")
         If (And (ICNF, 0x10))
         {
-            If (And (\_SB.PCI0.GFX0.TCHE, 0x0100))
+            If (And (\_SB.PCI0.IGPU.TCHE, 0x0100))
             {
                 If (LEqual (\_SB.IAOE.ITMR, One))
                 {
                     If (LAnd (And (\_SB.IAOE.IBT1, One), LOr (And (\_SB.IAOE.WKRS, 0x02
                         ), And (\_SB.IAOE.WKRS, 0x10))))
                     {
-                        Store (Or (And (\_SB.PCI0.GFX0.STAT, 0xFFFFFFFFFFFFFFFC), One), \_SB.PCI0.GFX0.STAT)
+                        Store (Or (And (\_SB.PCI0.IGPU.STAT, 0xFFFFFFFFFFFFFFFC), One), \_SB.PCI0.IGPU.STAT)
                     }
                     Else
                     {
-                        Store (And (\_SB.PCI0.GFX0.STAT, 0xFFFFFFFFFFFFFFFC), \_SB.PCI0.GFX0.STAT)
+                        Store (And (\_SB.PCI0.IGPU.STAT, 0xFFFFFFFFFFFFFFFC), \_SB.PCI0.IGPU.STAT)
                     }
                 }
                 Else
@@ -12819,11 +12819,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     If (LAnd (And (\_SB.IAOE.IBT1, One), LOr (And (\_SB.IAOE.WKRS, 0x02
                         ), And (\_SB.IAOE.WKRS, 0x10))))
                     {
-                        Store (Or (And (\_SB.PCI0.GFX0.STAT, 0xFFFFFFFFFFFFFFFC), One), \_SB.PCI0.GFX0.STAT)
+                        Store (Or (And (\_SB.PCI0.IGPU.STAT, 0xFFFFFFFFFFFFFFFC), One), \_SB.PCI0.IGPU.STAT)
                     }
                     Else
                     {
-                        Store (And (\_SB.PCI0.GFX0.STAT, 0xFFFFFFFFFFFFFFFC), \_SB.PCI0.GFX0.STAT)
+                        Store (And (\_SB.PCI0.IGPU.STAT, 0xFFFFFFFFFFFFFFFC), \_SB.PCI0.IGPU.STAT)
                     }
                 }
             }
@@ -13310,7 +13310,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 0x02, 
                 Package (0x01)
                 {
-                    "\\_SB.PCI0.GFX0"
+                    "\\_SB.PCI0.IGPU"
                 }, 
 
                 Package (0x01)
@@ -13322,7 +13322,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             {
                 Package (0x02)
                 {
-                    "\\_SB.PCI0.GFX0", 
+                    "\\_SB.PCI0.IGPU", 
                     0xFFFFFFFF
                 }, 
 
@@ -13432,7 +13432,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Package (0x03)
                 {
-                    "\\_SB.PCI0.GFX0", 
+                    "\\_SB.PCI0.IGPU", 
                     One, 
                     Package (0x02)
                     {
@@ -13839,7 +13839,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                                         One, 
                                         Package (0x01)
                                         {
-                                            "\\_SB.PCI0.GFX0"
+                                            "\\_SB.PCI0.IGPU"
                                         }
                                     })
                                 }
@@ -14256,9 +14256,9 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
         Method (_L66, 0, NotSerialized)  // _Lxx: Level-Triggered GPE
         {
-            If (LAnd (\_SB.PCI0.GFX0.GSSE, LNot (GSMI)))
+            If (LAnd (\_SB.PCI0.IGPU.GSSE, LNot (GSMI)))
             {
-                \_SB.PCI0.GFX0.GSCI ()
+                \_SB.PCI0.IGPU.GSCI ()
             }
         }
 
@@ -14273,7 +14273,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             {
                 ADBG ("Rotation Lock")
                 Sleep (0x03E8)
-                \_SB.PCI0.GFX0.IUEH (0x04)
+                \_SB.PCI0.IGPU.IUEH (0x04)
             }
         }
     }
@@ -15521,9 +15521,9 @@ DTB1, 8
         Name (ONAM, "ASUSTeK")
         Method (ADVG, 0, NotSerialized)
         {
-            If (\_SB.PCI0.GFX0.PRST ())
+            If (\_SB.PCI0.IGPU.PRST ())
             {
-                Return (\_SB.PCI0.GFX0.ADVD ())
+                Return (\_SB.PCI0.IGPU.ADVD ())
             }
 
             Return (0x03)
@@ -15531,9 +15531,9 @@ DTB1, 8
 
         Method (GCDM, 0, NotSerialized)
         {
-            If (\_SB.PCI0.GFX0.PRST ())
+            If (\_SB.PCI0.IGPU.PRST ())
             {
-                Return (\_SB.PCI0.GFX0.GCDS ())
+                Return (\_SB.PCI0.IGPU.GCDS ())
             }
 
             Return (One)
@@ -15541,9 +15541,9 @@ DTB1, 8
 
         Method (SWHG, 1, Serialized)
         {
-            If (\_SB.PCI0.GFX0.PRST ())
+            If (\_SB.PCI0.IGPU.PRST ())
             {
-                \_SB.PCI0.GFX0.SWHD (Arg0)
+                \_SB.PCI0.IGPU.SWHD (Arg0)
                 Return (One)
             }
 
@@ -15552,9 +15552,9 @@ DTB1, 8
 
         Method (NATK, 0, NotSerialized)
         {
-            If (\_SB.PCI0.GFX0.PRST ())
+            If (\_SB.PCI0.IGPU.PRST ())
             {
-                Return (\_SB.PCI0.GFX0.NATK ())
+                Return (\_SB.PCI0.IGPU.NATK ())
             }
 
             Return (One)
@@ -16989,7 +16989,7 @@ DTB1, 8
                 Store (Arg0, ALAE)
                 If (LEqual (MSOS (), OSW7))
                 {
-                    ^^PCI0.GFX0.AINT (Zero, Local0)
+                    ^^PCI0.IGPU.AINT (Zero, Local0)
                 }
                 Else
                 {
@@ -21079,7 +21079,7 @@ DTB1, 8
                             ShiftLeft (Local4, 0x04, Local4)
                             Store (LBTN, Local3)
                             Store (Add (Local4, Local3), Local3)
-                            ^^^GFX0.AINT (One, Divide (Multiply (DerefOf (Index (PWAC, Local3)), 0x64
+                            ^^^IGPU.AINT (One, Divide (Multiply (DerefOf (Index (PWAC, Local3)), 0x64
                                 ), 0xFF, ))
                         }
                     }
@@ -22478,7 +22478,7 @@ Store (ShiftRight (Local4, 8), DTB1)
                         If (LEqual (MSOS (), OSW7))
                         {
                             Store (RALS (), Local0)
-                            ^^^GFX0.AINT (Zero, Local0)
+                            ^^^IGPU.AINT (Zero, Local0)
                         }
                         Else
                         {
@@ -22798,9 +22798,9 @@ Store (ShiftRight (Local4, 8), DTB1)
         Name (ASBN, Zero)
         Method (SBRN, 0, Serialized)
         {
-            If (^^^GFX0.PRST ())
+            If (^^^IGPU.PRST ())
             {
-                Store (^^^GFX0.GCBL (^^^GFX0.CBLV), Local0)
+                Store (^^^IGPU.GCBL (^^^IGPU.CBLV), Local0)
                 Subtract (0x0A, Local0, Local1)
                 If (LNotEqual (Local1, LBTN))
                 {
@@ -22819,14 +22819,14 @@ Store (ShiftRight (Local4, 8), DTB1)
             If (LGreaterEqual (MSOS (), OSVT))
             {
                 Store (LBTN, Local0)
-                If (^^^GFX0.PRST ())
+                If (^^^IGPU.PRST ())
                 {
-                    If (LNotEqual (^^^GFX0.LCDD._DCS (), 0x1F))
+                    If (LNotEqual (^^^IGPU.LCDD._DCS (), 0x1F))
                     {
                         Return (One)
                     }
 
-                    ^^^GFX0.DWBL ()
+                    ^^^IGPU.DWBL ()
                     Store (One, ASBN)
                 }
 
@@ -22883,14 +22883,14 @@ Store (ShiftRight (Local4, 8), DTB1)
             If (LGreaterEqual (MSOS (), OSVT))
             {
                 Store (LBTN, Local0)
-                If (^^^GFX0.PRST ())
+                If (^^^IGPU.PRST ())
                 {
-                    If (LNotEqual (^^^GFX0.LCDD._DCS (), 0x1F))
+                    If (LNotEqual (^^^IGPU.LCDD._DCS (), 0x1F))
                     {
                         Return (One)
                     }
 
-                    ^^^GFX0.UPBL ()
+                    ^^^IGPU.UPBL ()
                     Store (One, ASBN)
                 }
 
@@ -23254,7 +23254,7 @@ Store (ShiftRight (Local4, 8), DTB1)
             {
                 If (LEqual (MSOS (), OSW7))
                 {
-                    ^^^GFX0.AINT (Zero, Local0)
+                    ^^^IGPU.AINT (Zero, Local0)
                 }
                 Else
                 {
@@ -23482,7 +23482,7 @@ Store (ShiftRight (Local4, 8), DTB1)
 
                 If (And (VGAF, One))
                 {
-                    Store (One, ^^PCI0.GFX0.CLID)
+                    Store (One, ^^PCI0.IGPU.CLID)
                 }
 
                 Return (Local0)
@@ -23514,9 +23514,9 @@ Store (ShiftRight (Local4, 8), DTB1)
             {
                 Store (GLID (), Local0)
                 Store (Local0, LIDS)
-                If (CondRefOf (\_SB.PCI0.GFX0.GLID))
+                If (CondRefOf (\_SB.PCI0.IGPU.GLID))
                 {
-                    ^^^GFX0.GLID (LIDS)
+                    ^^^IGPU.GLID (LIDS)
                 }
             }
         }
@@ -27997,9 +27997,9 @@ Store (ShiftRight (Local4, 8), DTB1)
 
             Method (_BCL, 0, NotSerialized)  // _BCL: Brightness Control Levels
             {
-                If (CondRefOf (\_SB.PCI0.GFX0.LCDD._BCL))
+                If (CondRefOf (\_SB.PCI0.IGPU.LCDD._BCL))
                 {
-                    Return (\_SB.PCI0.GFX0.LCDD._BCL ())
+                    Return (\_SB.PCI0.IGPU.LCDD._BCL ())
                 }
                 Else
                 {
@@ -28012,17 +28012,17 @@ Store (ShiftRight (Local4, 8), DTB1)
 
             Method (_BCM, 1, NotSerialized)  // _BCM: Brightness Control Method
             {
-                If (CondRefOf (\_SB.PCI0.GFX0.LCDD._BCM))
+                If (CondRefOf (\_SB.PCI0.IGPU.LCDD._BCM))
                 {
-                    \_SB.PCI0.GFX0.LCDD._BCM (Arg0)
+                    \_SB.PCI0.IGPU.LCDD._BCM (Arg0)
                 }
             }
 
             Method (_BQC, 0, NotSerialized)  // _BQC: Brightness Query Current
             {
-                If (CondRefOf (\_SB.PCI0.GFX0.LCDD._BQC))
+                If (CondRefOf (\_SB.PCI0.IGPU.LCDD._BQC))
                 {
-                    Return (\_SB.PCI0.GFX0.LCDD._BQC ())
+                    Return (\_SB.PCI0.IGPU.LCDD._BQC ())
                 }
                 Else
                 {
@@ -28032,9 +28032,9 @@ Store (ShiftRight (Local4, 8), DTB1)
 
             Method (_DCS, 0, NotSerialized)  // _DCS: Display Current Status
             {
-                If (CondRefOf (\_SB.PCI0.GFX0.LCDD._DCS))
+                If (CondRefOf (\_SB.PCI0.IGPU.LCDD._DCS))
                 {
-                    Return (\_SB.PCI0.GFX0.LCDD._DCS ())
+                    Return (\_SB.PCI0.IGPU.LCDD._DCS ())
                 }
                 Else
                 {
@@ -28409,7 +28409,7 @@ Store (ShiftRight (Local4, 8), DTB1)
             }
         }
 
-        Device (GFX0)
+        Device (IGPU)
         {
             Name (_ADR, 0x00020000)  // _ADR: Address
             OperationRegion (VSID, PCI_Config, Zero, 0x04)
@@ -28420,10 +28420,10 @@ Store (ShiftRight (Local4, 8), DTB1)
 
             Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
             {
-                ADBG ("GFX0 DEP Call")
+                ADBG ("IGPU DEP Call")
                 If (LEqual (S0ID, One))
                 {
-                    ADBG ("GFX0 DEP")
+                    ADBG ("IGPU DEP")
                     Return (Package (0x01)
                     {
                         \_SB.PEPD
@@ -28431,7 +28431,7 @@ Store (ShiftRight (Local4, 8), DTB1)
                 }
                 Else
                 {
-                    ADBG ("GFX0 DEP NULL")
+                    ADBG ("IGPU DEP NULL")
                     Return (Package (Zero) {})
                 }
             }
@@ -29824,7 +29824,7 @@ Store (ShiftRight (Local4, 8), DTB1)
                     Subtract (0x0A, Local0, LBTN)
                     If (BRNC)
                     {
-                        \_SB.PCI0.GFX0.AINT (One, Arg0)
+                        \_SB.PCI0.IGPU.AINT (One, Arg0)
                     }
                     Else
                     {
@@ -30577,7 +30577,7 @@ Store (ShiftRight (Local4, 8), DTB1)
                     }
                     Else
                     {
-                        Notify (\_SB.PCI0.GFX0, Arg1)
+                        Notify (\_SB.PCI0.IGPU, Arg1)
                     }
                 }
 
@@ -30587,7 +30587,7 @@ Store (ShiftRight (Local4, 8), DTB1)
                 }
                 Else
                 {
-                    Notify (\_SB.PCI0.GFX0, 0x80)
+                    Notify (\_SB.PCI0.IGPU, 0x80)
                 }
 
                 Return (Zero)
@@ -30804,7 +30804,7 @@ Store (ShiftRight (Local4, 8), DTB1)
                         Store (One, GSES)
                     }
 
-                    Store (One, \_SB.PCI0.GFX0.CLID)
+                    Store (One, \_SB.PCI0.IGPU.CLID)
                 }
             }
 
@@ -31674,12 +31674,12 @@ Store (ShiftRight (Local4, 8), DTB1)
                     }
 
                     ISMI (0x94)
-                    Notify (\_SB.PCI0.GFX0, 0x81)
+                    Notify (\_SB.PCI0.IGPU, 0x81)
                 }
                 Else
                 {
-                    Store (One, \_SB.PCI0.GFX0.CEVT)
-                    Store (0x03, \_SB.PCI0.GFX0.CSTS)
+                    Store (One, \_SB.PCI0.IGPU.CEVT)
+                    Store (0x03, \_SB.PCI0.IGPU.CSTS)
                     If (LNotEqual (\_SB.OCAD, \_SB.OPAD))
                     {
                         Store (\_SB.OCAD, \_SB.OPAD)
@@ -31689,7 +31689,7 @@ Store (ShiftRight (Local4, 8), DTB1)
                         }
                         Else
                         {
-                            Notify (\_SB.PCI0.GFX0, Zero)
+                            Notify (\_SB.PCI0.IGPU, Zero)
                         }
 
                         Sleep (0x03E8)
@@ -31697,7 +31697,7 @@ Store (ShiftRight (Local4, 8), DTB1)
 
                     Store (AF2D (Arg0), \_SB.NSTE)
                     WNDD (\_SB.NSTE)
-                    Notify (\_SB.PCI0.GFX0, 0x80)
+                    Notify (\_SB.PCI0.IGPU, 0x80)
                 }
 
                 Return (Zero)
@@ -31794,18 +31794,18 @@ Store (ShiftRight (Local4, 8), DTB1)
             Method (SAOS, 1, NotSerialized)
             {
                 Store (One, IIST)
-                If (And (\_SB.PCI0.GFX0.TCHE, 0x0100))
+                If (And (\_SB.PCI0.IGPU.TCHE, 0x0100))
                 {
                     If (LEqual (ITMR, One))
                     {
                         If (LAnd (LAnd (And (IBT1, One), LOr (And (\_SB.IAOE.WKRS, 
                             0x02), And (\_SB.IAOE.WKRS, 0x10))), LNot (And (Arg0, One))))
                         {
-                            If (LNot (\_SB.PCI0.GFX0.PARD ()))
+                            If (LNot (\_SB.PCI0.IGPU.PARD ()))
                             {
-                                Store (And (\_SB.PCI0.GFX0.STAT, 0xFFFFFFFC), \_SB.PCI0.GFX0.STAT)
-                                Store (Or (\_SB.PCI0.GFX0.ASLC, 0x0100), \_SB.PCI0.GFX0.ASLC)
-                                Store (One, \_SB.PCI0.GFX0.ASLE)
+                                Store (And (\_SB.PCI0.IGPU.STAT, 0xFFFFFFFC), \_SB.PCI0.IGPU.STAT)
+                                Store (Or (\_SB.PCI0.IGPU.ASLC, 0x0100), \_SB.PCI0.IGPU.ASLC)
+                                Store (One, \_SB.PCI0.IGPU.ASLE)
                             }
                         }
                     }
@@ -31814,11 +31814,11 @@ Store (ShiftRight (Local4, 8), DTB1)
                         If (LAnd (LAnd (And (IBT1, One), LOr (And (\_SB.IAOE.WKRS, 
                             0x02), And (\_SB.IAOE.WKRS, 0x10))), LNot (And (Arg0, One))))
                         {
-                            If (LNot (\_SB.PCI0.GFX0.PARD ()))
+                            If (LNot (\_SB.PCI0.IGPU.PARD ()))
                             {
-                                Store (And (\_SB.PCI0.GFX0.STAT, 0xFFFFFFFC), \_SB.PCI0.GFX0.STAT)
-                                Store (Or (\_SB.PCI0.GFX0.ASLC, 0x0100), \_SB.PCI0.GFX0.ASLC)
-                                Store (One, \_SB.PCI0.GFX0.ASLE)
+                                Store (And (\_SB.PCI0.IGPU.STAT, 0xFFFFFFFC), \_SB.PCI0.IGPU.STAT)
+                                Store (Or (\_SB.PCI0.IGPU.ASLC, 0x0100), \_SB.PCI0.IGPU.ASLC)
+                                Store (One, \_SB.PCI0.IGPU.ASLE)
                             }
                         }
                     }
@@ -32081,7 +32081,7 @@ Store (ShiftRight (Local4, 8), DTB1)
         If (Arg0)
         {
             \_SB.PCI0.NPTS (Arg0)
-            \_SB.PCI0.GFX0.OPTS (Arg0)
+            \_SB.PCI0.IGPU.OPTS (Arg0)
             OEMS (Arg0)
         }
     }
@@ -32090,7 +32090,7 @@ Store (ShiftRight (Local4, 8), DTB1)
     {
         \_SB.PCI0.NWAK (Arg0)
         \_SB.ATKD.GENW (Arg0)
-        \_SB.PCI0.GFX0.OWAK (Arg0)
+        \_SB.PCI0.IGPU.OWAK (Arg0)
         OEMW (Arg0)
     }
 
