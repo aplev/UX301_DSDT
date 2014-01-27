@@ -17430,6 +17430,7 @@ DTB1, 8
             Method (SKBL, 1, NotSerialized)
             {
                 Store (Arg0, Local0)
+                Store (Arg0, KBLV)
                 Store (DerefOf (Index (PWKB, Local0)), Local1)
                 ^^PCI0.LPCB.EC0.WRAM (0x04B1, Local1)
                 Return (One)
