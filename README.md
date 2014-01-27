@@ -39,8 +39,7 @@ Whats Working:
 <br>KeyboardFN Keys: Working with AsusFNKeys
 <br>
 <br>To-Do:
-<br>Sleep: GoToSleep Working / WakeFromSleep causes Shutdown/Reboot
-<br>USB: RehabMan GenericUSB - Working, but crashes on some Devices like (Wifi-dongle plug-out)
+<br>Sleep: Working, but causes a 10 Secounds delay after wake.
 <br>HD WebCam: Working OTB (But doesnt turns off after you used it)
 
 ==============
@@ -49,4 +48,6 @@ Whats Working:
 <br>All help is Welcome.
 <br>If you want contact me, just email me at: a.kaplan@oilrec.de
 
-<br>IN PROGRESS...
+<br>You can find a full GUIDE Here: 
+<br>http://forum.osxlatitude.com/index.php?/topic/5974-mavericks-1091-hm87-iris-5100-asus-ux301la/?p=32332 
+<br>
