@@ -8491,8 +8491,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             }
         }
 
-        Scope (\_SB.PCI0)
-        {
             Device (SIRC)
             {
                 Name (_HID, EisaId ("PNP0C02"))  // _HID: Hardware ID
@@ -9801,11 +9799,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     }
                 }
             }
-        }
-
-        Scope (\_SB.PCI0)
-        {
-        }
 
         Scope (I2C0)
         {
@@ -11155,14 +11148,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             }
         }
 
-        Scope (SPI0)
-        {
-        }
-
-        Scope (SPI1)
-        {
-        }
-
         Scope (UA00)
         {
             Device (BTH0)
@@ -12483,10 +12468,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
             Break
         }
-    }
-
-    Method (RDMA, 3, NotSerialized)
-    {
     }
 
     Scope (_SB.PCI0)
