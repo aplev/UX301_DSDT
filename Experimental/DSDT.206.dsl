@@ -17434,6 +17434,11 @@ DTB1, 8
                 ^^PCI0.LPCB.EC0.WRAM (0x04B1, Local1)
                 Return (One)
             }
+            
+            Method (GKBL, 0, NotSerialized)
+            {
+                Return (KBLV)
+            }
         }
 
         Device (ASHS)
