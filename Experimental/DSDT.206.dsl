@@ -23371,6 +23371,7 @@ Store (ShiftRight (Local4, 8), DTB1)
     {
         Device (ALS)
         {
+            Name (_CID, "smc-als")  // _CID: Compatible ID
             Method (_HID, 0, NotSerialized)  // _HID: Hardware ID
             {
                     Return ("ACPI0008")
@@ -30040,7 +30041,7 @@ Store (ShiftRight (Local4, 8), DTB1)
 OperationRegion (IGD2, PCI_Config, 0x10, 4)
 Field (IGD2, AnyAcc, NoLock, Preserve)
 {
-	BAR1,32,
+        BAR1,32,
 }
 
 
@@ -32105,17 +32106,21 @@ Field (IGD2, AnyAcc, NoLock, Preserve)
             Name (_STA, 0x0B)
             //define hardware register access for brightness
             // you can see BAR1 value in RW-Everything under Bus00,02 Intel VGA controler PCI
-            OperationRegion (BRIT, SystemMemory, ^PCI0.IGPU.BAR1, 0xc8254)
+            // Note: Not sure which one is right here... for now, going with BAR1 minus 4
+            OperationRegion (BRIT, SystemMemory, Subtract(^PCI0.IGPU.BAR1, 4), 0xe1184)
+            //OperationRegion (BRIT, SystemMemory, And(\_SB.PCI0.IGPU.BAR1, Not(0xF)), 0xe1184)
             Field (BRIT, AnyAcc, Lock, Preserve)
             {
-                Offset(0x4824c),
+                Offset(0x48250),
                 LEV2, 32,
                 LEVL, 32,
-                Offset (0x7003C),
+                Offset(0x70040),
                 P0BL, 32,
-                Offset(0xc824c),
+                Offset(0xc8250),
                 LEVW, 32,
                 LEVX, 32,
+                Offset(0xe1180),
+                PCHL, 32,
             }
             Method (_INI, 0, NotSerialized)
             {
@@ -32185,7 +32190,7 @@ Field (IGD2, AnyAcc, NoLock, Preserve)
             // Use XOPT=1 to disable smooth transitions
             Name (XOPT, Zero)
             // XRGL/XRGH: defines the valid range
-            Name (XRGL, One)
+            Name (XRGL, Zero)
             Name (XRGH, 1400)
             // _BCL: returns list of valid brightness levels
             // first two entries describe ac/battery power levels
@@ -32235,4 +32240,3 @@ Field (IGD2, AnyAcc, NoLock, Preserve)
         }
     }
 }
-
