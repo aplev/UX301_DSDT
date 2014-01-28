@@ -3613,10 +3613,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Name (_UID, Zero)  // _UID: Unique ID
                     Name (BUF0, ResourceTemplate()
                     {
-                        IRQNoFlags ()
-                            {0}
-                        IRQNoFlags ()
-                            {8}
+                        IRQNoFlags() { 0, 8, 11, 15 }
+
                         Memory32Fixed (ReadWrite,
                             0xFED00000,         // Address Base
                             0x00000400,         // Address Length
@@ -3775,6 +3773,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                             0x01,               // Alignment
                             0x02,               // Length
                             )
+                        IRQNoFlags ()
+                            {2}
                     })
                 }
 
@@ -5359,7 +5359,17 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             
             Device (MCHC)
             {
-                Name (_ADR, Zero)  // _ADR: Address
+                Name (_ADR, Zero)
+                Method (_DSM, 4, NotSerialized)
+                {
+                    If (LEqual (Arg2, Zero)) { Return (Buffer(One) { 0x03 } ) }
+                    Return (Package()
+                    {
+                        "built-in", Buffer(One) { 0x00 },
+                        "device-id", Buffer() { 0x04, 0x0a, 0x00, 0x00 },
+                        "name", Buffer() { "pci8086,0a04" },
+                    })
+                }
             }
         }
     }
@@ -8807,19 +8817,29 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 CreateDWordField (RBUF, _Y1F._BAS, BVAL)  // _BAS: Base Address
                 Method (_STA, 0, NotSerialized)  // _STA: Status
                 {
-                    Return (0x0F)
+                    If (LEqual (BVAL, Zero))
+                    {
+                        Return (Zero)
+                    }
+
+                    If (LLess (OSYS, 0x07DC))
+                    {
+                        Return (Zero)
+                    }
+
+                    If (LAnd (LEqual (DOSD, 0x02), LEqual (OSYS, 0x07DC)))
+                    {
+                        PTD3 ()
+                        Return (Zero)
+                    }
+
+                    If (LEqual (S0ID, One))
+                    {
+                        Return (0x0F)
+                    }
+
+                    Return (Zero)
                 }
-                Method (_DSM, 4, NotSerialized)
-        {
-            If (LEqual (Arg2, Zero)) { Return (Buffer(One) { 0x03 } ) }
-            Return (Package()
-            {
-                "device-id", Buffer() { 0x60, 0x9c, 0x00, 0x00 },
-                "compatible", Buffer() { "pci8086,9c60" },
-                "IOName", Buffer() { "pci8086,9c60" },
-                "name", Buffer() { "pci8086,9c60" },
-            })
-        }
             }
 
             Device (I2C0)
@@ -9209,9 +9229,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
             Device (SPI0)
             {
+                Name (_HID, "INT33C0")  // _HID: Hardware ID
                 Name (_CID, "INT33C0")  // _CID: Compatible ID
-                Name (_HID, "INT33C0")
-                Name (_DDN, "Intel(R) Low Power Subsystem SPI Host Controller - 9C66")  // _DDN: DOS Device Name
                 Name (_UID, One)  // _UID: Unique ID
                 Name (_ADR, 0x00150003)  // _ADR: Address
                 Method (M0D3, 0, Serialized)
@@ -9258,7 +9277,22 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 CreateDWordField (RBUF, _Y22._BAS, BVAL)  // _BAS: Base Address
                 Method (_STA, 0, NotSerialized)  // _STA: Status
                 {
-                    Return (0x0F)
+                    If (LEqual (BVAL, Zero))
+                    {
+                        Return (Zero)
+                    }
+
+                    If (LLess (OSYS, 0x07DC))
+                    {
+                        Return (Zero)
+                    }
+
+                    If (LEqual (S0ID, One))
+                    {
+                        Return (0x0F)
+                    }
+
+                    Return (Zero)
                 }
 
                 Method (_PS0, 0, Serialized)  // _PS0: Power State 0
@@ -9294,25 +9328,12 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         Store (TEMP, Local0)
                     }
                 }
-                Method (_DSM, 4, NotSerialized)
-        {
-            If (LEqual (Arg2, Zero)) { Return (Buffer(One) { 0x03 } ) }
-            Return (Package()
-            {
-                "built-in", Buffer(One) { 0x00 },
-                "device-id", Buffer() { 0x66, 0x9c, 0x00, 0x00 },
-                "compatible", Buffer() { "pci8086,9c66" },
-                "IOName", Buffer() { "pci8086,9c66" },
-                "name", Buffer() { "pci8086,9c66" },
-            })
-        }
             }
 
             Device (SPI1)
             {
+                Name (_HID, "INT33C1")  // _HID: Hardware ID
                 Name (_CID, "INT33C1")  // _CID: Compatible ID
-                Name (_HID, "INT33C1")  // _CID: Compatible ID
-                Name (_DDN, "Intel(R) Low Power Subsystem SPI Host Controller - 9C66")  // _DDN: DOS Device Name
                 Name (_UID, 0x02)  // _UID: Unique ID
                 Name (_ADR, 0x00150004)  // _ADR: Address
                 Method (M0D3, 0, Serialized)
@@ -9348,7 +9369,19 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 })
                 Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
-                    Return (RBUF)
+                    Name (DBUF, ResourceTemplate ()
+                    {
+                        FixedDMA (0x0010, 0x0000, Width32bit, )
+                        FixedDMA (0x0011, 0x0001, Width32bit, )
+                    })
+                    If (LNotEqual (^^SDMA._STA (), Zero))
+                    {
+                        Return (ConcatenateResTemplate (RBUF, DBUF))
+                    }
+                    Else
+                    {
+                        Return (RBUF)
+                    }
                 }
 
                 Method (HRV, 0, NotSerialized)  // _HRV: Hardware Revision
@@ -9359,7 +9392,22 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 CreateDWordField (RBUF, _Y23._BAS, BVAL)  // _BAS: Base Address
                 Method (_STA, 0, NotSerialized)  // _STA: Status
                 {
-                    Return (0x0F)
+                    If (LEqual (BVAL, Zero))
+                    {
+                        Return (Zero)
+                    }
+
+                    If (LLess (OSYS, 0x07DC))
+                    {
+                        Return (Zero)
+                    }
+
+                    If (LEqual (S0ID, One))
+                    {
+                        Return (0x0F)
+                    }
+
+                    Return (Zero)
                 }
 
                 Method (_PS0, 0, Serialized)  // _PS0: Power State 0
@@ -9394,47 +9442,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         Or (TEMP, 0x03, TEMP)
                         Store (TEMP, Local0)
                     }
-                }
-                
-                Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
-                {
-                    If (LEqual (Arg0, Buffer (0x10)
-                            {
-                                /* 0000 */   0xC6, 0xB7, 0xB5, 0xA0, 0x18, 0x13, 0x1C, 0x44,
-                                /* 0008 */   0xB0, 0xC9, 0xFE, 0x69, 0x5E, 0xAF, 0x94, 0x9B
-                            }))
-                    {
-                        Store (Package (0x08)
-                            {
-                                "spi-pin-cs", 
-                                Buffer (0x08)
-                                {
-                                     0x57, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-                                }, 
-
-                                "spi-pin-clk", 
-                                Buffer (0x08)
-                                {
-                                     0x58, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-                                }, 
-
-                                "spi-pin-mosi", 
-                                Buffer (0x08)
-                                {
-                                     0x5A, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-                                }, 
-
-                                "spi-pin-miso", 
-                                Buffer (0x08)
-                                {
-                                     0x59, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-                                }
-                            }, Local0)
-                        DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
-                        Return (Local0)
-                    }
-
-                    Return (Zero)
                 }
             }
 
@@ -14666,7 +14673,6 @@ PTS (Arg0)
         Device (EC0)
         {
             Name (_HID, EisaId ("PNP0C09"))  // _HID: Hardware ID
-            Name (_UID, Zero)  // _UID: Unique ID
             Name (_CRS, ResourceTemplate ()  // _CRS: Current Resource Settings
             {
                 IO (Decode16,
@@ -14686,15 +14692,6 @@ PTS (Arg0)
             {
                 Store (0x0A, Local0)
                 Return (Local0)
-            }
-            
-            Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
-            {
-                   Return (Package (0x02)
-                   {
-                       0x70, 
-                       0x04
-                   })
             }
 
             Mutex (MUEC, 0x00)
@@ -17511,7 +17508,7 @@ DTB1, 8
                 PCI0
             })
             
-            Name (_PRW, Package() { 0x70, 0x04 })
+            Name (_PRW, Package() { 0x18, 0x03 })
         }
     }
 
@@ -23374,7 +23371,6 @@ Store (ShiftRight (Local4, 8), DTB1)
     {
         Device (ALS)
         {
-            Name (_CID, "smc-als")  // _CID: Compatible ID
             Method (_HID, 0, NotSerialized)  // _HID: Hardware ID
             {
                     Return ("ACPI0008")
@@ -23460,7 +23456,14 @@ Store (ShiftRight (Local4, 8), DTB1)
         Device (SLPB)
         {
             Name (_HID, EisaId ("PNP0C0E"))  // _HID: Hardware ID
-            Name (_STA, 0x0B)  // _STA: Status
+            Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
+            {
+                Return (Package (0x02)
+                {
+                    0x0B, 
+                    0x04
+                })
+            }
         }
     }
 
