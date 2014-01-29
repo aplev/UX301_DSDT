@@ -26,6 +26,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
      * disassembler did not know how many arguments to assign to the
      * unresolved methods.
      */
+    External (_SB_.PCI0.PAUD.PUAM, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
+    External (_SB_.PCI0.XHC_.DUAM, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
+    External (_SB_.TPM_.PTS_, MethodObj)    // Warning: Unresolved Method, guessing 1 arguments (may be incorrect, see warning above)
+    External (PS0X, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
+    External (PS3X, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
     External (HDOS, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
     External (HNOT, MethodObj)    // Warning: Unresolved Method, guessing 1 arguments (may be incorrect, see warning above)
     External (IDAB, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
@@ -1494,9 +1499,9 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 CreateDWordField (Local0, Zero, CDW1)
                 CreateDWordField (Local0, 0x04, CDW2)
                 CreateDWordField (Local0, 0x08, CDW3)
-                If (^XHC1.CUID (Arg0))
+                If (^XHC.CUID (Arg0))
                 {
-                    Return (^XHC1.POSC (Arg1, Arg2, Arg3))
+                    Return (^XHC.POSC (Arg1, Arg2, Arg3))
                 }
                 Else
                 {
@@ -1504,7 +1509,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     {
                         If (LEqual (XCNT, Zero))
                         {
-                            ^XHC1.XSEL ()
+                            ^XHC.XSEL ()
                             Increment (XCNT)
                         }
                     }
@@ -5329,6 +5334,15 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 }
             }
 
+            Device (XHC1)
+            {
+                Name (_ADR, 0x00140000)  // _ADR: Address
+                Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
+                {
+                    Return (GPRW (0x6D, 0x03))
+                }
+            }
+            
             Device (IMEI)
             {
                 Name (_ADR, 0x00160000)
@@ -6674,7 +6688,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             }
         }
 
-        Device (XHC1)
+        Device (XHC)
         {
             Name (_ADR, 0x00140000)  // _ADR: Address
             Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
@@ -7026,6 +7040,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Store (One, AX15)
                 }
 
+                If (CondRefOf (\_SB.PCI0.XHC.PS0X))
+                {
+                    PS0X ()
+                }
+
                 If (LEqual (Local3, 0x03))
                 {
                     Store (0x03, D0D3)
@@ -7086,6 +7105,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 If (LEqual (PCHS, 0x02))
                 {
                     Store (Zero, AX15)
+                }
+
+                If (CondRefOf (\_SB.PCI0.XHC.PS3X))
+                {
+                    PS3X ()
                 }
 
                 If (LEqual (Local3, 0x03))
@@ -8417,33 +8441,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             }
 
             Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
-                {
-                    Return (Package (0x02)
-                    {
-                        0x6D, 
-                        0x03
-                    })
-                }
-                
-            Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
             {
-                Store (Package (0x09)
-                    {
-                        "AAPL,current-available", 
-                        0x0834, 
-                        "AAPL,current-extra", 
-                        0x0898, 
-                        "AAPL,current-extra-in-sleep", 
-                        0x0640, 
-                        "AAPL,max-port-current-in-sleep", 
-                        0x0834, 
-                        Buffer (One)
-                        {
-                             0x00
-                        }
-                    }, Local0)
-                DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
-                Return (Local0)
+                Return (GPRW (0x6D, 0x03))
             }
         }
 
@@ -9008,6 +9007,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         And (TEMP, 0xFFFFFFFC, TEMP)
                         Store (TEMP, Local0)
                     }
+
+                    If (CondRefOf (\_SB.PCI0.I2C0.PS0X))
+                    {
+                        PS0X ()
+                    }
                 }
 
                 Method (_PS3, 0, Serialized)  // _PS3: Power State 3
@@ -9024,6 +9028,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                         Or (TEMP, 0x03, TEMP)
                         Store (TEMP, Local0)
+                    }
+
+                    If (CondRefOf (\_SB.PCI0.I2C0.PS3X))
+                    {
+                        PS3X ()
                     }
                 }
             }
@@ -9183,6 +9192,10 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     ADBG ("I2C1 Ctrlr D0")
                     If (LNotEqual (^^SIRC.CNTR (0x03), Zero))
                     {
+                        If (CondRefOf (\_SB.PCI0.I2C1.PS0X))
+                        {
+                            PS0X ()
+                        }
 
                         Add (^^SIRC.CNTR (0x03), 0x84, Local0)
                         OperationRegion (ICB1, SystemMemory, Local0, 0x04)
@@ -9761,6 +9774,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                         And (TEMP, 0xFFFFFFFC, TEMP)
                         Store (TEMP, Local0)
+                    }
+
+                    If (CondRefOf (\_SB.PCI0.SDHC.PS0X))
+                    {
+                        PS0X ()
                     }
                 }
 
@@ -11283,6 +11301,10 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Method (_PS0, 0, Serialized)  // _PS0: Power State 0
                 {
                     ADBG ("WiFi1 Enter D0")
+                    If (CondRefOf (\_SB.PCI0.SDHC.WI01.PS0X))
+                    {
+                        PS0X ()
+                    }
                 }
 
                 Method (_PS2, 0, Serialized)  // _PS2: Power State 2
@@ -11293,6 +11315,10 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Method (_PS3, 0, Serialized)  // _PS3: Power State 3
                 {
                     ADBG ("WiFi1 Enter D3")
+                    If (CondRefOf (\_SB.PCI0.SDHC.WI01.PS3X))
+                    {
+                        PS3X ()
+                    }
                 }
 
                 Name (RBUF, ResourceTemplate ()
@@ -12825,7 +12851,11 @@ PTS (Arg0)
         }
 
         If (LOr (LEqual (Arg0, 0x03), LEqual (Arg0, 0x04))) {}
-        }
+        If (CondRefOf (\_SB.TPM.PTS))
+        {
+            \_SB.TPM.PTS (Arg0)
+        }    }
+
     }
 
     Method (_WAK, 1, Serialized)  // _WAK: Wake
@@ -12882,7 +12912,7 @@ PTS (Arg0)
 
         If (LOr (LEqual (Arg0, 0x03), LEqual (Arg0, 0x04)))
         {
-            \_SB.PCI0.XHC1.XWAK ()
+            \_SB.PCI0.XHC.XWAK ()
             \_SB.PCI0.LPCB.EC0.WRAM (0x0533, 0x69)
             \_SB.PCI0.LPCB.EC0.WRAM (0x0534, 0x64)
         }
@@ -13093,6 +13123,24 @@ PTS (Arg0)
                 {
                     RPL1 ()
                 }
+            }
+
+            P_CS ()
+        }
+    }
+
+    Method (P_CS, 0, Serialized)
+    {
+        If (CondRefOf (\_SB.PCI0.PAUD.PUAM))
+        {
+            \_SB.PCI0.PAUD.PUAM ()
+        }
+
+        If (LEqual (OSYS, 0x07DC))
+        {
+            If (CondRefOf (\_SB.PCI0.XHC.DUAM))
+            {
+                \_SB.PCI0.XHC.DUAM ()
             }
         }
     }
@@ -13375,7 +13423,7 @@ PTS (Arg0)
 
                 Package (0x02)
                 {
-                    "\\_SB.PCI0.XHC1", 
+                    "\\_SB.PCI0.XHC", 
                     0xFFFFFFFF
                 }, 
 
@@ -13618,7 +13666,7 @@ PTS (Arg0)
 
                 Package (0x03)
                 {
-                    "\\_SB.PCI0.XHC1", 
+                    "\\_SB.PCI0.XHC", 
                     One, 
                     Package (0x02)
                     {
@@ -14189,9 +14237,9 @@ PTS (Arg0)
                 Notify (\_SB.PCI0.EHC2, 0x02)
             }
 
-            If (LAnd (\_SB.PCI0.XHC1.PMEE, \_SB.PCI0.XHC1.PMES))
+            If (LAnd (\_SB.PCI0.XHC.PMEE, \_SB.PCI0.XHC.PMES))
             {
-                Notify (\_SB.PCI0.XHC1, 0x02)
+                Notify (\_SB.PCI0.XHC, 0x02)
             }
 
             If (LAnd (\_SB.PCI0.HDEF.PMEE, \_SB.PCI0.HDEF.PMES))
@@ -25096,7 +25144,7 @@ Store (ShiftRight (Local4, 8), DTB1)
         }
     }
 
-    Scope (_SB.PCI0.XHC1.RHUB.HS05)
+    Scope (_SB.PCI0.XHC.RHUB.HS05)
     {
         Name (CAPD, Package (One)
         {
