@@ -4747,6 +4747,15 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         Return (Local0)
                     }
                 }
+        Method (_DSM, 4, NotSerialized)
+        {
+            If (LEqual (Arg2, Zero)) { Return (Buffer(One) { 0x03 } ) }
+            Return (Package()
+            {
+                "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
+                "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
+            })
+        }
             }
 
             Device (RP03)
@@ -5320,12 +5329,28 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 }
             }
 
-            Device (USB2)
+            Device (EHC3)
             {
                 Name (_ADR, 0x001D0000)  // _ADR: Address
                 Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
                 {
                     Return (GPRW (0x6D, 0x03))
+                }
+                Method (_DSM, 4, NotSerialized)
+                {
+                    If (LEqual (Arg2, Zero)) { Return (Buffer(One) { 0x03 } ) }
+                    Return (Package()
+                    {
+                        "AAPL,clock-id", Buffer(One) { 0x01 },
+                        "built-in", Buffer(One) { 0x00 },
+                        "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
+                        "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
+                        "AAPL,current-available", 2100,
+                        "AAPL,current-extra", 2200,
+                        "AAPL,current-extra-in-sleep", 1600,
+                        "AAPL,device-internal", 0x02,
+                        "AAPL,max-port-current-in-sleep", 2100,
+                    })
                 }
             }
 
@@ -5335,6 +5360,22 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
                 {
                     Return (GPRW (0x6D, 0x03))
+                }
+                Method (_DSM, 4, NotSerialized)
+                {
+                    If (LEqual (Arg2, Zero)) { Return (Buffer(One) { 0x03 } ) }
+                    Return (Package()
+                    {
+                        "AAPL,clock-id", Buffer(One) { 0x02 },
+                        "built-in", Buffer(One) { 0x00 },
+                        "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
+                        "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
+                        "AAPL,current-available", 2100,
+                        "AAPL,current-extra", 2200,
+                        "AAPL,current-extra-in-sleep", 1600,
+                        "AAPL,device-internal", 0x02,
+                        "AAPL,max-port-current-in-sleep", 2100,
+                    })
                 }
             }
             
@@ -5348,6 +5389,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     {
                         "device-id", Buffer() { 0x3A, 0x9C, 0x00, 0x00 },
                         "name", Buffer() { "pci8086,9c3a" },
+                        "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
+                        "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
                     })
                 }
             }
@@ -5363,6 +5406,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         "built-in", Buffer(One) { 0x00 },
                         "device-id", Buffer() { 0x04, 0x0a, 0x00, 0x00 },
                         "name", Buffer() { "pci8086,0a04" },
+                        "subsystem-vendor-id", Buffer() { 0x6B, 0x10, 0x00, 0x00 },
                     })
                 }
             }
@@ -6307,6 +6351,22 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             {
                 Return (GPRW (0x6D, 0x03))
             }
+            Method (_DSM, 4, NotSerialized)
+                {
+                    If (LEqual (Arg2, Zero)) { Return (Buffer(One) { 0x03 } ) }
+                    Return (Package()
+                    {
+                        "AAPL,clock-id", Buffer(One) { 0x01 },
+                        "built-in", Buffer(One) { 0x00 },
+                        "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
+                        "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
+                        "AAPL,current-available", 2100,
+                        "AAPL,current-extra", 2200,
+                        "AAPL,current-extra-in-sleep", 1600,
+                        "AAPL,device-internal", 0x02,
+                        "AAPL,max-port-current-in-sleep", 2100,
+                    })
+                }
         }
 
         Device (EHC2)
@@ -6680,6 +6740,22 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
             {
                 Return (GPRW (0x6D, 0x03))
+            }
+            Method (_DSM, 4, NotSerialized)
+            {
+                If (LEqual (Arg2, Zero)) { Return (Buffer(One) { 0x03 } ) }
+                Return (Package()
+                {
+                    "AAPL,clock-id", Buffer(One) { 0x01 },
+                    "built-in", Buffer(One) { 0x00 },
+                    "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
+                    "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
+                    "AAPL,current-available", 2100,
+                    "AAPL,current-extra", 2200,
+                    "AAPL,current-extra-in-sleep", 1600,
+                    "AAPL,device-internal", 0x02,
+                    "AAPL,max-port-current-in-sleep", 2100,
+                })
             }
         }
 
@@ -8429,6 +8505,22 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             {
                 Return (GPRW (0x6D, 0x03))
             }
+            Method (_DSM, 4, NotSerialized)
+                {
+                    If (LEqual (Arg2, Zero)) { Return (Buffer(One) { 0x03 } ) }
+                    Return (Package()
+                    {
+                        "AAPL,clock-id", Buffer(One) { 0x01 },
+                        "built-in", Buffer(One) { 0x00 },
+                        "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
+                        "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
+                        "AAPL,current-available", 2100,
+                        "AAPL,current-extra", 2200,
+                        "AAPL,current-extra-in-sleep", 1600,
+                        "AAPL,device-internal", 0x02,
+                        "AAPL,max-port-current-in-sleep", 2100,
+                    })
+                }
         }
 
         Device (HDEF)
@@ -8456,20 +8548,13 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             
             Method (_DSM, 4, NotSerialized)
             {
-                Store (Package (0x06)
+                Store (Package (0x0A)
                 {
-                    "hda-gfx",
-                    Buffer (0x0A)
-                    {
-                        "onboard-1"
-                    },
-                    "layout-id",
-                    Buffer (0x04)
-                    {
-                        0x01, 0x00, 0x00, 0x00
-                    },
-                    "PinConfigurations",
-                    Buffer (Zero) {}
+                    "hda-gfx", Buffer (0x0A) { "onboard-1" },
+                    "layout-id", Buffer (0x04) { 0x01, 0x00, 0x00, 0x00 },
+                    "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
+                    "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
+                    "PinConfigurations", Buffer (Zero) {}
                 }, Local0)
                 DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
                 Return (Local0)
@@ -11729,13 +11814,13 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Return (Package()
             {
                 "device-id", Buffer() { 0x03, 0x8c, 0x00, 0x00 },
-                "compatible", Buffer() { "pci8086,8c03" },
                 "IOName", Buffer() { "pci8086,8c03" },
                 "name", Buffer() { "pci8086,8c03" },
+                "built-in", Buffer(One) { 0x00 },
+                "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
+                "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
             })
         }
-        
-            
         }
 
         Device (SAT1)
@@ -12078,21 +12163,40 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Or (HCON, 0x02, HCON)
                 Or (HSTS, 0xFF, HSTS)
             }
+            
             Device (BUS0)
             {
-                Name (_CID, "smbus")
-                Name (_ADR, Zero)
+                Name (_CID, "smbus")  // _CID: Compatible ID
+                Name (_ADR, Zero)  // _ADR: Address
                 Device (DVL0)
                 {
                     Name (_ADR, 0x57)
                     Name (_CID, "diagsvault")
                     Method (_DSM, 4, NotSerialized)
                     {
-                        If (LEqual (Arg2, Zero)) { Return (Buffer(One) { 0x03 } ) }
-                        Return (Package() { "address", 0x57 })
+                    If (LEqual (Arg2, Zero)) { Return (Buffer(One) { 0x03 } ) }
+                    Return (Package() { "address", 0x57 })
                     }
                 }
             }
+
+            Device (BUS1)
+            {
+                Name (_CID, "smbus")  // _CID: Compatible ID
+                Name (_ADR, One)  // _ADR: Address
+            }
+            
+            Method (_DSM, 4, NotSerialized)
+            {
+            If (LEqual (Arg2, Zero)) { Return (Buffer(One) { 0x03 } ) }
+            Return (Package()
+            {
+                "device-id", Buffer() { 0x22, 0x9c, 0x00, 0x00 },
+                "built-in", Buffer(One) { 0x00 },
+                "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
+                "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
+            })
+        }
         }
     }
 
