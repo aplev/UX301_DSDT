@@ -12178,33 +12178,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Return (Package() { "address", 0x57 })
                     }
                 }
-                
-                Device (MKY0)
-                    {
-                        Name (_ADR, Zero)
-                        Name (_CID, "mikey")
-                        Method (_DSM, 4, NotSerialized)
-                        {
-                            Store (Package (0x0A)
-                                {
-                                    "refnum", Zero, 
-                                    "address", 0x39, 
-                                    "device-id", 0x0CD2, 
-                                    "ramp-control-address", 0x3B, 
-                                    "hdet", One
-                                }, Local0)
-                            DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
-                            Return (Local0)
-                        }
-                        Name (H1IN, 0x15)
-                        Scope (\_GPE)
-                        {
-                            Method (_L15, 0, NotSerialized)
-                            {
-                                    Notify (\_SB.PCI0.SBUS.BUS0.MKY0, 0x80)
-                            }
-                        }
-                    }
             }
 
             Device (BUS1)
@@ -32173,7 +32146,7 @@ Field (IGD2, AnyAcc, NoLock, Preserve)
             //define hardware register access for brightness
             // you can see BAR1 value in RW-Everything under Bus00,02 Intel VGA controler PCI
             // Note: Not sure which one is right here... for now, going with BAR1 minus 4
-            OperationRegion (BRIT, SystemMemory, Subtract(^PCI0.IGPU.BAR1, 4), 0xF7848250)
+            OperationRegion (BRIT, SystemMemory, Subtract(^PCI0.IGPU.BAR1, 4), 0xe1184)
             //OperationRegion (BRIT, SystemMemory, And(\_SB.PCI0.IGPU.BAR1, Not(0xF)), 0xe1184)
             Field (BRIT, AnyAcc, Lock, Preserve)
             {
