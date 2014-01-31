@@ -38,7 +38,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
     External (_PR_.CLVL, FieldUnitObj)
     External (_PR_.CPU0, ProcessorObj)
     External (_PR_.CPU0._PPC, IntObj)
-    External (_PR_.CPU0.APSS, PkgObj)
+    External (_PR_.CPU0._PSS, PkgObj)
     External (_PR_.CPU0._TPC, IntObj)
     External (_PR_.CPU0._TSD, MethodObj)    // 0 Arguments
     External (_PR_.CPU0._TSS, MethodObj)    // 0 Arguments
@@ -13149,9 +13149,9 @@ PTS (Arg0)
                 ADBG ("Enter CS")
                 If (PSCP)
                 {
-                    If (LAnd (CondRefOf (\_PR.CPU0.APSS), CondRefOf (\_PR.CPU0._PPC)))
+                    If (LAnd (CondRefOf (\_PR.CPU0._PSS), CondRefOf (\_PR.CPU0._PPC)))
                     {
-                        Subtract (SizeOf (\_PR.CPU0.APSS), One, \_PR.CPU0._PPC)
+                        Subtract (SizeOf (\_PR.CPU0._PSS), One, \_PR.CPU0._PPC)
                         PNOT ()
                     }
                 }
@@ -26482,9 +26482,9 @@ Store (ShiftRight (Local4, 8), DTB1)
         Method (CLPO, 0, NotSerialized)
         {
             Store (LPOE, Index (TLPO, One))
-            If (CondRefOf (\_PR.CPU0.APSS))
+            If (CondRefOf (\_PR.CPU0._PSS))
             {
-                Store (SizeOf (\_PR.CPU0.APSS), Local1)
+                Store (SizeOf (\_PR.CPU0._PSS), Local1)
             }
             Else
             {
@@ -26807,9 +26807,9 @@ Store (ShiftRight (Local4, 8), DTB1)
 
         Method (_PSS, 0, NotSerialized)  // _PSS: Performance Supported States
         {
-            If (CondRefOf (\_PR.CPU0.APSS))
+            If (CondRefOf (\_PR.CPU0._PSS))
             {
-                Return (\_PR.CPU0.APSS)
+                Return (\_PR.CPU0._PSS)
             }
             Else
             {
@@ -27009,9 +27009,9 @@ Store (ShiftRight (Local4, 8), DTB1)
 
         Method (_PDL, 0, NotSerialized)  // _PDL: P-state Depth Limit
         {
-            If (CondRefOf (\_PR.CPU0.APSS))
+            If (CondRefOf (\_PR.CPU0._PSS))
             {
-                Return (Subtract (SizeOf (\_PR.CPU0.APSS), One))
+                Return (Subtract (SizeOf (\_PR.CPU0._PSS), One))
             }
             Else
             {
@@ -27585,9 +27585,9 @@ Store (ShiftRight (Local4, 8), DTB1)
 
             Method (_PSS, 0, NotSerialized)  // _PSS: Performance Supported States
             {
-                If (CondRefOf (\_PR.CPU0.APSS))
+                If (CondRefOf (\_PR.CPU0._PSS))
                 {
-                    Return (\_PR.CPU0.APSS)
+                    Return (\_PR.CPU0._PSS)
                 }
                 Else
                 {
@@ -27787,9 +27787,9 @@ Store (ShiftRight (Local4, 8), DTB1)
 
             Method (_PDL, 0, NotSerialized)  // _PDL: P-state Depth Limit
             {
-                If (CondRefOf (\_PR.CPU0.APSS))
+                If (CondRefOf (\_PR.CPU0._PSS))
                 {
-                    Return (Subtract (SizeOf (\_PR.CPU0.APSS), One))
+                    Return (Subtract (SizeOf (\_PR.CPU0._PSS), One))
                 }
                 Else
                 {
