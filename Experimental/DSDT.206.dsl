@@ -5410,6 +5410,19 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     })
                 }
             }
+            
+            Device (P0P2)
+            {
+                Name (_ADR, 0x00010000)
+                Method (_PRT, 0, NotSerialized)
+                {
+                    If (PICM)
+                    {
+                        Return (AR00 ())
+                    }
+                    Return (PR00 ())
+                }
+            }
         }
     }
 
