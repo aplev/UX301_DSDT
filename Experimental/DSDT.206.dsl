@@ -32284,8 +32284,8 @@ Field (IGD2, AnyAcc, NoLock, Preserve)
         Name (_HID, "FAN00000")
         Name (TACH, Package (0x04)
         {
-            "Right Fan", "FAN0",
-            "Left Fan", "FAN1"
+            "Left Fan", "FAN1",
+            "Right Fan", "FAN0"
         })
         Method (FAN0, 0, NotSerialized)
         {
