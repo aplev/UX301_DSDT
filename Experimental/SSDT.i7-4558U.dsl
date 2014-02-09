@@ -1,7 +1,7 @@
 /*
  * Intel ACPI Component Architecture
  * AML Disassembler version 20130210-00 [Feb 10 2013]
- * Copyright (c) 2000 - 2013 Intel Corporation
+ * Copyright (c) 2000 - 2014 Intel Corporation
  * 
  * Original Table Header:
  *     Signature        "SSDT"
@@ -10,12 +10,12 @@
  *     Checksum         0x00
  *     OEM ID           "APPLE "
  *     OEM Table ID     "CpuPm"
- *     OEM Revision     0x00009500 (38144)
+ *     OEM Revision     0x00009800 (38912)
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20130210 (538116624)
  */
 
-DefinitionBlock ("ssdt_pr.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00009500)
+DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00009800)
 {
     External (\_PR_.CPU0, DeviceObj)
     External (\_PR_.CPU1, DeviceObj)
@@ -160,10 +160,10 @@ DefinitionBlock ("ssdt_pr.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00009500)
         Method (ACST, 0, NotSerialized)
         {
             /* Low Power Modes for CPU1 */
-            Return (Package (0x05)
+            Return (Package (0x07)
             {
                 One,
-                0x03,
+                0x05,
                 Package (0x04)
                 {
                     ResourceTemplate ()
@@ -209,6 +209,38 @@ DefinitionBlock ("ssdt_pr.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00009500)
                     },
                     0x03,
                     0xC6,
+                    0xC8
+                },
+
+                Package (0x04)
+                {
+                    ResourceTemplate ()
+                    {
+                        Register (FFixedHW,
+                            0x01,               // Bit Width
+                            0x02,               // Bit Offset
+                            0x0000000000000040, // Address
+                            0x03,               // Access Size
+                            )
+                    },
+                    0x06,
+                    0xF5,
+                    0x015E
+                },
+
+                Package (0x04)
+                {
+                    ResourceTemplate ()
+                    {
+                        Register (FFixedHW,
+                            0x01,               // Bit Width
+                            0x02,               // Bit Offset
+                            0x0000000000000050, // Address
+                            0x03,               // Access Size
+                            )
+                    },
+                    0x07,
+                    0xF5,
                     0xC8
                 }
             })

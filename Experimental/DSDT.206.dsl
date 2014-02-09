@@ -32141,7 +32141,7 @@ Field (IGD2, AnyAcc, NoLock, Preserve)
             Name (_ADR, Zero)
             Name (_HID, EisaId ("APP0002"))
             Name (_CID, "backlight")
-            Name (_UID, 10)
+            Name (_UID, 0x0E)
             Name (_STA, 0x0B)
             //define hardware register access for brightness
             // you can see BAR1 value in RW-Everything under Bus00,02 Intel VGA controler PCI
