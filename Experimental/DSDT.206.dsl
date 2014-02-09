@@ -32278,4 +32278,24 @@ Field (IGD2, AnyAcc, NoLock, Preserve)
             })
         }
     }
+
+    Device (SMCD)
+    {
+        Name (_HID, "FAN00000")
+        Name (TACH, Package (0x04)
+        {
+            "Left Fan", "FAN0",
+            "Right Fan", "FAN1"
+        })
+        Method (FAN0, 0, NotSerialized)
+        {
+            Store (\_SB.PCI0.LPCB.EC0.TACH (One), Local0)
+            Return (Local0)
+        }
+        Method (FAN1, 0, NotSerialized)
+        {
+            Store (\_SB.PCI0.LPCB.EC0.TACH (Zero), Local0)
+            Return (Local0)
+        }
+    }
 }
