@@ -1,0 +1,209 @@
+Sensor Eigenschaften	
+Sensortyp	CPU, HDD, Asus NB ACPI, PCH, SNB
+	
+Temperaturen	
+CPU	41 °C  (106 °F)
+CPU Package	41 °C  (106 °F)
+CPU IA Cores	39 °C  (102 °F)
+CPU GT Cores	41 °C  (106 °F)
+1. CPU / 1. Kern	39 °C  (102 °F)
+1. CPU / 2. Kern	38 °C  (100 °F)
+PCH Diode	38 °C  (100 °F)
+SanDisk SD6SP1M128G1002 (132948403192)	31 °C  (88 °F)
+SanDisk SD6SP1M128G1002 (132948403311)	31 °C  (88 °F)
+	
+Spannungswerte	
+CPU Kern	0.897 V
+Akku	11.100 V
+	
+Leistungswerte	
+CPU Package	1.31 W
+CPU IA Cores	0.34 W
+CPU GT Cores	0.01 W
+CPU Uncore	0.15 W
+DIMM	0.80 W
+Batterie Aufladeanteil	Netzanschluss
+
+------[ Motherboard Info ]------
+
+Motherboard ID      : <DMI>
+Motherboard Model   : Asus UX301LAA Series Notebook
+Motherboard Chipset : Intel Lynx Point-LP, Intel Haswell
+
+DMI MB Manufacturer : ASUSTeK COMPUTER INC.
+DMI MB Product      : UX301LAA
+DMI MB Version      : 1.0
+DMI MB Serial       : BSN12345678901234567
+DMI SYS Manufacturer: ASUSTeK COMPUTER INC.
+DMI SYS Product     : UX301LAA
+DMI SYS Version     : 1.0
+DMI SYS Serial      : D9N0CY012087360
+DMI BIOS Version    : UX301LAA.206
+
+------[ GPIO @ isa 1C00 ]------
+
+0000  FF DB FF F7  FB FF FF FF  FF FF FF 7F  00 00 00 00
+0010  FF FF 00 00  00 00 00 00  00 00 00 00  00 00 00 00
+0020  00 00 08 00  00 00 00 00  00 00 00 00  00 00 00 00
+0030  00 00 00 00  04 00 00 00  00 00 00 00  00 00 00 00
+
+ITE 87xx Port           = 00h
+ITE 87xx HWMonitor Port = 0000h
+ITE 87xx Device ID      = 0000h
+ITE 87xx Version        = 00h
+
+Winbond SuperIO Port              = 00h
+Winbond SuperIO HWMonitor Port/60 = 0000h
+Winbond SuperIO HWMonitor Port/64 = 0000h
+Winbond SuperIO Device ID         = FFFFh
+
+Fintek SuperIO Port           = 00h
+Fintek SuperIO HWMonitor Port = 0000h
+Fintek SuperIO Device ID      = 0000h
+
+LPC47 SuperIO HWMonitor Port = 0000h
+LPC47 SuperIO Device ID      = FFFFh
+
+ASpeed SuperIO Port = 00h
+
+------[ ACPI Temperatures & Fans ]------
+
+_TZ_.THM0._TMP             : 
+_TZ_.THM1._TMP             : 
+_TZ_.THR0._TMP             : 
+_TZ_.THR1._TMP             : 
+_TZ_.TZ00._TMP             : 
+_TZ_.TZ01._TMP             : 
+_TZ_.RTMP                  : <TYPE>0</TYPE><LEN>4</LEN><DATA>41</DATA>
+_TZ_.RFAN                  : 
+_TZ_.RFAN(0)               : <TYPE>0</TYPE><LEN>4</LEN><DATA>0</DATA>
+_TZ_.RFAN(1)               : <TYPE>0</TYPE><LEN>4</LEN><DATA>0</DATA>
+_SB_.ATKD._HID             : <TYPE>1</TYPE><LEN>8</LEN><DATA>PNP0C14</DATA>
+_SB_.ATKD.TMPR             : <TYPE>0</TYPE><LEN>4</LEN><DATA>3142</DATA>
+_SB_.PCI0.LPC0.EC0_.CCTV   : 
+_SB_.PCI0.LPC0.EC0_.LRPM   : 
+_SB_.PCI0.LPC0.EC0_.HRPM   : 
+_SB_.PCI0.SBRG.EC0_.ECPU   : 
+_SB_.PCI0.SBRG.EC0_.TACH(0): 
+_SB_.PCI0.SBRG.EC0_.TACH(1): 
+_SB_.PCI0.SBRG.EC0_.TAH0   : 
+_SB_.PCI0.SBRG.EC0_.TAH1   : 
+_SB_.PCI0.SBRG.EC0_.ST00   : 
+_SB_.PCI0.SBRG.EC0_.SC01   : 
+_SB_.PCI0.SBRG.EC0_.SC02   : 
+_SB_.PCI0.SBRG.EC0_.SC03   : 
+_SB_.PCI0.SBRG.EC0_.SC04   : 
+_SB_.PCI0.SBRG.EC0_.SC05   : 
+_SB_.PCI0.SBRG.EC0_.SC06   : 
+_SB_.PCI0.PIB_.EC0_.TCRT   : 
+_SB_.PCI0.SBRG.EC0_.CTPM   : 
+_SB_.PCI0.SBRG.EC__.CPUT   : 
+_SB_.PCI0.SBRG.EC__.SYST   : 
+_SB_.PCI0.LPC_.EC0_.CTMP   : 
+_SB_.PCI0.LPCB.EC0_.CTMP   : 
+_SB_.PCI0.LPC_.EC0_.TMP1   : 
+_SB_.PCI0.LPC_.EC0_.TMP2   : 
+_SB_.PCI0.LPC_.EC0_.TMPI   : 
+_SB_.PCI0.LPC_.EC0_.TMPV   : 
+_SB_.PCI0.LPCB.EC0_.A1TP   : 
+_SB_.PCI0.LPCB.EC0_.A2TP   : 
+_SB_.PCI0.LPCB.EC0_.FAN0   : 
+_SB_.PCI0.LPCB.EC__.TS1R   : 
+_SB_.PCI0.LPCB.EC__.TS2R   : 
+_SB_.PCI0.LPCB.EC__.TS3R   : 
+_SB_.PCI0.LPCB.EC__.F1FL   : 
+_SB_.PCI0.LPCB.EC__.F1FH   : 
+_SB_.PCI0.LPCB.EC__.F2FL   : 
+_SB_.PCI0.LPCB.EC__.F2FH   : 
+_SB_.PCI0.LPC_.H8EC.RTMP   : 
+_SB_.PCI0.LPC_.H8EC.LTMP   : 
+_SB_.PCI0.LPC_.H8EC.MTMP   : 
+_SB_.PCI0.LPC_.H8EC.GTMP   : 
+_SB_.PCI0.LPCB.H8EC.CTMP   : 
+_SB_.PCI0.LPCB.H8EC.DTMP   : 
+_SB_.PCI0.LPCB.H8EC.GTMP   : 
+_SB_.PCI0.LPCB.H8EC.ITMP   : 
+_SB_.PCI0.LPCB.H8EC.MTMP   : 
+_SB_.PCI0.LPCB.H8EC.STMP   : 
+_SB_.PCI0.LPCB.H8EC.PFAN   : 
+_SB_.PCI0.LPCB.EC0_.OTPC   : 
+_SB_.PCI0.LPCB.EC0_.VGAT   : 
+_SB_.PCI0.LPCB.EC0_.CHPT   : 
+_SB_.PCI0.LPCB.EC0_.CPUT   : 
+_SB_.PCI0.LPCB.EC0_.SYST   : 
+_SB_.PCI0.LPCB.EC0_.DTS1   : 
+_SB_.PCI0.LPCB.EC0_.DTS2   : 
+_SB_.PCI0.LPCB.EC0_.DIMM   : 
+_SB_.PCI0.LPCB.EC0_.FANH   : 
+_SB_.PCI0.LPCB.EC0_.FANL   : 
+_SB_.PCI0.LPCB.EC0_.CUTP   : 
+_SB_.PCI0.LPCB.EC0_.PHTP   : 
+_SB_.PCI0.LPCB.EC0_.DIMT   : 
+_SB_.PCI0.LPCB.EC0_.INLE   : 
+_SB_.PCI0.LPCB.EC0_.PANT   : 
+_SB_.PCI0.LPCB.EC0_.F0RM   : 
+_SB_.PCI0.LPCB.EC0_.F0DT   : 
+_SB_.PCI0.LPCB.EC0_.F1RM   : 
+_SB_.PCI0.LPCB.EC0_.F1DT   : 
+_SB_.SAMB.TMPC             : 
+_SB_.SAMB.TMPH             : 
+_SB_.STR0._TMP             : 
+_SB_.STR1._TMP             : 
+_SB_.STR2._TMP             : 
+_SB_.STR3._TMP             : 
+_SB_.STR4._TMP             : 
+_SB_.STR5._TMP             : 
+_SB_.STR6._TMP             : 
+_SB_.STR7._TMP             : 
+
+==========================================================================
+
+------[ 1 SMBus detected ]------
+
+------[ SMBus #0 ]------
+
+SMBus Type  : Intel ICH
+SMBus Port  : F040
+Can Have SPD: Yes
+Scan Type   : Full
+
+------[ SMBus Device B00-D44 ]------
+
+  0000  00 00 00 04 00 00 00 00 00 05 05 05 01 10 02 14  ................
+  0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  0020  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  0030  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  0040  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  0050  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  0060  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  0070  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  0080  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  0090  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  00A0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  00B0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  00C0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  00D0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  00E0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  00F0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+
+------[ SMBus Device B00-D44 ]------
+
+  0000  FF00 FF00 FF00 FF04 FF00 FF00 FF00 FF00 FF00 FF06 FF05 FF05 FF01 FF10 FF02 FF14 
+  0010  FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 
+  0020  FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 
+  0030  FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 
+  0040  FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 
+  0050  FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 
+  0060  FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 
+  0070  FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 
+  0080  FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 
+  0090  FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 
+  00A0  FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 
+  00B0  FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 
+  00C0  FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 
+  00D0  FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 
+  00E0  FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 
+  00F0  FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 FF00 
+
+*** SMBus Semaphore Disabled = 0
+
