@@ -32279,37 +32279,38 @@ Field (IGD2, AnyAcc, NoLock, Preserve)
         Method (FAN0, 0, NotSerialized)
         {
             Store (\_SB.PCI0.LPCB.EC0.TACH (Zero), Local0)
-            If (LLessEqual (\_SB.PCI0.LPCB.EC0.ECPU, 0x32)) { Store (Zero, Local0) } // If CPU < 50C, Show 0RPM
+//            If (LLessEqual (\_SB.PCI0.LPCB.EC0.ECPU, 0x32)) { Store (Zero, Local0) } // If CPU < 50C, Show 0RPM
             Return (Local0)
         }
         Method (FAN1, 0, NotSerialized)
         {
             Store (\_SB.PCI0.LPCB.EC0.TACH (One), Local0)
-            If (LLessEqual (\_SB.PCI0.LPCB.EC0.ECPU, 0x32)) { Store (Zero, Local0) } // If CPU < 50C, Show 0RPM
+//            If (LLessEqual (\_SB.PCI0.LPCB.EC0.ECPU, 0x32)) { Store (Zero, Local0) } // If CPU < 50C, Show 0RPM
             Return (Local0)
         }
     }
 
-    Device (PROB) // ACPIProbe virtual device (c) TimeWalker
-    {
-        Name (_HID, EisaId ("PNP0C02")) // Expose PLLD to IORegistry
-        Name (_CID, EisaId ("PRB0000")) // device compatible name allows ACPIProbe matching
-        Name (INVL, 0x3E8)          // Set Polling interval 1 sec
-        Name (TOUT, Zero)           // Set Polling timeout  0 sec (continuous polling)
-        Name (LOGG, One)            // Enable Console logging of values returned by methods
-        Name (LIST, Package (One)  // Define methods to poll
-        { "SFNS" })
-        
-        Method (SFNS, 0, NotSerialized)
-        {
-            Store (\_SB.PCI0.LPCB.EC0.ECPU, Local0)      // Get current CPU Temperature
-            If (LLessEqual (Local0, 0x32)) {             // If CPU is < 50C, disable both Fans
-                \_SB.PCI0.LPCB.EC0.SFNV (One, Zero)
-                \_SB.PCI0.LPCB.EC0.SFNV (0x02, Zero)
-                Store ("Fans are OFF", Local1) } Else {
-                \_SB.PCI0.LPCB.EC0.SFNV (Zero, Zero)     // If CPU is > 50C, set to Automatic
-                Store ("Fans are AUTO", Local1) }
-            Return (Local1)
-        }
-    }
+//    Device (PROB) // ACPIProbe virtual device (c) TimeWalker
+//    {
+//        Name (_HID, EisaId ("PNP0C02")) // Expose PLLD to IORegistry
+//        Name (_CID, EisaId ("PRB0000")) // device compatible name allows ACPIProbe matching
+//        Name (INVL, 0x3E8)          // Set Polling interval 1 sec
+//        Name (TOUT, Zero)           // Set Polling timeout  0 sec (continuous polling)
+//        Name (LOGG, One)            // Enable Console logging of values returned by methods
+//        Name (LIST, Package (One)  // Define methods to poll
+//        { "SFNS" })
+//        
+//        Method (SFNS, 0, NotSerialized)
+//        {
+//            Store (\_SB.PCI0.LPCB.EC0.ECPU, Local0)      // Get current CPU Temperature
+//            // Max RPM=6550, Min RPM=1200
+//            If (LLessEqual (Local0, 0x32)) {             // If CPU is < 50C, disable both Fans
+//                \_SB.PCI0.LPCB.EC0.SFNV (One, Zero)
+//                \_SB.PCI0.LPCB.EC0.SFNV (0x02, Zero)
+//                Store ("Fans are OFF", Local1) } Else {
+//                \_SB.PCI0.LPCB.EC0.SFNV (Zero, Zero)     // If CPU is > 50C, set to Automatic
+//                Store ("Fans are AUTO", Local1) }
+//            Return (Local1)
+//        }
+//    }
 }
