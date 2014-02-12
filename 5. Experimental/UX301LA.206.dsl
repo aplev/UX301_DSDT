@@ -12875,10 +12875,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
     Method (_PTS, 1, NotSerialized)  // _PTS: Prepare To Sleep
     {
-        If (LEqual (Arg0, 0x05)) {}
-    Else
-    {
-PTS (Arg0)
+        If (LEqual (Arg0, 0x05)) {} Else {
+        PTS (Arg0)
         ADBG (Concatenate ("_PTS=", ToHexString (Arg0)))
         If (And (ICNF, 0x10))
         {
