@@ -5192,7 +5192,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
                 }
             }
 
-            Device (GFX0)
+            Device (IGPU)
             {
                 Name (_ADR, 0x00020000)  // _ADR: Address
                 OperationRegion (VSID, PCI_Config, Zero, 0x04)
@@ -5252,6 +5252,12 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
                     LBPC,   8, 
                     Offset (0xBC), 
                     ASLS,   32
+                }
+                
+                OperationRegion (IGD2, PCI_Config, 0x10, 4)
+                Field (IGD2, AnyAcc, NoLock, Preserve)
+                {
+                        BAR1,32,
                 }
 
                 OperationRegion (IGDM, SystemMemory, ASLB, 0x2000)
@@ -5707,7 +5713,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
                         }
                         Else
                         {
-                            Notify (GFX0, Arg1)
+                            Notify (IGPU, Arg1)
                         }
                     }
 
@@ -5717,7 +5723,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
                     }
                     Else
                     {
-                        Notify (GFX0, 0x80)
+                        Notify (IGPU, 0x80)
                     }
 
                     Return (Zero)
@@ -7022,7 +7028,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
                         }
 
                         ISMI (0x94)
-                        Notify (GFX0, 0x81)
+                        Notify (IGPU, 0x81)
                     }
                     Else
                     {
@@ -7037,7 +7043,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
                             }
                             Else
                             {
-                                Notify (GFX0, Zero)
+                                Notify (IGPU, Zero)
                             }
 
                             Sleep (0x03E8)
@@ -7045,7 +7051,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
 
                         Store (AF2D (Arg0), NSTE)
                         WNDD (NSTE)
-                        Notify (GFX0, 0x80)
+                        Notify (IGPU, 0x80)
                     }
 
                     Return (Zero)
@@ -7488,6 +7494,15 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
 
                         Return (CRS2)
                     }
+                }
+                Method (_DSM, 4, NotSerialized)
+                {
+                    If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
+                    Return (Package()
+                    {
+                        "AAPL,ig-platform-id", Buffer() { 0x03, 0x00, 0x66, 0x01 },
+                        "hda-gfx", Buffer() { "onboard-1" },
+                    })
                 }
             }
 
@@ -10473,9 +10488,9 @@ DTB1, 8
         Name (ONAM, "ASUSTeK")
         Method (ADVG, 0, NotSerialized)
         {
-            If (\_SB.PCI0.GFX0.PRST ())
+            If (\_SB.PCI0.IGPU.PRST ())
             {
-                Return (\_SB.PCI0.GFX0.ADVD ())
+                Return (\_SB.PCI0.IGPU.ADVD ())
             }
 
             Return (0x03)
@@ -10483,9 +10498,9 @@ DTB1, 8
 
         Method (GCDM, 0, NotSerialized)
         {
-            If (\_SB.PCI0.GFX0.PRST ())
+            If (\_SB.PCI0.IGPU.PRST ())
             {
-                Return (\_SB.PCI0.GFX0.GCDS ())
+                Return (\_SB.PCI0.IGPU.GCDS ())
             }
 
             Return (One)
@@ -10493,9 +10508,9 @@ DTB1, 8
 
         Method (SWHG, 1, Serialized)
         {
-            If (\_SB.PCI0.GFX0.PRST ())
+            If (\_SB.PCI0.IGPU.PRST ())
             {
-                \_SB.PCI0.GFX0.SWHD (Arg0)
+                \_SB.PCI0.IGPU.SWHD (Arg0)
                 Return (One)
             }
 
@@ -10504,9 +10519,9 @@ DTB1, 8
 
         Method (NATK, 0, NotSerialized)
         {
-            If (\_SB.PCI0.GFX0.PRST ())
+            If (\_SB.PCI0.IGPU.PRST ())
             {
-                Return (\_SB.PCI0.GFX0.NATK ())
+                Return (\_SB.PCI0.IGPU.NATK ())
             }
 
             Return (One)
@@ -11821,7 +11836,7 @@ DTB1, 8
                 Store (Arg0, ALAE)
                 If (LEqual (MSOS (), OSW7))
                 {
-                    ^^PCI0.GFX0.AINT (Zero, Local0)
+                    ^^PCI0.IGPU.AINT (Zero, Local0)
                 }
                 Else
                 {
@@ -16384,7 +16399,7 @@ DTB1, 8
                             ShiftLeft (Local4, 0x04, Local4)
                             Store (LBTN, Local3)
                             Store (Add (Local4, Local3), Local3)
-                            ^^^GFX0.AINT (One, Divide (Multiply (DerefOf (Index (PWAC, Local3)), 0x64
+                            ^^^IGPU.AINT (One, Divide (Multiply (DerefOf (Index (PWAC, Local3)), 0x64
                                 ), 0xFF, ))
                         }
                     }
@@ -17863,7 +17878,7 @@ Store (ShiftRight (Local4, 8), DTB1)
                         If (LEqual (MSOS (), OSW7))
                         {
                             Store (RALS (), Local0)
-                            ^^^GFX0.AINT (Zero, Local0)
+                            ^^^IGPU.AINT (Zero, Local0)
                         }
                         Else
                         {
@@ -18194,9 +18209,9 @@ Store (ShiftRight (Local4, 8), DTB1)
         Name (ASBN, Zero)
         Method (SBRN, 0, Serialized)
         {
-            If (^^^GFX0.PRST ())
+            If (^^^IGPU.PRST ())
             {
-                Store (^^^GFX0.GCBL (^^^GFX0.CBLV), Local0)
+                Store (^^^IGPU.GCBL (^^^IGPU.CBLV), Local0)
                 Subtract (0x0A, Local0, Local1)
                 If (LNotEqual (Local1, LBTN))
                 {
@@ -18215,14 +18230,14 @@ Store (ShiftRight (Local4, 8), DTB1)
             If (LGreaterEqual (MSOS (), OSVT))
             {
                 Store (LBTN, Local0)
-                If (^^^GFX0.PRST ())
+                If (^^^IGPU.PRST ())
                 {
-                    If (LNotEqual (^^^GFX0.LCDD._DCS (), 0x1F))
+                    If (LNotEqual (^^^IGPU.LCDD._DCS (), 0x1F))
                     {
                         Return (One)
                     }
 
-                    ^^^GFX0.DWBL ()
+                    ^^^IGPU.DWBL ()
                     Store (One, ASBN)
                 }
 
@@ -18279,14 +18294,14 @@ Store (ShiftRight (Local4, 8), DTB1)
             If (LGreaterEqual (MSOS (), OSVT))
             {
                 Store (LBTN, Local0)
-                If (^^^GFX0.PRST ())
+                If (^^^IGPU.PRST ())
                 {
-                    If (LNotEqual (^^^GFX0.LCDD._DCS (), 0x1F))
+                    If (LNotEqual (^^^IGPU.LCDD._DCS (), 0x1F))
                     {
                         Return (One)
                     }
 
-                    ^^^GFX0.UPBL ()
+                    ^^^IGPU.UPBL ()
                     Store (One, ASBN)
                 }
 
@@ -18809,7 +18824,7 @@ Store (ShiftRight (Local4, 8), DTB1)
             {
                 If (LEqual (MSOS (), OSW7))
                 {
-                    ^^^GFX0.AINT (Zero, Local0)
+                    ^^^IGPU.AINT (Zero, Local0)
                 }
                 Else
                 {
@@ -18866,7 +18881,7 @@ Store (ShiftRight (Local4, 8), DTB1)
             {
                 If (LEqual (MSOS (), OSW7))
                 {
-                    ^^^GFX0.AINT (Zero, Local0)
+                    ^^^IGPU.AINT (Zero, Local0)
                 }
                 Else
                 {
@@ -19115,7 +19130,7 @@ Store (ShiftRight (Local4, 8), DTB1)
 
                 If (And (VGAF, One))
                 {
-                    Store (One, ^^PCI0.GFX0.CLID)
+                    Store (One, ^^PCI0.IGPU.CLID)
                 }
 
                 Return (Local0)
@@ -19147,9 +19162,9 @@ Store (ShiftRight (Local4, 8), DTB1)
             {
                 Store (GLID (), Local0)
                 Store (Local0, LIDS)
-                If (CondRefOf (\_SB.PCI0.GFX0.GLID))
+                If (CondRefOf (\_SB.PCI0.IGPU.GLID))
                 {
-                    ^^^GFX0.GLID (LIDS)
+                    ^^^IGPU.GLID (LIDS)
                 }
             }
         }
@@ -19923,9 +19938,9 @@ Store (ShiftRight (Local4, 8), DTB1)
 
         Method (_L06, 0, NotSerialized)  // _Lxx: Level-Triggered GPE
         {
-            If (LAnd (\_SB.PCI0.GFX0.GSSE, LNot (GSMI)))
+            If (LAnd (\_SB.PCI0.IGPU.GSSE, LNot (GSMI)))
             {
-                \_SB.PCI0.GFX0.GSCI ()
+                \_SB.PCI0.IGPU.GSCI ()
             }
         }
     }
@@ -23136,7 +23151,7 @@ Store (ShiftRight (Local4, 8), DTB1)
         If (Arg0)
         {
             \_SB.PCI0.NPTS (Arg0)
-            \_SB.PCI0.GFX0.OPTS (Arg0)
+            \_SB.PCI0.IGPU.OPTS (Arg0)
             OEMS (Arg0)
         }
     }
@@ -23146,7 +23161,7 @@ Store (ShiftRight (Local4, 8), DTB1)
         \_SB.PCI0.XHC.XWAK (Arg0)
         \_SB.PCI0.NWAK (Arg0)
         \_SB.ATKD.GENW (Arg0)
-        \_SB.PCI0.GFX0.OWAK (Arg0)
+        \_SB.PCI0.IGPU.OWAK (Arg0)
         OEMW (Arg0)
     }
     Method (B1B2, 2, NotSerialized)
@@ -23154,6 +23169,130 @@ Store (ShiftRight (Local4, 8), DTB1)
         ShiftLeft (Arg1, 8, Local0)
         Or (Arg0, Local0, Local0)
         Return (Local0)
+    }
+    Scope (\_SB)
+    {
+        Device (PNLF)
+        {
+            // normal PNLF declares (note some of this probably not necessary)
+            Name (_HID, EisaId ("APP0002"))
+            Name (_CID, "backlight")
+            Name (_UID, 10)
+            Name (_STA, 0x0B)
+            //define hardware register access for brightness
+            // you can see BAR1 value in RW-Everything under Bus00,02 Intel VGA controler PCI
+            // Note: Not sure which one is right here... for now, going with BAR1 minus 4
+            OperationRegion (BRIT, SystemMemory, Subtract(\_SB.PCI0.IGPU.BAR1, 4), 0xe1184)
+            //OperationRegion (BRIT, SystemMemory, And(\_SB.PCI0.IGPU.BAR1, Not(0xF)), 0xe1184)
+            Field (BRIT, AnyAcc, Lock, Preserve)
+            {
+                Offset(0x48250),
+                LEV2, 32,
+                LEVL, 32,
+                Offset(0x70040),
+                P0BL, 32,
+                Offset(0xc8250),
+                LEVW, 32,
+                LEVX, 32,
+                Offset(0xe1180),
+                PCHL, 32,
+            }
+            // DEB1 special for setting KLVX at runtime...
+            //Method (DEB1, 1, NotSerialized)
+            //{
+            //    Store(Arg0, KLVX)
+            //}
+            Name(KPCH, 0)
+            // _INI deals with differences between native setting and desired
+            Method (_INI, 0, NotSerialized)
+            {
+                Store(PCHL, KPCH)
+                Store(ShiftRight(KLVX,16), Local0)
+                Store(ShiftRight(LEVX,16), Local1)
+                if (LNotEqual(Local0, Local1))
+                {
+                    Divide(Multiply(LEVL, Local0), Local1,, Local0)
+                    //Store(P0BL, Local1)
+                    //While(LEqual (P0BL, Local1)) {}
+                    Store(Local0, LEVL)
+                    Store(KLVX, LEVX)
+                }
+            }
+            // _BCM/_BQC: set/get for brightness level
+            Method (_BCM, 1, NotSerialized)
+            {
+                // initialize for consistent backlight level before/after sleep
+                if (LNotEqual(PCHL, KPCH)) { Store(KPCH, PCHL) }
+                If (LNotEqual(LEVW, 0x80000000)) { Store (0x80000000, LEVW) }
+                If (LNotEqual(LEVX, KLVX)) { Store (KLVX, LEVX) }
+                // store new backlight level
+                Store(Match(_BCL, MGE, Arg0, MTR, 0, 2), Local0)
+                If (LEqual(Local0, Ones)) { Subtract(SizeOf(_BCL), 1, Local0) }
+                If (LNotEqual(LEV2, 0x80000000)) { Store(0x80000000, LEV2) }
+                Store(DerefOf(Index(_BCL, Local0)), LEVL)
+            }
+            Method (_BQC, 0, NotSerialized)
+            {
+                Store(Match(_BCL, MGE, LEVL, MTR, 0, 2), Local0)
+                If (LEqual(Local0, Ones)) { Subtract(SizeOf(_BCL), 1, Local0) }
+                Return(DerefOf(Index(_BCL, Local0)))
+            }
+            Method (_DOS, 1, NotSerialized)
+            {
+                ^^PCI0.IGPU._DOS(Arg0)
+            }
+            // extended _BCM/_BQC for setting "in between" levels
+            Method (XBCM, 1, NotSerialized)
+            {
+                // initialize for consistent backlight level before/after sleep
+                if (LNotEqual(PCHL, KPCH)) { Store(KPCH, PCHL) }
+                If (LNotEqual(LEVW, 0x80000000)) { Store (0x80000000, LEVW) }
+                If (LNotEqual(LEVX, KLVX)) { Store (KLVX, LEVX) }
+                // store new backlight level
+                If (LGreater(Arg0, XRGH)) { Store(XRGH, Arg0) }
+                If (LAnd(Arg0, LLess(Arg0, XRGL))) { Store(XRGL, Arg0) }
+                If (LNotEqual(LEV2, 0x80000000)) { Store(0x80000000, LEV2) }
+                Store(Arg0, LEVL)
+            }
+            Method (XBQC, 0, NotSerialized)
+            {
+                Store(LEVL, Local0)
+                If (LGreater(Local0, XRGH)) { Store(XRGH, Local0) }
+                If (LAnd(Local0, LLess(Local0, XRGL))) { Store(XRGL, Local0) }
+                Return(Local0)
+            }
+            // Use XOPT=1 to disable smooth transitions
+            Name (XOPT, Zero)
+            // XRGL/XRGH: defines the valid range
+            Name (XRGL, 40)
+            Name (XRGH, 1808)
+            // KLVX is initialization value for LEVX
+            Name (KLVX, 0x7100000)
+            // _BCL: returns list of valid brightness levels
+            // first two entries describe ac/battery power levels
+            Name (_BCL, Package()
+            {
+                1808,
+                479,
+                0,
+                55, 55, 57, 59,
+                62, 66, 71, 77,
+                83, 91, 99, 108,
+                119, 130, 142, 154,
+                168, 183, 198, 214,
+                232, 250, 269, 289,
+                309, 331, 354, 377,
+                401, 426, 453, 479,
+                507, 536, 566, 596,
+                627, 660, 693, 727,
+                762, 797, 834, 872,
+                910, 949, 990, 1031,
+                1073, 1115, 1159, 1204,
+                1249, 1296, 1343, 1391,
+                1440, 1490, 1541, 1592,
+                1645, 1698, 1753, 1808,
+            })
+        }
     }
 }
 

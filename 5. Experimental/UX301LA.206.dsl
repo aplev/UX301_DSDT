@@ -30064,11 +30064,12 @@ Store (ShiftRight (Local4, 8), DTB1)
                 Offset (0xBC), 
                 ASLS,   32
             }
-OperationRegion (IGD2, PCI_Config, 0x10, 4)
-Field (IGD2, AnyAcc, NoLock, Preserve)
-{
-        BAR1,32,
-}
+            
+            OperationRegion (IGD2, PCI_Config, 0x10, 4)
+            Field (IGD2, AnyAcc, NoLock, Preserve)
+            {
+                    BAR1,32,
+            }
 
 
             OperationRegion (IGDM, SystemMemory, ASLB, 0x2000)
