@@ -4862,6 +4862,20 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
                         }
                         EndDependentFn ()
                     })
+                    
+                    Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                    {
+                        Store (Package (0x02)
+                            {
+                                "AAPL,has-embedded-fn-keys", 
+                                Buffer (0x04)
+                                {
+                                     0x01, 0x00, 0x00, 0x00
+                                }
+                            }, Local0)
+                        DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                        Return (Local0)
+                    }
                 }
             }
 
@@ -8759,7 +8773,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
     Method (_WAK, 1, Serialized)  // _WAK: Wake
     {
         If (LOr(LLess(Arg0,1),LGreater(Arg0,5))) { Store(3,Arg0) }
-WAK (Arg0)
+        WAK (Arg0)
         Return (Package (0x02)
         {
             Zero, 
@@ -11895,21 +11909,10 @@ DTB1, 8
                 }
 
                 Store (Arg0, ALAE)
-                If (LEqual (MSOS (), OSW7))
-                {
-                    ^^PCI0.IGPU.AINT (Zero, Local0)
-                }
-                Else
-                {
-                    If (LEqual (MSOS (), OSW8))
-                    {
-                        Notify (ALS, 0x80)
-                    }
-                }
-
-                Return (One)
+                Notify (ALS, 0x80)
+                Return (ALAE)
             }
-
+            
             Method (ALSL, 1, NotSerialized)
             {
                 Return (One)
@@ -12237,6 +12240,25 @@ DTB1, 8
                 }
 
                 Return (Zero)
+            }
+            
+            Method (ALSS, 0, NotSerialized)
+            {
+                Return (^^PCI0.LPCB.EC0.RALS ())
+            }
+            
+            Method (SKBL, 1, NotSerialized)
+            {
+                Store (Arg0, Local0)
+                Store (Arg0, KBLV)
+                Store (DerefOf (Index (PWKB, Local0)), Local1)
+                ^^PCI0.LPCB.EC0.WRAM (0x04B1, Local1)
+                Return (One)
+            }
+            
+            Method (GKBL, 0, NotSerialized)
+            {
+                Return (KBLV)
             }
         }
 
@@ -17300,12 +17322,40 @@ Store (ShiftRight (Local4, 8), DTB1)
                     Add (Local0, Local1, Local0)
                     Multiply (Local0, 0x03E8, Local1)
                     Divide (Local1, ALSA, Local2, Local3)
-                    Return (Local3)
                 }
                 Else
                 {
                     Return (0x012C)
                 }
+                
+                If (LLessEqual (Local3, 0x3C))
+                {
+                    ^^^^ATKD.SKBL (0x03)
+                    Store (One, Local4)
+                }
+                Else
+                {
+                    If (LLessEqual (Local3, 0x82))
+                    {
+                        ^^^^ATKD.SKBL (0x02)
+                        Store (0x02, Local4)
+                    }
+                    Else
+                    {
+                        If (LLessEqual (Local3, 0xFF))
+                        {
+                            ^^^^ATKD.SKBL (One)
+                            Store (0x03, Local4)
+                        }
+                        Else
+                        {
+                            ^^^^ATKD.SKBL (Zero)
+                            Store (0x04, Local4)
+                        }
+                    }
+                }
+
+                Return (Local4)
             }
             Else
             {
@@ -17938,18 +17988,7 @@ Store (ShiftRight (Local4, 8), DTB1)
                     If (ALAE)
                     {
                         TALS (One)
-                        If (LEqual (MSOS (), OSW7))
-                        {
-                            Store (RALS (), Local0)
-                            ^^^IGPU.AINT (Zero, Local0)
-                        }
-                        Else
-                        {
-                            If (LEqual (MSOS (), OSW8))
-                            {
-                                Notify (ALS, 0x80)
-                            }
-                        }
+                        Notify (ALS, 0x80)
                     }
                 }
                 Else
@@ -18267,20 +18306,6 @@ Store (ShiftRight (Local4, 8), DTB1)
         Method (_Q0D, 0, NotSerialized)  // _Qxx: EC Query
         {
             ^^^^ATKD.IANE (0xC4)
-        }
-
-        Name (ASBN, Zero)
-        Method (SBRN, 0, Serialized)
-        {
-            If (^^^IGPU.PRST ())
-            {
-                Store (^^^IGPU.GCBL (^^^IGPU.CBLV), Local0)
-                Subtract (0x0A, Local0, Local1)
-                If (LNotEqual (Local1, LBTN))
-                {
-                    Store (Local1, LBTN)
-                }
-            }
         }
 
         Method (_Q0E, 0, NotSerialized)  // _Qxx: EC Query
@@ -18823,58 +18848,10 @@ Store (ShiftRight (Local4, 8), DTB1)
 
         Method (_QCD, 0, NotSerialized)  // _Qxx: EC Query
         {
-            Store (RALS (), Local0)
-            Store (ST8E (0x31, Zero), Local1)
-            If (LNotEqual (OLUX, Local1))
+            Notify (ALS, 0x80)
+            If (ATKP)
             {
-                If (LEqual (MSOS (), OSW7))
-                {
-                    ^^^IGPU.AINT (Zero, Local0)
-                }
-                Else
-                {
-                    If (LEqual (MSOS (), OSW8))
-                    {
-                        Notify (ALS, 0x80)
-                    }
-                }
-
-                If (ATKP)
-                {
-                    Store (Zero, Local2)
-                    If (LAnd (LLessEqual (OLUX, One), LGreater (Local1, One)))
-                    {
-                        Store (One, Local2)
-                    }
-                    Else
-                    {
-                        If (LAnd (LLessEqual (OLUX, 0x07), LGreater (Local1, 0x07)))
-                        {
-                            Store (One, Local2)
-                        }
-                        Else
-                        {
-                            If (LAnd (LGreaterEqual (OLUX, 0x07), LLess (Local1, 0x07)))
-                            {
-                                Store (One, Local2)
-                            }
-                            Else
-                            {
-                                If (LAnd (LGreaterEqual (OLUX, One), LLess (Local1, One)))
-                                {
-                                    Store (One, Local2)
-                                }
-                            }
-                        }
-                    }
-
-                    If (Local2)
-                    {
-                        ^^^^ATKD.IANE (0xC6)
-                    }
-                }
-
-                Store (Local1, OLUX)
+                ^^^^ATKD.IANE (0xC7)
             }
         }
 
@@ -19031,16 +19008,10 @@ Store (ShiftRight (Local4, 8), DTB1)
     {
         Device (ALS)
         {
+            Name (_CID, "smc-als")  // _CID: Compatible ID
             Method (_HID, 0, NotSerialized)  // _HID: Hardware ID
             {
-                If (LGreaterEqual (MSOS (), OSW7))
-                {
                     Return ("ACPI0008")
-                }
-                Else
-                {
-                    Return ("PNP0C02")
-                }
             }
 
             Method (_STA, 0, NotSerialized)  // _STA: Status
