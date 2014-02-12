@@ -4132,13 +4132,16 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
                 {
                     Name (_HID, EisaId ("PNP0103"))  // _HID: Hardware ID
                     Name (_UID, Zero)  // _UID: Unique ID
-                    Name (BUF0, ResourceTemplate ()
-                    {
+                    Name (BUF0, ResourceTemplate()
+{
+    IRQNoFlags() { 0, 8, 11, 15 }
+
                         Memory32Fixed (ReadWrite,
                             0xFED00000,         // Address Base
                             0x00000400,         // Address Length
                             _Y10)
                     })
+
                     Method (_STA, 0, NotSerialized)  // _STA: Status
                     {
                         If (LGreaterEqual (OSYS, 0x07D1))
@@ -4291,8 +4294,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
                             0x01,               // Alignment
                             0x02,               // Length
                             )
-                        IRQNoFlags ()
-                            {2}
+                        
                     })
                 }
 
@@ -4422,10 +4424,9 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
                             0x0070,             // Range Minimum
                             0x0070,             // Range Maximum
                             0x01,               // Alignment
-                            0x08,               // Length
+                            0x02,               // Length
                             )
-                        IRQNoFlags ()
-                            {8}
+                        
                     })
                 }
 
@@ -4446,8 +4447,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
                             0x10,               // Alignment
                             0x04,               // Length
                             )
-                        IRQNoFlags ()
-                            {0}
+                        
                     })
                 }
 
@@ -5189,6 +5189,28 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
                 {
                     Or (HCON, 0x02, HCON)
                     Or (HSTS, 0xFF, HSTS)
+                }
+                
+                Device (BUS0)
+                {
+                    Name (_CID, "smbus")  // _CID: Compatible ID
+                    Name (_ADR, Zero)  // _ADR: Address
+                    Device (DVL0)
+                    {
+                        Name (_ADR, 0x57)
+                        Name (_CID, "diagsvault")
+                        Method (_DSM, 4, NotSerialized)
+                        {
+                        If (LEqual (Arg2, Zero)) { Return (Buffer(One) { 0x03 } ) }
+                        Return (Package() { "address", 0x57 })
+                        }
+                    }
+                }
+
+                Device (BUS1)
+                {
+                    Name (_CID, "smbus")  // _CID: Compatible ID
+                    Name (_ADR, One)  // _ADR: Address
                 }
             }
 
@@ -8693,7 +8715,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
 
     Method (_PTS, 1, NotSerialized)  // _PTS: Prepare To Sleep
     {
-        PTS (Arg0)
+        If (LEqual (Arg0, 0x05)) {} Else { PTS (Arg0) }
     }
 
     Method (_WAK, 1, Serialized)  // _WAK: Wake
@@ -23146,6 +23168,39 @@ Store (ShiftRight (Local4, 8), DTB1)
         }
     }
     
+    Method (DTGP, 5, NotSerialized)
+    {
+        If (LEqual (Arg0, Buffer (0x10)
+                {
+                    /* 0000 */   0xC6, 0xB7, 0xB5, 0xA0, 0x18, 0x13, 0x1C, 0x44,
+                    /* 0008 */   0xB0, 0xC9, 0xFE, 0x69, 0x5E, 0xAF, 0x94, 0x9B
+                }))
+        {
+            If (LEqual (Arg1, One))
+            {
+                If (LEqual (Arg2, Zero))
+                {
+                    Store (Buffer (One)
+                        {
+                             0x03
+                        }, Arg4)
+                    Return (One)
+                }
+
+                If (LEqual (Arg2, One))
+                {
+                    Return (One)
+                }
+            }
+        }
+
+        Store (Buffer (One)
+            {
+                 0x00
+            }, Arg4)
+        Return (Zero)
+    }
+    
     Method (PTS, 1, NotSerialized)
     {
         If (Arg0)
@@ -23292,6 +23347,26 @@ Store (ShiftRight (Local4, 8), DTB1)
                 1440, 1490, 1541, 1592,
                 1645, 1698, 1753, 1808,
             })
+        }
+    }
+
+    Device (SMCD)
+    {
+        Name (_HID, "FAN00000")
+        Name (TACH, Package (0x04)
+        {
+            "Left Fan", "FAN1",
+            "Right Fan", "FAN0"
+        })
+        Method (FAN0, 0, NotSerialized)
+        {
+            Store (\_SB.PCI0.LPCB.EC0.TACH (Zero), Local0)
+            Return (Local0)
+        }
+        Method (FAN1, 0, NotSerialized)
+        {
+            Store (\_SB.PCI0.LPCB.EC0.TACH (One), Local0)
+            Return (Local0)
         }
     }
 }
