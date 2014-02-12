@@ -2471,7 +2471,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
                 Add (Subtract (M1MX, M1MN), One, M1LN)
                 If (LOr (LEqual (MM64, Zero), LLessEqual (OSYS, 0x07D3)))
                 {
-                    CreateDWordField (BUF0, \_SB.PCI0._Y0F._LEN, MSLN)  // _LEN: Length
+                    CreateQWordField (BUF0, \_SB.PCI0._Y0F._LEN, MSLN)  // _LEN: Length
                     Store (Zero, MSLN)
                 }
                 Else
@@ -6388,7 +6388,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
                     }
                 }
 
-                Method (_DOD, 0, NotSerialized)  // _DOD: Display Output Devices
+                Method (_DOD, 0, Serialized)  // _DOD: Display Output Devices
                 {
                     Store (Zero, NDID)
                     If (LNotEqual (DIDL, Zero))
@@ -6572,7 +6572,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
                         }
                     }
 
-                    Method (_BCL, 0, NotSerialized)  // _BCL: Brightness Control Levels
+                    Method (_BCL, 0, Serialized)  // _BCL: Brightness Control Levels
                     {
                         If (LGreaterEqual (MSOS (), OSW8))
                         {
@@ -10441,7 +10441,7 @@ DTB1, 8
         Name (OSVT, 0x40)
         Name (OSW7, 0x80)
         Name (OSW8, 0x0100)
-        Method (MCTH, 2, NotSerialized)
+        Method (MCTH, 2, Serialized)
         {
             If (LLess (SizeOf (Arg0), SizeOf (Arg1)))
             {
@@ -10669,7 +10669,7 @@ DTB1, 8
                 /* 0018 */   0xC2, 0xE3, 0xED, 0x45, 0x91, 0xC2, 0x4C, 0x5A,
                 /* 0020 */   0x6D, 0x19, 0x5D, 0x1C, 0xFF, 0x00, 0x01, 0x08
             })
-            Method (WMNB, 3, NotSerialized)
+            Method (WMNB, 3, Serialized)
             {
                 CreateDWordField (Arg2, Zero, IIA0)
                 CreateDWordField (Arg2, 0x04, IIA1)
@@ -12249,22 +12249,24 @@ DTB1, 8
                 {
                     OWGD (Arg0)
                     Return (One)
-                }
+                } Else {
 
                 If (LEqual (Arg0, 0x02))
                 {
                     Return (OWGS ())
-                }
+                } Else {
 
                 If (LEqual (Arg0, 0x03))
                 {
                     Return (0xFF)
-                }
+                } Else {
 
                 If (LEqual (Arg0, 0x80))
                 {
                     Return (One)
-                }
+                } Else {
+                Return (Zero)
+                } } } }
             }
 
             Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -12941,7 +12943,7 @@ DTB1, 8
             Return (Local0)
         }
 
-        Method (BIF9, 0, NotSerialized)
+        Method (BIF9, 0, Serialized)
         {
             Name (BSTR, Buffer (0x20) {})
             Store (SMBR (RDBL, BADR, 0x21), Local0)
@@ -13314,7 +13316,7 @@ DTB1, 8
                 0x80000000, 
                 0x80000000
             })
-            Method (TSDD, 0, NotSerialized)
+            Method (TSDD, 0, Serialized)
             {
                 Name (TMPC, Zero)
                 Store (^^PCI0.LPCB.EC0.ECPU, TMPC)
@@ -13329,7 +13331,7 @@ DTB1, 8
                 Return (Ones)
             }
 
-            Method (PSDD, 0, NotSerialized)
+            Method (PSDD, 0, Serialized)
             {
                 Name (PWRC, Zero)
                 Store (PWRG (), PWRC)
@@ -13344,7 +13346,7 @@ DTB1, 8
                 Return (Ones)
             }
 
-            Method (OSDD, 0, NotSerialized)
+            Method (OSDD, 0, Serialized)
             {
                 Name (OSDC, Zero)
                 Store (OSDG (), OSDC)
@@ -13412,7 +13414,7 @@ DTB1, 8
                 Return (MBOX)
             }
 
-            Method (WPMD, 1, NotSerialized)
+            Method (WPMD, 1, Serialized)
             {
                 If (LNotEqual (SizeOf (Arg0), 0x1A))
                 {
@@ -13482,7 +13484,7 @@ DTB1, 8
                 Store (Zero, CYCT)
             }
 
-            Method (RPCS, 0, NotSerialized)
+            Method (RPCS, 0, Serialized)
             {
                 Name (TPCS, Zero)
                 If (LGreater (CYCT, Zero))
@@ -13498,7 +13500,7 @@ DTB1, 8
                 Return (TPCS)
             }
 
-            Method (RPEC, 0, NotSerialized)
+            Method (RPEC, 0, Serialized)
             {
                 Name (TPEC, Zero)
                 Store (ERRN, TPEC)
@@ -13571,7 +13573,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (GVER, 2, NotSerialized)
+        Method (GVER, 2, Serialized)
         {
             OperationRegion (\FGVR, SystemMemory, Arg0, Arg1)
             Field (FGVR, DWordAcc, NoLock, Preserve)
@@ -13584,7 +13586,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (MF30, 3, NotSerialized)
+        Method (MF30, 3, Serialized)
         {
             OperationRegion (FM30, SystemMemory, Arg0, 0x08)
             Field (FM30, DWordAcc, NoLock, Preserve)
@@ -13620,7 +13622,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (G30V, 2, NotSerialized)
+        Method (G30V, 2, Serialized)
         {
             If (LLess (Arg1, 0x0C))
             {
@@ -13640,7 +13642,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (EC01, 2, NotSerialized)
+        Method (EC01, 2, Serialized)
         {
             If (LLess (Arg1, 0x10))
             {
@@ -13668,7 +13670,7 @@ DTB1, 8
             Return (DerefOf (Index (Local0, Zero)))
         }
 
-        Method (EC02, 2, NotSerialized)
+        Method (EC02, 2, Serialized)
         {
             If (LLess (Arg1, 0x30))
             {
@@ -13722,7 +13724,7 @@ DTB1, 8
             ISMI (0xA1)
         }
 
-        Method (MF1X, 4, NotSerialized)
+        Method (MF1X, 4, Serialized)
         {
             OperationRegion (FM1X, SystemMemory, Arg0, 0x08)
             Field (FM1X, DWordAcc, NoLock, Preserve)
@@ -13814,7 +13816,7 @@ DTB1, 8
             Return (Local0)
         }
 
-        Method (G10V, 2, NotSerialized)
+        Method (G10V, 2, Serialized)
         {
             If (LLess (Arg1, 0x0C))
             {
@@ -13834,7 +13836,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (SRTC, 2, NotSerialized)
+        Method (SRTC, 2, Serialized)
         {
             If (LLess (Arg1, 0x0C))
             {
@@ -13883,7 +13885,7 @@ DTB1, 8
             Return (Local0)
         }
 
-        Method (G11V, 2, NotSerialized)
+        Method (G11V, 2, Serialized)
         {
             If (LLess (Arg1, 0x0C))
             {
@@ -13903,7 +13905,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (GBAT, 2, NotSerialized)
+        Method (GBAT, 2, Serialized)
         {
             If (LLess (Arg1, 0x0A))
             {
@@ -13923,7 +13925,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (ASBR, 2, NotSerialized)
+        Method (ASBR, 2, Serialized)
         {
             If (LLess (Arg1, 0x30))
             {
@@ -14069,7 +14071,7 @@ DTB1, 8
             Return (0x10)
         }
 
-        Method (BTCR, 2, NotSerialized)
+        Method (BTCR, 2, Serialized)
         {
             If (LLess (Arg1, 0x09))
             {
@@ -14108,7 +14110,7 @@ DTB1, 8
             Return (Local0)
         }
 
-        Method (G12V, 2, NotSerialized)
+        Method (G12V, 2, Serialized)
         {
             If (LLess (Arg1, 0x0C))
             {
@@ -14128,7 +14130,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (GLDI, 2, NotSerialized)
+        Method (GLDI, 2, Serialized)
         {
             If (LLess (Arg1, 0x10))
             {
@@ -14150,7 +14152,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (LDCR, 2, NotSerialized)
+        Method (LDCR, 2, Serialized)
         {
             If (LLess (Arg1, 0x0A))
             {
@@ -14220,7 +14222,7 @@ DTB1, 8
             Return (Local0)
         }
 
-        Method (G13V, 2, NotSerialized)
+        Method (G13V, 2, Serialized)
         {
             If (LLess (Arg1, 0x0C))
             {
@@ -14240,7 +14242,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (GTSI, 2, NotSerialized)
+        Method (GTSI, 2, Serialized)
         {
             If (LLess (Arg1, 0x0C))
             {
@@ -14280,7 +14282,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (GTSV, 2, NotSerialized)
+        Method (GTSV, 2, Serialized)
         {
             If (LLess (Arg1, 0x0A))
             {
@@ -14330,7 +14332,7 @@ DTB1, 8
             Return (0x10)
         }
 
-        Method (GVSN, 2, NotSerialized)
+        Method (GVSN, 2, Serialized)
         {
             If (LLess (Arg1, 0x09))
             {
@@ -14348,7 +14350,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (GVSV, 2, NotSerialized)
+        Method (GVSV, 2, Serialized)
         {
             If (LLess (Arg1, 0x0B))
             {
@@ -14371,7 +14373,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (GFNN, 2, NotSerialized)
+        Method (GFNN, 2, Serialized)
         {
             If (LLess (Arg1, 0x09))
             {
@@ -14389,7 +14391,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (GFNS, 2, NotSerialized)
+        Method (GFNS, 2, Serialized)
         {
             If (LLess (Arg1, 0x0D))
             {
@@ -14414,7 +14416,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (SFNS, 2, NotSerialized)
+        Method (SFNS, 2, Serialized)
         {
             If (LLess (Arg1, 0x0A))
             {
@@ -14459,7 +14461,7 @@ DTB1, 8
             Return (Local0)
         }
 
-        Method (G14V, 2, NotSerialized)
+        Method (G14V, 2, Serialized)
         {
             If (LLess (Arg1, 0x0C))
             {
@@ -14479,7 +14481,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (GNBT, 2, NotSerialized)
+        Method (GNBT, 2, Serialized)
         {
             If (LLess (Arg1, 0x09))
             {
@@ -14497,7 +14499,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (GBTS, 2, NotSerialized)
+        Method (GBTS, 2, Serialized)
         {
             If (LLess (Arg1, 0x0A))
             {
@@ -14611,7 +14613,7 @@ DTB1, 8
             Return (Local0)
         }
 
-        Method (G15V, 2, NotSerialized)
+        Method (G15V, 2, Serialized)
         {
             If (LLess (Arg1, 0x0C))
             {
@@ -14631,7 +14633,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (GLDB, 2, NotSerialized)
+        Method (GLDB, 2, Serialized)
         {
             If (LLess (Arg1, 0x0A))
             {
@@ -14651,7 +14653,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (SLDB, 2, NotSerialized)
+        Method (SLDB, 2, Serialized)
         {
             If (LLess (Arg1, 0x0A))
             {
@@ -14686,7 +14688,7 @@ DTB1, 8
             Return (0x11)
         }
 
-        Method (GDPI, 2, NotSerialized)
+        Method (GDPI, 2, Serialized)
         {
             If (LLess (Arg1, 0x10))
             {
@@ -14709,7 +14711,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (SODP, 2, NotSerialized)
+        Method (SODP, 2, Serialized)
         {
             If (LLess (Arg1, 0x0C))
             {
@@ -14757,7 +14759,7 @@ DTB1, 8
             Return (Local0)
         }
 
-        Method (G16V, 2, NotSerialized)
+        Method (G16V, 2, Serialized)
         {
             If (LLess (Arg1, 0x0C))
             {
@@ -14777,7 +14779,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (SFBD, 2, NotSerialized)
+        Method (SFBD, 2, Serialized)
         {
             If (LLess (Arg1, 0x0A))
             {
@@ -14844,7 +14846,7 @@ DTB1, 8
             Return (Local0)
         }
 
-        Method (G17V, 2, NotSerialized)
+        Method (G17V, 2, Serialized)
         {
             If (LLess (Arg1, 0x0C))
             {
@@ -14864,7 +14866,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (GMDL, 2, NotSerialized)
+        Method (GMDL, 2, Serialized)
         {
             If (LLess (Arg1, 0x19))
             {
@@ -14901,7 +14903,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (GBSI, 2, NotSerialized)
+        Method (GBSI, 2, Serialized)
         {
             If (LLess (Arg1, 0x19))
             {
@@ -14938,7 +14940,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (GECI, 2, NotSerialized)
+        Method (GECI, 2, Serialized)
         {
             If (LLess (Arg1, 0x19))
             {
@@ -14964,7 +14966,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (GFII, 2, NotSerialized)
+        Method (GFII, 2, Serialized)
         {
             If (LLess (Arg1, 0x10))
             {
@@ -15008,7 +15010,7 @@ DTB1, 8
             Return (Local0)
         }
 
-        Method (G18V, 2, NotSerialized)
+        Method (G18V, 2, Serialized)
         {
             If (LLess (Arg1, 0x0C))
             {
@@ -15028,7 +15030,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (GDVI, 2, NotSerialized)
+        Method (GDVI, 2, Serialized)
         {
             If (LLess (Arg1, 0x18))
             {
@@ -15047,7 +15049,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (GDVS, 2, NotSerialized)
+        Method (GDVS, 2, Serialized)
         {
             If (LLess (Arg1, 0x0A))
             {
@@ -15071,7 +15073,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (SDPW, 2, NotSerialized)
+        Method (SDPW, 2, Serialized)
         {
             If (LLess (Arg1, 0x0A))
             {
@@ -15121,7 +15123,7 @@ DTB1, 8
             Return (Local0)
         }
 
-        Method (G19V, 2, NotSerialized)
+        Method (G19V, 2, Serialized)
         {
             If (LLess (Arg1, 0x0C))
             {
@@ -15147,7 +15149,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (CSIN, 2, NotSerialized)
+        Method (CSIN, 2, Serialized)
         {
             If (LLess (Arg1, 0x0A))
             {
@@ -15165,7 +15167,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (NVIN, 2, NotSerialized)
+        Method (NVIN, 2, Serialized)
         {
             OperationRegion (FM1F, SystemMemory, Arg0, Arg1)
             Field (FM1F, DWordAcc, NoLock, Preserve)
@@ -15192,7 +15194,7 @@ DTB1, 8
         {
         }
 
-        Method (OFBD, 1, NotSerialized)
+        Method (OFBD, 1, Serialized)
         {
             Name (FBDT, Package (0x52)
             {
@@ -15314,7 +15316,7 @@ DTB1, 8
             Store (Arg1, Local1)
         }
 
-        Method (MF42, 3, NotSerialized)
+        Method (MF42, 3, Serialized)
         {
             OperationRegion (FM42, SystemMemory, Arg0, 0x08)
             Field (FM42, DWordAcc, NoLock, Preserve)
@@ -15350,7 +15352,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (SFBO, 2, NotSerialized)
+        Method (SFBO, 2, Serialized)
         {
             OperationRegion (\F421, SystemMemory, Arg0, Arg1)
             Field (F421, DWordAcc, NoLock, Preserve)
@@ -15362,7 +15364,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (SAOC, 2, NotSerialized)
+        Method (SAOC, 2, Serialized)
         {
             OperationRegion (\F422, SystemMemory, Arg0, Arg1)
             Field (F422, DWordAcc, NoLock, Preserve)
@@ -15374,7 +15376,7 @@ DTB1, 8
             Return (Zero)
         }
 
-        Method (GBST, 2, NotSerialized)
+        Method (GBST, 2, Serialized)
         {
             OperationRegion (\F423, SystemMemory, Arg0, Arg1)
             Field (F423, DWordAcc, NoLock, Preserve)
@@ -18283,128 +18285,18 @@ Store (ShiftRight (Local4, 8), DTB1)
 
         Method (_Q0E, 0, NotSerialized)  // _Qxx: EC Query
         {
-            If (LLess (MSOS (), OSW8))
+            If (ATKP)
             {
-                SBRN ()
+                ^^^^ATKD.IANE (0x20)
             }
-
-            If (LGreaterEqual (MSOS (), OSVT))
-            {
-                Store (LBTN, Local0)
-                If (^^^IGPU.PRST ())
-                {
-                    If (LNotEqual (^^^IGPU.LCDD._DCS (), 0x1F))
-                    {
-                        Return (One)
-                    }
-
-                    ^^^IGPU.DWBL ()
-                    Store (One, ASBN)
-                }
-
-                Store (Zero, ASBN)
-                If (ATKP)
-                {
-                    If (LGreaterEqual (MSOS (), OSW8)) {}
-                    Else
-                    {
-                        If (LGreater (Local0, Zero))
-                        {
-                            Decrement (Local0)
-                        }
-
-                        If (LGreater (Local0, 0x0A))
-                        {
-                            Store (0x0A, Local0)
-                        }
-
-                        Store (Local0, LBTN)
-                        ^^^^ATKD.IANE (Add (Local0, 0x20))
-                    }
-                }
-            }
-            Else
-            {
-                If (LGreater (LBTN, Zero))
-                {
-                    Decrement (LBTN)
-                }
-
-                If (LGreater (LBTN, 0x0A))
-                {
-                    Store (0x0A, LBTN)
-                }
-
-                STBR ()
-                If (ATKP)
-                {
-                    ^^^^ATKD.IANE (Add (LBTN, 0x20))
-                }
-            }
-
-            Return (One)
         }
-
+        
         Method (_Q0F, 0, NotSerialized)  // _Qxx: EC Query
         {
-            If (LLess (MSOS (), OSW8))
+            If (ATKP)
             {
-                SBRN ()
+                ^^^^ATKD.IANE (0x10)
             }
-
-            If (LGreaterEqual (MSOS (), OSVT))
-            {
-                Store (LBTN, Local0)
-                If (^^^IGPU.PRST ())
-                {
-                    If (LNotEqual (^^^IGPU.LCDD._DCS (), 0x1F))
-                    {
-                        Return (One)
-                    }
-
-                    ^^^IGPU.UPBL ()
-                    Store (One, ASBN)
-                }
-
-                Store (Zero, ASBN)
-                If (ATKP)
-                {
-                    If (LGreaterEqual (MSOS (), OSW8)) {}
-                    Else
-                    {
-                        If (LLess (Local0, 0x0A))
-                        {
-                            Increment (Local0)
-                        }
-                        Else
-                        {
-                            Store (0x0A, Local0)
-                        }
-
-                        Store (Local0, LBTN)
-                        ^^^^ATKD.IANE (Add (Local0, 0x10))
-                    }
-                }
-            }
-            Else
-            {
-                If (LLess (LBTN, 0x0A))
-                {
-                    Increment (LBTN)
-                }
-                Else
-                {
-                    Store (0x0A, LBTN)
-                }
-
-                STBR ()
-                If (ATKP)
-                {
-                    ^^^^ATKD.IANE (Add (LBTN, 0x10))
-                }
-            }
-
-            Return (One)
         }
 
         Method (_Q10, 0, NotSerialized)  // _Qxx: EC Query
@@ -18447,7 +18339,6 @@ Store (ShiftRight (Local4, 8), DTB1)
 
                 STB2 (0x19)
                 STB2 (0x99)
-                Return (One)
             }
 
             If (LEqual (ORFG, One))
@@ -18461,7 +18352,6 @@ Store (ShiftRight (Local4, 8), DTB1)
 
                 STB2 (0x19)
                 STB2 (0x99)
-                Return (One)
             }
 
             FHKW ()
@@ -18586,7 +18476,6 @@ Store (ShiftRight (Local4, 8), DTB1)
                 STB2 (0x20)
                 STB2 (0xE0)
                 STB2 (0xA0)
-                Return (One)
             }
 
             If (ATKP)
@@ -18603,7 +18492,6 @@ Store (ShiftRight (Local4, 8), DTB1)
                 STB2 (0x2E)
                 STB2 (0xE0)
                 STB2 (0xAE)
-                Return (One)
             }
 
             If (LLess (AVOL, 0x0F))
@@ -18625,7 +18513,6 @@ Store (ShiftRight (Local4, 8), DTB1)
                 STB2 (0x30)
                 STB2 (0xE0)
                 STB2 (0xB0)
-                Return (One)
             }
 
             If (LGreater (AVOL, Zero))
@@ -19261,7 +19148,6 @@ Store (ShiftRight (Local4, 8), DTB1)
         Method (_Q79, 0, NotSerialized)  // _Qxx: EC Query
         {
             ^^^^ATKD.IANE (0xB1)
-            Return (One)
         }
     }
 
@@ -19418,7 +19304,7 @@ Store (ShiftRight (Local4, 8), DTB1)
             Return (Local0)
         }
 
-        Method (RBPE, 1, NotSerialized)
+        Method (RBPE, 1, Serialized)
         {
             Acquire (MUTE, 0xFFFF)
             Add (Arg0, PEBS, Local0)
@@ -19432,7 +19318,7 @@ Store (ShiftRight (Local4, 8), DTB1)
             Return (XCFG)
         }
 
-        Method (RWPE, 1, NotSerialized)
+        Method (RWPE, 1, Serialized)
         {
             Acquire (MUTE, 0xFFFF)
             And (Arg0, 0xFFFFFFFE, Arg0)
@@ -19447,7 +19333,7 @@ Store (ShiftRight (Local4, 8), DTB1)
             Return (XCFG)
         }
 
-        Method (RDPE, 1, NotSerialized)
+        Method (RDPE, 1, Serialized)
         {
             Acquire (MUTE, 0xFFFF)
             And (Arg0, 0xFFFFFFFC, Arg0)
@@ -19462,7 +19348,7 @@ Store (ShiftRight (Local4, 8), DTB1)
             Return (XCFG)
         }
 
-        Method (WBPE, 2, NotSerialized)
+        Method (WBPE, 2, Serialized)
         {
             Acquire (MUTE, 0xFFFF)
             Add (Arg0, PEBS, Local0)
@@ -19476,7 +19362,7 @@ Store (ShiftRight (Local4, 8), DTB1)
             Release (MUTE)
         }
 
-        Method (WWPE, 2, NotSerialized)
+        Method (WWPE, 2, Serialized)
         {
             Acquire (MUTE, 0xFFFF)
             And (Arg0, 0xFFFFFFFE, Arg0)
@@ -19491,7 +19377,7 @@ Store (ShiftRight (Local4, 8), DTB1)
             Release (MUTE)
         }
 
-        Method (WDPE, 2, NotSerialized)
+        Method (WDPE, 2, Serialized)
         {
             Acquire (MUTE, 0xFFFF)
             And (Arg0, 0xFFFFFFFC, Arg0)
@@ -19506,7 +19392,7 @@ Store (ShiftRight (Local4, 8), DTB1)
             Release (MUTE)
         }
 
-        Method (RWDP, 3, NotSerialized)
+        Method (RWDP, 3, Serialized)
         {
             Acquire (MUTE, 0xFFFF)
             And (Arg0, 0xFFFFFFFC, Arg0)
@@ -22208,7 +22094,7 @@ Store (ShiftRight (Local4, 8), DTB1)
             }
             Else
             {
-                Return (Package (0x02) { Buffer (One) { Zero } })
+                Return (Package (0x02) { Buffer (Zero) { Zero }, Buffer (Zero) { Zero } })
             }
         }
 
@@ -22220,14 +22106,11 @@ Store (ShiftRight (Local4, 8), DTB1)
             }
             Else
             {
-                Return (Package (0x01)
-                { Package (0x05) {
-                    Zero, Zero, Zero, Zero, Zero }
-                })
+                Return (Package (Zero) { Package (0x05) {Zero, Zero, Zero, Zero, Zero} })
             }
         }
 
-        Method (_TDL, 0, NotSerialized)  // _TDL: T-State Depth Limit
+        Method (_TDL, 0, Serialized)  // _TDL: T-State Depth Limit
         {
             Name (LFMI, Zero)
             If (CondRefOf (\_PR.CPU0._TSS))
@@ -22242,7 +22125,7 @@ Store (ShiftRight (Local4, 8), DTB1)
             }
         }
 
-        Method (_PDL, 0, NotSerialized)  // _PDL: P-state Depth Limit
+        Method (_PDL, 0, Serialized)  // _PDL: P-state Depth Limit
         {
             Name (LFMI, Zero)
             If (CondRefOf (\_PR.CPU0._PSS))
@@ -22308,7 +22191,6 @@ Store (ShiftRight (Local4, 8), DTB1)
             Name (AAAA, Zero)
             Name (BBBB, Zero)
             Name (CCCC, Zero)
-            Name (PPUU, Zero)
             Name (TMP1, Package (0x01)
             {
                 Package (0x05)
@@ -22646,6 +22528,7 @@ Store (ShiftRight (Local4, 8), DTB1)
             }
 
             Notify (\_SB.PCI0.B0D4, 0x83)
+            Return (Zero)
         }
     }
 
@@ -22816,9 +22699,6 @@ Store (ShiftRight (Local4, 8), DTB1)
             Name (W128, Zero)
             Name (W119, Zero)
             Name (W120, Zero)
-            Name (IRDY, One)
-            Name (PIOT, Zero)
-            Name (DMAT, Zero)
             If (LEqual (SizeOf (Arg1), 0x0200))
             {
                 CreateWordField (Arg1, Zero, IW00)
@@ -22933,7 +22813,6 @@ Store (ShiftRight (Local4, 8), DTB1)
             Store (Zero, CMDC)
             If (LEqual (SizeOf (Arg1), 0x0200))
             {
-                CreateWordField (Arg1, Zero, IW00)
                 CreateWordField (Arg1, 0x0100, I128)
                 If (And (I128, One))
                 {
@@ -23084,9 +22963,6 @@ Store (ShiftRight (Local4, 8), DTB1)
             Name (W128, Zero)
             Name (W119, Zero)
             Name (W120, Zero)
-            Name (IRDY, One)
-            Name (PIOT, Zero)
-            Name (DMAT, Zero)
             If (LEqual (SizeOf (Arg1), 0x0200))
             {
                 CreateWordField (Arg1, Zero, IW00)
@@ -23171,7 +23047,6 @@ Store (ShiftRight (Local4, 8), DTB1)
             Store (Zero, CMDC)
             If (LEqual (SizeOf (Arg1), 0x0200))
             {
-                CreateWordField (Arg1, Zero, IW00)
                 CreateWordField (Arg1, 0x0100, I128)
                 If (And (I128, One))
                 {
