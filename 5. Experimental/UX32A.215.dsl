@@ -44,39 +44,39 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
     External (DMSP)
     External (LPSP)
     
-    External (_PR_.AAC0, IntObj)
-    External (_PR_.ACRT, IntObj)
-    External (_PR_.APSV, IntObj)
-    External (_PR_.CBMI, IntObj)
-    External (_PR_.CLVL, IntObj)
-    External (_PR_.CPU0)
-    External (_PR_.CPU0._PSS, IntObj)
+    External (_PR_.AAC0, FieldUnitObj)
+    External (_PR_.ACRT, FieldUnitObj)
+    External (_PR_.APSV, FieldUnitObj)
+    External (_PR_.CBMI, FieldUnitObj)
+    External (_PR_.CLVL, FieldUnitObj)
+    External (_PR_.CPU0, ProcessorObj)
+    External (_PR_.CPU0.APSS, PkgObj)
     External (_PR_.CPU0._PTC, IntObj)
     External (_PR_.CPU0._TPC, IntObj)
-    External (_PR_.CPU0._TSD, IntObj)
-    External (_PR_.CPU0._TSS, IntObj)
-    External (_PR_.CPU1)
-    External (_PR_.CPU2)
-    External (_PR_.CPU3)
-    External (_PR_.CPU4)
-    External (_PR_.CPU5)
-    External (_PR_.CPU6)
-    External (_PR_.CPU7)
-    External (_PR_.PL10)
-    External (_PR_.PL11)
-    External (_PR_.PL12)
-    External (_PR_.PL20)
-    External (_PR_.PL21)
-    External (_PR_.PL22)
-    External (_PR_.PLW0, IntObj)
-    External (_PR_.PLW1, IntObj)
-    External (_PR_.PLW2, IntObj)
-    External (_PR_.CTC0, IntObj)
-    External (_PR_.CTC1, IntObj)
-    External (_PR_.CTC2, IntObj)
-    External (_PR_.TAR0)
-    External (_PR_.TAR1)
-    External (_PR_.TAR2)
+    External (_PR_.CPU0._TSD, MethodObj)
+    External (_PR_.CPU0._TSS, MethodObj)
+    External (_PR_.CPU1, ProcessorObj)
+    External (_PR_.CPU2, ProcessorObj)
+    External (_PR_.CPU3, ProcessorObj)
+    External (_PR_.CPU4, ProcessorObj)
+    External (_PR_.CPU5, ProcessorObj)
+    External (_PR_.CPU6, ProcessorObj)
+    External (_PR_.CPU7, ProcessorObj)
+    External (_PR_.PL10, FieldUnitObj)
+    External (_PR_.PL11, FieldUnitObj)
+    External (_PR_.PL12, FieldUnitObj)
+    External (_PR_.PL20, FieldUnitObj)
+    External (_PR_.PL21, FieldUnitObj)
+    External (_PR_.PL22, FieldUnitObj)
+    External (_PR_.PLW0, FieldUnitObj)
+    External (_PR_.PLW1, FieldUnitObj)
+    External (_PR_.PLW2, FieldUnitObj)
+    External (_PR_.CTC0, FieldUnitObj)
+    External (_PR_.CTC1, FieldUnitObj)
+    External (_PR_.CTC2, FieldUnitObj)
+    External (_PR_.TAR0, FieldUnitObj)
+    External (_PR_.TAR1, FieldUnitObj)
+    External (_PR_.TAR2, FieldUnitObj)
     
 
     Name (SMBS, 0x0580)
@@ -8772,13 +8772,10 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
 
     Method (_WAK, 1, Serialized)  // _WAK: Wake
     {
-        If (LOr(LLess(Arg0,1),LGreater(Arg0,5))) { Store(3,Arg0) }
+        If (LOr (LLess (Arg0, One), LGreater (Arg0, 0x05))) { Store (0x03, Arg0) }
         WAK (Arg0)
         Return (Package (0x02)
-        {
-            Zero, 
-            Zero
-        })
+        { Zero, Zero })
     }
 
     Method (GETB, 3, Serialized)
@@ -12252,7 +12249,7 @@ DTB1, 8
                 Store (Arg0, Local0)
                 Store (Arg0, KBLV)
                 Store (DerefOf (Index (PWKB, Local0)), Local1)
-                ^^PCI0.LPCB.EC0.WRAM (0x04B1, Local1)
+                ^^PCI0.LPCB.EC0.WRAM (0x044B, Local1)
                 Return (One)
             }
             
@@ -22021,9 +22018,9 @@ Store (ShiftRight (Local4, 8), DTB1)
 
         Method (_PSS, 0, NotSerialized)  // _PSS: Performance Supported States
         {
-            If (CondRefOf (\_PR.CPU0._PSS))
+            If (CondRefOf (\_PR.CPU0.APSS))
             {
-                Return (\_PR.CPU0._PSS)
+                Return (\_PR.CPU0.APSS)
             }
             Else
             {
@@ -22099,9 +22096,9 @@ Store (ShiftRight (Local4, 8), DTB1)
         Method (_PDL, 0, Serialized)  // _PDL: P-state Depth Limit
         {
             Name (LFMI, Zero)
-            If (CondRefOf (\_PR.CPU0._PSS))
+            If (CondRefOf (\_PR.CPU0.APSS))
             {
-                Store (SizeOf (\_PR.CPU0._PSS), LFMI)
+                Store (SizeOf (\_PR.CPU0.APSS), LFMI)
                 Decrement (LFMI)
                 Return (LFMI)
             }
@@ -23272,6 +23269,38 @@ Store (ShiftRight (Local4, 8), DTB1)
         Method (FAN1, 0, NotSerialized)
         {
             Store (\_SB.PCI0.LPCB.EC0.TACH (One), Local0)
+            Return (Local0)
+        }
+        Name (KLVN, Zero)
+        Name (TEMP, Package (0x08)
+        {
+            "CPU Heatsink", 
+            "TCPU", 
+            "CPU Proximity", 
+            "TCPP", 
+            "PCH Die", 
+            "TPCH", 
+            "Mainboard", 
+            "TSYS"
+        })
+        Method (TCPU, 0, NotSerialized)
+        {
+            Store (\_SB.PCI0.LPCB.EC0.ECPU, Local0)
+            Return (Local0)
+        }
+        Method (TCPP, 0, NotSerialized)
+        {
+            Store (\_SB.PCI0.LPCB.EC0.TH0R, Local0)
+            Return (Local0)
+        }
+        Method (TPCH, 0, NotSerialized)
+        {
+            Store (\_SB.PCI0.LPCB.EC0.TH1L, Local0)
+            Return (Local0)
+        }
+        Method (TSYS, 0, NotSerialized)
+        {
+            Store (\_SB.PCI0.LPCB.EC0.TH1R, Local0)
             Return (Local0)
         }
     }

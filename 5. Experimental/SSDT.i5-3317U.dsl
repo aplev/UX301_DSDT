@@ -24,10 +24,29 @@ DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00010500)
 
     Scope (\_PR_.CPU0)
     {
-        Name (APLF, Zero)
-        Name (APSN, 0x09)
-        Name (APSS, Package (0x0F)
+        Method (_INI, 0, NotSerialized)
         {
+            Store ("ssdtPRGen version: 10.5 / Mac OS X 10.9.1 (13B42)", Debug)
+            Store ("target processor : i5-3317U", Debug)
+            Store ("running processor: Intel(R) Core(TM) i5-3317U CPU @ 1.70GHz", Debug)
+            Store ("baseFrequency    : 1200", Debug)
+            Store ("frequency        : 1700", Debug)
+            Store ("busFrequency     : 100", Debug)
+            Store ("logicalCPUs      : 4", Debug)
+            Store ("max TDP          : 17", Debug)
+            Store ("packageLength    : 15", Debug)
+            Store ("turboStates      : 9", Debug)
+            Store ("maxTurboFrequency: 2600", Debug)
+            Store ("gIvyWorkAround   : 3", Debug)
+            Store ("machdep.xcpm.mode: 0", Debug)
+        }
+
+        Name (APLF, 0x04)
+        Name (APSN, 0x0A)
+        Name (APSS, Package (0x14)
+        {
+            /* Workaround for the Ivy Bridge PM 'bug' */
+            Package (0x06) { 0x0A29, 0x004268, 0x0A, 0x0A, 0x1B00, 0x1B00 },
             /* High Frequency Modes (turbo) */
             Package (0x06) { 0x0A28, 0x004268, 0x0A, 0x0A, 0x1A00, 0x1A00 },
             Package (0x06) { 0x09C4, 0x004268, 0x0A, 0x0A, 0x1900, 0x1900 },
@@ -45,11 +64,18 @@ DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00010500)
             Package (0x06) { 0x0578, 0x0034D6, 0x0A, 0x0A, 0x0E00, 0x0E00 },
             Package (0x06) { 0x0514, 0x00307F, 0x0A, 0x0A, 0x0D00, 0x0D00 },
             /* Low Frequency Mode */
-            Package (0x06) { 0x04B0, 0x002C3F, 0x0A, 0x0A, 0x0C00, 0x0C00 }
+            Package (0x06) { 0x04B0, 0x002C3F, 0x0A, 0x0A, 0x0C00, 0x0C00 },
+            Package (0x06) { 0x044C,     Zero, 0x0A, 0x0A, 0x0B00, 0x0B00 },
+            Package (0x06) { 0x03E8,     Zero, 0x0A, 0x0A, 0x0A00, 0x0A00 },
+            Package (0x06) { 0x0384,     Zero, 0x0A, 0x0A, 0x0900, 0x0900 },
+            Package (0x06) { 0x0320,     Zero, 0x0A, 0x0A, 0x0800, 0x0800 }
         })
 
         Method (ACST, 0, NotSerialized)
         {
+            Store ("Method CPU0.ACST Called", Debug)
+            Store ("CPU0 C-States    : 29", Debug)
+
             /* Low Power Modes for CPU0 */
             Return (Package (0x06)
             {
@@ -123,6 +149,8 @@ DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00010500)
 
         Method (_DSM, 4, NotSerialized)
         {
+            Store ("Method CPU0._DSM Called", Debug)
+
             If (LEqual (Arg2, Zero))
             {
                 Return (Buffer (One)
@@ -143,11 +171,16 @@ DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00010500)
     {
         Method (APSS, 0, NotSerialized)
         {
+            Store ("Method CPU1.APSS Called", Debug)
+
             Return (\_PR_.CPU0.APSS)
         }
 
         Method (ACST, 0, NotSerialized)
         {
+            Store ("Method CPU1.ACST Called", Debug)
+            Store ("CPU1 C-States    : 7", Debug)
+
             /* Low Power Modes for CPU1 */
             Return (Package (0x05)
             {
@@ -208,6 +241,8 @@ DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00010500)
     {
         Method (APSS, 0, NotSerialized)
         {
+            Store ("Method CPU2.APSS Called", Debug)
+
             Return (\_PR_.CPU0.APSS)
         }
 
@@ -218,6 +253,8 @@ DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00010500)
     {
         Method (APSS, 0, NotSerialized)
         {
+            Store ("Method CPU3.APSS Called", Debug)
+
             Return (\_PR_.CPU0.APSS)
         }
 

@@ -32287,6 +32287,38 @@ Store (ShiftRight (Local4, 8), DTB1)
 //            If (LLessEqual (\_SB.PCI0.LPCB.EC0.ECPU, 0x32)) { Store (Zero, Local0) } // If CPU < 50C, Show 0RPM
             Return (Local0)
         }
+        Name (KLVN, Zero)
+        Name (TEMP, Package (0x08)
+        {
+            "CPU Heatsink", 
+            "TCPU", 
+            "CPU Proximity", 
+            "TCPP", 
+            "PCH Die", 
+            "TPCH", 
+            "Mainboard", 
+            "TSYS"
+        })
+        Method (TCPU, 0, NotSerialized)
+        {
+            Store (\_SB.PCI0.LPCB.EC0.ECPU, Local0)
+            Return (Local0)
+        }
+        Method (TCPP, 0, NotSerialized)
+        {
+            Store (\_SB.PCI0.LPCB.EC0.TH0R, Local0)
+            Return (Local0)
+        }
+        Method (TPCH, 0, NotSerialized)
+        {
+            Store (\_SB.PCI0.LPCB.EC0.TH1L, Local0)
+            Return (Local0)
+        }
+        Method (TSYS, 0, NotSerialized)
+        {
+            Store (\_SB.PCI0.LPCB.EC0.TH1R, Local0)
+            Return (Local0)
+        }
     }
 
 //    Device (PROB) // ACPIProbe virtual device (c) TimeWalker
