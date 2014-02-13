@@ -7558,7 +7558,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
                         "AAPL,ig-platform-id",
                         Buffer (0x04)
                         {
-                            0x0A, 0x00, 0x66, 0x01
+                            0x09, 0x00, 0x66, 0x01
                         },
                         "hda-gfx",
                         Buffer (0x0A)
