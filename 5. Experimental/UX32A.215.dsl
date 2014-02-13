@@ -12254,10 +12254,7 @@ DTB1, 8
                 Return (Zero)
             }
             
-            Method (ALSS, 0, NotSerialized)
-            {
-                Return (^^PCI0.LPCB.EC0.RALS ())
-            }
+            
             
             Method (SKBL, 1, NotSerialized)
             {
@@ -12271,6 +12268,10 @@ DTB1, 8
             Method (GKBL, 0, NotSerialized)
             {
                 Return (KBLV)
+            }
+            Method (ALSS, 0, NotSerialized)
+            {
+                Return (^^PCI0.LPCB.EC0.RALS ())
             }
         }
 
@@ -17324,94 +17325,55 @@ Store (ShiftRight (Local4, 8), DTB1)
 
         Method (RALS, 0, NotSerialized)
         {
-            And (LSTP, One, Local0)
-            If (LEqual (Local0, Zero))
+            
+            If (ALAE)
             {
-                If (ALAE)
+                Store (RRAM (0x04C9), Local0)
+                And (Local0, 0x0F, Local0)
+                If (LLessEqual (Local0, One))
                 {
-                    Store (RRAM (0x02A3), Local0)
-                    Store (RRAM (0x02A4), Local1)
-                    ShiftLeft (Local0, 0x08, Local0)
-                    Add (Local0, Local1, Local0)
-                    Multiply (Local0, 0x03E8, Local1)
-                    Divide (Local1, ALSA, Local2, Local3)
-                }
-                Else
-                {
-                    Return (0x012C)
-                }
-                
-                If (LLessEqual (Local3, 0x3C))
-                {
+                    Store (0x32, Local1)
                     ^^^^ATKD.SKBL (0x03)
-                    Store (One, Local4)
+                    Store (One, Local2)
                 }
                 Else
                 {
-                    If (LLessEqual (Local3, 0x82))
+                    If (LLessEqual (Local0, 0x06))
                     {
+                        Store (0xC8, Local1)
                         ^^^^ATKD.SKBL (0x02)
-                        Store (0x02, Local4)
+                        Store (0x02, Local2)
                     }
                     Else
                     {
-                        If (LLessEqual (Local3, 0xFF))
+                        If (LLessEqual (Local0, 0x0A))
                         {
+                            Store (0x0190, Local1)
                             ^^^^ATKD.SKBL (One)
-                            Store (0x03, Local4)
+                            Store (0x03, Local2)
                         }
                         Else
                         {
-                            ^^^^ATKD.SKBL (Zero)
-                            Store (0x04, Local4)
-                        }
-                    }
-                }
-
-                Return (Local4)
-            }
-            Else
-            {
-                If (ALAE)
-                {
-                    Store (RRAM (0x04C9), Local0)
-                    If (LLessEqual (Local0, One))
-                    {
-                        Store (0x32, Local1)
-                    }
-                    Else
-                    {
-                        If (LLessEqual (Local0, 0x06))
-                        {
-                            Store (0xC8, Local1)
-                        }
-                        Else
-                        {
-                            If (LLessEqual (Local0, 0x0A))
+                            If (LLessEqual (Local0, 0x0E))
                             {
-                                Store (0x0190, Local1)
+                                Store (0x0258, Local1)
                             }
                             Else
                             {
-                                If (LLessEqual (Local0, 0x0E))
-                                {
-                                    Store (0x0258, Local1)
-                                }
-                                Else
-                                {
-                                    Store (0x0320, Local1)
-                                }
+                                Store (0x0320, Local1)
                             }
+                            ^^^^ATKD.SKBL (Zero)
+                            Store (0x04, Local2)
                         }
                     }
-
-                    Return (Local1)
                 }
-                Else
-                {
-                    Return (0xC8)
-                }
+                Return (Local2)
             }
+            Else
+            {
+                Return (0xC8)
+            }
+
         }
     }
 
@@ -18804,68 +18766,24 @@ Store (ShiftRight (Local4, 8), DTB1)
         Name (OLUX, 0xFF)
         Method (_QDD, 0, NotSerialized)  // _Qxx: EC Query
         {
-            Store (RALS (), Local0)
-            Store (RRAM (0x04C9), Local1)
-            If (LNotEqual (OLUX, Local1))
+            
+            Notify (ALS, 0x80)
+            If (ATKP)
             {
-                If (LEqual (MSOS (), OSW7))
-                {
-                    ^^^IGPU.AINT (Zero, Local0)
-                }
-                Else
-                {
-                    If (LEqual (MSOS (), OSW8))
-                    {
-                        Notify (ALS, 0x80)
-                    }
-                }
-
-                If (ATKP)
-                {
-                    Store (Zero, Local2)
-                    If (LAnd (LLessEqual (OLUX, One), LGreater (Local1, One)))
-                    {
-                        Store (One, Local2)
-                    }
-                    Else
-                    {
-                        If (LAnd (LLessEqual (OLUX, 0x07), LGreater (Local1, 0x07)))
-                        {
-                            Store (One, Local2)
-                        }
-                        Else
-                        {
-                            If (LAnd (LGreaterEqual (OLUX, 0x07), LLess (Local1, 0x07)))
-                            {
-                                Store (One, Local2)
-                            }
-                            Else
-                            {
-                                If (LAnd (LGreaterEqual (OLUX, One), LLess (Local1, One)))
-                                {
-                                    Store (One, Local2)
-                                }
-                            }
-                        }
-                    }
-
-                    If (Local2)
-                    {
-                        ^^^^ATKD.IANE (0xC6)
-                    }
-                }
+                ^^^^ATKD.IANE (0xC6)
             }
 
-            Store (Local1, OLUX)
         }
 
         Method (_QCD, 0, NotSerialized)  // _Qxx: EC Query
         {
+            
             Notify (ALS, 0x80)
             If (ATKP)
             {
                 ^^^^ATKD.IANE (0xC7)
             }
+
         }
 
         Method (_QB0, 0, NotSerialized)  // _Qxx: EC Query
