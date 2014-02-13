@@ -182,7 +182,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
     Name (SS3, One)
     Name (SS4, One)
     Name (IOST, 0x4400)
-    Name (TOPM, 0x00000000)
+    Name (TOPM, Zero)
     Name (ROMS, 0xFFE00000)
     Name (VGAF, One)
     OperationRegion (GNVS, SystemMemory, 0xDA883E18, 0x01D1)
@@ -2304,181 +2304,181 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
             })
             Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
             {
-                CreateWordField (BUF0, \_SB.PCI0._Y00._MAX, PBMX)  // _MAX: Maximum Base Address
+                CreateWordField (BUF0, ^_Y00._MAX, PBMX)  // _MAX: Maximum Base Address
                 Store (Subtract (ShiftRight (PELN, 0x14), 0x02), PBMX)
-                CreateWordField (BUF0, \_SB.PCI0._Y00._LEN, PBLN)  // _LEN: Length
+                CreateWordField (BUF0, ^_Y00._LEN, PBLN)  // _LEN: Length
                 Store (Subtract (ShiftRight (PELN, 0x14), One), PBLN)
                 If (PM1L)
                 {
-                    CreateDWordField (BUF0, \_SB.PCI0._Y01._LEN, C0LN)  // _LEN: Length
+                    CreateDWordField (BUF0, ^_Y01._LEN, C0LN)  // _LEN: Length
                     Store (Zero, C0LN)
                 }
 
                 If (LEqual (PM1L, One))
                 {
-                    CreateBitField (BUF0, \_SB.PCI0._Y01._RW, C0RW)  // _RW_: Read-Write Status
+                    CreateBitField (BUF0, ^_Y01._RW, C0RW)  // _RW_: Read-Write Status
                     Store (Zero, C0RW)
                 }
 
                 If (PM1H)
                 {
-                    CreateDWordField (BUF0, \_SB.PCI0._Y02._LEN, C4LN)  // _LEN: Length
+                    CreateDWordField (BUF0, ^_Y02._LEN, C4LN)  // _LEN: Length
                     Store (Zero, C4LN)
                 }
 
                 If (LEqual (PM1H, One))
                 {
-                    CreateBitField (BUF0, \_SB.PCI0._Y02._RW, C4RW)  // _RW_: Read-Write Status
+                    CreateBitField (BUF0, ^_Y02._RW, C4RW)  // _RW_: Read-Write Status
                     Store (Zero, C4RW)
                 }
 
                 If (PM2L)
                 {
-                    CreateDWordField (BUF0, \_SB.PCI0._Y03._LEN, C8LN)  // _LEN: Length
+                    CreateDWordField (BUF0, ^_Y03._LEN, C8LN)  // _LEN: Length
                     Store (Zero, C8LN)
                 }
 
                 If (LEqual (PM2L, One))
                 {
-                    CreateBitField (BUF0, \_SB.PCI0._Y03._RW, C8RW)  // _RW_: Read-Write Status
+                    CreateBitField (BUF0, ^_Y03._RW, C8RW)  // _RW_: Read-Write Status
                     Store (Zero, C8RW)
                 }
 
                 If (PM2H)
                 {
-                    CreateDWordField (BUF0, \_SB.PCI0._Y04._LEN, CCLN)  // _LEN: Length
+                    CreateDWordField (BUF0, ^_Y04._LEN, CCLN)  // _LEN: Length
                     Store (Zero, CCLN)
                 }
 
                 If (LEqual (PM2H, One))
                 {
-                    CreateBitField (BUF0, \_SB.PCI0._Y04._RW, CCRW)  // _RW_: Read-Write Status
+                    CreateBitField (BUF0, ^_Y04._RW, CCRW)  // _RW_: Read-Write Status
                     Store (Zero, CCRW)
                 }
 
                 If (PM3L)
                 {
-                    CreateDWordField (BUF0, \_SB.PCI0._Y05._LEN, D0LN)  // _LEN: Length
+                    CreateDWordField (BUF0, ^_Y05._LEN, D0LN)  // _LEN: Length
                     Store (Zero, D0LN)
                 }
 
                 If (LEqual (PM3L, One))
                 {
-                    CreateBitField (BUF0, \_SB.PCI0._Y05._RW, D0RW)  // _RW_: Read-Write Status
+                    CreateBitField (BUF0, ^_Y05._RW, D0RW)  // _RW_: Read-Write Status
                     Store (Zero, D0RW)
                 }
 
                 If (PM3H)
                 {
-                    CreateDWordField (BUF0, \_SB.PCI0._Y06._LEN, D4LN)  // _LEN: Length
+                    CreateDWordField (BUF0, ^_Y06._LEN, D4LN)  // _LEN: Length
                     Store (Zero, D4LN)
                 }
 
                 If (LEqual (PM3H, One))
                 {
-                    CreateBitField (BUF0, \_SB.PCI0._Y06._RW, D4RW)  // _RW_: Read-Write Status
+                    CreateBitField (BUF0, ^_Y06._RW, D4RW)  // _RW_: Read-Write Status
                     Store (Zero, D4RW)
                 }
 
                 If (PM4L)
                 {
-                    CreateDWordField (BUF0, \_SB.PCI0._Y07._LEN, D8LN)  // _LEN: Length
+                    CreateDWordField (BUF0, ^_Y07._LEN, D8LN)  // _LEN: Length
                     Store (Zero, D8LN)
                 }
 
                 If (LEqual (PM4L, One))
                 {
-                    CreateBitField (BUF0, \_SB.PCI0._Y07._RW, D8RW)  // _RW_: Read-Write Status
+                    CreateBitField (BUF0, ^_Y07._RW, D8RW)  // _RW_: Read-Write Status
                     Store (Zero, D8RW)
                 }
 
                 If (PM4H)
                 {
-                    CreateDWordField (BUF0, \_SB.PCI0._Y08._LEN, DCLN)  // _LEN: Length
+                    CreateDWordField (BUF0, ^_Y08._LEN, DCLN)  // _LEN: Length
                     Store (Zero, DCLN)
                 }
 
                 If (LEqual (PM4H, One))
                 {
-                    CreateBitField (BUF0, \_SB.PCI0._Y08._RW, DCRW)  // _RW_: Read-Write Status
+                    CreateBitField (BUF0, ^_Y08._RW, DCRW)  // _RW_: Read-Write Status
                     Store (Zero, DCRW)
                 }
 
                 If (PM5L)
                 {
-                    CreateDWordField (BUF0, \_SB.PCI0._Y09._LEN, E0LN)  // _LEN: Length
+                    CreateDWordField (BUF0, ^_Y09._LEN, E0LN)  // _LEN: Length
                     Store (Zero, E0LN)
                 }
 
                 If (LEqual (PM5L, One))
                 {
-                    CreateBitField (BUF0, \_SB.PCI0._Y09._RW, E0RW)  // _RW_: Read-Write Status
+                    CreateBitField (BUF0, ^_Y09._RW, E0RW)  // _RW_: Read-Write Status
                     Store (Zero, E0RW)
                 }
 
                 If (PM5H)
                 {
-                    CreateDWordField (BUF0, \_SB.PCI0._Y0A._LEN, E4LN)  // _LEN: Length
+                    CreateDWordField (BUF0, ^_Y0A._LEN, E4LN)  // _LEN: Length
                     Store (Zero, E4LN)
                 }
 
                 If (LEqual (PM5H, One))
                 {
-                    CreateBitField (BUF0, \_SB.PCI0._Y0A._RW, E4RW)  // _RW_: Read-Write Status
+                    CreateBitField (BUF0, ^_Y0A._RW, E4RW)  // _RW_: Read-Write Status
                     Store (Zero, E4RW)
                 }
 
                 If (PM6L)
                 {
-                    CreateDWordField (BUF0, \_SB.PCI0._Y0B._LEN, E8LN)  // _LEN: Length
+                    CreateDWordField (BUF0, ^_Y0B._LEN, E8LN)  // _LEN: Length
                     Store (Zero, E8LN)
                 }
 
                 If (LEqual (PM6L, One))
                 {
-                    CreateBitField (BUF0, \_SB.PCI0._Y0B._RW, E8RW)  // _RW_: Read-Write Status
+                    CreateBitField (BUF0, ^_Y0B._RW, E8RW)  // _RW_: Read-Write Status
                     Store (Zero, E8RW)
                 }
 
                 If (PM6H)
                 {
-                    CreateDWordField (BUF0, \_SB.PCI0._Y0C._LEN, ECLN)  // _LEN: Length
+                    CreateDWordField (BUF0, ^_Y0C._LEN, ECLN)  // _LEN: Length
                     Store (Zero, ECLN)
                 }
 
                 If (LEqual (PM6H, One))
                 {
-                    CreateBitField (BUF0, \_SB.PCI0._Y0C._RW, ECRW)  // _RW_: Read-Write Status
+                    CreateBitField (BUF0, ^_Y0C._RW, ECRW)  // _RW_: Read-Write Status
                     Store (Zero, ECRW)
                 }
 
                 If (PM0H)
                 {
-                    CreateDWordField (BUF0, \_SB.PCI0._Y0D._LEN, F0LN)  // _LEN: Length
+                    CreateDWordField (BUF0, ^_Y0D._LEN, F0LN)  // _LEN: Length
                     Store (Zero, F0LN)
                 }
 
                 If (LEqual (PM0H, One))
                 {
-                    CreateBitField (BUF0, \_SB.PCI0._Y0D._RW, F0RW)  // _RW_: Read-Write Status
+                    CreateBitField (BUF0, ^_Y0D._RW, F0RW)  // _RW_: Read-Write Status
                     Store (Zero, F0RW)
                 }
 
-                CreateDWordField (BUF0, \_SB.PCI0._Y0E._MIN, M1MN)  // _MIN: Minimum Base Address
-                CreateDWordField (BUF0, \_SB.PCI0._Y0E._MAX, M1MX)  // _MAX: Maximum Base Address
-                CreateDWordField (BUF0, \_SB.PCI0._Y0E._LEN, M1LN)  // _LEN: Length
+                CreateDWordField (BUF0, ^_Y0E._MIN, M1MN)  // _MIN: Minimum Base Address
+                CreateDWordField (BUF0, ^_Y0E._MAX, M1MX)  // _MAX: Maximum Base Address
+                CreateDWordField (BUF0, ^_Y0E._LEN, M1LN)  // _LEN: Length
                 ShiftLeft (TLUD, 0x14, M1MN)
                 Add (Subtract (M1MX, M1MN), One, M1LN)
                 If (LOr (LEqual (MM64, Zero), LLessEqual (OSYS, 0x07D3)))
                 {
-                    CreateQWordField (BUF0, \_SB.PCI0._Y0F._LEN, MSLN)  // _LEN: Length
+                    CreateQWordField (BUF0, ^_Y0F._LEN, MSLN)  // _LEN: Length
                     Store (Zero, MSLN)
                 }
                 Else
                 {
-                    CreateQWordField (BUF0, \_SB.PCI0._Y0F._LEN, M2LN)  // _LEN: Length
-                    CreateQWordField (BUF0, \_SB.PCI0._Y0F._MIN, M2MN)  // _MIN: Minimum Base Address
-                    CreateQWordField (BUF0, \_SB.PCI0._Y0F._MAX, M2MX)  // _MAX: Maximum Base Address
+                    CreateQWordField (BUF0, ^_Y0F._LEN, M2LN)  // _LEN: Length
+                    CreateQWordField (BUF0, ^_Y0F._MIN, M2MN)  // _MIN: Minimum Base Address
+                    CreateQWordField (BUF0, ^_Y0F._MAX, M2MX)  // _MAX: Maximum Base Address
                     Store (0x0000000400000000, M2LN)
                     If (LGreaterEqual (TUUD, 0x1000))
                     {
@@ -4186,7 +4186,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
                     {
                         If (HPAE)
                         {
-                            CreateDWordField (BUF0, \_SB.PCI0.LPCB.HPET._Y10._BAS, HPT0)  // _BAS: Base Address
+                            CreateDWordField (BUF0, ^_Y10._BAS, HPT0)  // _BAS: Base Address
                             If (LEqual (HPAS, One))
                             {
                                 Store (0xFED01000, HPT0)
@@ -4738,7 +4738,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
                         0x02002E4F, 
                         0x130FD041
                     })
-                    Name (CID2, Package (0x01)
+                    Name (CID2, Package (One)
                     {
                         0x130FD041
                     })
@@ -6432,7 +6432,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
 
                     If (LEqual (NDID, One))
                     {
-                        Name (TMP1, Package (0x01)
+                        Name (TMP1, Package (One)
                         {
                             0xFFFFFFFF
                         })
@@ -6500,7 +6500,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
                         Return (TMP5)
                     }
 
-                    Return (Package (0x01)
+                    Return (Package (One)
                     {
                         0x0400
                     })
@@ -7959,7 +7959,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -8007,7 +8007,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -8055,7 +8055,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -8103,7 +8103,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -8151,7 +8151,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -8199,7 +8199,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -8247,7 +8247,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -8295,7 +8295,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
 
                     Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
                     {
-                        Name (PLDP, Package (0x01)
+                        Name (PLDP, Package (One)
                         {
                             Buffer (0x10)
                             {
@@ -9052,25 +9052,25 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
             })
             Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
             {
-                CreateDWordField (BUF0, \_SB.PCI0.PDRC._Y11._BAS, RBR0)  // _BAS: Base Address
+                CreateDWordField (BUF0, ^_Y11._BAS, RBR0)  // _BAS: Base Address
                 ShiftLeft (^^LPCB.RCBA, 0x0E, RBR0)
-                CreateDWordField (BUF0, \_SB.PCI0.PDRC._Y12._BAS, TBR0)  // _BAS: Base Address
+                CreateDWordField (BUF0, ^_Y12._BAS, TBR0)  // _BAS: Base Address
                 Store (TBAB, TBR0)
-                CreateDWordField (BUF0, \_SB.PCI0.PDRC._Y12._LEN, TBLN)  // _LEN: Length
+                CreateDWordField (BUF0, ^_Y12._LEN, TBLN)  // _LEN: Length
                 If (LEqual (TBAB, Zero))
                 {
                     Store (Zero, TBLN)
                 }
 
-                CreateDWordField (BUF0, \_SB.PCI0.PDRC._Y13._BAS, MBR0)  // _BAS: Base Address
+                CreateDWordField (BUF0, ^_Y13._BAS, MBR0)  // _BAS: Base Address
                 ShiftLeft (MHBR, 0x0F, MBR0)
-                CreateDWordField (BUF0, \_SB.PCI0.PDRC._Y14._BAS, DBR0)  // _BAS: Base Address
+                CreateDWordField (BUF0, ^_Y14._BAS, DBR0)  // _BAS: Base Address
                 ShiftLeft (DIBR, 0x0C, DBR0)
-                CreateDWordField (BUF0, \_SB.PCI0.PDRC._Y15._BAS, EBR0)  // _BAS: Base Address
+                CreateDWordField (BUF0, ^_Y15._BAS, EBR0)  // _BAS: Base Address
                 ShiftLeft (EPBR, 0x0C, EBR0)
-                CreateDWordField (BUF0, \_SB.PCI0.PDRC._Y16._BAS, XBR0)  // _BAS: Base Address
+                CreateDWordField (BUF0, ^_Y16._BAS, XBR0)  // _BAS: Base Address
                 ShiftLeft (PXBR, 0x1A, XBR0)
-                CreateDWordField (BUF0, \_SB.PCI0.PDRC._Y16._LEN, XSZ0)  // _LEN: Length
+                CreateDWordField (BUF0, ^_Y16._LEN, XSZ0)  // _LEN: Length
                 ShiftRight (0x10000000, PXSZ, XSZ0)
                 Return (BUF0)
             }
@@ -16896,7 +16896,7 @@ DTB1, 8
 
         Method (SMBW, 5, Serialized)
         {
-            Store (Package (0x01)
+            Store (Package (One)
                 {
                     0x07
                 }, Local0)
@@ -20872,7 +20872,7 @@ Store (ShiftRight (Local4, 8), DTB1)
 
     Scope (_SB.PCI0.EHC1.RHUB.PRT1.PRT5)
     {
-        Name (CAPD, Package (0x01)
+        Name (CAPD, Package (One)
         {
             Buffer (0x14)
             {
@@ -20974,7 +20974,7 @@ Store (ShiftRight (Local4, 8), DTB1)
         }
     }
 
-    Scope (\_SB)
+    Scope (_SB_)
     {
         Device (IETM)
         {
@@ -21238,7 +21238,7 @@ Store (ShiftRight (Local4, 8), DTB1)
         }
     }
 
-    Scope (\_SB.PCI0.B0D4)
+    Scope (_SB_.PCI0.B0D4)
     {
         OperationRegion (MBAR, SystemMemory, Add (ShiftLeft (MHBR, 0x0F), 0x5000), 0x1000)
         Field (MBAR, ByteAcc, NoLock, Preserve)
@@ -21287,7 +21287,7 @@ Store (ShiftRight (Local4, 8), DTB1)
         }
     }
 
-    Scope (\_SB.PCI0)
+    Scope (_SB_.PCI0)
     {
         Device (TMEM)
         {
@@ -21326,12 +21326,12 @@ Store (ShiftRight (Local4, 8), DTB1)
 
             Method (PGMB, 0, NotSerialized)
             {
-                Return (\_SB.PCI0.MHBR)
+                Return (MHBR)
             }
         }
     }
 
-    Scope (\_SB.PCI0.LPCB.EC0)
+    Scope (_SB_.PCI0.LPCB.EC0)
     {
         Device (TFN1)
         {
@@ -21471,7 +21471,7 @@ Store (ShiftRight (Local4, 8), DTB1)
 
             Method (_FSL, 1, Serialized)  // _FSL: Fan Set Level
             {
-                Notify (\_SB.IETM, 0x83)
+                Notify (IETM, 0x83)
             }
 
             Name (TFST, Package (0x03)
@@ -21587,7 +21587,7 @@ Store (ShiftRight (Local4, 8), DTB1)
         }
     }
     
-    Scope (\_SB.PCI0.B0D4)
+    Scope (_SB_.PCI0.B0D4)
     {
         Name (XPCC, Zero)
         Method (PPCC, 0, Serialized)
@@ -21601,7 +21601,7 @@ Store (ShiftRight (Local4, 8), DTB1)
             Name (T_0, Zero)  // T_x: Emitted by ASL Compiler
             If (LAnd (LEqual (XPCC, Zero), CondRefOf (\_PR.CBMI)))
             {
-                Store (\_SB.PCI0.LPCB.EC0.RRAM (0x01AD), Local0)
+                Store (^^LPCB.EC0.RRAM (0x01AD), Local0)
                 While (One)
                 {
                     Store (Local0, T_0)
@@ -21715,8 +21715,8 @@ Store (ShiftRight (Local4, 8), DTB1)
                     Store (Local0, T_4)
                     If (LEqual (T_4, Zero))
                     {
-                        Store (Zero, \_SB.PCI0.B0D4.MAXT)
-                        Notify (\_SB.PCI0.B0D4, 0x84)
+                        Store (Zero, MAXT)
+                        Notify (B0D4, 0x84)
                     }
                     Else
                     {
@@ -21727,19 +21727,19 @@ Store (ShiftRight (Local4, 8), DTB1)
                                 Store (\_PR.CLVL, T_5)
                                 If (LEqual (T_5, 0x03))
                                 {
-                                    Store (One, \_SB.PCI0.B0D4.MAXT)
+                                    Store (One, MAXT)
                                 }
                                 Else
                                 {
                                     If (LEqual (T_5, 0x02))
                                     {
-                                        Store (Zero, \_SB.PCI0.B0D4.MAXT)
+                                        Store (Zero, MAXT)
                                     }
                                     Else
                                     {
                                         If (LEqual (T_5, One))
                                         {
-                                            Store (Zero, \_SB.PCI0.B0D4.MAXT)
+                                            Store (Zero, MAXT)
                                         }
                                     }
                                 }
@@ -21747,7 +21747,7 @@ Store (ShiftRight (Local4, 8), DTB1)
                                 Break
                             }
 
-                            Notify (\_SB.PCI0.B0D4, 0x84)
+                            Notify (B0D4, 0x84)
                         }
                         Else
                         {
@@ -21758,19 +21758,19 @@ Store (ShiftRight (Local4, 8), DTB1)
                                     Store (\_PR.CLVL, T_6)
                                     If (LEqual (T_6, 0x03))
                                     {
-                                        Store (0x02, \_SB.PCI0.B0D4.MAXT)
+                                        Store (0x02, MAXT)
                                     }
                                     Else
                                     {
                                         If (LEqual (T_6, 0x02))
                                         {
-                                            Store (One, \_SB.PCI0.B0D4.MAXT)
+                                            Store (One, MAXT)
                                         }
                                         Else
                                         {
                                             If (LEqual (T_6, One))
                                             {
-                                                Store (Zero, \_SB.PCI0.B0D4.MAXT)
+                                                Store (Zero, MAXT)
                                             }
                                         }
                                     }
@@ -21778,7 +21778,7 @@ Store (ShiftRight (Local4, 8), DTB1)
                                     Break
                                 }
 
-                                Notify (\_SB.PCI0.B0D4, 0x84)
+                                Notify (B0D4, 0x84)
                             }
                         }
                     }
@@ -21885,78 +21885,78 @@ Store (ShiftRight (Local4, 8), DTB1)
 
         Method (CPL0, 0, NotSerialized)
         {
-            Store (One, Index (\_SB.PCI0.B0D4.NPCC, Zero))
-            Store (Zero, Index (DerefOf (Index (\_SB.PCI0.B0D4.NPCC, One)), Zero))
-            Store (MIN4 (\_PR.PL10), Index (DerefOf (Index (\_SB.PCI0.B0D4.NPCC, One)), One
+            Store (One, Index (NPCC, Zero))
+            Store (Zero, Index (DerefOf (Index (NPCC, One)), Zero))
+            Store (MIN4 (\_PR.PL10), Index (DerefOf (Index (NPCC, One)), One
                 ))
-            Store (CPNU (\_PR.PL10, One), Index (DerefOf (Index (\_SB.PCI0.B0D4.NPCC, One)), 
+            Store (CPNU (\_PR.PL10, One), Index (DerefOf (Index (NPCC, One)), 
                 0x02))
-            Store (\_PR.PLW0, Index (DerefOf (Index (\_SB.PCI0.B0D4.NPCC, One)), 0x03))
-            Store (\_PR.PLW0, Index (DerefOf (Index (\_SB.PCI0.B0D4.NPCC, One)), 0x04))
-            Store (One, Index (DerefOf (Index (\_SB.PCI0.B0D4.NPCC, 0x02)), Zero))
-            Store (CPNU (\_PR.PL20, One), Index (DerefOf (Index (\_SB.PCI0.B0D4.NPCC, 0x02)), 
+            Store (\_PR.PLW0, Index (DerefOf (Index (NPCC, One)), 0x03))
+            Store (\_PR.PLW0, Index (DerefOf (Index (NPCC, One)), 0x04))
+            Store (One, Index (DerefOf (Index (NPCC, 0x02)), Zero))
+            Store (CPNU (\_PR.PL20, One), Index (DerefOf (Index (NPCC, 0x02)), 
                 One))
-            Store (CPNU (\_PR.PL20, One), Index (DerefOf (Index (\_SB.PCI0.B0D4.NPCC, 0x02)), 
+            Store (CPNU (\_PR.PL20, One), Index (DerefOf (Index (NPCC, 0x02)), 
                 0x02))
-            Store (Zero, Index (DerefOf (Index (\_SB.PCI0.B0D4.NPCC, 0x02)), 0x03))
-            Store (Zero, Index (DerefOf (Index (\_SB.PCI0.B0D4.NPCC, 0x02)), 0x04))
+            Store (Zero, Index (DerefOf (Index (NPCC, 0x02)), 0x03))
+            Store (Zero, Index (DerefOf (Index (NPCC, 0x02)), 0x04))
         }
 
         Method (CPL1, 0, NotSerialized)
         {
-            Store (One, Index (\_SB.PCI0.B0D4.NPCC, Zero))
-            Store (Zero, Index (DerefOf (Index (\_SB.PCI0.B0D4.NPCC, One)), Zero))
-            Store (MIN4 (\_PR.PL11), Index (DerefOf (Index (\_SB.PCI0.B0D4.NPCC, One)), One
+            Store (One, Index (NPCC, Zero))
+            Store (Zero, Index (DerefOf (Index (NPCC, One)), Zero))
+            Store (MIN4 (\_PR.PL11), Index (DerefOf (Index (NPCC, One)), One
                 ))
-            Store (CPNU (\_PR.PL11, One), Index (DerefOf (Index (\_SB.PCI0.B0D4.NPCC, One)), 
+            Store (CPNU (\_PR.PL11, One), Index (DerefOf (Index (NPCC, One)), 
                 0x02))
-            Store (\_PR.PLW1, Index (DerefOf (Index (\_SB.PCI0.B0D4.NPCC, One)), 0x03))
-            Store (\_PR.PLW1, Index (DerefOf (Index (\_SB.PCI0.B0D4.NPCC, One)), 0x04))
-            Store (One, Index (DerefOf (Index (\_SB.PCI0.B0D4.NPCC, 0x02)), Zero))
-            Store (CPNU (\_PR.PL21, One), Index (DerefOf (Index (\_SB.PCI0.B0D4.NPCC, 0x02)), 
+            Store (\_PR.PLW1, Index (DerefOf (Index (NPCC, One)), 0x03))
+            Store (\_PR.PLW1, Index (DerefOf (Index (NPCC, One)), 0x04))
+            Store (One, Index (DerefOf (Index (NPCC, 0x02)), Zero))
+            Store (CPNU (\_PR.PL21, One), Index (DerefOf (Index (NPCC, 0x02)), 
                 One))
-            Store (CPNU (\_PR.PL21, One), Index (DerefOf (Index (\_SB.PCI0.B0D4.NPCC, 0x02)), 
+            Store (CPNU (\_PR.PL21, One), Index (DerefOf (Index (NPCC, 0x02)), 
                 0x02))
-            Store (Zero, Index (DerefOf (Index (\_SB.PCI0.B0D4.NPCC, 0x02)), 0x03))
-            Store (Zero, Index (DerefOf (Index (\_SB.PCI0.B0D4.NPCC, 0x02)), 0x04))
+            Store (Zero, Index (DerefOf (Index (NPCC, 0x02)), 0x03))
+            Store (Zero, Index (DerefOf (Index (NPCC, 0x02)), 0x04))
         }
 
         Method (CPL2, 0, NotSerialized)
         {
-            Store (One, Index (\_SB.PCI0.B0D4.NPCC, Zero))
-            Store (Zero, Index (DerefOf (Index (\_SB.PCI0.B0D4.NPCC, One)), Zero))
-            Store (MIN4 (\_PR.PL12), Index (DerefOf (Index (\_SB.PCI0.B0D4.NPCC, One)), One
+            Store (One, Index (NPCC, Zero))
+            Store (Zero, Index (DerefOf (Index (NPCC, One)), Zero))
+            Store (MIN4 (\_PR.PL12), Index (DerefOf (Index (NPCC, One)), One
                 ))
-            Store (CPNU (\_PR.PL12, One), Index (DerefOf (Index (\_SB.PCI0.B0D4.NPCC, One)), 
+            Store (CPNU (\_PR.PL12, One), Index (DerefOf (Index (NPCC, One)), 
                 0x02))
-            Store (\_PR.PLW2, Index (DerefOf (Index (\_SB.PCI0.B0D4.NPCC, One)), 0x03))
-            Store (\_PR.PLW2, Index (DerefOf (Index (\_SB.PCI0.B0D4.NPCC, One)), 0x04))
-            Store (One, Index (DerefOf (Index (\_SB.PCI0.B0D4.NPCC, 0x02)), Zero))
-            Store (CPNU (\_PR.PL22, One), Index (DerefOf (Index (\_SB.PCI0.B0D4.NPCC, 0x02)), 
+            Store (\_PR.PLW2, Index (DerefOf (Index (NPCC, One)), 0x03))
+            Store (\_PR.PLW2, Index (DerefOf (Index (NPCC, One)), 0x04))
+            Store (One, Index (DerefOf (Index (NPCC, 0x02)), Zero))
+            Store (CPNU (\_PR.PL22, One), Index (DerefOf (Index (NPCC, 0x02)), 
                 One))
-            Store (CPNU (\_PR.PL22, One), Index (DerefOf (Index (\_SB.PCI0.B0D4.NPCC, 0x02)), 
+            Store (CPNU (\_PR.PL22, One), Index (DerefOf (Index (NPCC, 0x02)), 
                 0x02))
-            Store (Zero, Index (DerefOf (Index (\_SB.PCI0.B0D4.NPCC, 0x02)), 0x03))
-            Store (Zero, Index (DerefOf (Index (\_SB.PCI0.B0D4.NPCC, 0x02)), 0x04))
+            Store (Zero, Index (DerefOf (Index (NPCC, 0x02)), 0x03))
+            Store (Zero, Index (DerefOf (Index (NPCC, 0x02)), 0x04))
         }
 
         Name (LSTM, Zero)
         Method (PGMB, 0, NotSerialized)
         {
-            Return (\_SB.PCI0.MHBR)
+            Return (MHBR)
         }
 
         Method (_PPC, 0, NotSerialized)  // _PPC: Performance Present Capabilites
         {
-            Return (\LIMT)
+            Return (LIMT)
         }
 
         Method (SPPC, 1, Serialized)
         {
             Name (T_0, Zero)  // T_x: Emitted by ASL Compiler
-            If (LLessEqual (Arg0, \_SB.CPUP))
+            If (LLessEqual (Arg0, CPUP))
             {
-                Store (Subtract (\_SB.CPUP, Arg0), \_SB.SLMT)
+                Store (Subtract (CPUP, Arg0), SLMT)
             }
 
             While (One)
@@ -22037,7 +22037,7 @@ Store (ShiftRight (Local4, 8), DTB1)
             }
             Else
             {
-                Return (Package (0x01) { Package (0x05) {
+                Return (Package (One) { Package (0x05) {
                 Zero, Zero, Zero, Zero, Zero } })
             }
         }
@@ -22109,7 +22109,7 @@ Store (ShiftRight (Local4, 8), DTB1)
         }
     }
     
-    Scope (\_SB.PCI0)
+    Scope (_SB_.PCI0)
     {
         Device (TPCH)
         {
@@ -22139,9 +22139,9 @@ Store (ShiftRight (Local4, 8), DTB1)
         }
     }
     
-    Scope (\_SB.IETM)
+    Scope (_SB_.IETM)
     {
-        Name (CTSP, Package (0x01)
+        Name (CTSP, Package (One)
         {
             Buffer (0x10)
             {
@@ -22151,7 +22151,7 @@ Store (ShiftRight (Local4, 8), DTB1)
         })
     }
 
-    Scope (\_SB.PCI0.B0D4)
+    Scope (_SB_.PCI0.B0D4)
     {
         Method (TDPL, 0, Serialized)
         {
@@ -22159,7 +22159,7 @@ Store (ShiftRight (Local4, 8), DTB1)
             Name (AAAA, Zero)
             Name (BBBB, Zero)
             Name (CCCC, Zero)
-            Name (TMP1, Package (0x01)
+            Name (TMP1, Package (One)
             {
                 Package (0x05)
                 {
@@ -22495,28 +22495,28 @@ Store (ShiftRight (Local4, 8), DTB1)
                 Break
             }
 
-            Notify (\_SB.PCI0.B0D4, 0x83)
+            Notify (B0D4, 0x83)
             Return (Zero)
         }
     }
 
-    Scope (\_SB.PCI0.LPCB.EC0)
+    Scope (_SB_.PCI0.LPCB.EC0_)
     {
         Method (_Q7F, 0, NotSerialized)  // _Qxx: EC Query
         {
-            Increment (\_SB.PCI0.B0D4.MAXT)
-            If (LGreaterEqual (\_SB.PCI0.B0D4.MAXT, 0x03))
+            Increment (^^^B0D4.MAXT)
+            If (LGreaterEqual (^^^B0D4.MAXT, 0x03))
             {
-                Store (Zero, \_SB.PCI0.B0D4.MAXT)
+                Store (Zero, ^^^B0D4.MAXT)
             }
 
-            Notify (\_SB.PCI0.B0D4, 0x84)
+            Notify (B0D4, 0x84)
         }
 
         Method (_QB7, 0, NotSerialized)  // _Qxx: EC Query
         {
-            Store (Zero, \_SB.PCI0.B0D4.MAXT)
-            Notify (\_SB.PCI0.B0D4, 0x84)
+            Store (Zero, ^^^B0D4.MAXT)
+            Notify (B0D4, 0x84)
         }
 
         Method (_QB8, 0, Serialized)  // _Qxx: EC Query
@@ -22527,19 +22527,19 @@ Store (ShiftRight (Local4, 8), DTB1)
                 Store (\_PR.CLVL, T_0)
                 If (LEqual (T_0, 0x03))
                 {
-                    Store (One, \_SB.PCI0.B0D4.MAXT)
+                    Store (One, ^^^B0D4.MAXT)
                 }
                 Else
                 {
                     If (LEqual (T_0, 0x02))
                     {
-                        Store (Zero, \_SB.PCI0.B0D4.MAXT)
+                        Store (Zero, ^^^B0D4.MAXT)
                     }
                     Else
                     {
                         If (LEqual (T_0, One))
                         {
-                            Store (Zero, \_SB.PCI0.B0D4.MAXT)
+                            Store (Zero, ^^^B0D4.MAXT)
                         }
                     }
                 }
@@ -22547,7 +22547,7 @@ Store (ShiftRight (Local4, 8), DTB1)
                 Break
             }
 
-            Notify (\_SB.PCI0.B0D4, 0x84)
+            Notify (B0D4, 0x84)
         }
 
         Method (_QB9, 0, Serialized)  // _Qxx: EC Query
@@ -22558,19 +22558,19 @@ Store (ShiftRight (Local4, 8), DTB1)
                 Store (\_PR.CLVL, T_0)
                 If (LEqual (T_0, 0x03))
                 {
-                    Store (0x02, \_SB.PCI0.B0D4.MAXT)
+                    Store (0x02, ^^^B0D4.MAXT)
                 }
                 Else
                 {
                     If (LEqual (T_0, 0x02))
                     {
-                        Store (One, \_SB.PCI0.B0D4.MAXT)
+                        Store (One, ^^^B0D4.MAXT)
                     }
                     Else
                     {
                         If (LEqual (T_0, One))
                         {
-                            Store (Zero, \_SB.PCI0.B0D4.MAXT)
+                            Store (Zero, ^^^B0D4.MAXT)
                         }
                     }
                 }
@@ -22578,11 +22578,11 @@ Store (ShiftRight (Local4, 8), DTB1)
                 Break
             }
 
-            Notify (\_SB.PCI0.B0D4, 0x84)
+            Notify (B0D4, 0x84)
         }
     }
     
-    Scope (\_SB.PCI0.IDE0)
+    Scope (_SB_.PCI0.IDE0)
     {
         Name (REGF, One)
         Method (_REG, 2, NotSerialized)  // _REG: Region Availability
@@ -22721,7 +22721,7 @@ Store (ShiftRight (Local4, 8), DTB1)
 
                 If (And (W119, 0x20))
                 {
-                    If (And (\_SB.HDDF, One))
+                    If (And (HDDF, One))
                     {
                         GTFB (AT08, Zero, Local7)
                     }
@@ -22801,7 +22801,7 @@ Store (ShiftRight (Local4, 8), DTB1)
                 CreateWordField (Arg1, 0xEE, I119)
                 If (And (I119, 0x20))
                 {
-                    If (And (\_SB.HDDF, One))
+                    If (And (HDDF, One))
                     {
                         GTFB (AT08, Zero, Local0)
                     }
@@ -22816,7 +22816,7 @@ Store (ShiftRight (Local4, 8), DTB1)
         }
     }
     
-    Scope (\_SB.PCI0.IDE1)
+    Scope (_SB_.PCI0.IDE1)
     {
         Name (REGF, One)
         Method (_REG, 2, NotSerialized)  // _REG: Region Availability
@@ -22985,7 +22985,7 @@ Store (ShiftRight (Local4, 8), DTB1)
 
                 If (And (W119, 0x20))
                 {
-                    If (And (\_SB.HDDF, One))
+                    If (And (HDDF, One))
                     {
                         GTFB (AT08, Zero, Local7)
                     }
@@ -23035,7 +23035,7 @@ Store (ShiftRight (Local4, 8), DTB1)
                 CreateWordField (Arg1, 0xEE, I119)
                 If (And (I119, 0x20))
                 {
-                    If (And (\_SB.HDDF, One))
+                    If (And (HDDF, One))
                     {
                         GTFB (AT08, Zero, Local0)
                     }
@@ -23107,7 +23107,7 @@ Store (ShiftRight (Local4, 8), DTB1)
         Or (Arg0, Local0, Local0)
         Return (Local0)
     }
-    Scope (\_SB)
+    Scope (_SB_)
     {
         Device (PNLF)
         {
@@ -23119,7 +23119,7 @@ Store (ShiftRight (Local4, 8), DTB1)
             //define hardware register access for brightness
             // you can see BAR1 value in RW-Everything under Bus00,02 Intel VGA controler PCI
             // Note: Not sure which one is right here... for now, going with BAR1 minus 4
-            OperationRegion (BRIT, SystemMemory, Subtract(\_SB.PCI0.IGPU.BAR1, 4), 0xe1184)
+            OperationRegion (BRIT, SystemMemory, Subtract(^PCI0.IGPU.BAR1, 4), 0xe1184)
             //OperationRegion (BRIT, SystemMemory, And(\_SB.PCI0.IGPU.BAR1, Not(0xF)), 0xe1184)
             Field (BRIT, AnyAcc, Lock, Preserve)
             {
@@ -23139,7 +23139,7 @@ Store (ShiftRight (Local4, 8), DTB1)
             //{
             //    Store(Arg0, KLVX)
             //}
-            Name(KPCH, 0)
+            Name(KPCH, Zero)
             // _INI deals with differences between native setting and desired
             Method (_INI, 0, NotSerialized)
             {
@@ -23156,22 +23156,22 @@ Store (ShiftRight (Local4, 8), DTB1)
                 }
             }
             // _BCM/_BQC: set/get for brightness level
-            Method (_BCM, 1, NotSerialized)
+            Method (_BCM, One, NotSerialized)
             {
                 // initialize for consistent backlight level before/after sleep
                 if (LNotEqual(PCHL, KPCH)) { Store(KPCH, PCHL) }
                 If (LNotEqual(LEVW, 0x80000000)) { Store (0x80000000, LEVW) }
                 If (LNotEqual(LEVX, KLVX)) { Store (KLVX, LEVX) }
                 // store new backlight level
-                Store(Match(_BCL, MGE, Arg0, MTR, 0, 2), Local0)
-                If (LEqual(Local0, Ones)) { Subtract(SizeOf(_BCL), 1, Local0) }
+                Store(Match(_BCL, MGE, Arg0, MTR, Zero, 2), Local0)
+                If (LEqual(Local0, Ones)) { Subtract(SizeOf(_BCL), One, Local0) }
                 If (LNotEqual(LEV2, 0x80000000)) { Store(0x80000000, LEV2) }
                 Store(DerefOf(Index(_BCL, Local0)), LEVL)
             }
             Method (_BQC, 0, NotSerialized)
             {
-                Store(Match(_BCL, MGE, LEVL, MTR, 0, 2), Local0)
-                If (LEqual(Local0, Ones)) { Subtract(SizeOf(_BCL), 1, Local0) }
+                Store(Match(_BCL, MGE, LEVL, MTR, Zero, 2), Local0)
+                If (LEqual(Local0, Ones)) { Subtract(SizeOf(_BCL), One, Local0) }
                 Return(DerefOf(Index(_BCL, Local0)))
             }
             Method (_DOS, 1, NotSerialized)
@@ -23211,7 +23211,7 @@ Store (ShiftRight (Local4, 8), DTB1)
             {
                 1808,
                 479,
-                0,
+                Zero,
                 55, 55, 57, 59,
                 62, 66, 71, 77,
                 83, 91, 99, 108,
