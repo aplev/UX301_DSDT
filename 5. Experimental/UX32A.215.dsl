@@ -2967,7 +2967,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
                         "layout-id",
                         Buffer (0x04)
                         {
-                            0x01, 0x00, 0x00, 0x00
+                            0x1C, 0x00, 0x00, 0x00
                         },
                         "PinConfigurations",
                         Buffer (Zero) {}
