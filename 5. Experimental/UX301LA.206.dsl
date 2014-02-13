@@ -10774,10 +10774,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 {
                     Name (SBFI, ResourceTemplate ()
                     {
-                        I2cSerialBus (0x0020, ControllerInitiated, 0x00061A80,
-                            AddressingMode7Bit, "\\_SB.PCI0.I2C1",
-                            0x00, ResourceConsumer, ,
-                            )
+                        I2cSerialBus (0x0020, ControllerInitiated, 0x00061A80, AddressingMode7Bit, "\\_SB.PCI0.I2C1", 0x00, ResourceConsumer, , )
                         Interrupt (ResourceConsumer, Level, ActiveLow, Exclusive, ,, _Y28)
                         {
                             0x00000019,
