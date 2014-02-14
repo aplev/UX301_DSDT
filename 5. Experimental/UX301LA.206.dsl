@@ -12273,7 +12273,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
     Method (_PTS, 1, NotSerialized)  // _PTS: Prepare To Sleep
     {
-        If (LEqual (Arg0, 0x05)) {} Else {
+        If (LEqual (Arg0, 0x05)) { Store (0x03, Arg0) }
         PTS (Arg0)
         If (And (ICNF, 0x10))
         {
@@ -12294,7 +12294,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         Store (Zero, \_SB.IAOE.FFSE)
             }
         }
-      }
     }
 
     Method (_WAK, 1, Serialized)  // _WAK: Wake
