@@ -3605,16 +3605,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Name (BUF0, ResourceTemplate()
                     {
                         IRQNoFlags() { 0, 8, 11, 15 }
-
                         Memory32Fixed (ReadWrite,
                             0xFED00000,         // Address Base
                             0x00000400,         // Address Length
                             _Y0F)
                     })
-
-                    
-
-                    
                     Name (_STA, 0x0F)
                     Method (_CRS, 0, NotSerialized)
                     {
@@ -3729,13 +3724,13 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                             0x01,               // Alignment
                             0x02,               // Length
                             )
-                        
                     })
                 }
 
                 Device (MATH)
                 {
                     Name (_HID, EisaId ("PNP0C04"))  // _HID: Hardware ID
+                    Name (_STA, 0x1F)                // _STA: Status
                     Name (_CRS, ResourceTemplate ()  // _CRS: Current Resource Settings
                     {
                         IO (Decode16,
@@ -3747,17 +3742,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         IRQNoFlags ()
                             {13}
                     })
-                    Method (_STA, 0, NotSerialized)  // _STA: Status
-                    {
-                        If (LEqual (And (CDID, 0xF000), 0x8000))
-                        {
-                            Return (0x1F)
-                        }
-                        Else
-                        {
-                            Return (Zero)
-                        }
-                    }
                 }
 
                 Device (LDRC)
@@ -3839,18 +3823,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                             0x01,               // Length
                             )
                         IO (Decode16,
-                            0xFFFF,             // Range Minimum
-                            0xFFFF,             // Range Maximum
-                            0x01,               // Alignment
-                            0x01,               // Length
-                            )
-                        IO (Decode16,
-                            0xFFFF,             // Range Minimum
-                            0xFFFF,             // Range Maximum
-                            0x01,               // Alignment
-                            0x01,               // Length
-                            )
-                        IO (Decode16,
                             0x0800,             // Range Minimum
                             0x0800,             // Range Maximum
                             0x01,               // Alignment
@@ -3918,9 +3890,9 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                             0x0070,             // Range Minimum
                             0x0070,             // Range Maximum
                             0x01,               // Alignment
-                            0x02,               // Length
+                            0x08,               // Length
                             )
-                        
+                            IRQNoFlags () {8}
                     })
                 }
 
@@ -4605,8 +4577,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                     Name (CRS1, ResourceTemplate ()
                     {
-                        IRQNoFlags ()
-                            {12}
+                        IRQNoFlags () {12}
                     })
                     Name (CRS2, ResourceTemplate ()
                     {
@@ -4707,15 +4678,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         Return (Local0)
                     }
                 }
-        Method (_DSM, 4, NotSerialized)
-        {
-            If (LEqual (Arg2, Zero)) { Return (Buffer(One) { 0x03 } ) }
-            Return (Package()
-            {
-                "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
-                "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
-            })
-        }
             }
 
             Device (RP03)
@@ -8527,11 +8489,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Name (_UID, 0x04)  // _UID: Unique ID
                 Method (_STA, 0, NotSerialized)  // _STA: Status
                 {
-                    If (LLess (OSYS, 0x07DC))
-                    {
-                        Return (Zero)
-                    }
-
                     If (LEqual (And (CDID, 0xF000), 0x8000))
                     {
                         Return (Zero)
@@ -8789,11 +8746,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         Return (Zero)
                     }
 
-                    If (LLess (OSYS, 0x07DC))
-                    {
-                        Return (Zero)
-                    }
-
                     If (LEqual (S0ID, One))
                     {
                         Return (0x0F)
@@ -8849,17 +8801,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 {
                     If (LEqual (BVAL, Zero))
                     {
-                        Return (Zero)
-                    }
-
-                    If (LLess (OSYS, 0x07DC))
-                    {
-                        Return (Zero)
-                    }
-
-                    If (LAnd (LEqual (DOSD, 0x02), LEqual (OSYS, 0x07DC)))
-                    {
-                        PTD3 ()
                         Return (Zero)
                     }
 
@@ -9005,11 +8946,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Method (_STA, 0, NotSerialized)  // _STA: Status
                 {
                     If (LEqual (BVAL, Zero))
-                    {
-                        Return (Zero)
-                    }
-
-                    If (LLess (OSYS, 0x07DC))
                     {
                         Return (Zero)
                     }
@@ -9194,11 +9130,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         Return (Zero)
                     }
 
-                    If (LLess (OSYS, 0x07DC))
-                    {
-                        Return (Zero)
-                    }
-
                     If (LEqual (S0ID, One))
                     {
                         Return (0x0F)
@@ -9293,11 +9224,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Method (_STA, 0, NotSerialized)  // _STA: Status
                 {
                     If (LEqual (BVAL, Zero))
-                    {
-                        Return (Zero)
-                    }
-
-                    If (LLess (OSYS, 0x07DC))
                     {
                         Return (Zero)
                     }
@@ -9408,11 +9334,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Method (_STA, 0, NotSerialized)  // _STA: Status
                 {
                     If (LEqual (BVAL, Zero))
-                    {
-                        Return (Zero)
-                    }
-
-                    If (LLess (OSYS, 0x07DC))
                     {
                         Return (Zero)
                     }
@@ -9529,11 +9450,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Method (_STA, 0, NotSerialized)  // _STA: Status
                 {
                     If (LEqual (BVAL, Zero))
-                    {
-                        Return (Zero)
-                    }
-
-                    If (LLess (OSYS, 0x07DC))
                     {
                         Return (Zero)
                     }
@@ -9666,11 +9582,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         Return (Zero)
                     }
 
-                    If (LLess (OSYS, 0x07DC))
-                    {
-                        Return (Zero)
-                    }
-
                     If (LEqual (S0ID, One))
                     {
                         Return (0x0F)
@@ -9758,11 +9669,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Method (_STA, 0, NotSerialized)  // _STA: Status
                 {
                     If (LEqual (BVAL, Zero))
-                    {
-                        Return (Zero)
-                    }
-
-                    If (LLess (OSYS, 0x07DC))
                     {
                         Return (Zero)
                     }
@@ -11445,8 +11351,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
             Method (_STA, 0, NotSerialized)  // _STA: Status
             {
-                If (LGreaterEqual (OSYS, 0x07DC))
-                {
                     If (LEqual (S0ID, One))
                     {
                         CreateDWordField (RBUF, ^_Y2E._BAS, BVAL)  // _BAS: Base Address
@@ -11464,8 +11368,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                             Return (0x0D)
                         }
                     }
-                }
-
                 Return (Zero)
             }
 
@@ -11515,10 +11417,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
             {
                 ADBG ("SAT0 DEP Call")
-                If (LGreaterEqual (OSYS, 0x07DD))
-                {
-                    If (LAnd (LEqual (S0ID, One), LNotEqual (And (PEPC, 0x03
-                        ), Zero)))
+                If (LAnd (LEqual (S0ID, One), LNotEqual (And (PEPC, 0x03), Zero)))
                     {
                         ADBG ("SAT0 DEP")
                         Return (Package (One)
@@ -11526,8 +11425,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                             PEPD
                         })
                     }
-                }
-
                 ADBG ("SAT0 DEP NULL")
                 Return (Package (Zero) {Zero})
             }
@@ -13817,8 +13714,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             })
             Method (_STA, 0, NotSerialized)  // _STA: Status
             {
-                If (LGreaterEqual (OSYS, 0x07DC))
-                {
                     If (LEqual (And (CDID, 0xF000), 0x9000))
                     {
                         If (LEqual (S0ID, One))
@@ -13826,8 +13721,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                             Return (0x0F)
                         }
                     }
-                }
-
                 Return (Zero)
             }
 
@@ -17390,9 +17283,10 @@ DTB1, 8
             }
         }
 
-        Device (ASHS)
+        Device (ASHS)    // Asus Hotkey Service
         {
             Name (_HID, "ATK4001")  // _HID: Hardware ID
+            Name (_STA, Zero)      // Status: We dont need this device for OSX
             Method (HSWC, 1, Serialized)
             {
                 If (LLess (Arg0, 0x02))
@@ -17426,24 +17320,12 @@ DTB1, 8
                 }
                 }
             }
-
-            Method (_STA, 0, NotSerialized)  // _STA: Status
-            {
-                If (LGreaterEqual (MSOS (), OSW8))
-                {
-                    Return (0x0F)
-                }
-                Else
-                {
-                    Return (Zero)
-                }
-            }
         }
     }
 
     Scope (_SB.PCI0)
     {
-        Device (AC0)
+        Device (ADP1)
         {
             Name (_HID, "ACPI0003")  // _HID: Hardware ID
             Method (_PSR, 0, NotSerialized)  // _PSR: Power Source
@@ -17456,7 +17338,7 @@ DTB1, 8
                 PCI0
             })
             
-            Name (_PRW, Package() { 0x18, 0x03 })
+            Name (_PRW, Package() { 0x18, 0x03 })  // _PRW: Power Resources for Wake
         }
     }
 
@@ -18281,7 +18163,7 @@ DTB1, 8
                 Else
                 {
                     Notify (BAT0, 0x81)
-                    Notify (AC0, 0x80)
+                    Notify (ADP1, 0x80)
                 }
             }
         }
@@ -18314,14 +18196,7 @@ DTB1, 8
         {
             If (LEqual (Arg0, 0x03))
             {
-                If (LLessEqual (MSOS (), OSME))
-                {
-                    Store (One, \_SB.WIDE)
-                }
-                Else
-                {
                     Store (Zero, \_SB.WIDE)
-                }
             }
 
             SBRS (Arg0)
@@ -18360,14 +18235,7 @@ DTB1, 8
             \_SB.PCI0.LPCB.EC0.EC0W (Arg0)
             If (LEqual (Arg0, 0x04))
             {
-                If (LLessEqual (MSOS (), OSME))
-                {
-                    Store (0x02, MES4)
-                }
-                Else
-                {
-                    Store (Zero, MES4)
-                }
+                Store (Zero, MES4)
             }
 
             SBRW (Arg0)
@@ -23027,7 +22895,7 @@ Store (ShiftRight (Local4, 8), DTB1)
                 STBR ()
             }
 
-            Notify (AC0, 0x80)
+            Notify (ADP1, 0x80)
             If (ATKP)
             {
                 ^^^^ATKD.IANE (Local0)
@@ -30836,7 +30704,8 @@ Store (ShiftRight (Local4, 8), DTB1)
             Device (^^MEM2)
             {
                 Name (_HID, EisaId ("PNP0C01"))  // _HID: Hardware ID
-                Name (_UID, 0x02)  // _UID: Unique ID
+                Name (_UID, 0x02)                // _UID: Unique ID
+                Name (_STA, 0x0F)                // _STA: Status
                 Name (CRS2, ResourceTemplate ()
                 {
                     Memory32Fixed (ReadWrite,
@@ -30848,19 +30717,6 @@ Store (ShiftRight (Local4, 8), DTB1)
                         0x00001000,         // Address Length
                         )
                 })
-                Method (_STA, 0, NotSerialized)  // _STA: Status
-                {
-                    If (IGDS)
-                    {
-                        If (LEqual (PNHM, 0x000306C1))
-                        {
-                            Return (0x0F)
-                        }
-                    }
-
-                    Return (Zero)
-                }
-
                 Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
                 {
                     Return (CRS2)
