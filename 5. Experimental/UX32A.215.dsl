@@ -26,10 +26,8 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
      * disassembler did not know how many arguments to assign to the
      * unresolved methods.
      */
-    External (_SB_.IFFS.SFTV, MethodObj)    // Warning: Unresolved Method, guessing 1 arguments (may be incorrect, see warning above)
     External (HNOT, MethodObj)    // Warning: Unresolved Method, guessing 1 arguments (may be incorrect, see warning above)
 
-    External (_SB_.IFFS.FFSS)
     External (PDC0, IntObj)
     External (PDC1, IntObj)
     External (PDC2, IntObj)
@@ -11379,10 +11377,7 @@ DTB1, 8
                             Store (One, MODE)
                             If (LEqual (Local0, Zero))
                             {
-                                If (CondRefOf (\_SB.IFFS.FFSS))
-                                {
-                                    Store (0x03, ^^IFFS.FFSS)
-                                }
+                                
                             }
                             Else
                             {
@@ -11394,10 +11389,7 @@ DTB1, 8
                             Store (Zero, MODE)
                             If (LEqual (Local0, Zero))
                             {
-                                If (CondRefOf (\_SB.IFFS.FFSS))
-                                {
-                                    Store (0x02, ^^IFFS.FFSS)
-                                }
+                              
                             }
                             Else
                             {
@@ -11413,10 +11405,6 @@ DTB1, 8
                         Store (S4FG, Local0)
                         If (LEqual (Local0, Zero))
                         {
-                            If (CondRefOf (\_SB.IFFS.SFTV))
-                            {
-                                ^^IFFS.SFTV (IIA1)
-                            }
                         }
 
                         Store (IIA1, S4TM)

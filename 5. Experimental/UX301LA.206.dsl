@@ -66,11 +66,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
     External (_PR_.TAR0, FieldUnitObj)
     External (_PR_.TAR1, FieldUnitObj)
     External (_PR_.TAR2, FieldUnitObj)
-    External (_SB_.IFFS.FFSS)
-    External (_SB_.PCCD)
-    External (_SB_.PCCD.PENB)
     External (MDBG, IntObj)
-    External (PCCD)
     External (PDC0, IntObj)
     External (PDC1, IntObj)
     External (PDC2, IntObj)
@@ -12858,23 +12854,10 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 {
                     \_SB.PCI0.LPCB.EC0.SCTF (Zero, 0x03)
                 }
-
-                If (LAnd (And (ICNF, 0x10), CondRefOf (\_SB.IFFS.FFSS)))
-                {
-                    If (And (\_SB.IFFS.FFSS, One))
-                    {
-                        Store (One, \_SB.IAOE.FFSE)
-                    }
-                    Else
-                    {
                         Store (Zero, \_SB.IAOE.FFSE)
-                    }
-                }
             }
         }
-
-        If (LOr (LEqual (Arg0, 0x03), LEqual (Arg0, 0x04))) {}
-       }
+      }
     }
 
     Method (_WAK, 1, Serialized)  // _WAK: Wake
@@ -12888,8 +12871,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             {
                 If (LEqual (\_SB.IAOE.ITMR, One))
                 {
-                    If (LAnd (And (\_SB.IAOE.IBT1, One), LOr (And (\_SB.IAOE.WKRS, 0x02
-                        ), And (\_SB.IAOE.WKRS, 0x10))))
+                    If (LAnd (And (\_SB.IAOE.IBT1, One), LOr (And (\_SB.IAOE.WKRS, 0x02), And (\_SB.IAOE.WKRS, 0x10))))
                     {
                         Store (Or (And (\_SB.PCI0.IGPU.STAT, 0xFFFFFFFFFFFFFFFC), One), \_SB.PCI0.IGPU.STAT)
                     }
@@ -12953,15 +12935,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
     Method (PNOT, 0, Serialized)
     {
-        If (CondRefOf (\_SB.PCCD.PENB))
-        {
-            Store (0x82, Local0)
-        }
-        Else
-        {
-            Store (0x80, Local0)
-        }
-
+        Store (0x80, Local0)
         If (LGreater (TCNT, One))
         {
             If (And (PDC0, 0x08))
@@ -13335,19 +13309,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                     If (And (CAP0, 0x20))
                     {
-                        If (CondRefOf (\_SB.PCCD.PENB))
-                        {
-                            If (LEqual (^PCCD.PENB, Zero))
-                            {
-                                And (CAP0, 0x1F, CAP0)
-                                Or (STS0, 0x10, STS0)
-                            }
-                        }
-                        Else
-                        {
                             And (CAP0, 0x1F, CAP0)
                             Or (STS0, 0x10, STS0)
-                        }
                     }
                 }
                 Else
@@ -14308,14 +14271,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 If (LGreaterEqual (DTSE, One))
                 {
                     Notify (\_TZ.THRM, 0x80)
-                }
-            }
-
-            If (CondRefOf (\_SB.PCCD.PENB))
-            {
-                If (LEqual (\_SB.PCCD.PENB, One))
-                {
-                    Notify (\_SB.PCCD, 0x80)
                 }
             }
         }
@@ -17178,15 +17133,6 @@ DTB1, 8
 
                     Break
                 }
-
-                If (CondRefOf (\_SB.PCCD.PENB))
-                {
-                    If (LEqual (^^PCCD.PENB, One))
-                    {
-                        Notify (PCCD, 0x82)
-                    }
-                }
-
                 Return (Zero)
             }
 
@@ -26202,15 +26148,7 @@ Store (ShiftRight (Local4, 8), DTB1)
         {
             Name (T_0, Zero)  // T_x: Emitted by ASL Compiler
             Store (Arg0, \_PR.CPU0._PPC)
-            If (CondRefOf (\_SB.PCCD.PENB))
-            {
-                Store (0x82, Local0)
-            }
-            Else
-            {
-                Store (0x80, Local0)
-            }
-
+            Store (0x80, Local0)
             While (One)
             {
                 Store (ToInteger (TCNT), T_0)
@@ -27299,15 +27237,7 @@ Store (ShiftRight (Local4, 8), DTB1)
             {
                 Name (T_0, Zero)  // T_x: Emitted by ASL Compiler
                 Store (Arg0, \_PR.CPU0._PPC)
-                If (CondRefOf (\_SB.PCCD.PENB))
-                {
-                    Store (0x82, Local0)
-                }
-                Else
-                {
-                    Store (0x80, Local0)
-                }
-
+                Store (0x80, Local0)
                 While (One)
                 {
                     Store (ToInteger (TCNT), T_0)
@@ -31686,14 +31616,6 @@ Store (ShiftRight (Local4, 8), DTB1)
                     Store (IBT1, Local0)
                     And (Local0, 0xF1, Local0)
                     Or (Local0, And (Arg0, 0x0E), Local0)
-                    If (CondRefOf (\_SB.IFFS.FFSS))
-                    {
-                        If (LAnd (And (^^IFFS.FFSS, 0x03), And (Arg0, 0x02)))
-                        {
-                            Or (Local0, 0x04, Local0)
-                        }
-                    }
-
                     Store (Local0, IBT1)
                     ^^PCI0.LPCB.EC0.SCTF (One, Local0)
                     Return (Zero)
@@ -31703,14 +31625,6 @@ Store (ShiftRight (Local4, 8), DTB1)
                     Store (IBT1, Local0)
                     And (Local0, 0xF1, Local0)
                     Or (Local0, And (Arg0, 0x0E), Local0)
-                    If (CondRefOf (^^IFFS.FFSS))
-                    {
-                        If (LAnd (And (^^IFFS.FFSS, 0x03), And (Arg0, 0x02)))
-                        {
-                            Or (Local0, 0x04, Local0)
-                        }
-                    }
-
                     Store (Local0, IBT1)
                     ^^PCI0.LPCB.EC0.SCTF (One, Local0)
                     Return (Zero)
@@ -31753,14 +31667,6 @@ Store (ShiftRight (Local4, 8), DTB1)
                     Store (IBT1, Local0)
                     And (Local0, 0x8F, Local0)
                     Or (Local0, ShiftLeft (And (Arg0, 0x0E), 0x03), Local0)
-                    If (CondRefOf (^^IFFS.FFSS))
-                    {
-                        If (LAnd (And (^^IFFS.FFSS, 0x03), And (Arg0, 0x02)))
-                        {
-                            Or (Local0, 0x20, Local0)
-                        }
-                    }
-
                     Store (Local0, IBT1)
                     Return (Zero)
                 }
@@ -31769,14 +31675,6 @@ Store (ShiftRight (Local4, 8), DTB1)
                     Store (IBT1, Local0)
                     And (Local0, 0x8F, Local0)
                     Or (Local0, ShiftLeft (And (Arg0, 0x0E), 0x03), Local0)
-                    If (CondRefOf (^^IFFS.FFSS))
-                    {
-                        If (LAnd (And (^^IFFS.FFSS, 0x03), And (Arg0, 0x02)))
-                        {
-                            Or (Local0, 0x20, Local0)
-                        }
-                    }
-
                     Store (Local0, IBT1)
                     Return (Zero)
                 }
