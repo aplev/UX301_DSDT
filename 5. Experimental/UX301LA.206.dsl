@@ -22625,6 +22625,12 @@ Store (ShiftRight (Local4, 8), DTB1)
 
     Scope (_SB)
     {
+        Device (PWRB)
+        {
+            Name (_HID, EisaId ("PNP0C0C"))  // _HID: Hardware ID
+            Name (_STA, 0x0F)                // _STA: Status
+        }
+        
         Device (SLPB)
         {
             Name (_HID, EisaId ("PNP0C0E"))  // _HID: Hardware ID
