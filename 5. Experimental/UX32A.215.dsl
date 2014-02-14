@@ -53,11 +53,6 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
     External (_PR_.TAR0, FieldUnitObj)
     External (_PR_.TAR1, FieldUnitObj)
     External (_PR_.TAR2, FieldUnitObj)
-    External (DASP)
-    External (DCSP)
-    External (DMSP)
-    External (DPSP)
-    External (LPSP)
     External (PDC0, IntObj)
     External (PDC1, IntObj)
     External (PDC2, IntObj)
@@ -20928,36 +20923,6 @@ Store (ShiftRight (Local4, 8), DTB1)
             Method (IDSP, 0, Serialized)
             {
                 Name (TMPI, Zero)
-                If (CondRefOf (DPSP))
-                {
-                    Store (DerefOf (Index (DPSP, Zero)), Index (TMPP, TMPI))
-                    Increment (TMPI)
-                }
-
-                If (CondRefOf (DASP))
-                {
-                    Store (DerefOf (Index (DASP, Zero)), Index (TMPP, TMPI))
-                    Increment (TMPI)
-                }
-
-                If (CondRefOf (DCSP))
-                {
-                    Store (DerefOf (Index (DCSP, Zero)), Index (TMPP, TMPI))
-                    Increment (TMPI)
-                }
-
-                If (CondRefOf (DMSP))
-                {
-                    Store (DerefOf (Index (DMSP, Zero)), Index (TMPP, TMPI))
-                    Increment (TMPI)
-                }
-
-                If (CondRefOf (LPSP))
-                {
-                    Store (DerefOf (Index (LPSP, Zero)), Index (TMPP, TMPI))
-                    Increment (TMPI)
-                }
-
                 If (CondRefOf (CTSP))
                 {
                     Store (DerefOf (Index (CTSP, Zero)), Index (TMPP, TMPI))
@@ -21026,8 +20991,6 @@ Store (ShiftRight (Local4, 8), DTB1)
                         Store (One, PSEM)
                         Store (\_PR.APSV, PTRP)
                     }
-
-                    Store (DerefOf (Index (DPSP, Zero)), UID2)
                     If (LAnd (LAnd (LEqual (IID0, EID0), LEqual (IID1, EID1)), LAnd (
                         LEqual (IID2, EID2), LEqual (IID3, EID3))))
                     {
@@ -21056,8 +21019,6 @@ Store (ShiftRight (Local4, 8), DTB1)
                         Store (One, ASEM)
                         Store (\_PR.AAC0, ATRP)
                     }
-
-                    Store (DerefOf (Index (DASP, Zero)), UID2)
                     If (LAnd (LAnd (LEqual (IID0, EID0), LEqual (IID1, EID1)), LAnd (
                         LEqual (IID2, EID2), LEqual (IID3, EID3))))
                     {
@@ -21086,8 +21047,6 @@ Store (ShiftRight (Local4, 8), DTB1)
                         Store (One, YSEM)
                         Store (\_PR.ACRT, YTRP)
                     }
-
-                    Store (DerefOf (Index (DCSP, Zero)), UID2)
                     If (LAnd (LAnd (LEqual (IID0, EID0), LEqual (IID1, EID1)), LAnd (
                         LEqual (IID2, EID2), LEqual (IID3, EID3))))
                     {
@@ -21970,14 +21929,7 @@ Store (ShiftRight (Local4, 8), DTB1)
 
         Method (_TSD, 0, NotSerialized)  // _TSD: Throttling State Dependencies
         {
-            If (CondRefOf (\_PR.CPU0._TSD))
-            {
                 Return (\_PR.CPU0._TSD)
-            }
-            Else
-            {
-                Return (Package (Zero) { Package (0x05) {Zero, Zero, Zero, Zero, Zero} })
-            }
         }
 
         Method (_TDL, 0, Serialized)  // _TDL: T-State Depth Limit
