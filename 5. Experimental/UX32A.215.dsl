@@ -12266,6 +12266,7 @@ DTB1, 8
         Device (ASHS)
         {
             Name (_HID, "ATK4001")  // _HID: Hardware ID
+            Name (_STA, Zero)       // Status: We dont need this device for OSX
             Method (HSWC, 1, Serialized)
             {
                 If (LLess (Arg0, 0x02))
@@ -12291,24 +12292,12 @@ DTB1, 8
                 Return (Zero)
                 } } } }
             }
-
-            Method (_STA, 0, NotSerialized)  // _STA: Status
-            {
-                If (_OSI ("Windows 2012"))
-                {
-                    Return (0x0F)
-                }
-                Else
-                {
-                    Return (Zero)
-                }
-            }
         }
     }
 
     Scope (_SB.PCI0)
     {
-        Device (AC0)
+        Device (ADP1)
         {
             Name (_HID, "ACPI0003")  // _HID: Hardware ID
             Method (_PSR, 0, NotSerialized)  // _PSR: Power Source
@@ -13145,7 +13134,7 @@ DTB1, 8
                 Else
                 {
                     Notify (BAT0, 0x81)
-                    Notify (AC0, 0x80)
+                    Notify (ADP1, 0x80)
                 }
             }
         }
@@ -18816,7 +18805,7 @@ Store (ShiftRight (Local4, 8), DTB1)
                 STBR ()
             }
 
-            Notify (AC0, 0x80)
+            Notify (ADP1, 0x80)
             If (ATKP)
             {
                 ^^^^ATKD.IANE (Local0)
