@@ -8821,10 +8821,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Name (_ADR, 0x00150001)  // _ADR: Address
                 Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
                 {
-                    ADBG ("I2C0 DEP Call")
                     If (LEqual (S0ID, One))
                     {
-                        ADBG ("I2C0 DEP")
                         Return (Package (One)
                         {
                             PEPD
@@ -8832,7 +8830,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     }
                     Else
                     {
-                        ADBG ("I2C0 DEP NULL")
                         Return (Package (Zero) {Zero})
                     }
                 }
@@ -8960,7 +8957,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Method (_PS0, 0, Serialized)  // _PS0: Power State 0
                 {
-                    ADBG ("I2C0 Ctrlr D0")
                     If (LNotEqual (^^SIRC.CNTR (0x02), Zero))
                     {
                         Add (^^SIRC.CNTR (0x02), 0x84, Local0)
@@ -8977,7 +8973,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Method (_PS3, 0, Serialized)  // _PS3: Power State 3
                 {
-                    ADBG ("I2C0 Ctrlr D3")
                     If (LNotEqual (^^SIRC.CNTR (0x02), Zero))
                     {
                         Add (^^SIRC.CNTR (0x02), 0x84, Local0)
@@ -9001,10 +8996,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Name (_ADR, 0x00150002)  // _ADR: Address
                 Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
                 {
-                    ADBG ("I2C1 DEP Call")
                     If (LEqual (S0ID, One))
                     {
-                        ADBG ("I2C1 DEP")
                         Return (Package (One)
                         {
                             PEPD
@@ -9012,7 +9005,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     }
                     Else
                     {
-                        ADBG ("I2C1 DEP NULL")
                         Return (Package (Zero) {Zero})
                     }
                 }
@@ -9140,7 +9132,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Method (_PS0, 0, Serialized)  // _PS0: Power State 0
                 {
-                    ADBG ("I2C1 Ctrlr D0")
                     If (LNotEqual (^^SIRC.CNTR (0x03), Zero))
                     {
                         Add (^^SIRC.CNTR (0x03), 0x84, Local0)
@@ -9157,7 +9148,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Method (_PS3, 0, Serialized)  // _PS3: Power State 3
                 {
-                    ADBG ("I2C1 Ctrlr D3")
                     If (LNotEqual (^^SIRC.CNTR (0x03), Zero))
                     {
                         Add (^^SIRC.CNTR (0x03), 0x84, Local0)
@@ -9238,7 +9228,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Method (_PS0, 0, Serialized)  // _PS0: Power State 0
                 {
-                    ADBG ("SPI0 Ctrlr D0")
                     If (LNotEqual (^^SIRC.CNTR (0x04), Zero))
                     {
                         Add (^^SIRC.CNTR (0x04), 0x84, Local0)
@@ -9255,7 +9244,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Method (_PS3, 0, Serialized)  // _PS3: Power State 3
                 {
-                    ADBG ("SPI0 Ctrlr D3")
                     If (LNotEqual (^^SIRC.CNTR (0x04), Zero))
                     {
                         Add (^^SIRC.CNTR (0x04), 0x84, Local0)
@@ -9348,7 +9336,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Method (_PS0, 0, Serialized)  // _PS0: Power State 0
                 {
-                    ADBG ("SPI1 Ctrlr D0")
                     If (LNotEqual (^^SIRC.CNTR (0x05), Zero))
                     {
                         Add (^^SIRC.CNTR (0x05), 0x84, Local0)
@@ -9365,7 +9352,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Method (_PS3, 0, Serialized)  // _PS3: Power State 3
                 {
-                    ADBG ("SPI1 Ctrlr D3")
                     If (LNotEqual (^^SIRC.CNTR (0x05), Zero))
                     {
                         Add (^^SIRC.CNTR (0x05), 0x84, Local0)
@@ -9389,10 +9375,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Name (_ADR, 0x00150005)  // _ADR: Address
                 Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
                 {
-                    ADBG ("UA00 DEP Call")
                     If (LEqual (S0ID, One))
                     {
-                        ADBG ("UA00 DEP")
                         Return (Package (One)
                         {
                             PEPD
@@ -9400,7 +9384,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     }
                     Else
                     {
-                        ADBG ("UA00 DEP NULL")
                         Return (Package (Zero) {Zero})
                     }
                 }
@@ -9464,7 +9447,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Method (_PS0, 0, Serialized)  // _PS0: Power State 0
                 {
-                    ADBG ("UAR0 Ctrlr D0")
                     If (LNotEqual (^^SIRC.CNTR (0x06), Zero))
                     {
                         Add (^^SIRC.CNTR (0x06), 0x84, Local0)
@@ -9481,7 +9463,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Method (_PS3, 0, Serialized)  // _PS3: Power State 3
                 {
-                    ADBG ("UAR0 Ctrlr D3")
                     If (LNotEqual (^^SIRC.CNTR (0x06), Zero))
                     {
                         Add (^^SIRC.CNTR (0x06), 0x84, Local0)
@@ -9505,10 +9486,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Name (_ADR, 0x00150006)  // _ADR: Address
                 Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
                 {
-                    ADBG ("UA01 DEP Call")
                     If (LEqual (S0ID, One))
                     {
-                        ADBG ("UA01 DEP")
                         Return (Package (One)
                         {
                             PEPD
@@ -9516,7 +9495,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     }
                     Else
                     {
-                        ADBG ("UA01 DEP NULL")
                         Return (Package (Zero) {Zero})
                     }
                 }
@@ -9592,7 +9570,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Method (_PS0, 0, Serialized)  // _PS0: Power State 0
                 {
-                    ADBG ("UAR1 Ctrlr D0")
                     If (LNotEqual (^^SIRC.CNTR (0x07), Zero))
                     {
                         Add (^^SIRC.CNTR (0x07), 0x84, Local0)
@@ -9609,7 +9586,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Method (_PS3, 0, Serialized)  // _PS3: Power State 3
                 {
-                    ADBG ("UAR1 Ctrlr D3")
                     If (LNotEqual (^^SIRC.CNTR (0x07), Zero))
                     {
                         Add (^^SIRC.CNTR (0x07), 0x84, Local0)
@@ -9633,10 +9609,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Name (_ADR, 0x00170000)  // _ADR: Address
                 Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
                 {
-                    ADBG ("SDHC DEP Call")
                     If (LEqual (S0ID, One))
                     {
-                        ADBG ("SDHC DEP")
                         Return (Package (One)
                         {
                             PEPD
@@ -9644,7 +9618,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     }
                     Else
                     {
-                        ADBG ("SDHC DEP NULL")
                         Return (Package (Zero) {Zero})
                     }
                 }
@@ -9683,7 +9656,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Method (_PS0, 0, Serialized)  // _PS0: Power State 0
                 {
-                    ADBG ("SDHC Ctrlr D0")
                     If (LNotEqual (^^SIRC.CNTR (0x08), Zero))
                     {
                         Add (^^SIRC.CNTR (0x08), 0x84, Local0)
@@ -9700,7 +9672,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Method (_PS3, 0, Serialized)  // _PS3: Power State 3
                 {
-                    ADBG ("SDHC Ctrlr D3")
                     If (LNotEqual (^^SIRC.CNTR (0x08), Zero))
                     {
                         Add (^^SIRC.CNTR (0x08), 0x84, Local0)
@@ -10135,14 +10106,12 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Method (_PS0, 0, Serialized)  // _PS0: Power State 0
                 {
-                    ADBG ("TPD4 Ctrlr D0")
                     WTIN (0x0E, Zero)
                     Store (One, GO14)
                 }
 
                 Method (_PS3, 0, Serialized)  // _PS3: Power State 3
                 {
-                    ADBG ("TPD4 Ctrlr D3")
                     WTIN (0x0E, One)
                     Store (Zero, GO14)
                 }
@@ -11198,7 +11167,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
         Scope (SDHC)
         {
-            Device (WI01)
+            Device (WI01)  // WIFI Device!!!
             {
                 Name (_ADR, One)  // _ADR: Address
                 Name (_DDN, "SDIO Wifi device Function 1")  // _DDN: DOS Device Name
@@ -11216,17 +11185,14 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Name (_S0W, 0x02)  // _S0W: S0 Device Wake State
                 Method (_PS0, 0, Serialized)  // _PS0: Power State 0
                 {
-                    ADBG ("WiFi1 Enter D0")
                 }
 
                 Method (_PS2, 0, Serialized)  // _PS2: Power State 2
                 {
-                    ADBG ("WiFi1 Enter D2")
                 }
 
                 Method (_PS3, 0, Serialized)  // _PS3: Power State 3
                 {
-                    ADBG ("WiFi1 Enter D3")
                 }
 
                 Name (RBUF, ResourceTemplate ()
@@ -11265,10 +11231,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Name (_UID, One)  // _UID: Unique ID
             Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
             {
-                ADBG ("ADSP DEP Call")
                 If (LEqual (S0ID, One))
                 {
-                    ADBG ("ADSP DEP")
                     Return (Package (One)
                     {
                         PEPD
@@ -11276,7 +11240,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 }
                 Else
                 {
-                    ADBG ("ADSP DEP NULL")
                     Return (Package (Zero) {Zero})
                 }
             }
@@ -11416,16 +11379,13 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Name (FDRP, Zero)
             Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
             {
-                ADBG ("SAT0 DEP Call")
                 If (LAnd (LEqual (S0ID, One), LNotEqual (And (PEPC, 0x03), Zero)))
                     {
-                        ADBG ("SAT0 DEP")
                         Return (Package (One)
                         {
                             PEPD
                         })
                     }
-                ADBG ("SAT0 DEP NULL")
                 Return (Package (Zero) {Zero})
             }
 
@@ -12444,10 +12404,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         {
             Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
             {
-                ADBG ("CPU0 DEP Call")
                 If (LEqual (S0ID, One))
                 {
-                    ADBG ("CPU0 DEP")
                     Return (Package (One)
                     {
                         \_SB.PEPD
@@ -12455,7 +12413,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 }
                 Else
                 {
-                    ADBG ("CPU0 DEP NULL")
                     Return (Package (Zero) {Zero})
                 }
             }
@@ -12465,10 +12422,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         {
             Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
             {
-                ADBG ("CPU1 DEP Call")
                 If (LEqual (S0ID, One))
                 {
-                    ADBG ("CPU1 DEP")
                     Return (Package (One)
                     {
                         \_SB.PEPD
@@ -12476,7 +12431,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 }
                 Else
                 {
-                    ADBG ("CPU1 DEP NULL")
                     Return (Package (Zero) {Zero})
                 }
             }
@@ -12486,10 +12440,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         {
             Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
             {
-                ADBG ("CPU2 DEP Call")
                 If (LEqual (S0ID, One))
                 {
-                    ADBG ("CPU2 DEP")
                     Return (Package (One)
                     {
                         \_SB.PEPD
@@ -12497,7 +12449,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 }
                 Else
                 {
-                    ADBG ("CPU2 DEP NULL")
                     Return (Package (Zero) {Zero})
                 }
             }
@@ -12507,10 +12458,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         {
             Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
             {
-                ADBG ("CPU3 DEP Call")
                 If (LEqual (S0ID, One))
                 {
-                    ADBG ("CPU3 DEP")
                     Return (Package (One)
                     {
                         \_SB.PEPD
@@ -12518,7 +12467,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 }
                 Else
                 {
-                    ADBG ("CPU3 DEP NULL")
                     Return (Package (Zero) {Zero})
                 }
             }
@@ -12528,10 +12476,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         {
             Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
             {
-                ADBG ("CPU4 DEP Call")
                 If (LEqual (S0ID, One))
                 {
-                    ADBG ("CPU4 DEP")
                     Return (Package (One)
                     {
                         \_SB.PEPD
@@ -12539,7 +12485,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 }
                 Else
                 {
-                    ADBG ("CPU4 DEP NULL")
                     Return (Package (Zero) {Zero})
                 }
             }
@@ -12549,10 +12494,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         {
             Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
             {
-                ADBG ("CPU5 DEP Call")
                 If (LEqual (S0ID, One))
                 {
-                    ADBG ("CPU5 DEP")
                     Return (Package (One)
                     {
                         \_SB.PEPD
@@ -12560,7 +12503,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 }
                 Else
                 {
-                    ADBG ("CPU5 DEP NULL")
                     Return (Package (Zero) {Zero})
                 }
             }
@@ -12570,10 +12512,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         {
             Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
             {
-                ADBG ("CPU6 DEP Call")
                 If (LEqual (S0ID, One))
                 {
-                    ADBG ("CPU6 DEP")
                     Return (Package (One)
                     {
                         \_SB.PEPD
@@ -12581,7 +12521,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 }
                 Else
                 {
-                    ADBG ("CPU6 DEP NULL")
                     Return (Package (Zero) {Zero})
                 }
             }
@@ -12591,10 +12530,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         {
             Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
             {
-                ADBG ("CPU7 DEP Call")
                 If (LEqual (S0ID, One))
                 {
-                    ADBG ("CPU7 DEP")
                     Return (Package (One)
                     {
                         \_SB.PEPD
@@ -12602,7 +12539,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 }
                 Else
                 {
-                    ADBG ("CPU7 DEP NULL")
                     Return (Package (Zero) {Zero})
                 }
             }
@@ -12734,7 +12670,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
     {
         If (LEqual (Arg0, 0x05)) {} Else {
         PTS (Arg0)
-        ADBG (Concatenate ("_PTS=", ToHexString (Arg0)))
         If (And (ICNF, 0x10))
         {
             If (CondRefOf (\_SB.IAOE.PTSL))
@@ -12761,7 +12696,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
     {
         If (LOr(LLess(Arg0,One),LGreater(Arg0,5))) { Store(3,Arg0) }
         WAK (Arg0)
-        ADBG ("_WAK")
         If (And (ICNF, 0x10))
         {
             If (And (\_SB.PCI0.IGPU.TCHE, 0x0100))
@@ -12979,7 +12913,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 \_SB.PCI0.LPCB.EC0.CSEE (0xAE)
                 P8XH (Zero, 0xC5)
                 P8XH (One, Zero)
-                ADBG ("Enter CS")
                 If (PSCP)
                 {
                     If (LAnd (CondRefOf (\_PR.CPU0.APSS), CondRefOf (\_PR.CPU0._PPC)))
@@ -12999,7 +12932,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 \_SB.PCI0.LPCB.EC0.CSEE (0xAF)
                 P8XH (Zero, 0xB0)
                 P8XH (One, 0xAB)
-                ADBG ("Exit CS")
                 If (PSCP)
                 {
                     If (CondRefOf (\_PR.CPU0._PPC))
@@ -14185,7 +14117,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         {
             If (LEqual (BID, BRH))
             {
-                ADBG ("Rotation Lock")
                 Sleep (0x03E8)
                 \_SB.PCI0.IGPU.IUEH (0x04)
             }
@@ -27988,10 +27919,8 @@ Store (ShiftRight (Local4, 8), DTB1)
 
             Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
             {
-                ADBG ("IGPU DEP Call")
                 If (LEqual (S0ID, One))
                 {
-                    ADBG ("IGPU DEP")
                     Return (Package (One)
                     {
                         PEPD
@@ -27999,7 +27928,6 @@ Store (ShiftRight (Local4, 8), DTB1)
                 }
                 Else
                 {
-                    ADBG ("IGPU DEP NULL")
                     Return (Package (Zero) {Zero})
                 }
             }
