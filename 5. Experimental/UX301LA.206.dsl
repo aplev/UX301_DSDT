@@ -18,17 +18,9 @@
  */
 DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 {
-    /*
-     * iASL Warning: There were 20 external control methods found during
-     * disassembly, but only 15 were resolved (5 unresolved). Additional
-     * ACPI tables are required to properly disassemble the code. This
-     * resulting disassembler output file may not compile because the
-     * disassembler did not know how many arguments to assign to the
-     * unresolved methods.
-     */
-    External (HDOS, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
-    External (HNOT, MethodObj)    // Warning: Unresolved Method, guessing 1 arguments (may be incorrect, see warning above)
-    External (IDAB, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
+    External (HDOS, MethodObj)    // Warning: Unresolved Method, Apple Tables Have this too!
+    External (HNOT, MethodObj)    // Warning: Unresolved Method, Apple Tables Have this too!
+    External (IDAB, MethodObj)    // Warning: Unresolved Method, Apple Tables Have this too!
     
     External (_PR_.AAC0, FieldUnitObj)
     External (_PR_.ACRT, FieldUnitObj)
@@ -36,21 +28,13 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
     External (_PR_.CBMI, FieldUnitObj)
     External (_PR_.CFGD, FieldUnitObj)
     External (_PR_.CLVL, FieldUnitObj)
-    External (_PR_.CPU0, ProcessorObj)
     External (_PR_.CPU0._PPC, IntObj)
-    External (_PR_.CPU0.APSS, PkgObj)
     External (_PR_.CPU0._TPC, IntObj)
     External (_PR_.CPU0._TSD, MethodObj)    // 0 Arguments
     External (_PR_.CPU0._TSS, MethodObj)    // 0 Arguments
+    External (_PR_.CPU0.APSS, PkgObj)
     External (_PR_.CPU0.TSMC, PkgObj)
     External (_PR_.CPU0.TSMF, PkgObj)
-    External (_PR_.CPU1, ProcessorObj)
-    External (_PR_.CPU2, ProcessorObj)
-    External (_PR_.CPU3, ProcessorObj)
-    External (_PR_.CPU4, ProcessorObj)
-    External (_PR_.CPU5, ProcessorObj)
-    External (_PR_.CPU6, ProcessorObj)
-    External (_PR_.CPU7, ProcessorObj)
     External (_PR_.CTC0, FieldUnitObj)
     External (_PR_.CTC1, FieldUnitObj)
     External (_PR_.CTC2, FieldUnitObj)
@@ -66,7 +50,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
     External (_PR_.TAR0, FieldUnitObj)
     External (_PR_.TAR1, FieldUnitObj)
     External (_PR_.TAR2, FieldUnitObj)
-    External (MDBG, IntObj)
     External (PDC0, IntObj)
     External (PDC1, IntObj)
     External (PDC2, IntObj)
@@ -12274,16 +12257,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         }
 
         Store (P80D, P80H)
-    }
-
-    Method (ADBG, 1, Serialized)
-    {
-        If (CondRefOf (MDBG))
-        {
-            Store (Arg0, MDBG)          
-            Return (Zero)
-        }
-        Return (Zero)
     }
 
     OperationRegion (SPRT, SystemIO, 0xB2, 0x02)
