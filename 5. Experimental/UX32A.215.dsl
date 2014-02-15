@@ -23122,12 +23122,12 @@ Store (ShiftRight (Local4, 8), DTB1)
             Return (Local0)
         }
         Name (KLVN, Zero)
-        Name (TEMP, Package (0x04)
+        Name (TEMP, Package (0x08)
         {
-            "CPU Heatsink", 
-            "TCPU", 
-            "CPU Proximity", 
-            "TCPP"
+            "CPU Heatsink", "TCPU", 
+            "CPU Proximity", "TCPP",
+            "Passive Cooling", "CPCT",
+            "Critical Temp", "CPTM"
         })
         Method (TCPU, 0, NotSerialized)
         {
@@ -23137,6 +23137,16 @@ Store (ShiftRight (Local4, 8), DTB1)
         Method (TCPP, 0, NotSerialized)
         {
             Store (\_SB.PCI0.LPCB.EC0.TH0R, Local0)
+            Return (Local0)
+        }
+        Method (CPCT, 0, NotSerialized)
+        {
+            Store (\_SB.PCI0.LPCB.EC0.EPSV, Local0)
+            Return (Local0)
+        }
+        Method (CPTM, 0, NotSerialized)
+        {
+            Store (\_SB.PCI0.LPCB.EC0.ECRT, Local0)
             Return (Local0)
         }
     }
