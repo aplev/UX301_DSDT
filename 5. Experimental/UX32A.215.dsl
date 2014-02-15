@@ -7519,11 +7519,9 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000013)
                 }
                 Method (_DSM, 4, NotSerialized)
                 {
-                    Store (Package (0x0A)
+                    Store (Package (0x06)
                     {
                     "AAPL,ig-platform-id", Buffer (0x04) { 0x09, 0x00, 0x66, 0x01 },
-                    "AAPL00,DualLink", Buffer (0x04) { 0x01,0x00,0x00,0x00 },
-                    "class-code", Buffer (0x04) { 0x00, 0x00, 0x03, 0x00 },
                     "built-in", Buffer (One) { 0x00 },
                     "hda-gfx", Buffer (0x0A) { "onboard-1" }
                     }, Local0)
