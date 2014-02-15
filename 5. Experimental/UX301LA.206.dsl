@@ -30822,23 +30822,14 @@ Store (ShiftRight (Local4, 8), DTB1)
             }
             Method (_DSM, 4, NotSerialized)
             {
-                Store (Package (0x06)
+                Store (Package (0x0C)
                 {
-                    "AAPL,ig-platform-id",
-                    Buffer (0x04)
-                    {
-                        0x08, 0x00, 0x2E, 0x0A
-                    },
-                    "hda-gfx",
-                    Buffer (0x0A)
-                    {
-                    "onboard-1"
-                    },
-                    "model", 
-                    Buffer (0x19)
-                    {
-                    "Intel Iris Graphics 5100"
-                    }
+                    "AAPL,ig-platform-id", Buffer (0x04) { 0x08, 0x00, 0x2E, 0x0A },
+                    "AAPL00,DualLink", Buffer (0x04) { 0x01,0x00,0x00,0x00 },
+                    "class-code", Buffer (0x04) { 0x00, 0x00, 0x03, 0x00 },
+                    "built-in", Buffer (One) { 0x00 },
+                    "hda-gfx", Buffer (0x0A) { "onboard-1" },
+                    "model", Buffer (0x19) { "Intel Iris Graphics 5100" }
                 }, Local0)
                 DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
                 Return (Local0)
