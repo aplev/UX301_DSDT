@@ -137,16 +137,10 @@ DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00010500)
             If (LEqual (Arg2, Zero))
             {
                 Return (Buffer (One)
-                {
-                    0x03
-                })
+                { 0x03 })
             }
-
             Return (Package (0x02)
-            {
-                "plugin-type",
-                One
-            })
+            { "plugin-type", One })
         }
     }
 
