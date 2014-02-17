@@ -12562,15 +12562,19 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Name (_ADR, 0x001F0002)  // _ADR: Address
             Name (FDEV, Zero)
             Name (FDRP, Zero)
-            Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
+            Method (DEP, 0, NotSerialized)
             {
-                If (LAnd (LEqual (S0ID, One), LNotEqual (And (PEPC, 0x03), Zero)))
+                If (LGreaterEqual (OSYS, 0x07DD))
+                {
+                    If (LAnd (LEqual (S0ID, One), LNotEqual (And (PEPC, 0x03
+                        ), Zero)))
                     {
                         Return (Package (One)
                         {
                             PEPD
                         })
                     }
+                }
                 Return (Package (Zero) {Zero})
             }
 
@@ -12703,104 +12707,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Return (PIB2)
                 }
             }
-
-        Name (TMD0, Buffer (0x14) {})
-        CreateDWordField (TMD0, Zero, PIO0)
-        CreateDWordField (TMD0, 0x04, DMA0)
-        CreateDWordField (TMD0, 0x08, PIO1)
-        CreateDWordField (TMD0, 0x0C, DMA1)
-        CreateDWordField (TMD0, 0x10, CHNF)
-        Method (_GTM, 0, NotSerialized)  // _GTM: Get Timing Mode
-        {
-            Store (0x78, PIO0)
-            Store (0x14, DMA0)
-            Store (0x78, PIO1)
-            Store (0x14, DMA1)
-            Or (CHNF, 0x05, CHNF)
-            Return (TMD0)
-        }
-
-        Method (_STM, 3, NotSerialized)  // _STM: Set Timing Mode
-        {
-        }
-
-        Device (SPT0)
-        {
-            Name (_ADR, 0xFFFF)  // _ADR: Address
-            Method (_GTF, 0, NotSerialized)  // _GTF: Get Task File
-            {
-                Store (Zero, CMDC)
-                GTFB (STFE, 0x06)
-                GTFB (FZTF, Zero)
-                GTFB (DCFL, Zero)
-                Return (SCBF)
-            }
-        }
-
-        Device (SPT1)
-        {
-            Name (_ADR, 0x0001FFFF)  // _ADR: Address
-            Method (_GTF, 0, NotSerialized)  // _GTF: Get Task File
-            {
-                Store (Zero, CMDC)
-                GTFB (STFE, 0x06)
-                GTFB (FZTF, Zero)
-                GTFB (DCFL, Zero)
-                Return (SCBF)
-            }
-        }
-
-        Device (SPT2)
-        {
-            Name (_ADR, 0x0002FFFF)  // _ADR: Address
-            Method (_GTF, 0, NotSerialized)  // _GTF: Get Task File
-            {
-                Store (Zero, CMDC)
-                GTFB (STFE, 0x06)
-                GTFB (FZTF, Zero)
-                GTFB (DCFL, Zero)
-                Return (SCBF)
-            }
-        }
-
-        Device (SPT3)
-        {
-            Name (_ADR, 0x0003FFFF)  // _ADR: Address
-            Method (_GTF, 0, NotSerialized)  // _GTF: Get Task File
-            {
-                Store (Zero, CMDC)
-                GTFB (STFE, 0x06)
-                GTFB (FZTF, Zero)
-                GTFB (DCFL, Zero)
-                Return (SCBF)
-            }
-        }
-
-        Device (SPT4)
-        {
-            Name (_ADR, 0x0004FFFF)  // _ADR: Address
-            Method (_GTF, 0, NotSerialized)  // _GTF: Get Task File
-            {
-                Store (Zero, CMDC)
-                GTFB (STFE, 0x06)
-                GTFB (FZTF, Zero)
-                GTFB (DCFL, Zero)
-                Return (SCBF)
-            }
-        }
-
-        Device (SPT5)
-        {
-            Name (_ADR, 0x0005FFFF)  // _ADR: Address
-            Method (_GTF, 0, NotSerialized)  // _GTF: Get Task File
-            {
-                Store (Zero, CMDC)
-                GTFB (STFE, 0x06)
-                GTFB (FZTF, Zero)
-                GTFB (DCFL, Zero)
-                Return (SCBF)
-            }
-        }
         Method (_DSM, 4, NotSerialized)
         {
             If (LEqual (Arg2, Zero)) { Return (Buffer(One) { 0x03 } ) }
@@ -12809,8 +12715,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 "device-id", Buffer() { 0x03, 0x8c, 0x00, 0x00 },
                 "IOName", Buffer() { "pci8086,8c03" },
                 "name", Buffer() { "pci8086,8c03" },
-                "built-in", Buffer(One) { 0x00 },
-                "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
+                "compatible", Buffer (0x0D) { "pci8086,8c03" }, 
                 "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
             })
         }
