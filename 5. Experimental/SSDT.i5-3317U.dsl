@@ -10,12 +10,12 @@
  *     Checksum         0x00
  *     OEM ID           "APPLE "
  *     OEM Table ID     "CpuPm"
- *     OEM Revision     0x00010500 (66816)
+ *     OEM Revision     0x00011000 (69632)
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20130210 (538116624)
  */
 
-DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00010500)
+DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00011000)
 {
     External (\_PR_.CPU0, DeviceObj)
     External (\_PR_.CPU1, DeviceObj)
@@ -26,27 +26,24 @@ DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00010500)
     {
         Method (_INI, 0, NotSerialized)
         {
-            Store ("ssdtPRGen version: 10.5 / Mac OS X 10.9.1 (13B42)", Debug)
+            Store ("ssdtPRGen version: 11.0 / Mac OS X 10.9.1 (13B42)", Debug)
             Store ("target processor : i5-3317U", Debug)
             Store ("running processor: Intel(R) Core(TM) i5-3317U CPU @ 1.70GHz", Debug)
             Store ("baseFrequency    : 1200", Debug)
             Store ("frequency        : 1700", Debug)
             Store ("busFrequency     : 100", Debug)
             Store ("logicalCPUs      : 4", Debug)
-            Store ("max TDP          : 17", Debug)
+            Store ("maximum TDP      : 17", Debug)
             Store ("packageLength    : 15", Debug)
             Store ("turboStates      : 9", Debug)
             Store ("maxTurboFrequency: 2600", Debug)
-            Store ("gIvyWorkAround   : 3", Debug)
             Store ("machdep.xcpm.mode: 0", Debug)
         }
 
-        Name (APLF, 0x04)
-        Name (APSN, 0x0A)
-        Name (APSS, Package (0x14)
+        Name (APLF, Zero)
+        Name (APSN, 0x09)
+        Name (APSS, Package (0x0F)
         {
-            /* Workaround for the Ivy Bridge PM 'bug' */
-            Package (0x06) { 0x0A29, 0x004268, 0x0A, 0x0A, 0x1B00, 0x1B00 },
             /* High Frequency Modes (turbo) */
             Package (0x06) { 0x0A28, 0x004268, 0x0A, 0x0A, 0x1A00, 0x1A00 },
             Package (0x06) { 0x09C4, 0x004268, 0x0A, 0x0A, 0x1900, 0x1900 },
@@ -64,11 +61,7 @@ DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00010500)
             Package (0x06) { 0x0578, 0x0034D6, 0x0A, 0x0A, 0x0E00, 0x0E00 },
             Package (0x06) { 0x0514, 0x00307F, 0x0A, 0x0A, 0x0D00, 0x0D00 },
             /* Low Frequency Mode */
-            Package (0x06) { 0x04B0, 0x002C3F, 0x0A, 0x0A, 0x0C00, 0x0C00 },
-            Package (0x06) { 0x044C,     Zero, 0x0A, 0x0A, 0x0B00, 0x0B00 },
-            Package (0x06) { 0x03E8,     Zero, 0x0A, 0x0A, 0x0A00, 0x0A00 },
-            Package (0x06) { 0x0384,     Zero, 0x0A, 0x0A, 0x0900, 0x0900 },
-            Package (0x06) { 0x0320,     Zero, 0x0A, 0x0A, 0x0800, 0x0800 }
+            Package (0x06) { 0x04B0, 0x002C3F, 0x0A, 0x0A, 0x0C00, 0x0C00 }
         })
 
         Method (ACST, 0, NotSerialized)
@@ -144,25 +137,6 @@ DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00010500)
                     0xF5,
                     0xC8
                 }
-            })
-        }
-
-        Method (_DSM, 4, NotSerialized)
-        {
-            Store ("Method CPU0._DSM Called", Debug)
-
-            If (LEqual (Arg2, Zero))
-            {
-                Return (Buffer (One)
-                {
-                    0x03
-                })
-            }
-
-            Return (Package (0x02)
-            {
-                "plugin-type",
-                One
             })
         }
     }
