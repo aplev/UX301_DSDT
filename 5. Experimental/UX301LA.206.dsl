@@ -1522,6 +1522,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     }
                 }
             }
+           // OWLD (Zero) // Disabling WiFi at Boot! Not Working
+           // OBTD (Zero) // Disabling Bluetooth at Boot! Not Working
         }
 
         Method (NHPG, 0, Serialized)
@@ -4281,9 +4283,9 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                             0x0070,             // Range Minimum
                             0x0070,             // Range Maximum
                             0x01,               // Alignment
-                            0x08,               // Length
+                            0x02,               // Length
                             )
-                            IRQNoFlags () {8}
+                            // IRQNoFlags () {8}
                     })
                 }
 
@@ -4304,7 +4306,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                             0x10,               // Alignment
                             0x04,               // Length
                             )
-                        
                     })
                 }
 
@@ -5151,7 +5152,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Device (PXSX)
                 {
                     Name (_ADR, Zero)  // _ADR: Address
-                    Name (_STA, Zero)      // Status: Intel WIFI Not Working!
+                    // Name (_STA, Zero) Status: Intel WIFI Not Working! Disabling not working!
                     Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
                     {
                         Return (GPRW (0x69, 0x04))
