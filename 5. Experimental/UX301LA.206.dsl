@@ -1477,7 +1477,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Store (0x07D3, OSYS)
                 }
 
-                If(LOr(_OSI("Darwin"),_OSI("Windows 2006")))
+                If (_OSI ("Windows 2006"))
                 {
                     Store (0x07D6, OSYS)
                 }
@@ -12564,13 +12564,17 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Name (FDRP, Zero)
             Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
             {
-                If (LAnd (LEqual (S0ID, One), LNotEqual (And (PEPC, 0x03), Zero)))
+                If (LGreaterEqual (OSYS, 0x07DD))
+                {
+                    If (LAnd (LEqual (S0ID, One), LNotEqual (And (PEPC, 0x03
+                        ), Zero)))
                     {
                         Return (Package (One)
                         {
                             PEPD
                         })
                     }
+                }
                 Return (Package (Zero) {Zero})
             }
 
@@ -12804,14 +12808,13 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         Method (_DSM, 4, NotSerialized)
         {
             If (LEqual (Arg2, Zero)) { Return (Buffer(One) { 0x03 } ) }
-            Return (Package()
+            Return ( Package (0x0A)
             {
-                "device-id", Buffer() { 0x03, 0x8c, 0x00, 0x00 },
-                "IOName", Buffer() { "pci8086,8c03" },
-                "name", Buffer() { "pci8086,8c03" },
-                "built-in", Buffer(One) { 0x00 },
-                "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
-                "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
+                "device-id", Buffer(0x04) { 0x03, 0x8c, 0x00, 0x00 },
+                "IOName", Buffer(0x0D) { "pci8086,8c03" },
+                "name", Buffer(0x0D) { "pci8086,8c03" },
+                "compatible", Buffer (0x0D) { "pci8086,8c03" },
+                "subsystem-vendor-id", Buffer(0x04) { 0x86, 0x80, 0x00, 0x00 }
             })
         }
         }
@@ -13572,6 +13575,89 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Store (PA6H, PM6H)
             Store (PA6L, PM6L)
         }
+        
+        Device (PDRC)
+        {
+            Name (_HID, EisaId ("PNP0C02"))  // _HID: Hardware ID
+            Name (_UID, One)  // _UID: Unique ID
+            Name (BUF0, ResourceTemplate ()
+            {
+                Memory32Fixed (ReadWrite,
+                    0x00000000,         // Address Base
+                    0x00004000,         // Address Length
+                    _Y2F)
+                Memory32Fixed (ReadWrite,
+                    0x00000000,         // Address Base
+                    0x00008000,         // Address Length
+                    _Y32)
+                Memory32Fixed (ReadWrite,
+                    0x00000000,         // Address Base
+                    0x00001000,         // Address Length
+                    _Y33)
+                Memory32Fixed (ReadWrite,
+                    0x00000000,         // Address Base
+                    0x00001000,         // Address Length
+                    _Y34)
+                Memory32Fixed (ReadWrite,
+                    0x00000000,         // Address Base
+                    0x00000000,         // Address Length
+                    _Y35)
+                Memory32Fixed (ReadWrite,
+                    0xFED20000,         // Address Base
+                    0x00020000,         // Address Length
+                    )
+                Memory32Fixed (ReadOnly,
+                    0xFED90000,         // Address Base
+                    0x00004000,         // Address Length
+                    )
+                Memory32Fixed (ReadWrite,
+                    0xFED45000,         // Address Base
+                    0x0004B000,         // Address Length
+                    )
+                Memory32Fixed (ReadOnly,
+                    0xFF000000,         // Address Base
+                    0x01000000,         // Address Length
+                    )
+                Memory32Fixed (ReadOnly,
+                    0xFEE00000,         // Address Base
+                    0x00100000,         // Address Length
+                    )
+                Memory32Fixed (ReadWrite,
+                    0x00000000,         // Address Base
+                    0x00001000,         // Address Length
+                    _Y30)
+                Memory32Fixed (ReadWrite,
+                    0x00000000,         // Address Base
+                    0x00010000,         // Address Length
+                    _Y31)
+            })
+            Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
+            {
+                CreateDWordField (BUF0, ^_Y2F._BAS, RBR0)  // _BAS: Base Address
+                ShiftLeft (^^LPCB.RCBA, 0x0E, RBR0)
+                CreateDWordField (BUF0, ^_Y30._BAS, TBR0)  // _BAS: Base Address
+                Store (TBAB, TBR0)
+                CreateDWordField (BUF0, ^_Y30._LEN, TBLN)  // _LEN: Length
+                If (LEqual (TBAB, Zero))
+                {
+                    Store (Zero, TBLN)
+                }
+
+                CreateDWordField (BUF0, ^_Y31._BAS, SNR0)  // _BAS: Base Address
+                Store (SRMB, SNR0)
+                CreateDWordField (BUF0, ^_Y32._BAS, MBR0)  // _BAS: Base Address
+                ShiftLeft (MHBR, 0x0F, MBR0)
+                CreateDWordField (BUF0, ^_Y33._BAS, DBR0)  // _BAS: Base Address
+                ShiftLeft (DIBR, 0x0C, DBR0)
+                CreateDWordField (BUF0, ^_Y34._BAS, EBR0)  // _BAS: Base Address
+                ShiftLeft (EPBR, 0x0C, EBR0)
+                CreateDWordField (BUF0, ^_Y35._BAS, XBR0)  // _BAS: Base Address
+                ShiftLeft (PXBR, 0x1A, XBR0)
+                CreateDWordField (BUF0, ^_Y35._LEN, XSZ0)  // _LEN: Length
+                ShiftRight (0x10000000, PXSZ, XSZ0)
+                Return (BUF0)
+            }
+        }
     }
 
     Scope (_PR)
@@ -14130,92 +14216,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         }
 
         Return (SMIF)
-    }
-
-    Scope (_SB.PCI0)
-    {
-        Device (PDRC)
-        {
-            Name (_HID, EisaId ("PNP0C02"))  // _HID: Hardware ID
-            Name (_UID, One)  // _UID: Unique ID
-            Name (BUF0, ResourceTemplate ()
-            {
-                Memory32Fixed (ReadWrite,
-                    0x00000000,         // Address Base
-                    0x00004000,         // Address Length
-                    _Y2F)
-                Memory32Fixed (ReadWrite,
-                    0x00000000,         // Address Base
-                    0x00008000,         // Address Length
-                    _Y32)
-                Memory32Fixed (ReadWrite,
-                    0x00000000,         // Address Base
-                    0x00001000,         // Address Length
-                    _Y33)
-                Memory32Fixed (ReadWrite,
-                    0x00000000,         // Address Base
-                    0x00001000,         // Address Length
-                    _Y34)
-                Memory32Fixed (ReadWrite,
-                    0x00000000,         // Address Base
-                    0x00000000,         // Address Length
-                    _Y35)
-                Memory32Fixed (ReadWrite,
-                    0xFED20000,         // Address Base
-                    0x00020000,         // Address Length
-                    )
-                Memory32Fixed (ReadOnly,
-                    0xFED90000,         // Address Base
-                    0x00004000,         // Address Length
-                    )
-                Memory32Fixed (ReadWrite,
-                    0xFED45000,         // Address Base
-                    0x0004B000,         // Address Length
-                    )
-                Memory32Fixed (ReadOnly,
-                    0xFF000000,         // Address Base
-                    0x01000000,         // Address Length
-                    )
-                Memory32Fixed (ReadOnly,
-                    0xFEE00000,         // Address Base
-                    0x00100000,         // Address Length
-                    )
-                Memory32Fixed (ReadWrite,
-                    0x00000000,         // Address Base
-                    0x00001000,         // Address Length
-                    _Y30)
-                Memory32Fixed (ReadWrite,
-                    0x00000000,         // Address Base
-                    0x00010000,         // Address Length
-                    _Y31)
-            })
-            Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
-            {
-                CreateDWordField (BUF0, ^_Y2F._BAS, RBR0)  // _BAS: Base Address
-                ShiftLeft (^^LPCB.RCBA, 0x0E, RBR0)
-                CreateDWordField (BUF0, ^_Y30._BAS, TBR0)  // _BAS: Base Address
-                Store (TBAB, TBR0)
-                CreateDWordField (BUF0, ^_Y30._LEN, TBLN)  // _LEN: Length
-                If (LEqual (TBAB, Zero))
-                {
-                    Store (Zero, TBLN)
-                }
-
-                CreateDWordField (BUF0, ^_Y31._BAS, SNR0)  // _BAS: Base Address
-                Store (SRMB, SNR0)
-                CreateDWordField (BUF0, ^_Y32._BAS, MBR0)  // _BAS: Base Address
-                ShiftLeft (MHBR, 0x0F, MBR0)
-                CreateDWordField (BUF0, ^_Y33._BAS, DBR0)  // _BAS: Base Address
-                ShiftLeft (DIBR, 0x0C, DBR0)
-                CreateDWordField (BUF0, ^_Y34._BAS, EBR0)  // _BAS: Base Address
-                ShiftLeft (EPBR, 0x0C, EBR0)
-                CreateDWordField (BUF0, ^_Y35._BAS, XBR0)  // _BAS: Base Address
-                ShiftLeft (PXBR, 0x1A, XBR0)
-                CreateDWordField (BUF0, ^_Y35._LEN, XSZ0)  // _LEN: Length
-                ShiftRight (0x10000000, PXSZ, XSZ0)
-                Return (BUF0)
-            }
-        }
     }
 
     Scope (_GPE)
@@ -22901,9 +22901,13 @@ Store (ShiftRight (Local4, 8), DTB1)
         Device (PWRB)
         {
             Name (_HID, EisaId ("PNP0C0C"))  // _HID: Hardware ID
-            Name (_STA, 0x0F)                // _STA: Status
+            Name (_UID, 0xAA)  // _UID: Unique ID
+            Name (_STA, 0x0B)  // _STA: Status
+            Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
+            {
+                Return (GPRW (0x1D, 0x03))
+            }
         }
-        
         Device (SLPB)
         {
             Name (_HID, EisaId ("PNP0C0E"))  // _HID: Hardware ID
