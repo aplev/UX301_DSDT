@@ -7432,7 +7432,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
             Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
             {
-                Return (GPRW (0x6D, 0x03))
+                Return (GPRW (0x6D, 0x04))
             }
             Method (_DSM, 4, NotSerialized)
                 {
@@ -7822,7 +7822,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
             Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
             {
-                Return (GPRW (0x6D, 0x03))
+                Return (GPRW (0x6D, 0x04))
             }
             Method (_DSM, 4, NotSerialized)
             {
@@ -9586,7 +9586,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
             Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
             {
-                Return (GPRW (0x6D, 0x03))
+                Return (GPRW (0x6D, 0x04))
             }
             Method (_DSM, 4, NotSerialized)
                 {
@@ -13921,6 +13921,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
     Method (_PTS, 1, NotSerialized)  // _PTS: Prepare To Sleep
     {
         If (LEqual (Arg0, 0x05)) { Store (0x03, Arg0) }
+        Store (Zero, P80D)
+        P8XH (Zero, Arg0)
         PTS (Arg0)
         If (And (ICNF, 0x10))
         {
@@ -13946,6 +13948,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
     Method (_WAK, 1, Serialized)  // _WAK: Wake
     {
         If (LOr(LLess(Arg0,One),LGreater(Arg0,5))) { Store(3,Arg0) }
+        P8XH (One, 0xAB)
         WAK (Arg0)
         If (And (ICNF, 0x10))
         {
@@ -14181,7 +14184,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Else
             {
                 \_SB.PCI0.LPCB.EC0.CSEE (0xAF)
-                P8XH (Zero, 0xB0)
+                P8XH (Zero, 0xC5)
                 P8XH (One, 0xAB)
                 If (PSCP)
                 {
@@ -18052,6 +18055,10 @@ DTB1, 8
             If (LEqual (Arg0, 0x04))
             {
                 Store (Zero, MES4)
+            }
+            If (Arg0)
+            {
+                STRP (Zero)
             }
 
             SBRW (Arg0)
