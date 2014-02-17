@@ -12581,8 +12581,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Device (PRT0)
             {
                 Name (_ADR, 0xFFFF)  // _ADR: Address
-                Name (FDEV, Zero)
-                Name (FDRP, Zero)
                 Method (_SDD, 1, Serialized)  // _SDD: Set Device Data
                 {
                     CreateByteField (Arg0, 0x9D, BFDS)
