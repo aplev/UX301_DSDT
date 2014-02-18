@@ -10,12 +10,12 @@
  *     Checksum         0x00
  *     OEM ID           "APPLE "
  *     OEM Table ID     "CpuPm"
- *     OEM Revision     0x00011000 (69632)
+ *     OEM Revision     0x00011500 (70912)
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20130210 (538116624)
  */
 
-DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00011000)
+DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00011500)
 {
     External (\_PR_.CPU0, DeviceObj)
     External (\_PR_.CPU1, DeviceObj)
