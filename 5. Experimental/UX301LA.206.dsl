@@ -4283,7 +4283,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                             0x0070,             // Range Minimum
                             0x0070,             // Range Maximum
                             0x01,               // Alignment
-                            0x02,               // Length
+                            0x08,               // Length
                             )
                             // IRQNoFlags () {8}
                     })
@@ -13920,7 +13920,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
     Method (_PTS, 1, NotSerialized)  // _PTS: Prepare To Sleep
     {
-        If (LEqual (Arg0, 0x05)) { Store (0x03, Arg0) }
+        If (LNotEqual(Arg0,5)) {
         PTS (Arg0)
         If (And (ICNF, 0x10))
         {
@@ -13941,6 +13941,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         Store (Zero, \_SB.IAOE.FFSE)
             }
         }
+}
+
     }
 
     Method (_WAK, 1, Serialized)  // _WAK: Wake
@@ -27472,7 +27474,7 @@ Store (ShiftRight (Local4, 8), DTB1)
             {
                 Store (Package (0x06)
                     {
-                        "hda-gfx", Buffer (0x0A) { "onboard-1" }, 
+                        "hda-gfx", Buffer (0x0A) { "onboard-2" }, 
                         "layout-id", Buffer (0x04) { 0x01, 0x00, 0x00, 0x00 }, 
                         "PinConfigurations", Buffer (Zero) {}
                     }, Local0)
@@ -29147,12 +29149,14 @@ Store (ShiftRight (Local4, 8), DTB1)
                 Offset (0xBC), 
                 ASLS,   32
             }
+OperationRegion (IGD2, PCI_Config, 0x10, 4)
+Field (IGD2, AnyAcc, NoLock, Preserve)
+{
+	BAR1,32,
+}
+
             
-            OperationRegion (IGD2, PCI_Config, 0x10, 4)
-            Field (IGD2, AnyAcc, NoLock, Preserve)
-            {
-                    BAR1,32,
-            }
+            
 
 
             OperationRegion (IGDM, SystemMemory, ASLB, 0x2000)
@@ -30785,14 +30789,10 @@ Store (ShiftRight (Local4, 8), DTB1)
             }
             Method (_DSM, 4, NotSerialized)
             {
-                Store (Package (0x0C)
+                Store (Package (0x04)
                 {
                     "AAPL,ig-platform-id", Buffer (0x04) { 0x08, 0x00, 0x2E, 0x0A },
-                    "AAPL00,DualLink", Buffer (0x04) { 0x01,0x00,0x00,0x00 },
-                    "class-code", Buffer (0x04) { 0x00, 0x00, 0x03, 0x00 },
-                    "built-in", Buffer (One) { 0x00 },
-                    "hda-gfx", Buffer (0x0A) { "onboard-1" },
-                    "model", Buffer (0x19) { "Intel Iris Graphics 5100" }
+                    "hda-gfx", Buffer (0x0A) { "onboard-2" }
                 }, Local0)
                 DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
                 Return (Local0)
@@ -31091,127 +31091,128 @@ Store (ShiftRight (Local4, 8), DTB1)
                 Store (Arg0, IWDT)
             }
         }
-        Device (PNLF)
+        
+    Device (PNLF)
+    {
+        // normal PNLF declares (note some of this probably not necessary)
+        Name (_ADR, Zero)
+        Name (_HID, EisaId ("APP0002"))
+        Name (_CID, "backlight")
+        Name (_UID, 10)
+        Name (_STA, 0x0B)
+        //define hardware register access for brightness
+        // you can see BAR1 value in RW-Everything under Bus00,02 Intel VGA controler PCI
+        // Note: Not sure which one is right here... for now, going with BAR1 minus 4
+        OperationRegion (BRIT, SystemMemory, Subtract(^PCI0.IGPU.BAR1, 4), 0xe1184)
+        //OperationRegion (BRIT, SystemMemory, And(\_SB.PCI0.IGPU.BAR1, Not(0xF)), 0xe1184)
+        Field (BRIT, AnyAcc, Lock, Preserve)
         {
-            // normal PNLF declares (note some of this probably not necessary)
-            Name (_ADR, Zero)
-            Name (_HID, EisaId ("APP0002"))
-            Name (_CID, "backlight")
-            Name (_UID, 0x0E)
-            Name (_STA, 0x0B)
-            //define hardware register access for brightness
-            // you can see BAR1 value in RW-Everything under Bus00,02 Intel VGA controler PCI
-            // Note: Not sure which one is right here... for now, going with BAR1 minus 4
-            OperationRegion (BRIT, SystemMemory, Subtract(^PCI0.IGPU.BAR1, 4), 0xe1184)
-            //OperationRegion (BRIT, SystemMemory, And(\_SB.PCI0.IGPU.BAR1, Not(0xF)), 0xe1184)
-            Field (BRIT, AnyAcc, Lock, Preserve)
-            {
-                Offset(0x48250),
-                LEV2, 32,
-                LEVL, 32,
-                Offset(0x70040),
-                P0BL, 32,
-                Offset(0xc8250),
-                LEVW, 32,
-                LEVX, 32,
-                Offset(0xe1180),
-                PCHL, 32,
-            }
-            Method (_INI, 0, NotSerialized)
-            {
-                // If the BIOS actually sets the values prior to boot, this would be
-                // how (maybe) to capture them.  My Envy does not have the capability
-                // to set brightness and I find these values are not set.
-                // The current value could also be in LEVL, and probably is even
-                // though OS X seems to manipulate only the low 16-bits of LEVX to
-                // change brightness.
-                // Because the low-order 16-bits are set to zero on the Envy, enabling
-                // this code causes a blank screen before the login screena appears.
-                //
-                //Store(LEVX, Local0)
-                //Store(ShiftRight(Local0,16), Local1)
-                //Store(And(Local0,0xFFFF), Local2)
-                //Divide(Multiply(Local2, 0xad9), Local1, Local0)
-                //Or(Local0, 0xad90000, Local0)
-                //
-                //REVIEW: wait for vblank to change things
-                //While(LEqual (P0BL, Local1)) {}
-                //
-                // This is part of the "keep startup level"...
-                // see comment above.
-                //Store(Local0, LEVX)
-                //
-                // This 0xC value comes from looking what OS X initializes this
-                // register to after display sleep (using ACPIDebug/ACPIPoller)
-                Store(0xC0000000, LEVW)
-                // Because this laptop starts at full brightness, I just set it right
-                // here.  This is to insure _BQC and XBQC return the correct level
-                // at startup.
-                Store(0xad90ad9, LEVX)
-            }
-            // _BCM/_BQC: set/get for brightness level
-            Method (_BCM, 1, NotSerialized)
-            {
-                // store new backlight level
-                Store(Match(_BCL, MGE, Arg0, MTR, Zero, 2), Local0)
-                If (LEqual(Local0, Ones)) { Subtract(SizeOf(_BCL), One, Local0) }
-                Store(Or(DerefOf(Index(_BCL,Local0)),And(LEVX,0xFFFF0000)), LEVX)
-            }
-            Method (_BQC, 0, NotSerialized)
-            {
-                Store(Match(_BCL, MGE, And(LEVX, 0xFFFF), MTR, Zero, 2), Local0)
-                If (LEqual(Local0, Ones)) { Subtract(SizeOf(_BCL), One, Local0) }
-                Return(DerefOf(Index(_BCL, Local0)))
-            }
-            Method (_DOS, 1, NotSerialized)
-            {
-                ^^PCI0.IGPU._DOS(Arg0)
-            }
-            // extended _BCM/_BQC for setting "in between" levels
-            Method (XBCM, 1, NotSerialized)
-            {
-                // store new backlight level
-                If (LGreater(Arg0, XRGH)) { Store(XRGH, Arg0) }
-                If (LAnd(Arg0, LLess(Arg0, XRGL))) { Store(XRGL, Arg0) }
-                Store(Or(Arg0,And(LEVX,0xFFFF0000)), LEVX)
-            }
-            Method (XBQC, 0, NotSerialized)
-            {
-                Store(And(LEVX,0xFFFF), Local0)
-                If (LGreater(Local0, XRGH)) { Store(XRGH, Local0) }
-                If (LAnd(Local0, LLess(Local0, XRGL))) { Store(XRGL, Local0) }
-                Return(Local0)
-            }
-            // Use XOPT=1 to disable smooth transitions
-            Name (XOPT, Zero)
-            // XRGL/XRGH: defines the valid range
-            Name (XRGL, Zero)
-            Name (XRGH, 1400)
-            // _BCL: returns list of valid brightness levels
-            // first two entries describe ac/battery power levels
-            Name (_BCL, Package()
-            {
-                780,
-                320,
-                Zero,
-                2, 4, 6, 9,
-                12, 15, 19, 23,
-                27, 32, 37, 42,
-                48, 54, 60, 67,
-                74, 82, 90, 99,
-                108, 118, 130, 143,
-                157, 172, 188, 205,
-                223, 242, 262, 283,
-                305, 328, 352, 377,
-                403, 430, 458, 487,
-                517, 547, 577, 609,
-                641, 674, 708, 743,
-                779, 810, 845, 880,
-                915, 950, 985, 1020,
-                1055, 1095, 1140, 1190,
-                1240, 1290, 1340, 1400,
-            })
+            Offset(0x48250),
+            LEV2, 32,
+            LEVL, 32,
+            Offset(0x70040),
+            P0BL, 32,
+            Offset(0xc8250),
+            LEVW, 32,
+            LEVX, 32,
+            Offset(0xe1180),
+            PCHL, 32,
         }
+        Method (_INI, 0, NotSerialized)
+        {
+            // If the BIOS actually sets the values prior to boot, this would be
+            // how (maybe) to capture them.  My Envy does not have the capability
+            // to set brightness and I find these values are not set.
+            // The current value could also be in LEVL, and probably is even
+            // though OS X seems to manipulate only the low 16-bits of LEVX to
+            // change brightness.
+            // Because the low-order 16-bits are set to zero on the Envy, enabling
+            // this code causes a blank screen before the login screena appears.
+            //
+            //Store(LEVX, Local0)
+            //Store(ShiftRight(Local0,16), Local1)
+            //Store(And(Local0,0xFFFF), Local2)
+            //Divide(Multiply(Local2, 0xad9), Local1, Local0)
+            //Or(Local0, 0xad90000, Local0)
+            //
+            //REVIEW: wait for vblank to change things
+            //While(LEqual (P0BL, Local1)) {}
+            //
+            // This is part of the "keep startup level"...
+            // see comment above.
+            //Store(Local0, LEVX)
+            //
+            // This 0xC value comes from looking what OS X initializes this
+            // register to after display sleep (using ACPIDebug/ACPIPoller)
+            Store(0xC0000000, LEVW)
+            // Because this laptop starts at full brightness, I just set it right
+            // here.  This is to insure _BQC and XBQC return the correct level
+            // at startup.
+            Store(0xad90ad9, LEVX)
+        }
+        // _BCM/_BQC: set/get for brightness level
+        Method (_BCM, 1, NotSerialized)
+        {
+            // store new backlight level
+            Store(Match(_BCL, MGE, Arg0, MTR, Zero, 2), Local0)
+            If (LEqual(Local0, Ones)) { Subtract(SizeOf(_BCL), One, Local0) }
+            Store(Or(DerefOf(Index(_BCL,Local0)),And(LEVX,0xFFFF0000)), LEVX)
+        }
+        Method (_BQC, 0, NotSerialized)
+        {
+            Store(Match(_BCL, MGE, And(LEVX, 0xFFFF), MTR, Zero, 2), Local0)
+            If (LEqual(Local0, Ones)) { Subtract(SizeOf(_BCL), One, Local0) }
+            Return(DerefOf(Index(_BCL, Local0)))
+        }
+        Method (_DOS, 1, NotSerialized)
+        {
+            ^^PCI0.IGPU._DOS(Arg0)
+        }
+        // extended _BCM/_BQC for setting "in between" levels
+        Method (XBCM, 1, NotSerialized)
+        {
+            // store new backlight level
+            If (LGreater(Arg0, XRGH)) { Store(XRGH, Arg0) }
+            If (LAnd(Arg0, LLess(Arg0, XRGL))) { Store(XRGL, Arg0) }
+            Store(Or(Arg0,And(LEVX,0xFFFF0000)), LEVX)
+        }
+        Method (XBQC, 0, NotSerialized)
+        {
+            Store(And(LEVX,0xFFFF), Local0)
+            If (LGreater(Local0, XRGH)) { Store(XRGH, Local0) }
+            If (LAnd(Local0, LLess(Local0, XRGL))) { Store(XRGL, Local0) }
+            Return(Local0)
+        }
+        // Use XOPT=1 to disable smooth transitions
+        Name (XOPT, Zero)
+        // XRGL/XRGH: defines the valid range
+        Name (XRGL, 9)
+        Name (XRGH, 1400)
+        // _BCL: returns list of valid brightness levels
+        // first two entries describe ac/battery power levels
+        Name (_BCL, Package()
+        {
+            780,
+            320,
+            Zero,
+            2, 4, 6, 9,
+            12, 15, 19, 23,
+            27, 32, 37, 42,
+            48, 54, 60, 67,
+            74, 82, 90, 99,
+            108, 118, 130, 143,
+            157, 172, 188, 205,
+            223, 242, 262, 283,
+            305, 328, 352, 377,
+            403, 430, 458, 487,
+            517, 547, 577, 609,
+            641, 674, 708, 743,
+            779, 810, 845, 880,
+            915, 950, 985, 1020,
+            1055, 1095, 1140, 1190,
+            1240, 1290, 1340, 1400,
+        })
+    }   
     }
         
     Method (PTS, 1, NotSerialized)
