@@ -4120,8 +4120,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                             0x01,               // Alignment
                             0x02,               // Length
                             )
-                        IRQNoFlags ()
-                            {2}
+                      //  IRQNoFlags () {2}
                     })
                 }
 
@@ -12810,18 +12809,19 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Return (SCBF)
             }
         }
-        Method (_DSM, 4, NotSerialized)
-        {
-            If (LEqual (Arg2, Zero)) { Return (Buffer(One) { 0x03 } ) }
-            Return ( Package (0x0A)
-            {
+        Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                { Store (Package (0x0E) {
                 "device-id", Buffer(0x04) { 0x03, 0x8c, 0x00, 0x00 },
                 "IOName", Buffer(0x0D) { "pci8086,8c03" },
                 "name", Buffer(0x0D) { "pci8086,8c03" },
-                "compatible", Buffer (0x0D) { "pci8086,8c03" },
-                "subsystem-vendor-id", Buffer(0x04) { 0x86, 0x80, 0x00, 0x00 }
-            })
-        }
+                "compatible", Buffer () { "SSD0" },
+                "subsystem-vendor-id", Buffer(0x04) { 0x86, 0x80, 0x00, 0x00 },
+                "sata-express-power-off", One,
+                "subsystem-id", Buffer(0x04) { 0x70, 0x72, 0x00, 0x00 }
+                }, Local0)
+                DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                Return (Local0)
+            }
         }
 
         Device (SAT1)
