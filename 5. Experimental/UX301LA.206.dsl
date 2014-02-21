@@ -5314,20 +5314,23 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 }
                 Method (_DSM, 4, NotSerialized)
                 {
-                    If (LEqual (Arg2, Zero)) { Return (Buffer(One) { 0x03 } ) }
-                    Return (Package()
+                    Store (Package ()
                     {
-                        "AAPL,clock-id", Buffer(One) { 0x02 },
-                        "built-in", Buffer(One) { 0x00 },
+                        "built-in", Buffer (One) { 0x00 },
+                        "AAPL,clock-id", Buffer (One) { 0x02 },
+                        "device_type", Buffer (0x05) { "XHCI" },
+                        "AAPL,current-available", 0x0834,
+                        "AAPL,current-extra", 0x0898,
+                        "AAPL,current-extra-in-sleep", 0x0640,
+                        "AAPL,device-internal", 0x02,
                         "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
                         "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
-                        "AAPL,current-available", 2100,
-                        "AAPL,current-extra", 2200,
-                        "AAPL,current-extra-in-sleep", 1600,
-                        "AAPL,device-internal", 0x02,
-                        "AAPL,max-port-current-in-sleep", 2100,
-                    })
+                        "AAPL,max-port-current-in-sleep", 0x0834, Buffer (One) { 0x00 }
+                    }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
                 }
+                
             }
             
             Device (IMEI)
@@ -22907,8 +22910,7 @@ Store (ShiftRight (Local4, 8), DTB1)
     {
         Device (PWRB)
         {
-            Name (_HID, EisaId ("PNP0C0C"))  // _HID: Hardware ID
-            Name (_UID, 0xAA)  // _UID: Unique ID
+            Name (_CID, EisaId ("PNP0C0C"))  // _CID: Compatible ID
             Name (_STA, 0x0B)  // _STA: Status
             Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
             {
