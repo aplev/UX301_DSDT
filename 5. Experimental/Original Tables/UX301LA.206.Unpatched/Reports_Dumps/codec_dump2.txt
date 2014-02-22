@@ -139,6 +139,7 @@ Node 0x12 [Pin Complex] wcaps 0x40040b: Stereo Amp-In
   Power states:  D0 D1 D2 D3 EPSS
   Power: setting=D0, actual=D0
 Node 0x13 [Vendor Defined Widget] wcaps 0xf00000: Mono
+
 Node 0x14 [Pin Complex] wcaps 0x40058d: Stereo Amp-Out
   Control: name="Speaker Playback Switch", index=0, device=0
     ControlAmp: chs=3, dir=Out, idx=0, ofs=0
@@ -251,6 +252,7 @@ Node 0x1e [Pin Complex] wcaps 0x400781: Stereo Digital
 Node 0x1f [Vendor Defined Widget] wcaps 0xf00000: Mono
 Node 0x20 [Vendor Defined Widget] wcaps 0xf00040: Mono
   Processing caps: benign=0, ncoeff=117
+
 Node 0x21 [Pin Complex] wcaps 0x40058d: Stereo Amp-Out
   Control: name="Headphone Playback Switch", index=0, device=0
     ControlAmp: chs=3, dir=Out, idx=0, ofs=0

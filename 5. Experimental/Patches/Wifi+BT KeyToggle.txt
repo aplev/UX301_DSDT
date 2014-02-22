@@ -1,0 +1,28 @@
+# Patch for Asus Wifi/BT Fn key to work with two toggles on/off
+
+# Replacing method _Q0B for Wifi/BT F2 key to work
+# by removing the code which prevents 
+into Method label _Q0B replace_content begin 
+                         If (LEqual (WBTG, One))\n
+                            {\n
+                                OWLD (Zero)\n
+                                ^^^^ATKD.IANE (0x5F)\n
+                                Sleep (0x0DAC)\n
+                                OBTD (Zero)\n
+                                ^^^^ATKD.IANE (0x7E)\n
+				Store (Zero, WBTG)\n
+                            }\n
+                            Else\n
+                            {\n
+                                OWLD (One)\n
+                                ^^^^ATKD.IANE (0x5E)\n
+                                Sleep (0x0DAC)\n
+                                OBTD (One)\n
+                                ^^^^ATKD.IANE (0x7D)\n
+				Store (One, WBTG)\n
+                            }
+ end;
+
+# Inserting two state toggles storing field
+into device label EC0 code_regex Name\s\(WBTG,\sOne\) remove_matched;
+into device label EC0 insert begin Name (WBTG, One) end;
