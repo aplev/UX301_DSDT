@@ -1,0 +1,6 @@
+#By Ramalama
+into Method label _INI parent_label _SB.PCI0 insert
+begin
+If (CondRefOf (\_SB.PCI0.PEG0.PEGP._OFF))\n
+{ ^PEG0.PEGP._OFF () }\n
+end;
