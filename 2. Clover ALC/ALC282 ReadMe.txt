@@ -1,5 +1,5 @@
-Use in Clover Inject AudioID: 1
-Or Patch your DSDT to LayoutID: 1
+Layout-ID: 1 (Without Signal Processing)
+Layout-ID: 28 (With Signal Processing)
 
 
 Add this to Clover Kext Patches:

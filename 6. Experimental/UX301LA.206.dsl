@@ -9707,7 +9707,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Store (Package (0x0A)
                 {
                     "hda-gfx", Buffer (0x0A) { "onboard-1" },
-                    "layout-id", Buffer (0x04) { 0x01, 0x00, 0x00, 0x00 },
+                    "layout-id", Buffer (0x04) { 0x1C, 0x00, 0x00, 0x00 },
                     "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
                     "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
                     "PinConfigurations", Buffer (Zero) {}
@@ -27482,7 +27482,7 @@ Store (ShiftRight (Local4, 8), DTB1)
                 Store (Package (0x06)
                     {
                         "hda-gfx", Buffer (0x0A) { "onboard-2" }, 
-                        "layout-id", Buffer (0x04) { 0x01, 0x00, 0x00, 0x00 }, 
+                        "layout-id", Buffer (0x04) { 0x1C, 0x00, 0x00, 0x00 }, 
                         "PinConfigurations", Buffer (Zero) {}
                     }, Local0)
                 DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
