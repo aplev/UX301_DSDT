@@ -1,0 +1,17 @@
+<key>KextsToPatch</key>
+	<array>
+		<dict>
+			<key>Comment</key>
+			<string>HD4000 Hdmi Audio</string>
+			<key>Find</key>
+			<data>
+			AwQAAAAEAACBAAAA
+			</data>
+			<key>Name</key>
+			<string>AppleIntelFramebufferCapri</string>
+			<key>Replace</key>
+			<data>
+			AwQAAAAIAAAGAAAA
+			</data>
+		</dict>
+	</array>
