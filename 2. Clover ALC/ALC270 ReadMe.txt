@@ -1,4 +1,5 @@
-Layout-ID: 1 or 28 (Use which you want)
+Layout-ID: 1 (Without Signal Processing)
+Layout-ID: 28 (With Signal Processing)
 
 
 Add this to Clover Kext Patches:
