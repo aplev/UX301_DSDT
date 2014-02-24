@@ -1,6 +1,6 @@
 /*
  * Intel ACPI Component Architecture
- * AML Disassembler version 20130210-00 [Feb 10 2013]
+ * AML Disassembler version 20140210-00 [Feb 10 2014]
  * Copyright (c) 2000 - 2014 Intel Corporation
  * 
  * Original Table Header:
@@ -10,12 +10,12 @@
  *     Checksum         0x00
  *     OEM ID           "APPLE "
  *     OEM Table ID     "CpuPm"
- *     OEM Revision     0x00011500 (70912)
+ *     OEM Revision     0x00012200 (74240)
  *     Compiler ID      "INTL"
- *     Compiler Version 0x20130210 (538116624)
+ *     Compiler Version 0x20140210 (538182160)
  */
 
-DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00011500)
+DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00012200)
 {
     External (\_PR_.CPU0, DeviceObj)
     External (\_PR_.CPU1, DeviceObj)
