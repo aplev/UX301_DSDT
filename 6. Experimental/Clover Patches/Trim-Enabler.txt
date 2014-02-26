@@ -1,0 +1,17 @@
+<key>KextsToPatch</key>
+	<array>
+		<dict>
+				<key>Comment</key>
+				<string>Trim Enabler</string>
+				<key>Find</key>
+				<data>
+				QVBQTEUgU1NE
+				</data>
+				<key>Name</key>
+				<string>IOAHCIBlockStorage</string>
+				<key>Replace</key>
+				<data>
+				AAAAAAAAAAAA
+				</data>
+		</dict>
+	</array>

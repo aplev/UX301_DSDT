@@ -22910,7 +22910,7 @@ Store (ShiftRight (Local4, 8), DTB1)
     {
         Device (PWRB)
         {
-            Name (_CID, EisaId ("PNP0C0C"))  // _CID: Compatible ID
+            Name (_HID, EisaId ("PNP0C0C"))  // _HID: Hardware ID
             Name (_STA, 0x0B)  // _STA: Status
             Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
             {
@@ -31110,8 +31110,8 @@ Field (IGD2, AnyAcc, NoLock, Preserve)
         //define hardware register access for brightness
         // you can see BAR1 value in RW-Everything under Bus00,02 Intel VGA controler PCI
         // Note: Not sure which one is right here... for now, going with BAR1 minus 4
-        OperationRegion (BRIT, SystemMemory, Subtract(^PCI0.IGPU.BAR1, 4), 0xe1184)
-        //OperationRegion (BRIT, SystemMemory, And(\_SB.PCI0.IGPU.BAR1, Not(0xF)), 0xe1184)
+        //OperationRegion (BRIT, SystemMemory, Subtract(^PCI0.IGPU.BAR1, 4), 0xe1184)
+        OperationRegion (BRIT, SystemMemory, And(^PCI0.IGPU.BAR1, Not(0xF)), 0xe1184)
         Field (BRIT, AnyAcc, Lock, Preserve)
         {
             Offset(0x48250),
@@ -31330,27 +31330,30 @@ Field (IGD2, AnyAcc, NoLock, Preserve)
         }
     }
 
-//    Device (PROB) // ACPIProbe virtual device (c) TimeWalker
-//    {
-//        Name (_HID, EisaId ("PNP0C02")) // Expose PLLD to IORegistry
-//        Name (_CID, EisaId ("PRB0000")) // device compatible name allows ACPIProbe matching
-//        Name (INVL, 0x3E8)          // Set Polling interval 1 sec
-//        Name (TOUT, Zero)           // Set Polling timeout  0 sec (continuous polling)
-//        Name (LOGG, One)            // Enable Console logging of values returned by methods
-//        Name (LIST, Package (One)  // Define methods to poll
-//        { "SFNS" })
-//        
-//        Method (SFNS, 0, NotSerialized)
-//        {
-//            Store (\_SB.PCI0.LPCB.EC0.ECPU, Local0)      // Get current CPU Temperature
-//            // Max RPM=6550, Min RPM=1200
-//            If (LLessEqual (Local0, 0x32)) {             // If CPU is < 50C, disable both Fans
-//                \_SB.PCI0.LPCB.EC0.SFNV (One, Zero)
-//                \_SB.PCI0.LPCB.EC0.SFNV (0x02, Zero)
-//                Store ("Fans are OFF", Local1) } Else {
-//                \_SB.PCI0.LPCB.EC0.SFNV (Zero, Zero)     // If CPU is > 50C, set to Automatic
-//                Store ("Fans are AUTO", Local1) }
-//            Return (Local1)
-//        }
-//    }
+/*
+//    http://github.com/kozlek/HWSensors/blob/master/ACPISensors/SSDT.dsl
+    Device (PROB) // ACPIProbe virtual device (c) TimeWalker
+    {
+        Name (_HID, EisaId ("PNP0C02")) // Expose PLLD to IORegistry
+        Name (_CID, EisaId ("PRB0000")) // device compatible name allows ACPIProbe matching
+        Name (INVL, 0x3E8)          // Set Polling interval 1 sec
+        Name (TOUT, Zero)           // Set Polling timeout  0 sec (continuous polling)
+        Name (LOGG, One)            // Enable Console logging of values returned by methods
+        Name (LIST, Package (One)  // Define methods to poll
+        { "SFNS" })
+        
+        Method (SFNS, 0, NotSerialized)
+        {
+            Store (\_SB.PCI0.LPCB.EC0.ECPU, Local0)      // Get current CPU Temperature
+            // Max RPM=6550, Min RPM=1200
+            If (LLessEqual (Local0, 0x32)) {             // If CPU is < 50C, disable both Fans
+                \_SB.PCI0.LPCB.EC0.SFNV (One, Zero)
+                \_SB.PCI0.LPCB.EC0.SFNV (0x02, Zero)
+                Store ("Fans are OFF", Local1) } Else {
+                \_SB.PCI0.LPCB.EC0.SFNV (Zero, Zero)     // If CPU is > 50C, set to Automatic
+                Store ("Fans are AUTO", Local1) }
+            Return (Local1)
+        }
+    }
+*/
 }
