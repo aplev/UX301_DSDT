@@ -30798,7 +30798,7 @@ Field (IGD2, AnyAcc, NoLock, Preserve)
             {
                 Store (Package (0x04)
                 {
-                    "AAPL,ig-platform-id", Buffer (0x04) { 0x08, 0x00, 0x2E, 0x0A },
+                    "AAPL,ig-platform-id", Buffer (0x04) { 0x0A, 0x00, 0x2E, 0x0A },
                     "hda-gfx", Buffer (0x0A) { "onboard-2" }
                 }, Local0)
                 DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
