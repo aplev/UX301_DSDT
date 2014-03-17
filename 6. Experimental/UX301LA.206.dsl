@@ -17093,17 +17093,50 @@ DTB1, 8
             {
                 Return (^^PCI0.LPCB.EC0.RALS ())
             }
-
+            
+            Name (BOFF, Zero)
             Method (SKBL, 1, NotSerialized)
             {
-                Store (Arg0, Local0)
-                Store (Arg0, KBLV)
-                Store (DerefOf (Index (PWKB, Local0)), Local1)
+                If (Or (LEqual (Arg0, 0xED), LEqual (Arg0, 0xFD)))
+                {
+                    If (LEqual(Arg0, BOFF))
+                    {
+                        Store (Zero, Local0)
+                    }
+                    Else
+                    {
+                        Return (One)
+                    }
+                }
+                Else
+                {
+                    If(Or (LEqual (Arg0, 0xEA), LEqual (Arg0, 0xFA)))
+                    {
+                        Store (KBLV, Local0)
+                        If (LEqual(Arg0, 0xEA))
+                        {
+                            Store (0xED, BOFF)
+                        }
+                        Else
+                        {
+                            Store (0xFD, BOFF)
+                        }
+                    }
+                    Else
+                    {
+                        Store (Arg0, Local0)
+                        Store (Arg0, KBLV)
+                    }
+                }
+                Store (DerefOf (Index (KBPW, Local0)), Local1)
                 ^^PCI0.LPCB.EC0.WRAM (0x04B1, Local1)
                 Return (One)
             }
-            
-            Method (GKBL, 0, NotSerialized)
+            Name (KBPW, Buffer (0x10)
+            {
+                0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88, 0x99, 0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF
+            })
+            Method (GKBL, 1, NotSerialized)
             {
                 Return (KBLV)
             }
