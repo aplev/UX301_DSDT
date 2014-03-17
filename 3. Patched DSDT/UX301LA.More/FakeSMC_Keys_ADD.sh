@@ -1,0 +1,1 @@
+sudo nvram -x -f ~/Desktop/FakeSMC_Keys_NVRAM.plist
