@@ -8359,14 +8359,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 }
             }
 
-            Method (XWAK, 1, Serialized)
+            Method (XWAK, 0, Serialized)
             {
-                If (LOr (LEqual (Arg0, 0x03), LEqual (Arg0, 0x04)))
+                If (LOr (LEqual (XUSB, One), LEqual (XRST, One)))
                 {
-                    If (LOr (LEqual (XUSB, One), LEqual (XRST, One)))
-                    {
-                        XSEL ()
-                    }
+                    XSEL ()
                 }
             }
 
@@ -13542,31 +13539,49 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
     {
         Name (PA0H, Zero)
         Name (PA1H, Zero)
+        Name (PA1L, Zero)
         Name (PA2H, Zero)
+        Name (PA2L, Zero)
         Name (PA3H, Zero)
+        Name (PA3L, Zero)
         Name (PA4H, Zero)
+        Name (PA4L, Zero)
         Name (PA5H, Zero)
+        Name (PA5L, Zero)
         Name (PA6H, Zero)
+        Name (PA6L, Zero)
         Method (NPTS, 1, NotSerialized)
         {
             Store (PM0H, PA0H)
             Store (PM1H, PA1H)
+            Store (PM1L, PA1L)
             Store (PM2H, PA2H)
+            Store (PM2L, PA2L)
             Store (PM3H, PA3H)
+            Store (PM3L, PA3L)
             Store (PM4H, PA4H)
+            Store (PM4L, PA4L)
             Store (PM5H, PA5H)
+            Store (PM5L, PA5L)
             Store (PM6H, PA6H)
+            Store (PM6L, PA6L)
         }
 
         Method (NWAK, 1, NotSerialized)
         {
             Store (PA0H, PM0H)
             Store (PA1H, PM1H)
+            Store (PA1L, PM1L)
             Store (PA2H, PM2H)
+            Store (PA2L, PM2L)
             Store (PA3H, PM3H)
+            Store (PA3L, PM3L)
             Store (PA4H, PM4H)
+            Store (PA4L, PM4L)
             Store (PA5H, PM5H)
+            Store (PA5L, PM5L)
             Store (PA6H, PM6H)
+            Store (PA6L, PM6L)
         }
         
         Device (PDRC)
@@ -13915,15 +13930,91 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
     {
         If (LNotEqual(Arg0,5)) {
         PTS (Arg0)
+        If (And (ICNF, 0x10))
+        {
+            If (CondRefOf (\_SB.IAOE.PTSL))
+            {
+                Store (Arg0, \_SB.IAOE.PTSL)
+            }
         }
+
+        If (LEqual (Arg0, 0x03))
+        {
+            If (And (ICNF, One))
+            {
+                If (LAnd (And (ICNF, 0x10), LEqual (\_SB.IAOE.ITMR, Zero)))
+                {
+                    \_SB.PCI0.LPCB.EC0.SCTF (Zero, 0x03)
+                }
+                        Store (Zero, \_SB.IAOE.FFSE)
+            }
+        }
+}
+
     }
 
     Method (_WAK, 1, Serialized)  // _WAK: Wake
     {
         If (LOr(LLess(Arg0,One),LGreater(Arg0,5))) { Store(3,Arg0) }
         WAK (Arg0)
+        If (And (ICNF, 0x10))
+        {
+            If (And (\_SB.PCI0.IGPU.TCHE, 0x0100))
+            {
+                If (LEqual (\_SB.IAOE.ITMR, One))
+                {
+                    If (LAnd (And (\_SB.IAOE.IBT1, One), LOr (And (\_SB.IAOE.WKRS, 0x02), And (\_SB.IAOE.WKRS, 0x10))))
+                    {
+                        Store (Or (And (\_SB.PCI0.IGPU.STAT, 0xFFFFFFFFFFFFFFFC), One), \_SB.PCI0.IGPU.STAT)
+                    }
+                    Else
+                    {
+                        Store (And (\_SB.PCI0.IGPU.STAT, 0xFFFFFFFFFFFFFFFC), \_SB.PCI0.IGPU.STAT)
+                    }
+                }
+                Else
+                {
+                    If (LAnd (And (\_SB.IAOE.IBT1, One), LOr (And (\_SB.IAOE.WKRS, 0x02
+                        ), And (\_SB.IAOE.WKRS, 0x10))))
+                    {
+                        Store (Or (And (\_SB.PCI0.IGPU.STAT, 0xFFFFFFFFFFFFFFFC), One), \_SB.PCI0.IGPU.STAT)
+                    }
+                    Else
+                    {
+                        Store (And (\_SB.PCI0.IGPU.STAT, 0xFFFFFFFFFFFFFFFC), \_SB.PCI0.IGPU.STAT)
+                    }
+                }
+            }
+
+            If (CondRefOf (\_SB.IAOE.PTSL))
+            {
+                Store (Zero, \_SB.IAOE.PTSL)
+            }
+
+            If (LEqual (\_SB.IAOE.ITMR, Zero)) {}
+            If (CondRefOf (\_SB.IAOE.ECTM))
+            {
+                Store (Zero, \_SB.IAOE.ECTM)
+            }
+
+            If (CondRefOf (\_SB.IAOE.RCTM))
+            {
+                Store (Zero, \_SB.IAOE.RCTM)
+            }
+        }
+
+        If (LOr (LEqual (Arg0, 0x03), LEqual (Arg0, 0x04)))
+        {
+            \_SB.PCI0.XHC.XWAK ()
+            \_SB.PCI0.LPCB.EC0.WRAM (0x0533, 0x69)
+            \_SB.PCI0.LPCB.EC0.WRAM (0x0534, 0x64)
+        }
+
         Return (Package (0x02)
-        { Zero, Zero })
+        {
+            Zero, 
+            Zero
+        })
     }
 
     Method (GETB, 3, Serialized)
@@ -17998,19 +18089,12 @@ DTB1, 8
 
         Method (OEMW, 1, NotSerialized)
         {
-            ISMI (0x9E)
+            ISMI (0xAA)
             Store (Zero, \_SB.SLPT)
             \_SB.PCI0.LPCB.EC0.EC0W (Arg0)
             If (LEqual (Arg0, 0x04))
             {
-                If (LLessEqual (MSOS (), OSME))
-                {
-                    Store (0x02, MES4)
-                }
-                Else
-                {
-                    Store (Zero, MES4)
-                }
+                Store (Zero, MES4)
             }
 
             SBRW (Arg0)
@@ -31177,7 +31261,6 @@ Field (IGD2, AnyAcc, NoLock, Preserve)
 
     Method (WAK, 1, NotSerialized)
     {
-        \_SB.PCI0.XHC.XWAK (Arg0)
         \_SB.PCI0.NWAK (Arg0)
         \_SB.ATKD.GENW (Arg0)
         \_SB.PCI0.IGPU.OWAK (Arg0)
