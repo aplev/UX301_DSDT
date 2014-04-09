@@ -1,0 +1,17 @@
+<key>KextsToPatch</key>
+	<array>
+		<dict>
+				<key>Comment</key>
+				<string>Airport fix 3rd Party Wifi</string>
+				<key>Find</key>
+				<data>
+				MGsQAAB1DQ==
+				</data>
+				<key>Name</key>
+				<string>AirPortBrcm4360</string>
+				<key>Replace</key>
+				<data>
+				MGsQAAB0DQ==
+				</data>
+		</dict>
+	</array>

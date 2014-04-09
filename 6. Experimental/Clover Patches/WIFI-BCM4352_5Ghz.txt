@@ -1,0 +1,17 @@
+<key>KextsToPatch</key>
+	<array>
+		<dict>
+				<key>Comment</key>
+				<string>Broadcom 5GHZ</string>
+				<key>Find</key>
+				<data>
+				AVhU
+				</data>
+				<key>Name</key>
+				<string>AirPortBrcm4360</string>
+				<key>Replace</key>
+				<data>
+				AVhY
+				</data>
+		</dict>
+	</array>

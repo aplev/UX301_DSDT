@@ -5155,17 +5155,24 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Device (PXSX)
                 {
-                    Name (_ADR, Zero)  // _ADR: Address
-                    // Name (_STA, Zero) Status: Intel WIFI Not Working! Disabling not working!
-                    Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
+                    // I Have now BCM94352Z, this is the code for:
+                    Name (_ADR, Zero)
+                    Name (_SUN, One)
+                    Name (_PRW, Package (0x02) {0x09,0x04})
+                    Method (_DSM, 4, NotSerialized)
                     {
-                        Return (GPRW (0x69, 0x04))
+                        If (LEqual (Arg2, Zero)) { Return (Buffer(One) { 0x03 } ) }
+                        Return (Package()
+                        {
+                            "AAPL,slot-name", "AirPort",
+                            "built-in", Buffer (One) {0x00},
+                            "device_type", "AirPort",
+                            "model", "Broadcom BCM4352 802.11 a/b/g/n/ac Wireless Network Controller",
+                            "name", "AirPort Extreme",
+                            "compatible","pci14e4,43a0"
+                        })
                     }
 
-                    Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
-                    {
-                        Return (HPCE)
-                    }
                 }
 
                 Method (_REG, 2, NotSerialized)  // _REG: Region Availability
@@ -31279,7 +31286,8 @@ Field (IGD2, AnyAcc, NoLock, Preserve)
         Or (Arg0, Local0, Local0)
         Return (Local0)
     }
-
+    
+/* I Have now BCM94352Z Card
     Device (RMNE)
     {
         Name (_ADR, Zero)
@@ -31300,6 +31308,7 @@ Field (IGD2, AnyAcc, NoLock, Preserve)
             })
         }
     }
+*/
 
     Device (SMCD)
     {
