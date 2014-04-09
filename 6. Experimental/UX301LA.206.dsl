@@ -29730,7 +29730,13 @@ Field (IGD2, AnyAcc, NoLock, Preserve)
                     Store (Arg0, CLID)
                 }
 
-                Return (GNOT (0x02, Zero))
+                If (GNOT (0x02, Zero))
+                {
+                    Or (CLID, 0x80000000, CLID)
+                    Return (One)
+                }
+
+                Return (Zero)
             }
 
             Method (GDCK, 1, NotSerialized)
