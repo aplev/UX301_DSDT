@@ -89,10 +89,10 @@ Make_BackUp_of_ApplePS2Elan_in_SLE="NO"                  # YES or NO
 Destination_of_AsusNBFnKeys="Downloads/AsusNBFnKeys.kext"
 # Desktop: "Desktop/AsusNBFnKeys..." Dokuments: "Dokuments/AsusNBFnKeys..."
 
-Enable_AsusNBFnKeys_Customization="YES"
+Enable_AsusNBFnKeys_Customization="NO"
 # Enable/Disable FN Keys Customizations
 
-Install_AsusNBFnKeys_to_SLE="YES"                         # YES or NO
+Install_AsusNBFnKeys_to_SLE="NO"                         # YES or NO
 Make_BackUp_of_AsusNBFnKeys_in_SLE="NO"                  # YES or NO
 
 
