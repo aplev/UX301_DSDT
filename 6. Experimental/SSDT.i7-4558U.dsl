@@ -10,12 +10,12 @@
  *     Checksum         0x00
  *     OEM ID           "APPLE "
  *     OEM Table ID     "CpuPm"
- *     OEM Revision     0x00013000 (77824)
+ *     OEM Revision     0x00013200 (78336)
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20140210 (538182160)
  */
 
-DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00013000)
+DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00013200)
 {
     External (\_PR_.CPU0, DeviceObj)
     External (\_PR_.CPU1, DeviceObj)
@@ -160,10 +160,10 @@ DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00013000)
         Method (ACST, 0, NotSerialized)
         {
             /* Low Power Modes for CPU1 */
-            Return (Package (0x05)
+            Return (Package (0x07)
             {
                 One,
-                0x03,
+                0x05,
                 Package (0x04)
                 {
                     ResourceTemplate ()
@@ -209,6 +209,38 @@ DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00013000)
                     },
                     0x03,
                     0xC6,
+                    0xC8
+                },
+
+                Package (0x04)
+                {
+                    ResourceTemplate ()
+                    {
+                        Register (FFixedHW,
+                            0x01,               // Bit Width
+                            0x02,               // Bit Offset
+                            0x0000000000000040, // Address
+                            0x03,               // Access Size
+                            )
+                    },
+                    0x06,
+                    0xF5,
+                    0x015E
+                },
+
+                Package (0x04)
+                {
+                    ResourceTemplate ()
+                    {
+                        Register (FFixedHW,
+                            0x01,               // Bit Width
+                            0x02,               // Bit Offset
+                            0x0000000000000050, // Address
+                            0x03,               // Access Size
+                            )
+                    },
+                    0x07,
+                    0xF5,
                     0xC8
                 }
             })

@@ -18090,13 +18090,10 @@ DTB1, 8
                     \_SB.PCI0.LPCB.EC0.ST8E (Zero, 0x08)
                 }
             }
-
-            ISMI (0x9D)
         }
 
         Method (OEMW, 1, NotSerialized)
         {
-            ISMI (0xAA)
             Store (Zero, \_SB.SLPT)
             \_SB.PCI0.LPCB.EC0.EC0W (Arg0)
             If (LEqual (Arg0, 0x04))
