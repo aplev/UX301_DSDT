@@ -23112,7 +23112,7 @@ Store (ShiftRight (Local4, 8), DTB1)
             })
         }
     }
-    
+/* There is now a BCM943225 Card
     Device (RMNE)
     {
         Name (_ADR, Zero)
@@ -23133,7 +23133,7 @@ Store (ShiftRight (Local4, 8), DTB1)
             })
         }
     }
-
+*/
     Device (SMCD)
     {
         Name (_HID, "FAN00000")
