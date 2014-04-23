@@ -115,7 +115,8 @@ Reboot_after_Install="NO"                                # YES or NO
 ##############################  MODES ##############################
 ####################################################################
 v3HWLegacyMode="DEFAULT"          # YES or NO
-v4ButtonsSimulated="DEFAULT"      # YES or NO #Enable Touchpad Left/Middle/Right Buttons
+v4HW3ButtonsSimulated="DEFAULT"   # YES or NO #Enable Touchpad Left/Middle/Right Buttons
+v4HWHasPhysicalButtons="DEFAULT"  # YES or NO #Enable Physical Left/Right Buttons
 MulFingDoubleTaps="DEFAULT"       # YES or NO
 
 AccidentalInputTimeOut="DEFAULT"
@@ -127,14 +128,20 @@ PointerResolution="DEFAULT"
 ####################################################################
 ########################  2Finger Scrolling ########################
 ####################################################################
+Auto2FingScroll="DEFAULT"             # YES or NO
+# Like Continious-scroll but without holding fingers
+ScrollStopTimeOut="DEFAULT"          # Default=0.5 Secounds
+# If you don't move your fingers you get 0.5 Secounds Continious Scroll
+
+Sling2FingScroll="DEFAULT"            # YES or NO
+SlingEffectHoldTimeOut="DEFAULT"      # Default=1.0 Secounds
+#Starts ScrollSling after hold timeout.
+
 LinearScrolling="DEFAULT"             # YES or NO
 Continous2FingScroll="DEFAULT"        # YES or NO
 Inertial2FingScroll="DEFAULT"         # YES or NO
 ScrollSlingEffect="DEFAULT"           # YES or NO
 NoHorizScrollInertia="DEFAULT"        # YES or NO
-SlingEffectHoldTimeOut="DEFAULT"      # Default=1.5 Secounds
-#Starts ScrollSling after hold timeout.
-
 AccelerationPrefValue="DEFAULT"       # Default=0 #Possible 0/1/2/3/4
 ScrollResolution="DEFAULT"
 # Default=1600 #For Scroll acceleration enhancement
@@ -142,6 +149,10 @@ ScrollResolution="DEFAULT"
 ####################################################################
 #########################  Edge Scrolling ##########################
 ####################################################################
+AutoEdgeScroll="DEFAULT"               # YES or NO
+# Like Continious-scroll but without holding fingers
+
+SlingEdgeScroll="DEFAULT"              # YES or NO
 EdgeScrolling="DEFAULT"                # YES or NO
 InertialEdgeScroll="DEFAULT"           # YES or NO
 ContinousEdgeScroll="DEFAULT"          # YES or NO
@@ -216,6 +227,8 @@ KeyBoardNumLockOn="DEFAULT"                         # YES or NO
 Use_ISO_Layout="DEFAULT"                            # YES or NO
 Keyboard_type_ID="DEFAULT"                          # ID Read Keyboard Thread
 
+Num_Lock_On="DEFAULT"                               # YES or NO
+Disable_NumLock_LED="DEFAULT"                       # YES or NO
 Swap_alt_and_windows_key="DEFAULT"                  # YES or NO
 Make_context_menu_key_into_key="DEFAULT"            # NO or Key Number (Thread)
 Make_delete_key_into_cmd_and_backspace="DEFAULT"    # YES or NO
@@ -362,14 +375,22 @@ if [[ $Enable_Touchpad_Settings == "YES" ]]; then     # TOUCHPAD SETTINGS START 
 		perl -0777 -pe 's|<key>v3HWLegacyMode</key>\s*.*>|<key>v3HWLegacyMode</key>\n<false/>|' ~/$TOUCHPADPLIST > ~/$TOUCHPADPLIST2
 		rm ~/$TOUCHPADPLIST; mv ~/$TOUCHPADPLIST2 ~/$TOUCHPADPLIST
 		echo "--> v3HWLegacyMode - Disabled"; fi
-	if [[ $v4ButtonsSimulated == "YES" ]]; then
-		perl -0777 -pe 's|<key>v4ButtonsSimulated</key>\s*.*>|<key>v4ButtonsSimulated</key>\n<true/>|' ~/$TOUCHPADPLIST > ~/$TOUCHPADPLIST2
+	if [[ $v4HW3ButtonsSimulated == "YES" ]]; then
+		perl -0777 -pe 's|<key>v4HW3ButtonsSimulated</key>\s*.*>|<key>v4HW3ButtonsSimulated</key>\n<true/>|' ~/$TOUCHPADPLIST > ~/$TOUCHPADPLIST2
 		rm ~/$TOUCHPADPLIST; mv ~/$TOUCHPADPLIST2 ~/$TOUCHPADPLIST
-		echo "--> v4ButtonsSimulated - Enabled"; fi
-	if [[ $v4ButtonsSimulated == "NO" ]]; then
-		perl -0777 -pe 's|<key>v4ButtonsSimulated</key>\s*.*>|<key>v4ButtonsSimulated</key>\n<false/>|' ~/$TOUCHPADPLIST > ~/$TOUCHPADPLIST2
+		echo "--> v4HW3ButtonsSimulated - Enabled"; fi
+	if [[ $v4HW3ButtonsSimulated == "NO" ]]; then
+		perl -0777 -pe 's|<key>v4HW3ButtonsSimulated</key>\s*.*>|<key>v4HW3ButtonsSimulated</key>\n<false/>|' ~/$TOUCHPADPLIST > ~/$TOUCHPADPLIST2
 		rm ~/$TOUCHPADPLIST; mv ~/$TOUCHPADPLIST2 ~/$TOUCHPADPLIST
-		echo "--> v4ButtonsSimulated - Disabled"; fi
+		echo "--> v4HW3ButtonsSimulated - Disabled"; fi
+        if [[ $v4HWHasPhysicalButtons == "YES" ]]; then
+		perl -0777 -pe 's|<key>v4HWHasPhysicalButtons</key>\s*.*>|<key>v4HWHasPhysicalButtons</key>\n<true/>|' ~/$TOUCHPADPLIST > ~/$TOUCHPADPLIST2
+		rm ~/$TOUCHPADPLIST; mv ~/$TOUCHPADPLIST2 ~/$TOUCHPADPLIST
+		echo "--> v4HWHasPhysicalButtons - Enabled"; fi
+	if [[ $v4HWHasPhysicalButtons == "NO" ]]; then
+		perl -0777 -pe 's|<key>v4HWHasPhysicalButtons</key>\s*.*>|<key>v4HWHasPhysicalButtons</key>\n<false/>|' ~/$TOUCHPADPLIST > ~/$TOUCHPADPLIST2
+		rm ~/$TOUCHPADPLIST; mv ~/$TOUCHPADPLIST2 ~/$TOUCHPADPLIST
+		echo "--> v4HWHasPhysicalButtons - Disabled"; fi
 	if [[ $MulFingDoubleTaps == "YES" ]]; then
 		perl -0777 -pe 's|<key>MulFingDoubleTaps</key>\s*.*>|<key>MulFingDoubleTaps</key>\n<true/>|' ~/$TOUCHPADPLIST > ~/$TOUCHPADPLIST2
 		rm ~/$TOUCHPADPLIST; mv ~/$TOUCHPADPLIST2 ~/$TOUCHPADPLIST
@@ -386,6 +407,22 @@ if [[ $Enable_Touchpad_Settings == "YES" ]]; then     # TOUCHPAD SETTINGS START 
 		perl -0777 -pe 's|<key>LinearScrolling</key>\s*.*>|<key>LinearScrolling</key>\n<false/>|' ~/$TOUCHPADPLIST > ~/$TOUCHPADPLIST2
 		rm ~/$TOUCHPADPLIST; mv ~/$TOUCHPADPLIST2 ~/$TOUCHPADPLIST
 		echo "--> LinearScrolling - Disabled"; fi
+        if [[ $Sling2FingScroll == "YES" ]]; then
+		perl -0777 -pe 's|<key>Sling2FingScroll</key>\s*.*>|<key>Sling2FingScroll</key>\n<true/>|' ~/$TOUCHPADPLIST > ~/$TOUCHPADPLIST2
+		rm ~/$TOUCHPADPLIST; mv ~/$TOUCHPADPLIST2 ~/$TOUCHPADPLIST
+		echo "--> Sling2FingScroll - Enabled"; fi
+	if [[ $Sling2FingScroll == "NO" ]]; then
+		perl -0777 -pe 's|<key>Sling2FingScroll</key>\s*.*>|<key>Sling2FingScroll</key>\n<false/>|' ~/$TOUCHPADPLIST > ~/$TOUCHPADPLIST2
+		rm ~/$TOUCHPADPLIST; mv ~/$TOUCHPADPLIST2 ~/$TOUCHPADPLIST
+		echo "--> Sling2FingScroll - Disabled"; fi
+        if [[ $SlingEdgeScroll == "YES" ]]; then
+		perl -0777 -pe 's|<key>SlingEdgeScroll</key>\s*.*>|<key>SlingEdgeScroll</key>\n<true/>|' ~/$TOUCHPADPLIST > ~/$TOUCHPADPLIST2
+		rm ~/$TOUCHPADPLIST; mv ~/$TOUCHPADPLIST2 ~/$TOUCHPADPLIST
+		echo "--> SlingEdgeScroll - Enabled"; fi
+	if [[ $SlingEdgeScroll == "NO" ]]; then
+		perl -0777 -pe 's|<key>SlingEdgeScroll</key>\s*.*>|<key>SlingEdgeScroll</key>\n<false/>|' ~/$TOUCHPADPLIST > ~/$TOUCHPADPLIST2
+		rm ~/$TOUCHPADPLIST; mv ~/$TOUCHPADPLIST2 ~/$TOUCHPADPLIST
+		echo "--> SlingEdgeScroll - Disabled"; fi
 	if [[ $Continous2FingScroll == "YES" ]]; then
 		perl -0777 -pe 's|<key>Continous2FingScroll</key>\s*.*>|<key>Continous2FingScroll</key>\n<true/>|' ~/$TOUCHPADPLIST > ~/$TOUCHPADPLIST2
 		rm ~/$TOUCHPADPLIST; mv ~/$TOUCHPADPLIST2 ~/$TOUCHPADPLIST
@@ -394,6 +431,22 @@ if [[ $Enable_Touchpad_Settings == "YES" ]]; then     # TOUCHPAD SETTINGS START 
 		perl -0777 -pe 's|<key>Continous2FingScroll</key>\s*.*>|<key>Continous2FingScroll</key>\n<false/>|' ~/$TOUCHPADPLIST > ~/$TOUCHPADPLIST2
 		rm ~/$TOUCHPADPLIST; mv ~/$TOUCHPADPLIST2 ~/$TOUCHPADPLIST
 		echo "--> Continous2FingScroll - Disabled"; fi
+        if [[ $Auto2FingScroll == "YES" ]]; then
+		perl -0777 -pe 's|<key>Auto2FingScroll</key>\s*.*>|<key>Auto2FingScroll</key>\n<true/>|' ~/$TOUCHPADPLIST > ~/$TOUCHPADPLIST2
+		rm ~/$TOUCHPADPLIST; mv ~/$TOUCHPADPLIST2 ~/$TOUCHPADPLIST
+		echo "--> Auto2FingScroll - Enabled"; fi
+	if [[ $Auto2FingScroll == "NO" ]]; then
+		perl -0777 -pe 's|<key>Auto2FingScroll</key>\s*.*>|<key>Auto2FingScroll</key>\n<false/>|' ~/$TOUCHPADPLIST > ~/$TOUCHPADPLIST2
+		rm ~/$TOUCHPADPLIST; mv ~/$TOUCHPADPLIST2 ~/$TOUCHPADPLIST
+		echo "--> Auto2FingScroll - Disabled"; fi
+        if [[ $AutoEdgeScroll == "YES" ]]; then
+		perl -0777 -pe 's|<key>AutoEdgeScroll</key>\s*.*>|<key>AutoEdgeScroll</key>\n<true/>|' ~/$TOUCHPADPLIST > ~/$TOUCHPADPLIST2
+		rm ~/$TOUCHPADPLIST; mv ~/$TOUCHPADPLIST2 ~/$TOUCHPADPLIST
+		echo "--> AutoEdgeScroll - Enabled"; fi
+	if [[ $AutoEdgeScroll == "NO" ]]; then
+		perl -0777 -pe 's|<key>AutoEdgeScroll</key>\s*.*>|<key>AutoEdgeScroll</key>\n<false/>|' ~/$TOUCHPADPLIST > ~/$TOUCHPADPLIST2
+		rm ~/$TOUCHPADPLIST; mv ~/$TOUCHPADPLIST2 ~/$TOUCHPADPLIST
+		echo "--> AutoEdgeScroll - Disabled"; fi
 	if [[ $Inertial2FingScroll == "YES" ]]; then
 		perl -0777 -pe 's|<key>Inertial2FingScroll</key>\s*.*>|<key>Inertial2FingScroll</key>\n<true/>|' ~/$TOUCHPADPLIST > ~/$TOUCHPADPLIST2
 		rm ~/$TOUCHPADPLIST; mv ~/$TOUCHPADPLIST2 ~/$TOUCHPADPLIST
@@ -728,6 +781,16 @@ if [[ $Enable_Touchpad_Settings == "YES" ]]; then     # TOUCHPAD SETTINGS START 
 			if [[ $SlingEffectHoldTimeOut == 0 ]]; then
 			echo "--> SlingEffectHoldTimeOut - Disabled"; else
 			echo "--> SlingEffectHoldTimeOut - set to $SlingEffectHoldTimeOut Secounds"; fi; fi; fi
+        if [[ $ScrollStopTimeOut != "DEFAULT" && $ScrollStopTimeOut != "YES" ]]; then
+		if [[ $ScrollStopTimeOut == "NO" ]]; then
+		ScrollStopTimeOut=0; fi
+		sScrollStopTimeOut=$(echo "$ScrollStopTimeOut*1000/1" | bc)
+		if [[ "$sScrollStopTimeOut" -ge 0 && "$sScrollStopTimeOut" -le 10000 ]]; then
+			perl -0777 -pe "s|<key>ScrollStopTimeOut</key>\s*.*>|<key>ScrollStopTimeOut</key>\n<integer>$sScrollStopTimeOut</integer>|" ~/$TOUCHPADPLIST > ~/$TOUCHPADPLIST2
+			rm ~/$TOUCHPADPLIST; mv ~/$TOUCHPADPLIST2 ~/$TOUCHPADPLIST
+			if [[ $ScrollStopTimeOut == 0 ]]; then
+			echo "--> ScrollStopTimeOut - Disabled"; else
+			echo "--> ScrollStopTimeOut - set to $ScrollStopTimeOut Secounds"; fi; fi; fi
 	if [[ $AccelerationPrefValue != "DEFAULT" && $AccelerationPrefValue != "YES" && $AccelerationPrefValue != "NO" ]]; then
 		if [[ "$AccelerationPrefValue" -ge 0 && "$AccelerationPrefValue" -le 4 ]]; then
 			perl -0777 -pe "s|<key>AccelerationPrefValue</key>\s*.*>|<key>AccelerationPrefValue</key>\n<integer>$AccelerationPrefValue</integer>|" ~/$TOUCHPADPLIST > ~/$TOUCHPADPLIST2
@@ -822,6 +885,22 @@ if [[ $Enable_Keyboard_Settings == "YES" ]]; then     # KEYBOARD SETTINGS START 
 		perl -0777 -pe 's|<key>Enable Asus KBacklight</key>\s*.*>|<key>Enable Asus KBacklight</key>\n<false/>|' ~/$KEYBOARDPLIST > ~/$KEYBOARDPLIST2
 		rm ~/$KEYBOARDPLIST; mv ~/$KEYBOARDPLIST2 ~/$KEYBOARDPLIST
 		echo "--> Enable Asus KBacklight - Disabled"; fi
+        if [[ $Num_Lock_On == "YES" ]]; then
+		perl -0777 -pe 's|<key>Num Lock On</key>\s*.*>|<key>Num Lock On</key>\n<true/>|' ~/$KEYBOARDPLIST > ~/$KEYBOARDPLIST2
+		rm ~/$KEYBOARDPLIST; mv ~/$KEYBOARDPLIST2 ~/$KEYBOARDPLIST
+		echo "--> Num Lock On - Enabled"; fi
+	if [[ $Num_Lock_On == "NO" ]]; then
+		perl -0777 -pe 's|<key>Num Lock On</key>\s*.*>|<key>Num Lock On</key>\n<false/>|' ~/$KEYBOARDPLIST > ~/$KEYBOARDPLIST2
+		rm ~/$KEYBOARDPLIST; mv ~/$KEYBOARDPLIST2 ~/$KEYBOARDPLIST
+		echo "--> Num Lock On - Disabled"; fi
+        if [[ $Disable_NumLock_LED == "YES" ]]; then
+		perl -0777 -pe 's|<key>Disable NumLock LED</key>\s*.*>|<key>Disable NumLock LED</key>\n<true/>|' ~/$KEYBOARDPLIST > ~/$KEYBOARDPLIST2
+		rm ~/$KEYBOARDPLIST; mv ~/$KEYBOARDPLIST2 ~/$KEYBOARDPLIST
+		echo "--> Disable NumLock LED - Enabled"; fi
+	if [[ $Disable_NumLock_LED == "NO" ]]; then
+		perl -0777 -pe 's|<key>Disable NumLock LED</key>\s*.*>|<key>Disable NumLock LED</key>\n<false/>|' ~/$KEYBOARDPLIST > ~/$KEYBOARDPLIST2
+		rm ~/$KEYBOARDPLIST; mv ~/$KEYBOARDPLIST2 ~/$KEYBOARDPLIST
+		echo "--> Disable NumLock LED - Disabled"; fi
 	if [[ $Enable_Extended_Functions == "YES" ]]; then
 		perl -0777 -pe 's|<key>Enable Extended Functions</key>\s*.*>|<key>Enable Extended Functions</key>\n<true/>|' ~/$KEYBOARDPLIST > ~/$KEYBOARDPLIST2
 		rm ~/$KEYBOARDPLIST; mv ~/$KEYBOARDPLIST2 ~/$KEYBOARDPLIST
