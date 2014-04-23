@@ -11,6 +11,7 @@ ASUS UX-Series OSX Support!
 <br>
 <br>Supported Models:
 <br>Asus UX301LA (i7-4558U)
+<br>Asus UX302LG (i7-4500U)
 <br>Asus UX32A (i5-3317U)
 <br>
 <br>
