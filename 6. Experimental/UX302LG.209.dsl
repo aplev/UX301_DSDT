@@ -11871,8 +11871,1465 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Offset (0x14)
         }
     }
-    
-    Device (XHC)
+
+            
+
+            
+
+            Device (UHC3)
+            {
+                Name (_ADR, 0x001D0000)  // _ADR: Address
+                Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
+                {
+                    Return (GPRW (0x6D, 0x03))
+                }
+
+                Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                {
+                    If (LEqual (Arg2, Zero))
+                    {
+                        Return (Buffer (One)
+                        {
+                             0x03
+                        })
+                    }
+
+                    Return (Package (0x14)
+                    {
+                        "device-id", 
+                        Buffer (0x04)
+                        {
+                             0x26, 0x1E, 0x00, 0x00
+                        }, 
+
+                        "AAPL,clock-id", 
+                        Buffer (One)
+                        {
+                             0x01
+                        }, 
+
+                        "built-in", 
+                        Buffer (One)
+                        {
+                             0x00
+                        }, 
+
+                        "subsystem-id", 
+                        Buffer (0x04)
+                        {
+                             0x70, 0x72, 0x00, 0x00
+                        }, 
+
+                        "subsystem-vendor-id", 
+                        Buffer (0x04)
+                        {
+                             0x86, 0x80, 0x00, 0x00
+                        }, 
+
+                        "AAPL,current-available", 
+                        0x0834, 
+                        "AAPL,current-extra", 
+                        0x0898, 
+                        "AAPL,current-extra-in-sleep", 
+                        0x0640, 
+                        "AAPL,device-internal", 
+                        0x02, 
+                        "AAPL,max-port-current-in-sleep", 
+                        0x0834
+                    })
+                }
+            }
+
+            Device (XHC1)
+            {
+                Name (_ADR, 0x00140000)  // _ADR: Address
+                Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
+                {
+                    Return (GPRW (0x6D, 0x03))
+                }
+
+                Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                {
+                    If (LEqual (Arg2, Zero))
+                    {
+                        Return (Buffer (One)
+                        {
+                             0x03
+                        })
+                    }
+
+                    Return (Package (0x12)
+                    {
+                        "device-id", 
+                        Buffer (0x04)
+                        {
+                             0x31, 0x1E, 0x00, 0x00
+                        }, 
+
+                        "built-in", 
+                        Buffer (One)
+                        {
+                             0x00
+                        }, 
+
+                        "subsystem-id", 
+                        Buffer (0x04)
+                        {
+                             0x70, 0x72, 0x00, 0x00
+                        }, 
+
+                        "subsystem-vendor-id", 
+                        Buffer (0x04)
+                        {
+                             0x86, 0x80, 0x00, 0x00
+                        }, 
+
+                        "AAPL,current-available", 
+                        0x0834, 
+                        "AAPL,current-extra", 
+                        0x0898, 
+                        "AAPL,current-extra-in-sleep", 
+                        0x0640, 
+                        "AAPL,device-internal", 
+                        0x02, 
+                        "AAPL,max-port-current-in-sleep", 
+                        0x0834
+                    })
+                }
+            }
+
+            Device (MCHC)
+            {
+                Name (_ADR, Zero)  // _ADR: Address
+                Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                {
+                    If (LEqual (Arg2, Zero))
+                    {
+                        Return (Buffer (One)
+                        {
+                             0x03
+                        })
+                    }
+
+                    Return (Package (0x08)
+                    {
+                        "built-in", 
+                        Buffer (One)
+                        {
+                             0x00
+                        }, 
+
+                        "device-id", 
+                        Buffer (0x04)
+                        {
+                             0x04, 0x0A, 0x00, 0x00
+                        }, 
+
+                        "name", 
+                        Buffer (0x0D)
+                        {
+                            "pci8086,0a04"
+                        }, 
+
+                        "subsystem-vendor-id", 
+                        Buffer (0x04)
+                        {
+                             0x6B, 0x10, 0x00, 0x00
+                        }
+                    })
+                }
+            }
+
+            Device (IMEI)
+            {
+                Name (_ADR, 0x00160000)  // _ADR: Address
+                Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                {
+                    If (LEqual (Arg2, Zero))
+                    {
+                        Return (Buffer (One)
+                        {
+                             0x03
+                        })
+                    }
+
+                    Return (Package (0x08)
+                    {
+                        "device-id", 
+                        Buffer (0x04)
+                        {
+                             0x3A, 0x9C, 0x00, 0x00
+                        }, 
+
+                        "name", 
+                        Buffer (0x0D)
+                        {
+                            "pci8086,9c3a"
+                        }, 
+
+                        "subsystem-id", 
+                        Buffer (0x04)
+                        {
+                             0x70, 0x72, 0x00, 0x00
+                        }, 
+
+                        "subsystem-vendor-id", 
+                        Buffer (0x04)
+                        {
+                             0x86, 0x80, 0x00, 0x00
+                        }
+                    })
+                }
+            }
+
+        Name (LTRE, Zero)
+        Name (OBFF, Zero)
+        Name (LMSL, Zero)
+        Name (LNSL, Zero)
+        Device (EHC1)
+        {
+            Name (_ADR, 0x001D0000)  // _ADR: Address
+            OperationRegion (PWKE, PCI_Config, 0x54, 0x12)
+            Field (PWKE, DWordAcc, NoLock, Preserve)
+            {
+                Offset (0x01), 
+                PMEE,   1, 
+                    ,   6, 
+                PMES,   1, 
+                Offset (0x0E), 
+                    ,   1, 
+                PWUC,   8
+            }
+
+            Method (_PSW, 1, NotSerialized)  // _PSW: Power State Wake
+            {
+                If (Arg0)
+                {
+                    Store (Ones, PWUC)
+                }
+                Else
+                {
+                    Store (Zero, PWUC)
+                }
+            }
+
+            Method (_S3D, 0, NotSerialized)  // _S3D: S3 Device State
+            {
+                Return (0x02)
+            }
+
+            Method (_S4D, 0, NotSerialized)  // _S4D: S4 Device State
+            {
+                Return (0x02)
+            }
+
+            Device (HUBN)
+            {
+                Name (_ADR, Zero)  // _ADR: Address
+                Device (PR01)
+                {
+                    Name (_ADR, One)  // _ADR: Address
+                    Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
+                    {
+                        Name (UPCA, Package (0x04)
+                        {
+                            0xFF, 
+                            Zero, 
+                            Zero, 
+                            Zero
+                        })
+                        Return (UPCA)
+                    }
+
+                    Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
+                    {
+                        Name (PLDP, Package (One)
+                        {
+                            Buffer (0x10)
+                            {
+                                /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                /* 0008 */   0x30, 0x1C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+                            }
+                        })
+                        Return (PLDP)
+                    }
+
+                    Device (PR11)
+                    {
+                        Name (_ADR, One)  // _ADR: Address
+                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
+                        {
+                            Name (UPCP, Package (0x04)
+                            {
+                                0xFF, 
+                                0xFF, 
+                                Zero, 
+                                Zero
+                            })
+                            Return (UPCP)
+                        }
+
+                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
+                        {
+                            Name (PLDP, Package (One)
+                            {
+                                Buffer (0x10)
+                                {
+                                    /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                    /* 0008 */   0xE1, 0x1C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+                                }
+                            })
+                            Return (PLDP)
+                        }
+                    }
+
+                    Device (PR12)
+                    {
+                        Name (_ADR, 0x02)  // _ADR: Address
+                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
+                        {
+                            Name (UPCP, Package (0x04)
+                            {
+                                0xFF, 
+                                0xFF, 
+                                Zero, 
+                                Zero
+                            })
+                            Return (UPCP)
+                        }
+
+                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
+                        {
+                            Name (PLDP, Package (One)
+                            {
+                                Buffer (0x10)
+                                {
+                                    /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                    /* 0008 */   0xE1, 0x1D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+                                }
+                            })
+                            Return (PLDP)
+                        }
+                    }
+
+                    Device (PR13)
+                    {
+                        Name (_ADR, 0x03)  // _ADR: Address
+                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
+                        {
+                            Name (UPCP, Package (0x04)
+                            {
+                                0xFF, 
+                                0xFF, 
+                                Zero, 
+                                Zero
+                            })
+                            Return (UPCP)
+                        }
+
+                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
+                        {
+                            Name (PLDP, Package (One)
+                            {
+                                Buffer (0x10)
+                                {
+                                    /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                    /* 0008 */   0xE1, 0x1D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+                                }
+                            })
+                            CreateBitField (DerefOf (Index (PLDP, Zero)), 0x40, VIS)
+                            If (LEqual (And (CDID, 0xF000), 0x9000))
+                            {
+                                And (VIS, Zero, VIS)
+                            }
+
+                            Return (PLDP)
+                        }
+                    }
+
+                    Device (PR14)
+                    {
+                        Name (_ADR, 0x04)  // _ADR: Address
+                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
+                        {
+                            Name (UPCP, Package (0x04)
+                            {
+                                0xFF, 
+                                0xFF, 
+                                Zero, 
+                                Zero
+                            })
+                            Return (UPCP)
+                        }
+
+                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
+                        {
+                            Name (PLDP, Package (One)
+                            {
+                                Buffer (0x10)
+                                {
+                                    /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                    /* 0008 */   0xE1, 0x1E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+                                }
+                            })
+                            Return (PLDP)
+                        }
+
+                        Alias (SBV1, SDGV)
+                        Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
+                        {
+                            Name (T_0, Zero)
+                            If (LEqual (Arg0, Buffer (0x10)
+                                    {
+                                        /* 0000 */   0x8F, 0x70, 0xFC, 0xA5, 0x75, 0x87, 0xA6, 0x4B,
+                                        /* 0008 */   0xBD, 0x0C, 0xBA, 0x90, 0xA1, 0xEC, 0x72, 0xF8
+                                    }))
+                            {
+                                While (One)
+                                {
+                                    Store (ToInteger (Arg2), T_0)
+                                    If (LEqual (T_0, Zero))
+                                    {
+                                        If (LEqual (Arg1, One))
+                                        {
+                                            Return (Buffer (One)
+                                            {
+                                                 0x07
+                                            })
+                                        }
+                                        Else
+                                        {
+                                            Return (Buffer (One)
+                                            {
+                                                 0x00
+                                            })
+                                        }
+                                    }
+                                    Else
+                                    {
+                                        If (LEqual (T_0, One))
+                                        {
+                                            If (LEqual (SDGV, 0xFF))
+                                            {
+                                                Return (Zero)
+                                            }
+                                            Else
+                                            {
+                                                Return (One)
+                                            }
+                                        }
+                                        Else
+                                        {
+                                            If (LEqual (T_0, 0x02))
+                                            {
+                                                Return (SDGV)
+                                            }
+                                        }
+                                    }
+
+                                    Break
+                                }
+                            }
+
+                            Return (Zero)
+                        }
+                    }
+
+                    Device (PR15)
+                    {
+                        Name (_ADR, 0x05)  // _ADR: Address
+                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
+                        {
+                            Name (UPCP, Package (0x04)
+                            {
+                                0xFF, 
+                                0xFF, 
+                                Zero, 
+                                Zero
+                            })
+                            Return (UPCP)
+                        }
+
+                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
+                        {
+                            Name (PLDP, Package (One)
+                            {
+                                Buffer (0x10)
+                                {
+                                    /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                    /* 0008 */   0xB1, 0x1E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+                                }
+                            })
+                            Return (PLDP)
+                        }
+
+                        Alias (SBV2, SDGV)
+                        Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
+                        {
+                            Name (T_0, Zero)
+                            If (LEqual (Arg0, Buffer (0x10)
+                                    {
+                                        /* 0000 */   0x8F, 0x70, 0xFC, 0xA5, 0x75, 0x87, 0xA6, 0x4B,
+                                        /* 0008 */   0xBD, 0x0C, 0xBA, 0x90, 0xA1, 0xEC, 0x72, 0xF8
+                                    }))
+                            {
+                                While (One)
+                                {
+                                    Store (ToInteger (Arg2), T_0)
+                                    If (LEqual (T_0, Zero))
+                                    {
+                                        If (LEqual (Arg1, One))
+                                        {
+                                            Return (Buffer (One)
+                                            {
+                                                 0x07
+                                            })
+                                        }
+                                        Else
+                                        {
+                                            Return (Buffer (One)
+                                            {
+                                                 0x00
+                                            })
+                                        }
+                                    }
+                                    Else
+                                    {
+                                        If (LEqual (T_0, One))
+                                        {
+                                            If (LEqual (SDGV, 0xFF))
+                                            {
+                                                Return (Zero)
+                                            }
+                                            Else
+                                            {
+                                                Return (One)
+                                            }
+                                        }
+                                        Else
+                                        {
+                                            If (LEqual (T_0, 0x02))
+                                            {
+                                                Return (SDGV)
+                                            }
+                                        }
+                                    }
+
+                                    Break
+                                }
+                            }
+
+                            Return (Zero)
+                        }
+                    }
+
+                    Device (PR16)
+                    {
+                        Name (_ADR, 0x06)  // _ADR: Address
+                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
+                        {
+                            Name (UPCP, Package (0x04)
+                            {
+                                0xFF, 
+                                0xFF, 
+                                Zero, 
+                                Zero
+                            })
+                            Return (UPCP)
+                        }
+
+                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
+                        {
+                            Name (PLDP, Package (One)
+                            {
+                                Buffer (0x10)
+                                {
+                                    /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                    /* 0008 */   0xB1, 0x1E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+                                }
+                            })
+                            Return (PLDP)
+                        }
+
+                        Alias (SBV1, SDGV)
+                        Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
+                        {
+                            Name (T_0, Zero)
+                            If (LEqual (Arg0, Buffer (0x10)
+                                    {
+                                        /* 0000 */   0x8F, 0x70, 0xFC, 0xA5, 0x75, 0x87, 0xA6, 0x4B,
+                                        /* 0008 */   0xBD, 0x0C, 0xBA, 0x90, 0xA1, 0xEC, 0x72, 0xF8
+                                    }))
+                            {
+                                While (One)
+                                {
+                                    Store (ToInteger (Arg2), T_0)
+                                    If (LEqual (T_0, Zero))
+                                    {
+                                        If (LEqual (Arg1, One))
+                                        {
+                                            Return (Buffer (One)
+                                            {
+                                                 0x07
+                                            })
+                                        }
+                                        Else
+                                        {
+                                            Return (Buffer (One)
+                                            {
+                                                 0x00
+                                            })
+                                        }
+                                    }
+                                    Else
+                                    {
+                                        If (LEqual (T_0, One))
+                                        {
+                                            If (LEqual (SDGV, 0xFF))
+                                            {
+                                                Return (Zero)
+                                            }
+                                            Else
+                                            {
+                                                Return (One)
+                                            }
+                                        }
+                                        Else
+                                        {
+                                            If (LEqual (T_0, 0x02))
+                                            {
+                                                Return (SDGV)
+                                            }
+                                        }
+                                    }
+
+                                    Break
+                                }
+                            }
+
+                            Return (Zero)
+                        }
+                    }
+
+                    Device (PR17)
+                    {
+                        Name (_ADR, 0x07)  // _ADR: Address
+                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
+                        {
+                            Name (UPCP, Package (0x04)
+                            {
+                                0xFF, 
+                                0xFF, 
+                                Zero, 
+                                Zero
+                            })
+                            Return (UPCP)
+                        }
+
+                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
+                        {
+                            Name (PLDP, Package (One)
+                            {
+                                Buffer (0x10)
+                                {
+                                    /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                    /* 0008 */   0xB1, 0x1E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+                                }
+                            })
+                            Return (PLDP)
+                        }
+
+                        Alias (SBV2, SDGV)
+                        Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
+                        {
+                            Name (T_0, Zero)
+                            If (LEqual (Arg0, Buffer (0x10)
+                                    {
+                                        /* 0000 */   0x8F, 0x70, 0xFC, 0xA5, 0x75, 0x87, 0xA6, 0x4B,
+                                        /* 0008 */   0xBD, 0x0C, 0xBA, 0x90, 0xA1, 0xEC, 0x72, 0xF8
+                                    }))
+                            {
+                                While (One)
+                                {
+                                    Store (ToInteger (Arg2), T_0)
+                                    If (LEqual (T_0, Zero))
+                                    {
+                                        If (LEqual (Arg1, One))
+                                        {
+                                            Return (Buffer (One)
+                                            {
+                                                 0x07
+                                            })
+                                        }
+                                        Else
+                                        {
+                                            Return (Buffer (One)
+                                            {
+                                                 0x00
+                                            })
+                                        }
+                                    }
+                                    Else
+                                    {
+                                        If (LEqual (T_0, One))
+                                        {
+                                            If (LEqual (SDGV, 0xFF))
+                                            {
+                                                Return (Zero)
+                                            }
+                                            Else
+                                            {
+                                                Return (One)
+                                            }
+                                        }
+                                        Else
+                                        {
+                                            If (LEqual (T_0, 0x02))
+                                            {
+                                                Return (SDGV)
+                                            }
+                                        }
+                                    }
+
+                                    Break
+                                }
+                            }
+
+                            Return (Zero)
+                        }
+                    }
+
+                    Device (PR18)
+                    {
+                        Name (_ADR, 0x08)  // _ADR: Address
+                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
+                        {
+                            Name (UPCP, Package (0x04)
+                            {
+                                0xFF, 
+                                0xFF, 
+                                Zero, 
+                                Zero
+                            })
+                            Return (UPCP)
+                        }
+
+                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
+                        {
+                            Name (PLDP, Package (One)
+                            {
+                                Buffer (0x10)
+                                {
+                                    /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                    /* 0008 */   0xB1, 0x1E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+                                }
+                            })
+                            Return (PLDP)
+                        }
+                    }
+                }
+            }
+
+            Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
+            {
+                Return (GPRW (0x6D, 0x03))
+            }
+
+        Device (RHUB)
+        {
+            Name (_ADR, Zero)  // _ADR: Address
+            Device (PRT1)
+            {
+                Name (_ADR, One)  // _ADR: Address
+                Name (_UPC, Package (0x04)  // _UPC: USB Port Capabilities
+                {
+                    Zero, 
+                    0xFF, 
+                    Zero, 
+                    Zero
+                })
+                Device (PRT1)
+                {
+                    Name (_ADR, One)  // _ADR: Address
+                    Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+                    {
+                        OUPC (Zero)
+                        Return (BUPC)
+                    }
+
+                    Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+                    {
+                        OPLD (Zero)
+                        Return (BPLD)
+                    }
+                }
+
+                Device (PRT2)
+                {
+                    Name (_ADR, 0x02)  // _ADR: Address
+                    Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+                    {
+                        OUPC (One)
+                        Return (BUPC)
+                    }
+
+                    Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+                    {
+                        OPLD (One)
+                        Return (BPLD)
+                    }
+                }
+
+                Device (PRT3)
+                {
+                    Name (_ADR, 0x03)  // _ADR: Address
+                    Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+                    {
+                        OUPC (0x02)
+                        Return (BUPC)
+                    }
+
+                    Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+                    {
+                        OPLD (0x02)
+                        Return (BPLD)
+                    }
+                }
+
+                Device (PRT4)
+                {
+                    Name (_ADR, 0x04)  // _ADR: Address
+                    Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+                    {
+                        OUPC (0x03)
+                        Return (BUPC)
+                    }
+
+                    Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+                    {
+                        OPLD (0x03)
+                        Return (BPLD)
+                    }
+                }
+
+                Device (PRT5)
+                {
+                    Name (_ADR, 0x05)  // _ADR: Address
+                    Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+                    {
+                        OUPC (0x04)
+                        Return (BUPC)
+                    }
+
+                    Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+                    {
+                        OPLD (0x04)
+                        Return (BPLD)
+                    }
+                }
+
+                Device (PRT6)
+                {
+                    Name (_ADR, 0x06)  // _ADR: Address
+                    Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+                    {
+                        OUPC (0x05)
+                        Return (BUPC)
+                    }
+
+                    Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+                    {
+                        OPLD (0x05)
+                        Return (BPLD)
+                    }
+                }
+
+                Device (PRT7)
+                {
+                    Name (_ADR, 0x07)  // _ADR: Address
+                    Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+                    {
+                        OUPC (0x06)
+                        Return (BUPC)
+                    }
+
+                    Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+                    {
+                        OPLD (0x06)
+                        Return (BPLD)
+                    }
+                }
+
+                Device (PRT8)
+                {
+                    Name (_ADR, 0x08)  // _ADR: Address
+                    Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+                    {
+                        OUPC (0x07)
+                        Return (BUPC)
+                    }
+
+                    Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+                    {
+                        OPLD (0x07)
+                        Return (BPLD)
+                    }
+                }
+            }
+        }
+
+        OperationRegion (EHC1, PCI_Config, 0x10, 0x08)
+        Field (EHC1, AnyAcc, Lock, Preserve)
+        {
+            MBAS,   64
+        }
+
+        Method (LTEP, 0, NotSerialized)
+        {
+        }
+    }
+
+        Device (EHC2)
+        {
+            Name (_ADR, 0x001A0000)  // _ADR: Address
+            OperationRegion (PWKE, PCI_Config, 0x54, 0x12)
+            Field (PWKE, DWordAcc, NoLock, Preserve)
+            {
+                Offset (0x01), 
+                PMEE,   1, 
+                    ,   6, 
+                PMES,   1, 
+                Offset (0x0E), 
+                    ,   1, 
+                PWUC,   6
+            }
+
+            Method (_PSW, 1, NotSerialized)  // _PSW: Power State Wake
+            {
+                If (Arg0)
+                {
+                    Store (Ones, PWUC)
+                }
+                Else
+                {
+                    Store (Zero, PWUC)
+                }
+            }
+
+            Method (_S3D, 0, NotSerialized)  // _S3D: S3 Device State
+            {
+                Return (0x02)
+            }
+
+            Method (_S4D, 0, NotSerialized)  // _S4D: S4 Device State
+            {
+                Return (0x02)
+            }
+
+            Device (HUBN)
+            {
+                Name (_ADR, Zero)  // _ADR: Address
+                Device (PR01)
+                {
+                    Name (_ADR, One)  // _ADR: Address
+                    Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
+                    {
+                        Name (UPCA, Package (0x04)
+                        {
+                            0xFF, 
+                            Zero, 
+                            Zero, 
+                            Zero
+                        })
+                        Return (UPCA)
+                    }
+
+                    Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
+                    {
+                        Name (PLDP, Package (One)
+                        {
+                            Buffer (0x10)
+                            {
+                                /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                /* 0008 */   0x30, 0x1C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+                            }
+                        })
+                        Return (PLDP)
+                    }
+
+                    Device (PR11)
+                    {
+                        Name (_ADR, One)  // _ADR: Address
+                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
+                        {
+                            Name (UPCP, Package (0x04)
+                            {
+                                0xFF, 
+                                0xFF, 
+                                Zero, 
+                                Zero
+                            })
+                            Return (UPCP)
+                        }
+
+                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
+                        {
+                            Name (PLDP, Package (One)
+                            {
+                                Buffer (0x10)
+                                {
+                                    /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                    /* 0008 */   0xE1, 0x1C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+                                }
+                            })
+                            Return (PLDP)
+                        }
+                    }
+
+                    Device (PR12)
+                    {
+                        Name (_ADR, 0x02)  // _ADR: Address
+                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
+                        {
+                            Name (UPCP, Package (0x04)
+                            {
+                                0xFF, 
+                                0xFF, 
+                                Zero, 
+                                Zero
+                            })
+                            Return (UPCP)
+                        }
+
+                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
+                        {
+                            Name (PLDP, Package (One)
+                            {
+                                Buffer (0x10)
+                                {
+                                    /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                    /* 0008 */   0xE1, 0x1D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+                                }
+                            })
+                            Return (PLDP)
+                        }
+
+                        Alias (SBV1, SDGV)
+                        Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
+                        {
+                            Name (T_0, Zero)
+                            If (LEqual (Arg0, Buffer (0x10)
+                                    {
+                                        /* 0000 */   0x8F, 0x70, 0xFC, 0xA5, 0x75, 0x87, 0xA6, 0x4B,
+                                        /* 0008 */   0xBD, 0x0C, 0xBA, 0x90, 0xA1, 0xEC, 0x72, 0xF8
+                                    }))
+                            {
+                                While (One)
+                                {
+                                    Store (ToInteger (Arg2), T_0)
+                                    If (LEqual (T_0, Zero))
+                                    {
+                                        If (LEqual (Arg1, One))
+                                        {
+                                            Return (Buffer (One)
+                                            {
+                                                 0x07
+                                            })
+                                        }
+                                        Else
+                                        {
+                                            Return (Buffer (One)
+                                            {
+                                                 0x00
+                                            })
+                                        }
+                                    }
+                                    Else
+                                    {
+                                        If (LEqual (T_0, One))
+                                        {
+                                            If (LEqual (SDGV, 0xFF))
+                                            {
+                                                Return (Zero)
+                                            }
+                                            Else
+                                            {
+                                                Return (One)
+                                            }
+                                        }
+                                        Else
+                                        {
+                                            If (LEqual (T_0, 0x02))
+                                            {
+                                                Return (SDGV)
+                                            }
+                                        }
+                                    }
+
+                                    Break
+                                }
+                            }
+
+                            Return (Zero)
+                        }
+                    }
+
+                    Device (PR13)
+                    {
+                        Name (_ADR, 0x03)  // _ADR: Address
+                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
+                        {
+                            Name (UPCP, Package (0x04)
+                            {
+                                0xFF, 
+                                0xFF, 
+                                Zero, 
+                                Zero
+                            })
+                            Return (UPCP)
+                        }
+
+                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
+                        {
+                            Name (PLDP, Package (One)
+                            {
+                                Buffer (0x10)
+                                {
+                                    /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                    /* 0008 */   0xE1, 0x1D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+                                }
+                            })
+                            CreateBitField (DerefOf (Index (PLDP, Zero)), 0x40, VIS)
+                            If (LEqual (And (CDID, 0xF000), 0x9000))
+                            {
+                                And (VIS, Zero, VIS)
+                            }
+
+                            Return (PLDP)
+                        }
+
+                        Alias (SBV2, SDGV)
+                        Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
+                        {
+                            Name (T_0, Zero)
+                            If (LEqual (Arg0, Buffer (0x10)
+                                    {
+                                        /* 0000 */   0x8F, 0x70, 0xFC, 0xA5, 0x75, 0x87, 0xA6, 0x4B,
+                                        /* 0008 */   0xBD, 0x0C, 0xBA, 0x90, 0xA1, 0xEC, 0x72, 0xF8
+                                    }))
+                            {
+                                While (One)
+                                {
+                                    Store (ToInteger (Arg2), T_0)
+                                    If (LEqual (T_0, Zero))
+                                    {
+                                        If (LEqual (Arg1, One))
+                                        {
+                                            Return (Buffer (One)
+                                            {
+                                                 0x07
+                                            })
+                                        }
+                                        Else
+                                        {
+                                            Return (Buffer (One)
+                                            {
+                                                 0x00
+                                            })
+                                        }
+                                    }
+                                    Else
+                                    {
+                                        If (LEqual (T_0, One))
+                                        {
+                                            If (LEqual (SDGV, 0xFF))
+                                            {
+                                                Return (Zero)
+                                            }
+                                            Else
+                                            {
+                                                Return (One)
+                                            }
+                                        }
+                                        Else
+                                        {
+                                            If (LEqual (T_0, 0x02))
+                                            {
+                                                Return (SDGV)
+                                            }
+                                        }
+                                    }
+
+                                    Break
+                                }
+                            }
+
+                            Return (Zero)
+                        }
+                    }
+
+                    Device (PR14)
+                    {
+                        Name (_ADR, 0x04)  // _ADR: Address
+                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
+                        {
+                            Name (UPCP, Package (0x04)
+                            {
+                                0xFF, 
+                                0xFF, 
+                                Zero, 
+                                Zero
+                            })
+                            Return (UPCP)
+                        }
+
+                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
+                        {
+                            Name (PLDP, Package (One)
+                            {
+                                Buffer (0x10)
+                                {
+                                    /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                    /* 0008 */   0xE1, 0x1E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+                                }
+                            })
+                            Return (PLDP)
+                        }
+                    }
+
+                    Device (PR15)
+                    {
+                        Name (_ADR, 0x05)  // _ADR: Address
+                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
+                        {
+                            Name (UPCP, Package (0x04)
+                            {
+                                0xFF, 
+                                0xFF, 
+                                Zero, 
+                                Zero
+                            })
+                            Return (UPCP)
+                        }
+
+                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
+                        {
+                            Name (PLDP, Package (One)
+                            {
+                                Buffer (0x10)
+                                {
+                                    /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                    /* 0008 */   0xB1, 0x1E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+                                }
+                            })
+                            Return (PLDP)
+                        }
+                    }
+
+                    Device (PR16)
+                    {
+                        Name (_ADR, 0x06)  // _ADR: Address
+                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
+                        {
+                            Name (UPCP, Package (0x04)
+                            {
+                                0xFF, 
+                                0xFF, 
+                                Zero, 
+                                Zero
+                            })
+                            Return (UPCP)
+                        }
+
+                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
+                        {
+                            Name (PLDP, Package (One)
+                            {
+                                Buffer (0x10)
+                                {
+                                    /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                    /* 0008 */   0xB1, 0x1E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+                                }
+                            })
+                            Return (PLDP)
+                        }
+                    }
+                }
+            }
+
+            Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
+            {
+                Return (GPRW (0x6D, 0x03))
+            }
+
+            Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+            {
+                If (LEqual (Arg2, Zero))
+                {
+                    Return (Buffer (One)
+                    {
+                         0x03
+                    })
+                }
+
+                Return (Package (0x14)
+                {
+                    "device-id", 
+                    Buffer (0x04)
+                    {
+                         0x2D, 0x1E, 0x00, 0x00
+                    }, 
+
+                    "AAPL,clock-id", 
+                    Buffer (One)
+                    {
+                         0x01
+                    }, 
+
+                    "built-in", 
+                    Buffer (One)
+                    {
+                         0x00
+                    }, 
+
+                    "subsystem-id", 
+                    Buffer (0x04)
+                    {
+                         0x70, 0x72, 0x00, 0x00
+                    }, 
+
+                    "subsystem-vendor-id", 
+                    Buffer (0x04)
+                    {
+                         0x86, 0x80, 0x00, 0x00
+                    }, 
+
+                    "AAPL,current-available", 
+                    0x0834, 
+                    "AAPL,current-extra", 
+                    0x0898, 
+                    "AAPL,current-extra-in-sleep", 
+                    0x0640, 
+                    "AAPL,device-internal", 
+                    0x02, 
+                    "AAPL,max-port-current-in-sleep", 
+                    0x0834
+                })
+            }
+
+        Device (RHUB)
+        {
+            Name (_ADR, Zero)  // _ADR: Address
+            Device (PRT1)
+            {
+                Name (_ADR, One)  // _ADR: Address
+                Name (_UPC, Package (0x04)  // _UPC: USB Port Capabilities
+                {
+                    Zero, 
+                    0xFF, 
+                    Zero, 
+                    Zero
+                })
+                Device (PRT1)
+                {
+                    Name (_ADR, One)  // _ADR: Address
+                    Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+                    {
+                        OUPC (0x08)
+                        Return (BUPC)
+                    }
+
+                    Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+                    {
+                        OPLD (0x08)
+                        Return (BPLD)
+                    }
+                }
+
+                Device (PRT2)
+                {
+                    Name (_ADR, 0x02)  // _ADR: Address
+                    Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+                    {
+                        OUPC (0x09)
+                        Return (BUPC)
+                    }
+
+                    Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+                    {
+                        OPLD (0x09)
+                        Return (BPLD)
+                    }
+                }
+
+                Device (PRT3)
+                {
+                    Name (_ADR, 0x03)  // _ADR: Address
+                    Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+                    {
+                        OUPC (0x0A)
+                        Return (BUPC)
+                    }
+
+                    Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+                    {
+                        OPLD (0x0A)
+                        Return (BPLD)
+                    }
+                }
+
+                Device (PRT4)
+                {
+                    Name (_ADR, 0x04)  // _ADR: Address
+                    Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+                    {
+                        OUPC (0x0B)
+                        Return (BUPC)
+                    }
+
+                    Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+                    {
+                        OPLD (0x0B)
+                        Return (BPLD)
+                    }
+                }
+
+                Device (PRT5)
+                {
+                    Name (_ADR, 0x05)  // _ADR: Address
+                    Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+                    {
+                        OUPC (0x0C)
+                        Return (BUPC)
+                    }
+
+                    Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+                    {
+                        OPLD (0x0C)
+                        Return (BPLD)
+                    }
+                }
+
+                Device (PRT6)
+                {
+                    Name (_ADR, 0x06)  // _ADR: Address
+                    Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+                    {
+                        OUPC (0x0D)
+                        Return (BUPC)
+                    }
+
+                    Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+                    {
+                        OPLD (0x0D)
+                        Return (BPLD)
+                    }
+                }
+            }
+        }
+    }
+
+        Device (XHC)
         {
             Name (_ADR, 0x00140000)  // _ADR: Address
             Method (_DEP, 0, NotSerialized)  // _DEP: Dependencies
@@ -13646,1362 +15103,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             {
                 Return (GPRW (0x6D, 0x03))
             }
-            
-            Method (_DSM, 4, NotSerialized)
-                {
-                    If (LEqual (Arg2, Zero)) { Return (Buffer(One) { 0x03 } ) }
-                    Return (Package()
-                    {
-                        "AAPL,clock-id", Buffer(One) { 0x01 },
-                        "built-in", Buffer(One) { 0x00 },
-                        "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
-                        "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
-                        "AAPL,current-available", 2100,
-                        "AAPL,current-extra", 2200,
-                        "AAPL,current-extra-in-sleep", 1600,
-                        "AAPL,device-internal", 0x02,
-                        "AAPL,max-port-current-in-sleep", 2100,
-                    })
-                }
         }
-
-            Device (XHC1)
-            {
-                Name (_ADR, 0x00140000)  // _ADR: Address
-                Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
-                {
-                    Return (GPRW (0x6D, 0x03))
-                }
-
-                Method (_DSM, 4, NotSerialized)
-                {
-                    Store (Package ()
-                    {
-                        "built-in", Buffer (One) { 0x00 },
-                        "AAPL,clock-id", Buffer (One) { 0x02 },
-                        "device_type", Buffer (0x05) { "XHCI" },
-                        "AAPL,current-available", 0x0834,
-                        "AAPL,current-extra", 0x0898,
-                        "AAPL,current-extra-in-sleep", 0x0640,
-                        "AAPL,device-internal", 0x02,
-                        "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
-                        "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
-                        "AAPL,max-port-current-in-sleep", 0x0834, Buffer (One) { 0x00 }
-                    }, Local0)
-                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
-                    Return (Local0)
-                }
-            }
-
-            Device (MCHC)
-            {
-                Name (_ADR, Zero)  // _ADR: Address
-                Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
-                {
-                    If (LEqual (Arg2, Zero))
-                    {
-                        Return (Buffer (One)
-                        {
-                             0x03
-                        })
-                    }
-
-                    Return (Package (0x08)
-                    {
-                        "built-in", 
-                        Buffer (One)
-                        {
-                             0x00
-                        }, 
-
-                        "device-id", 
-                        Buffer (0x04)
-                        {
-                             0x04, 0x0A, 0x00, 0x00
-                        }, 
-
-                        "name", 
-                        Buffer (0x0D)
-                        {
-                            "pci8086,0a04"
-                        }, 
-
-                        "subsystem-vendor-id", 
-                        Buffer (0x04)
-                        {
-                             0x6B, 0x10, 0x00, 0x00
-                        }
-                    })
-                }
-            }
-
-            Device (IMEI)
-            {
-                Name (_ADR, 0x00160000)
-                Method (_DSM, 4, NotSerialized)
-                {
-                    If (LEqual (Arg2, Zero)) { Return (Buffer(One) { 0x03 } ) }
-                    Return (Package()
-                    {
-                        "device-id", Buffer() { 0x3A, 0x9C, 0x00, 0x00 },
-                        "name", Buffer() { "pci8086,9c3a" },
-                        "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
-                        "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
-                    })
-                }
-            }
-
-        Name (LTRE, Zero)
-        Name (OBFF, Zero)
-        Name (LMSL, Zero)
-        Name (LNSL, Zero)
-        Device (EHC1)
-        {
-            Name (_ADR, 0x001D0000)  // _ADR: Address
-            OperationRegion (PWKE, PCI_Config, 0x54, 0x12)
-            Field (PWKE, DWordAcc, NoLock, Preserve)
-            {
-                Offset (0x01), 
-                PMEE,   1, 
-                    ,   6, 
-                PMES,   1, 
-                Offset (0x0E), 
-                    ,   1, 
-                PWUC,   8
-            }
-
-            Method (_PSW, 1, NotSerialized)  // _PSW: Power State Wake
-            {
-                If (Arg0)
-                {
-                    Store (Ones, PWUC)
-                }
-                Else
-                {
-                    Store (Zero, PWUC)
-                }
-            }
-
-            Method (_S3D, 0, NotSerialized)  // _S3D: S3 Device State
-            {
-                Return (0x02)
-            }
-
-            Method (_S4D, 0, NotSerialized)  // _S4D: S4 Device State
-            {
-                Return (0x02)
-            }
-
-            Device (HUBN)
-            {
-                Name (_ADR, Zero)  // _ADR: Address
-                Device (PR01)
-                {
-                    Name (_ADR, One)  // _ADR: Address
-                    Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
-                    {
-                        Name (UPCA, Package (0x04)
-                        {
-                            0xFF, 
-                            Zero, 
-                            Zero, 
-                            Zero
-                        })
-                        Return (UPCA)
-                    }
-
-                    Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
-                    {
-                        Name (PLDP, Package (One)
-                        {
-                            Buffer (0x10)
-                            {
-                                /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                /* 0008 */   0x30, 0x1C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-                            }
-                        })
-                        Return (PLDP)
-                    }
-
-                    Device (PR11)
-                    {
-                        Name (_ADR, One)  // _ADR: Address
-                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
-                        {
-                            Name (UPCP, Package (0x04)
-                            {
-                                0xFF, 
-                                0xFF, 
-                                Zero, 
-                                Zero
-                            })
-                            Return (UPCP)
-                        }
-
-                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
-                        {
-                            Name (PLDP, Package (One)
-                            {
-                                Buffer (0x10)
-                                {
-                                    /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                    /* 0008 */   0xE1, 0x1C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-                                }
-                            })
-                            Return (PLDP)
-                        }
-                    }
-
-                    Device (PR12)
-                    {
-                        Name (_ADR, 0x02)  // _ADR: Address
-                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
-                        {
-                            Name (UPCP, Package (0x04)
-                            {
-                                0xFF, 
-                                0xFF, 
-                                Zero, 
-                                Zero
-                            })
-                            Return (UPCP)
-                        }
-
-                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
-                        {
-                            Name (PLDP, Package (One)
-                            {
-                                Buffer (0x10)
-                                {
-                                    /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                    /* 0008 */   0xE1, 0x1D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-                                }
-                            })
-                            Return (PLDP)
-                        }
-                    }
-
-                    Device (PR13)
-                    {
-                        Name (_ADR, 0x03)  // _ADR: Address
-                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
-                        {
-                            Name (UPCP, Package (0x04)
-                            {
-                                0xFF, 
-                                0xFF, 
-                                Zero, 
-                                Zero
-                            })
-                            Return (UPCP)
-                        }
-
-                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
-                        {
-                            Name (PLDP, Package (One)
-                            {
-                                Buffer (0x10)
-                                {
-                                    /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                    /* 0008 */   0xE1, 0x1D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-                                }
-                            })
-                            CreateBitField (DerefOf (Index (PLDP, Zero)), 0x40, VIS)
-                            If (LEqual (And (CDID, 0xF000), 0x9000))
-                            {
-                                And (VIS, Zero, VIS)
-                            }
-
-                            Return (PLDP)
-                        }
-                    }
-
-                    Device (PR14)
-                    {
-                        Name (_ADR, 0x04)  // _ADR: Address
-                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
-                        {
-                            Name (UPCP, Package (0x04)
-                            {
-                                0xFF, 
-                                0xFF, 
-                                Zero, 
-                                Zero
-                            })
-                            Return (UPCP)
-                        }
-
-                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
-                        {
-                            Name (PLDP, Package (One)
-                            {
-                                Buffer (0x10)
-                                {
-                                    /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                    /* 0008 */   0xE1, 0x1E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-                                }
-                            })
-                            Return (PLDP)
-                        }
-
-                        Alias (SBV1, SDGV)
-                        Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
-                        {
-                            Name (T_0, Zero)
-                            If (LEqual (Arg0, Buffer (0x10)
-                                    {
-                                        /* 0000 */   0x8F, 0x70, 0xFC, 0xA5, 0x75, 0x87, 0xA6, 0x4B,
-                                        /* 0008 */   0xBD, 0x0C, 0xBA, 0x90, 0xA1, 0xEC, 0x72, 0xF8
-                                    }))
-                            {
-                                While (One)
-                                {
-                                    Store (ToInteger (Arg2), T_0)
-                                    If (LEqual (T_0, Zero))
-                                    {
-                                        If (LEqual (Arg1, One))
-                                        {
-                                            Return (Buffer (One)
-                                            {
-                                                 0x07
-                                            })
-                                        }
-                                        Else
-                                        {
-                                            Return (Buffer (One)
-                                            {
-                                                 0x00
-                                            })
-                                        }
-                                    }
-                                    Else
-                                    {
-                                        If (LEqual (T_0, One))
-                                        {
-                                            If (LEqual (SDGV, 0xFF))
-                                            {
-                                                Return (Zero)
-                                            }
-                                            Else
-                                            {
-                                                Return (One)
-                                            }
-                                        }
-                                        Else
-                                        {
-                                            If (LEqual (T_0, 0x02))
-                                            {
-                                                Return (SDGV)
-                                            }
-                                        }
-                                    }
-
-                                    Break
-                                }
-                            }
-
-                            Return (Zero)
-                        }
-                    }
-
-                    Device (PR15)
-                    {
-                        Name (_ADR, 0x05)  // _ADR: Address
-                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
-                        {
-                            Name (UPCP, Package (0x04)
-                            {
-                                0xFF, 
-                                0xFF, 
-                                Zero, 
-                                Zero
-                            })
-                            Return (UPCP)
-                        }
-
-                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
-                        {
-                            Name (PLDP, Package (One)
-                            {
-                                Buffer (0x10)
-                                {
-                                    /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                    /* 0008 */   0xB1, 0x1E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-                                }
-                            })
-                            Return (PLDP)
-                        }
-
-                        Alias (SBV2, SDGV)
-                        Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
-                        {
-                            Name (T_0, Zero)
-                            If (LEqual (Arg0, Buffer (0x10)
-                                    {
-                                        /* 0000 */   0x8F, 0x70, 0xFC, 0xA5, 0x75, 0x87, 0xA6, 0x4B,
-                                        /* 0008 */   0xBD, 0x0C, 0xBA, 0x90, 0xA1, 0xEC, 0x72, 0xF8
-                                    }))
-                            {
-                                While (One)
-                                {
-                                    Store (ToInteger (Arg2), T_0)
-                                    If (LEqual (T_0, Zero))
-                                    {
-                                        If (LEqual (Arg1, One))
-                                        {
-                                            Return (Buffer (One)
-                                            {
-                                                 0x07
-                                            })
-                                        }
-                                        Else
-                                        {
-                                            Return (Buffer (One)
-                                            {
-                                                 0x00
-                                            })
-                                        }
-                                    }
-                                    Else
-                                    {
-                                        If (LEqual (T_0, One))
-                                        {
-                                            If (LEqual (SDGV, 0xFF))
-                                            {
-                                                Return (Zero)
-                                            }
-                                            Else
-                                            {
-                                                Return (One)
-                                            }
-                                        }
-                                        Else
-                                        {
-                                            If (LEqual (T_0, 0x02))
-                                            {
-                                                Return (SDGV)
-                                            }
-                                        }
-                                    }
-
-                                    Break
-                                }
-                            }
-
-                            Return (Zero)
-                        }
-                    }
-
-                    Device (PR16)
-                    {
-                        Name (_ADR, 0x06)  // _ADR: Address
-                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
-                        {
-                            Name (UPCP, Package (0x04)
-                            {
-                                0xFF, 
-                                0xFF, 
-                                Zero, 
-                                Zero
-                            })
-                            Return (UPCP)
-                        }
-
-                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
-                        {
-                            Name (PLDP, Package (One)
-                            {
-                                Buffer (0x10)
-                                {
-                                    /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                    /* 0008 */   0xB1, 0x1E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-                                }
-                            })
-                            Return (PLDP)
-                        }
-
-                        Alias (SBV1, SDGV)
-                        Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
-                        {
-                            Name (T_0, Zero)
-                            If (LEqual (Arg0, Buffer (0x10)
-                                    {
-                                        /* 0000 */   0x8F, 0x70, 0xFC, 0xA5, 0x75, 0x87, 0xA6, 0x4B,
-                                        /* 0008 */   0xBD, 0x0C, 0xBA, 0x90, 0xA1, 0xEC, 0x72, 0xF8
-                                    }))
-                            {
-                                While (One)
-                                {
-                                    Store (ToInteger (Arg2), T_0)
-                                    If (LEqual (T_0, Zero))
-                                    {
-                                        If (LEqual (Arg1, One))
-                                        {
-                                            Return (Buffer (One)
-                                            {
-                                                 0x07
-                                            })
-                                        }
-                                        Else
-                                        {
-                                            Return (Buffer (One)
-                                            {
-                                                 0x00
-                                            })
-                                        }
-                                    }
-                                    Else
-                                    {
-                                        If (LEqual (T_0, One))
-                                        {
-                                            If (LEqual (SDGV, 0xFF))
-                                            {
-                                                Return (Zero)
-                                            }
-                                            Else
-                                            {
-                                                Return (One)
-                                            }
-                                        }
-                                        Else
-                                        {
-                                            If (LEqual (T_0, 0x02))
-                                            {
-                                                Return (SDGV)
-                                            }
-                                        }
-                                    }
-
-                                    Break
-                                }
-                            }
-
-                            Return (Zero)
-                        }
-                    }
-
-                    Device (PR17)
-                    {
-                        Name (_ADR, 0x07)  // _ADR: Address
-                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
-                        {
-                            Name (UPCP, Package (0x04)
-                            {
-                                0xFF, 
-                                0xFF, 
-                                Zero, 
-                                Zero
-                            })
-                            Return (UPCP)
-                        }
-
-                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
-                        {
-                            Name (PLDP, Package (One)
-                            {
-                                Buffer (0x10)
-                                {
-                                    /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                    /* 0008 */   0xB1, 0x1E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-                                }
-                            })
-                            Return (PLDP)
-                        }
-
-                        Alias (SBV2, SDGV)
-                        Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
-                        {
-                            Name (T_0, Zero)
-                            If (LEqual (Arg0, Buffer (0x10)
-                                    {
-                                        /* 0000 */   0x8F, 0x70, 0xFC, 0xA5, 0x75, 0x87, 0xA6, 0x4B,
-                                        /* 0008 */   0xBD, 0x0C, 0xBA, 0x90, 0xA1, 0xEC, 0x72, 0xF8
-                                    }))
-                            {
-                                While (One)
-                                {
-                                    Store (ToInteger (Arg2), T_0)
-                                    If (LEqual (T_0, Zero))
-                                    {
-                                        If (LEqual (Arg1, One))
-                                        {
-                                            Return (Buffer (One)
-                                            {
-                                                 0x07
-                                            })
-                                        }
-                                        Else
-                                        {
-                                            Return (Buffer (One)
-                                            {
-                                                 0x00
-                                            })
-                                        }
-                                    }
-                                    Else
-                                    {
-                                        If (LEqual (T_0, One))
-                                        {
-                                            If (LEqual (SDGV, 0xFF))
-                                            {
-                                                Return (Zero)
-                                            }
-                                            Else
-                                            {
-                                                Return (One)
-                                            }
-                                        }
-                                        Else
-                                        {
-                                            If (LEqual (T_0, 0x02))
-                                            {
-                                                Return (SDGV)
-                                            }
-                                        }
-                                    }
-
-                                    Break
-                                }
-                            }
-
-                            Return (Zero)
-                        }
-                    }
-
-                    Device (PR18)
-                    {
-                        Name (_ADR, 0x08)  // _ADR: Address
-                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
-                        {
-                            Name (UPCP, Package (0x04)
-                            {
-                                0xFF, 
-                                0xFF, 
-                                Zero, 
-                                Zero
-                            })
-                            Return (UPCP)
-                        }
-
-                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
-                        {
-                            Name (PLDP, Package (One)
-                            {
-                                Buffer (0x10)
-                                {
-                                    /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                    /* 0008 */   0xB1, 0x1E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-                                }
-                            })
-                            Return (PLDP)
-                        }
-                    }
-                }
-            }
-
-            Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
-            {
-                Return (GPRW (0x6D, 0x03))
-            }
-
-        Device (RHUB)
-        {
-            Name (_ADR, Zero)  // _ADR: Address
-            Device (PRT1)
-            {
-                Name (_ADR, One)  // _ADR: Address
-                Name (_UPC, Package (0x04)  // _UPC: USB Port Capabilities
-                {
-                    Zero, 
-                    0xFF, 
-                    Zero, 
-                    Zero
-                })
-                Device (PRT1)
-                {
-                    Name (_ADR, One)  // _ADR: Address
-                    Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
-                    {
-                        OUPC (Zero)
-                        Return (BUPC)
-                    }
-
-                    Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
-                    {
-                        OPLD (Zero)
-                        Return (BPLD)
-                    }
-                }
-
-                Device (PRT2)
-                {
-                    Name (_ADR, 0x02)  // _ADR: Address
-                    Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
-                    {
-                        OUPC (One)
-                        Return (BUPC)
-                    }
-
-                    Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
-                    {
-                        OPLD (One)
-                        Return (BPLD)
-                    }
-                }
-
-                Device (PRT3)
-                {
-                    Name (_ADR, 0x03)  // _ADR: Address
-                    Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
-                    {
-                        OUPC (0x02)
-                        Return (BUPC)
-                    }
-
-                    Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
-                    {
-                        OPLD (0x02)
-                        Return (BPLD)
-                    }
-                }
-
-                Device (PRT4)
-                {
-                    Name (_ADR, 0x04)  // _ADR: Address
-                    Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
-                    {
-                        OUPC (0x03)
-                        Return (BUPC)
-                    }
-
-                    Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
-                    {
-                        OPLD (0x03)
-                        Return (BPLD)
-                    }
-                }
-
-                Device (PRT5)
-                {
-                    Name (_ADR, 0x05)  // _ADR: Address
-                    Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
-                    {
-                        OUPC (0x04)
-                        Return (BUPC)
-                    }
-
-                    Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
-                    {
-                        OPLD (0x04)
-                        Return (BPLD)
-                    }
-                }
-
-                Device (PRT6)
-                {
-                    Name (_ADR, 0x06)  // _ADR: Address
-                    Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
-                    {
-                        OUPC (0x05)
-                        Return (BUPC)
-                    }
-
-                    Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
-                    {
-                        OPLD (0x05)
-                        Return (BPLD)
-                    }
-                }
-
-                Device (PRT7)
-                {
-                    Name (_ADR, 0x07)  // _ADR: Address
-                    Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
-                    {
-                        OUPC (0x06)
-                        Return (BUPC)
-                    }
-
-                    Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
-                    {
-                        OPLD (0x06)
-                        Return (BPLD)
-                    }
-                }
-
-                Device (PRT8)
-                {
-                    Name (_ADR, 0x08)  // _ADR: Address
-                    Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
-                    {
-                        OUPC (0x07)
-                        Return (BUPC)
-                    }
-
-                    Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
-                    {
-                        OPLD (0x07)
-                        Return (BPLD)
-                    }
-                }
-            }
-        }
-
-        OperationRegion (EHC1, PCI_Config, 0x10, 0x08)
-        Field (EHC1, AnyAcc, Lock, Preserve)
-        {
-            MBAS,   64
-        }
-
-        Method (LTEP, 0, NotSerialized)
-        {
-        }
-        
-        Method (_DSM, 4, NotSerialized)
-                {
-                    If (LEqual (Arg2, Zero)) { Return (Buffer(One) { 0x03 } ) }
-                    Return (Package()
-                    {
-                        "AAPL,clock-id", Buffer(One) { 0x01 },
-                        "built-in", Buffer(One) { 0x00 },
-                        "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
-                        "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
-                        "AAPL,current-available", 2100,
-                        "AAPL,current-extra", 2200,
-                        "AAPL,current-extra-in-sleep", 1600,
-                        "AAPL,device-internal", 0x02,
-                        "AAPL,max-port-current-in-sleep", 2100,
-                    })
-                }
-    }
-
-        Device (EHC2)
-        {
-            Name (_ADR, 0x001A0000)  // _ADR: Address
-            OperationRegion (PWKE, PCI_Config, 0x54, 0x12)
-            Field (PWKE, DWordAcc, NoLock, Preserve)
-            {
-                Offset (0x01), 
-                PMEE,   1, 
-                    ,   6, 
-                PMES,   1, 
-                Offset (0x0E), 
-                    ,   1, 
-                PWUC,   6
-            }
-
-            Method (_PSW, 1, NotSerialized)  // _PSW: Power State Wake
-            {
-                If (Arg0)
-                {
-                    Store (Ones, PWUC)
-                }
-                Else
-                {
-                    Store (Zero, PWUC)
-                }
-            }
-
-            Method (_S3D, 0, NotSerialized)  // _S3D: S3 Device State
-            {
-                Return (0x02)
-            }
-
-            Method (_S4D, 0, NotSerialized)  // _S4D: S4 Device State
-            {
-                Return (0x02)
-            }
-
-            Device (HUBN)
-            {
-                Name (_ADR, Zero)  // _ADR: Address
-                Device (PR01)
-                {
-                    Name (_ADR, One)  // _ADR: Address
-                    Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
-                    {
-                        Name (UPCA, Package (0x04)
-                        {
-                            0xFF, 
-                            Zero, 
-                            Zero, 
-                            Zero
-                        })
-                        Return (UPCA)
-                    }
-
-                    Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
-                    {
-                        Name (PLDP, Package (One)
-                        {
-                            Buffer (0x10)
-                            {
-                                /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                /* 0008 */   0x30, 0x1C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-                            }
-                        })
-                        Return (PLDP)
-                    }
-
-                    Device (PR11)
-                    {
-                        Name (_ADR, One)  // _ADR: Address
-                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
-                        {
-                            Name (UPCP, Package (0x04)
-                            {
-                                0xFF, 
-                                0xFF, 
-                                Zero, 
-                                Zero
-                            })
-                            Return (UPCP)
-                        }
-
-                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
-                        {
-                            Name (PLDP, Package (One)
-                            {
-                                Buffer (0x10)
-                                {
-                                    /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                    /* 0008 */   0xE1, 0x1C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-                                }
-                            })
-                            Return (PLDP)
-                        }
-                    }
-
-                    Device (PR12)
-                    {
-                        Name (_ADR, 0x02)  // _ADR: Address
-                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
-                        {
-                            Name (UPCP, Package (0x04)
-                            {
-                                0xFF, 
-                                0xFF, 
-                                Zero, 
-                                Zero
-                            })
-                            Return (UPCP)
-                        }
-
-                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
-                        {
-                            Name (PLDP, Package (One)
-                            {
-                                Buffer (0x10)
-                                {
-                                    /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                    /* 0008 */   0xE1, 0x1D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-                                }
-                            })
-                            Return (PLDP)
-                        }
-
-                        Alias (SBV1, SDGV)
-                        Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
-                        {
-                            Name (T_0, Zero)
-                            If (LEqual (Arg0, Buffer (0x10)
-                                    {
-                                        /* 0000 */   0x8F, 0x70, 0xFC, 0xA5, 0x75, 0x87, 0xA6, 0x4B,
-                                        /* 0008 */   0xBD, 0x0C, 0xBA, 0x90, 0xA1, 0xEC, 0x72, 0xF8
-                                    }))
-                            {
-                                While (One)
-                                {
-                                    Store (ToInteger (Arg2), T_0)
-                                    If (LEqual (T_0, Zero))
-                                    {
-                                        If (LEqual (Arg1, One))
-                                        {
-                                            Return (Buffer (One)
-                                            {
-                                                 0x07
-                                            })
-                                        }
-                                        Else
-                                        {
-                                            Return (Buffer (One)
-                                            {
-                                                 0x00
-                                            })
-                                        }
-                                    }
-                                    Else
-                                    {
-                                        If (LEqual (T_0, One))
-                                        {
-                                            If (LEqual (SDGV, 0xFF))
-                                            {
-                                                Return (Zero)
-                                            }
-                                            Else
-                                            {
-                                                Return (One)
-                                            }
-                                        }
-                                        Else
-                                        {
-                                            If (LEqual (T_0, 0x02))
-                                            {
-                                                Return (SDGV)
-                                            }
-                                        }
-                                    }
-
-                                    Break
-                                }
-                            }
-
-                            Return (Zero)
-                        }
-                    }
-
-                    Device (PR13)
-                    {
-                        Name (_ADR, 0x03)  // _ADR: Address
-                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
-                        {
-                            Name (UPCP, Package (0x04)
-                            {
-                                0xFF, 
-                                0xFF, 
-                                Zero, 
-                                Zero
-                            })
-                            Return (UPCP)
-                        }
-
-                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
-                        {
-                            Name (PLDP, Package (One)
-                            {
-                                Buffer (0x10)
-                                {
-                                    /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                    /* 0008 */   0xE1, 0x1D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-                                }
-                            })
-                            CreateBitField (DerefOf (Index (PLDP, Zero)), 0x40, VIS)
-                            If (LEqual (And (CDID, 0xF000), 0x9000))
-                            {
-                                And (VIS, Zero, VIS)
-                            }
-
-                            Return (PLDP)
-                        }
-
-                        Alias (SBV2, SDGV)
-                        Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
-                        {
-                            Name (T_0, Zero)
-                            If (LEqual (Arg0, Buffer (0x10)
-                                    {
-                                        /* 0000 */   0x8F, 0x70, 0xFC, 0xA5, 0x75, 0x87, 0xA6, 0x4B,
-                                        /* 0008 */   0xBD, 0x0C, 0xBA, 0x90, 0xA1, 0xEC, 0x72, 0xF8
-                                    }))
-                            {
-                                While (One)
-                                {
-                                    Store (ToInteger (Arg2), T_0)
-                                    If (LEqual (T_0, Zero))
-                                    {
-                                        If (LEqual (Arg1, One))
-                                        {
-                                            Return (Buffer (One)
-                                            {
-                                                 0x07
-                                            })
-                                        }
-                                        Else
-                                        {
-                                            Return (Buffer (One)
-                                            {
-                                                 0x00
-                                            })
-                                        }
-                                    }
-                                    Else
-                                    {
-                                        If (LEqual (T_0, One))
-                                        {
-                                            If (LEqual (SDGV, 0xFF))
-                                            {
-                                                Return (Zero)
-                                            }
-                                            Else
-                                            {
-                                                Return (One)
-                                            }
-                                        }
-                                        Else
-                                        {
-                                            If (LEqual (T_0, 0x02))
-                                            {
-                                                Return (SDGV)
-                                            }
-                                        }
-                                    }
-
-                                    Break
-                                }
-                            }
-
-                            Return (Zero)
-                        }
-                    }
-
-                    Device (PR14)
-                    {
-                        Name (_ADR, 0x04)  // _ADR: Address
-                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
-                        {
-                            Name (UPCP, Package (0x04)
-                            {
-                                0xFF, 
-                                0xFF, 
-                                Zero, 
-                                Zero
-                            })
-                            Return (UPCP)
-                        }
-
-                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
-                        {
-                            Name (PLDP, Package (One)
-                            {
-                                Buffer (0x10)
-                                {
-                                    /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                    /* 0008 */   0xE1, 0x1E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-                                }
-                            })
-                            Return (PLDP)
-                        }
-                    }
-
-                    Device (PR15)
-                    {
-                        Name (_ADR, 0x05)  // _ADR: Address
-                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
-                        {
-                            Name (UPCP, Package (0x04)
-                            {
-                                0xFF, 
-                                0xFF, 
-                                Zero, 
-                                Zero
-                            })
-                            Return (UPCP)
-                        }
-
-                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
-                        {
-                            Name (PLDP, Package (One)
-                            {
-                                Buffer (0x10)
-                                {
-                                    /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                    /* 0008 */   0xB1, 0x1E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-                                }
-                            })
-                            Return (PLDP)
-                        }
-                    }
-
-                    Device (PR16)
-                    {
-                        Name (_ADR, 0x06)  // _ADR: Address
-                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
-                        {
-                            Name (UPCP, Package (0x04)
-                            {
-                                0xFF, 
-                                0xFF, 
-                                Zero, 
-                                Zero
-                            })
-                            Return (UPCP)
-                        }
-
-                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
-                        {
-                            Name (PLDP, Package (One)
-                            {
-                                Buffer (0x10)
-                                {
-                                    /* 0000 */   0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                    /* 0008 */   0xB1, 0x1E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-                                }
-                            })
-                            Return (PLDP)
-                        }
-                    }
-                }
-            }
-
-            Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
-            {
-                Return (GPRW (0x6D, 0x03))
-            }
-
-            Method (_DSM, 4, NotSerialized)
-            {
-                If (LEqual (Arg2, Zero)) { Return (Buffer(One) { 0x03 } ) }
-                Return (Package()
-                {
-                    "AAPL,clock-id", Buffer(One) { 0x01 },
-                    "built-in", Buffer(One) { 0x00 },
-                    "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
-                    "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
-                    "AAPL,current-available", 2100,
-                    "AAPL,current-extra", 2200,
-                    "AAPL,current-extra-in-sleep", 1600,
-                    "AAPL,device-internal", 0x02,
-                    "AAPL,max-port-current-in-sleep", 2100,
-                })
-            }
-            
-        Device (RHUB)
-        {
-            Name (_ADR, Zero)  // _ADR: Address
-            Device (PRT1)
-            {
-                Name (_ADR, One)  // _ADR: Address
-                Name (_UPC, Package (0x04)  // _UPC: USB Port Capabilities
-                {
-                    Zero, 
-                    0xFF, 
-                    Zero, 
-                    Zero
-                })
-                Device (PRT1)
-                {
-                    Name (_ADR, One)  // _ADR: Address
-                    Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
-                    {
-                        OUPC (0x08)
-                        Return (BUPC)
-                    }
-
-                    Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
-                    {
-                        OPLD (0x08)
-                        Return (BPLD)
-                    }
-                }
-
-                Device (PRT2)
-                {
-                    Name (_ADR, 0x02)  // _ADR: Address
-                    Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
-                    {
-                        OUPC (0x09)
-                        Return (BUPC)
-                    }
-
-                    Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
-                    {
-                        OPLD (0x09)
-                        Return (BPLD)
-                    }
-                }
-
-                Device (PRT3)
-                {
-                    Name (_ADR, 0x03)  // _ADR: Address
-                    Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
-                    {
-                        OUPC (0x0A)
-                        Return (BUPC)
-                    }
-
-                    Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
-                    {
-                        OPLD (0x0A)
-                        Return (BPLD)
-                    }
-                }
-
-                Device (PRT4)
-                {
-                    Name (_ADR, 0x04)  // _ADR: Address
-                    Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
-                    {
-                        OUPC (0x0B)
-                        Return (BUPC)
-                    }
-
-                    Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
-                    {
-                        OPLD (0x0B)
-                        Return (BPLD)
-                    }
-                }
-
-                Device (PRT5)
-                {
-                    Name (_ADR, 0x05)  // _ADR: Address
-                    Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
-                    {
-                        OUPC (0x0C)
-                        Return (BUPC)
-                    }
-
-                    Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
-                    {
-                        OPLD (0x0C)
-                        Return (BPLD)
-                    }
-                }
-
-                Device (PRT6)
-                {
-                    Name (_ADR, 0x06)  // _ADR: Address
-                    Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
-                    {
-                        OUPC (0x0D)
-                        Return (BUPC)
-                    }
-
-                    Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
-                    {
-                        OPLD (0x0D)
-                        Return (BPLD)
-                    }
-                }
-            }
-        }
-    }
-    Device (EHC3)
-            {
-                Name (_ADR, 0x001D0000)  // _ADR: Address
-                Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
-                {
-                    Return (GPRW (0x6D, 0x03))
-                }
-                
-                Method (_DSM, 4, NotSerialized)
-                {
-                    If (LEqual (Arg2, Zero)) { Return (Buffer(One) { 0x03 } ) }
-                    Return (Package()
-                    {
-                        "AAPL,clock-id", Buffer(One) { 0x01 },
-                        "built-in", Buffer(One) { 0x00 },
-                        "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
-                        "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
-                        "AAPL,current-available", 2100,
-                        "AAPL,current-extra", 2200,
-                        "AAPL,current-extra-in-sleep", 1600,
-                        "AAPL,device-internal", 0x02,
-                        "AAPL,max-port-current-in-sleep", 2100,
-                    })
-                }
-
-            }
 
         Device (HDEF)
         {
