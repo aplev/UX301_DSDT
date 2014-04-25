@@ -11883,61 +11883,25 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 {
                     Return (GPRW (0x6D, 0x03))
                 }
-
-                Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                Method (_DSM, 4, NotSerialized)
                 {
-                    If (LEqual (Arg2, Zero))
+                    If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
+                    Return (Package()
                     {
-                        Return (Buffer (One)
-                        {
-                             0x03
-                        })
-                    }
-
-                    Return (Package (0x14)
-                    {
-                        "device-id", 
-                        Buffer (0x04)
-                        {
-                             0x26, 0x1E, 0x00, 0x00
-                        }, 
-
-                        "AAPL,clock-id", 
-                        Buffer (One)
-                        {
-                             0x01
-                        }, 
-
-                        "built-in", 
-                        Buffer (One)
-                        {
-                             0x00
-                        }, 
-
-                        "subsystem-id", 
-                        Buffer (0x04)
-                        {
-                             0x70, 0x72, 0x00, 0x00
-                        }, 
-
-                        "subsystem-vendor-id", 
-                        Buffer (0x04)
-                        {
-                             0x86, 0x80, 0x00, 0x00
-                        }, 
-
-                        "AAPL,current-available", 
-                        0x0834, 
-                        "AAPL,current-extra", 
-                        0x0898, 
-                        "AAPL,current-extra-in-sleep", 
-                        0x0640, 
-                        "AAPL,device-internal", 
-                        0x02, 
-                        "AAPL,max-port-current-in-sleep", 
-                        0x0834
+                        "AAPL,clock-id", Buffer() { 0x01 },
+                        "built-in", Buffer() { 0x00 },
+                        "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
+                        "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
+                        "AAPL,current-available", 2100,
+                        "AAPL,current-extra", 2200,
+                        "AAPL,current-extra-in-sleep", 1600,
+                        "AAPL,device-internal", 0x02,
+                        "AAPL,max-port-current-in-sleep", 2100,
                     })
                 }
+                
+
+                
             }
 
             Device (XHC1)
@@ -11947,55 +11911,18 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 {
                     Return (GPRW (0x6D, 0x03))
                 }
-
                 Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                 {
-                    If (LEqual (Arg2, Zero))
+                Store (Package (0x09)
                     {
-                        Return (Buffer (One)
-                        {
-                             0x03
-                        })
-                    }
-
-                    Return (Package (0x12)
-                    {
-                        "device-id", 
-                        Buffer (0x04)
-                        {
-                             0x31, 0x1E, 0x00, 0x00
-                        }, 
-
-                        "built-in", 
-                        Buffer (One)
-                        {
-                             0x00
-                        }, 
-
-                        "subsystem-id", 
-                        Buffer (0x04)
-                        {
-                             0x70, 0x72, 0x00, 0x00
-                        }, 
-
-                        "subsystem-vendor-id", 
-                        Buffer (0x04)
-                        {
-                             0x86, 0x80, 0x00, 0x00
-                        }, 
-
-                        "AAPL,current-available", 
-                        0x0834, 
-                        "AAPL,current-extra", 
-                        0x0898, 
-                        "AAPL,current-extra-in-sleep", 
-                        0x0640, 
-                        "AAPL,device-internal", 
-                        0x02, 
-                        "AAPL,max-port-current-in-sleep", 
-                        0x0834
-                    })
-                }
+                        "AAPL,current-available", 0x0834, 
+                        "AAPL,current-extra", 0x0898, 
+                        "AAPL,current-extra-in-sleep", 0x0640, 
+                        "AAPL,max-port-current-in-sleep", 0x0834, 
+                        Buffer (0x01) { 0x00 } }, Local0)
+                DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                Return (Local0)
+                }  
             }
 
             Device (MCHC)
@@ -12787,6 +12714,19 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         Method (LTEP, 0, NotSerialized)
         {
         }
+        Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+            {
+                Store (Package (0x0B)
+                    {
+                        "AAPL,current-available", 0x0834, 
+                        "AAPL,current-extra", 0x0898, 
+                        "AAPL,current-extra-in-sleep", 0x0640, 
+                        "AAPL,max-port-current-in-sleep", 0x0834, 
+                        "AAPL,device-internal", 0x00, 
+                        Buffer (0x01) { 0x00 } }, Local0)
+                DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                Return (Local0)
+            }
     }
 
         Device (EHC2)
@@ -13162,60 +13102,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Return (GPRW (0x6D, 0x03))
             }
 
-            Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
-            {
-                If (LEqual (Arg2, Zero))
-                {
-                    Return (Buffer (One)
-                    {
-                         0x03
-                    })
-                }
-
-                Return (Package (0x14)
-                {
-                    "device-id", 
-                    Buffer (0x04)
-                    {
-                         0x2D, 0x1E, 0x00, 0x00
-                    }, 
-
-                    "AAPL,clock-id", 
-                    Buffer (One)
-                    {
-                         0x01
-                    }, 
-
-                    "built-in", 
-                    Buffer (One)
-                    {
-                         0x00
-                    }, 
-
-                    "subsystem-id", 
-                    Buffer (0x04)
-                    {
-                         0x70, 0x72, 0x00, 0x00
-                    }, 
-
-                    "subsystem-vendor-id", 
-                    Buffer (0x04)
-                    {
-                         0x86, 0x80, 0x00, 0x00
-                    }, 
-
-                    "AAPL,current-available", 
-                    0x0834, 
-                    "AAPL,current-extra", 
-                    0x0898, 
-                    "AAPL,current-extra-in-sleep", 
-                    0x0640, 
-                    "AAPL,device-internal", 
-                    0x02, 
-                    "AAPL,max-port-current-in-sleep", 
-                    0x0834
-                })
-            }
+            
 
         Device (RHUB)
         {
@@ -13327,12 +13214,26 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 }
             }
         }
+        Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+            {
+                Store (Package (0x0B)
+                    {
+                        "AAPL,current-available", 0x0834, 
+                        "AAPL,current-extra", 0x0898, 
+                        "AAPL,current-extra-in-sleep", 0x0640, 
+                        "AAPL,max-port-current-in-sleep", 0x0834, 
+                        "AAPL,device-internal", 0x00, 
+                        Buffer (0x01) { 0x00 } }, Local0)
+                DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                Return (Local0)
+            }
+        
     }
 
         Device (XHC)
         {
             Name (_ADR, 0x00140000)  // _ADR: Address
-            Method (_DEP, 0, NotSerialized)  // _DEP: Dependencies
+            Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
             {
                 If (LEqual (S0ID, One))
                 {
@@ -15413,7 +15314,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Return (RBUF)
                 }
 
-                Method (_HRV, 0, NotSerialized)  // _HRV: Hardware Revision
+                Method (HRV, 0, NotSerialized)  // _HRV: Hardware Revision
                 {
                     Return (CRID)
                 }
@@ -15461,7 +15362,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Return (RBUF)
                 }
 
-                Method (_HRV, 0, NotSerialized)  // _HRV: Hardware Revision
+                Method (HRV, 0, NotSerialized)  // _HRV: Hardware Revision
                 {
                     Return (CRID)
                 }
@@ -15515,7 +15416,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Name (_CID, "INT33C2")  // _CID: Compatible ID
                 Name (_UID, One)  // _UID: Unique ID
                 Name (_ADR, 0x00150001)  // _ADR: Address
-                Method (_DEP, 0, NotSerialized)  // _DEP: Dependencies
+                Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
                 {
                     ADBG ("I2C0 DEP Call")
                     If (LEqual (S0ID, One))
@@ -15633,7 +15534,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     }
                 }
 
-                Method (_HRV, 0, NotSerialized)  // _HRV: Hardware Revision
+                Method (HRV, 0, NotSerialized)  // _HRV: Hardware Revision
                 {
                     Return (CRID)
                 }
@@ -16140,7 +16041,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Name (_CID, "INT33C3")  // _CID: Compatible ID
                 Name (_UID, 0x02)  // _UID: Unique ID
                 Name (_ADR, 0x00150002)  // _ADR: Address
-                Method (_DEP, 0, NotSerialized)  // _DEP: Dependencies
+                Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
                 {
                     ADBG ("I2C1 DEP Call")
                     If (LEqual (S0ID, One))
@@ -16258,7 +16159,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     }
                 }
 
-                Method (_HRV, 0, NotSerialized)  // _HRV: Hardware Revision
+                Method (HRV, 0, NotSerialized)  // _HRV: Hardware Revision
                 {
                     Return (CRID)
                 }
@@ -17276,7 +17177,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Return (RBUF)
                 }
 
-                Method (_HRV, 0, NotSerialized)  // _HRV: Hardware Revision
+                Method (HRV, 0, NotSerialized)  // _HRV: Hardware Revision
                 {
                     Return (CRID)
                 }
@@ -17391,7 +17292,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     }
                 }
 
-                Method (_HRV, 0, NotSerialized)  // _HRV: Hardware Revision
+                Method (HRV, 0, NotSerialized)  // _HRV: Hardware Revision
                 {
                     Return (CRID)
                 }
@@ -17457,7 +17358,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Name (_CID, "INT33C4")  // _CID: Compatible ID
                 Name (_UID, One)  // _UID: Unique ID
                 Name (_ADR, 0x00150005)  // _ADR: Address
-                Method (_DEP, 0, NotSerialized)  // _DEP: Dependencies
+                Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
                 {
                     ADBG ("UA00 DEP Call")
                     If (LEqual (S0ID, One))
@@ -17511,7 +17412,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Return (RBUF)
                 }
 
-                Method (_HRV, 0, NotSerialized)  // _HRV: Hardware Revision
+                Method (HRV, 0, NotSerialized)  // _HRV: Hardware Revision
                 {
                     Return (CRID)
                 }
@@ -17607,7 +17508,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Name (_CID, "INT33C5")  // _CID: Compatible ID
                 Name (_UID, 0x02)  // _UID: Unique ID
                 Name (_ADR, 0x00150006)  // _ADR: Address
-                Method (_DEP, 0, NotSerialized)  // _DEP: Dependencies
+                Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
                 {
                     ADBG ("UA01 DEP Call")
                     If (LEqual (S0ID, One))
@@ -17673,7 +17574,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     }
                 }
 
-                Method (_HRV, 0, NotSerialized)  // _HRV: Hardware Revision
+                Method (HRV, 0, NotSerialized)  // _HRV: Hardware Revision
                 {
                     Return (CRID)
                 }
@@ -17837,7 +17738,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Name (_CID, "PNP0D40")  // _CID: Compatible ID
                 Name (_UID, One)  // _UID: Unique ID
                 Name (_ADR, 0x00170000)  // _ADR: Address
-                Method (_DEP, 0, NotSerialized)  // _DEP: Dependencies
+                Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
                 {
                     ADBG ("SDHC DEP Call")
                     If (LEqual (S0ID, One))
@@ -18003,7 +17904,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Name (_CID, "INT33C8")  // _CID: Compatible ID
             Name (_DDN, "Intel(R) Smart Sound Technology Host Controller - INT33C8")  // _DDN: DOS Device Name
             Name (_UID, One)  // _UID: Unique ID
-            Method (_DEP, 0, NotSerialized)  // _DEP: Dependencies
+            Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
             {
                 ADBG ("ADSP DEP Call")
                 If (LEqual (S0ID, One))
@@ -18144,7 +18045,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Name (_ADR, 0x001F0002)  // _ADR: Address
             Name (FDEV, Zero)
             Name (FDRP, Zero)
-            Method (_DEP, 0, NotSerialized)  // _DEP: Dependencies
+            Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
             {
                 ADBG ("SAT0 DEP Call")
                 If (LGreaterEqual (OSYS, 0x07DD))
@@ -20082,7 +19983,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 REG0,   32
             }
 
-            Method (_DEP, 0, NotSerialized)  // _DEP: Dependencies
+            Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
             {
                 ADBG ("GFX0 DEP Call")
                 If (LEqual (S0ID, One))
@@ -31441,7 +31342,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
     {
         Processor (CPU0, 0x01, 0x00001810, 0x06)
         {
-            Method (_DEP, 0, NotSerialized)  // _DEP: Dependencies
+            Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
             {
                 ADBG ("CPU0 DEP Call")
                 If (LEqual (S0ID, One))
@@ -31462,7 +31363,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
         Processor (CPU1, 0x02, 0x00001810, 0x06)
         {
-            Method (_DEP, 0, NotSerialized)  // _DEP: Dependencies
+            Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
             {
                 ADBG ("CPU1 DEP Call")
                 If (LEqual (S0ID, One))
@@ -31483,7 +31384,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
         Processor (CPU2, 0x03, 0x00001810, 0x06)
         {
-            Method (_DEP, 0, NotSerialized)  // _DEP: Dependencies
+            Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
             {
                 ADBG ("CPU2 DEP Call")
                 If (LEqual (S0ID, One))
@@ -31504,7 +31405,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
         Processor (CPU3, 0x04, 0x00001810, 0x06)
         {
-            Method (_DEP, 0, NotSerialized)  // _DEP: Dependencies
+            Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
             {
                 ADBG ("CPU3 DEP Call")
                 If (LEqual (S0ID, One))
@@ -31525,7 +31426,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
         Processor (CPU4, 0x05, 0x00001810, 0x06)
         {
-            Method (_DEP, 0, NotSerialized)  // _DEP: Dependencies
+            Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
             {
                 ADBG ("CPU4 DEP Call")
                 If (LEqual (S0ID, One))
@@ -31546,7 +31447,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
         Processor (CPU5, 0x06, 0x00001810, 0x06)
         {
-            Method (_DEP, 0, NotSerialized)  // _DEP: Dependencies
+            Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
             {
                 ADBG ("CPU5 DEP Call")
                 If (LEqual (S0ID, One))
@@ -31567,7 +31468,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
         Processor (CPU6, 0x07, 0x00001810, 0x06)
         {
-            Method (_DEP, 0, NotSerialized)  // _DEP: Dependencies
+            Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
             {
                 ADBG ("CPU6 DEP Call")
                 If (LEqual (S0ID, One))
@@ -31588,7 +31489,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
         Processor (CPU7, 0x08, 0x00001810, 0x06)
         {
-            Method (_DEP, 0, NotSerialized)  // _DEP: Dependencies
+            Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
             {
                 ADBG ("CPU7 DEP Call")
                 If (LEqual (S0ID, One))
