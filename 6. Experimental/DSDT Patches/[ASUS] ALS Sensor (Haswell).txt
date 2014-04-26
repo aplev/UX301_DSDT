@@ -69,6 +69,6 @@ into method label ALSS remove_entry;
 into device label ATKD insert begin
 Method (ALSS, 0, NotSerialized)\n
             {\n
-                Return (^^PCI0.LPCB.EC.RALS ())\n
+                Return (^^PCI0.LPCB.EC0.RALS ())\n
             }
 end;
