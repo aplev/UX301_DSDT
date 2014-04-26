@@ -82,7 +82,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
     Name (PMBS, 0x1800)
     Name (GPBS, 0x1C00)
     Name (SMIP, 0xB2)
-    Name (APCB, 0xFEC000000)
+    Name (APCB, 0xFEC00000)
     Name (APCL, 0x1000)
     Name (SMCR, 0x1830)
     Name (HPTB, 0xFED00000)
@@ -5177,7 +5177,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     })
                 }
 
-                Device (ARPT)
+                Device (PXSX)
                 {
                     Name (_ADR, Zero)  // _ADR: Address
                     Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
@@ -5246,7 +5246,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                             }
                         }
 
-                        Notify (ARPT, 0x02)
+                        Notify (PXSX, 0x02)
                     }
                 }
 
@@ -5323,6 +5323,23 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 {
                     Return (GPRW (0x6D, 0x03))
                 }
+                Method (_DSM, 4, NotSerialized)
+                {
+                    If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
+                    Return (Package()
+                    {
+                        "device-id", Buffer() { 0x26, 0x1e, 0x00, 0x00 },
+                        "AAPL,clock-id", Buffer() { 0x01 },
+                        "built-in", Buffer() { 0x00 },
+                        "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
+                        "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
+                        "AAPL,current-available", 2100,
+                        "AAPL,current-extra", 2200,
+                        "AAPL,current-extra-in-sleep", 1600,
+                        "AAPL,device-internal", 0x02,
+                        "AAPL,max-port-current-in-sleep", 2100,
+                    })
+                }
             }
 
             Device (XHC1)
@@ -5331,6 +5348,22 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
                 {
                     Return (GPRW (0x6D, 0x03))
+                }
+                Method (_DSM, 4, NotSerialized)
+                {
+                    If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
+                    Return (Package()
+                    {
+                        "device-id", Buffer() { 0x31, 0x1e, 0x00, 0x00 },
+                        "built-in", Buffer() { 0x00 },
+                        "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
+                        "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
+                        "AAPL,current-available", 2100,
+                        "AAPL,current-extra", 2200,
+                        "AAPL,current-extra-in-sleep", 1600,
+                        "AAPL,device-internal", 0x02,
+                        "AAPL,max-port-current-in-sleep", 2100,
+                    })
                 }
             }
             Device (MCHC)
@@ -6253,24 +6286,6 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             {
                 Return (GPRW (0x6D, 0x03))
             }
-            Method (_DSM, 4, NotSerialized)
-            {
-                Store (Package (0x15) {
-                    "AAPL,slot-name", "Built In",
-                    "name", "Intel EHCI Controller",
-                    "model", Buffer(0x3E) {"Intel 8 Series Chipset Family USB Enhanced Host Controller #1"},
-                    "device_type", Buffer (0x0E) {"USB Controller"},
-                    "AAPL,current-available", 0x0834,
-                    "AAPL,current-extra", 0x0A8C,
-                    "AAPL,current-in-sleep", 0x03E8,
-                    "AAPL,current-extra-in-sleep", 0x0834,
-                    "AAPL,max-port-current-in-sleep", 0x0A8C,
-                    "AAPL,device-internal", 0x02,
-                    Buffer (One) {0x00}
-                }, Local0)
-                DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
-                Return (Local0)
-            }
         }
 
         Device (EHC2)
@@ -6647,21 +6662,20 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             }
             Method (_DSM, 4, NotSerialized)
             {
-                Store (Package (0x15) {
-                    "AAPL,slot-name", "Built In",
-                    "name", "Intel EHCI Controller",
-                    "model", Buffer (0x3E) {"Intel 8 Series Chipset Family USB Enhanced Host Controller #2"},
-                    "device_type", Buffer (0x0E) {"USB Controller"},
-                    "AAPL,current-available", 0x0834,
-                    "AAPL,current-extra", 0x0A8C,
-                    "AAPL,current-in-sleep", 0x03E8,
-                    "AAPL,current-extra-in-sleep", 0x0834,
-                    "AAPL,max-port-current-in-sleep", 0x0A8C,
+                If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
+                Return (Package()
+                {
+                    "device-id", Buffer() { 0x2d, 0x1e, 0x00, 0x00 },
+                    "AAPL,clock-id", Buffer() { 0x01 },
+                    "built-in", Buffer() { 0x00 },
+                    "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
+                    "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
+                    "AAPL,current-available", 2100,
+                    "AAPL,current-extra", 2200,
+                    "AAPL,current-extra-in-sleep", 1600,
                     "AAPL,device-internal", 0x02,
-                    Buffer (One) {0x00}
-                }, Local0)
-                DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
-                Return (Local0)
+                    "AAPL,max-port-current-in-sleep", 2100,
+                })
             }
         }
 
@@ -8421,24 +8435,6 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             {
                 Return (GPRW (0x6D, 0x03))
             }
-            Method (_DSM, 4, NotSerialized)
-            {
-                Store (Package (0x15) {
-                    "AAPL,slot-name", "Built In",
-                    "name", "Intel XHCI Controller",
-                    "model", Buffer (0x37) {"Intel 8 Series Chipset Family USB xHCI Host Controller"},
-                    "device_type", Buffer (0x0E) {"USB Controller"},
-                    "AAPL,current-available", 0x0834,
-                    "AAPL,current-extra", 0x0A8C,
-                    "AAPL,current-in-sleep", 0x03E8,
-                    "AAPL,current-extra-in-sleep", 0x0834,
-                    "AAPL,max-port-current-in-sleep", 0x0A8C,
-                    "AAPL,device-internal", 0x02,
-                    Buffer (One) {0x00}
-                }, Local0)
-                DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
-                Return (Local0)
-            }
         }
 
         Device (HDEF)
@@ -8465,19 +8461,15 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             }
             Method (_DSM, 4, NotSerialized)
             {
-                Store (Package (0x0E) {
-                    "AAPL,slot-name", "Built In",
-                    "name", "Realtek Audio Controller",
-                    "model", Buffer () {"Realtek ALC282 Audio Controller"},
-                    "device_type", Buffer (0x10) {"Audio Controller"},
-                    "layout-id", Buffer (0x04) {0x01,0x00,0x00,0x00},
-                    "PinConfigurations", Buffer (Zero) {},
-                    "hda-gfx", Buffer (0x0A) {"onboard-1"}
-                }, Local0)
-                DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
-                Return (Local0)
+                If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
+                Return (Package()
+                {
+                    "layout-id", Buffer() { 0x01, 0x00, 0x00, 0x00 },
+                    "hda-gfx", Buffer() { "onboard-1" },
+                    "PinConfigurations", Buffer() { },
+                    //"MaximumBootBeepVolume", 77,
+                })
             }
-            
         }
 
         Scope (\_SB.PCI0)
@@ -11509,20 +11501,20 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             }
         }
 
-        Device (SATA)
+        Device (SAT0)
         {
             Name (_ADR, 0x001F0002)  // _ADR: Address
             Name (FDEV, Zero)
             Name (FDRP, Zero)
             Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
             {
-                ADBG ("SATA DEP Call")
+                ADBG ("SAT0 DEP Call")
                 If (LGreaterEqual (OSYS, 0x07DD))
                 {
                     If (LAnd (LEqual (S0ID, One), LNotEqual (And (PEPC, 0x03
                         ), Zero)))
                     {
-                        ADBG ("SATA DEP")
+                        ADBG ("SAT0 DEP")
                         Return (Package (One)
                         {
                             PEPD
@@ -11530,7 +11522,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     }
                 }
 
-                ADBG ("SATA DEP NULL")
+                ADBG ("SAT0 DEP NULL")
                 Return (Package (Zero) {})
             }
 
@@ -11676,7 +11668,10 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             }
         }
 
-        
+        Device (SAT1)
+        {
+            Name (_ADR, 0x001F0005)  // _ADR: Address
+        }
 
         Device (SBUS)
         {
@@ -13258,7 +13253,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Package (One)
                 {
-                    "\\_SB.PCI0.SATA.PRT1"
+                    "\\_SB.PCI0.SAT0.PRT1"
                 }
             })
             Name (DEVX, Package (0x08)
@@ -13271,7 +13266,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Package (0x02)
                 {
-                    "\\_SB.PCI0.SATA.PRT1", 
+                    "\\_SB.PCI0.SAT0.PRT1", 
                     0xFFFFFFFF
                 }, 
 
@@ -13390,7 +13385,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Package (0x03)
                 {
-                    "\\_SB.PCI0.SATA", 
+                    "\\_SB.PCI0.SAT0", 
                     One, 
                     Package (0x02)
                     {
@@ -13405,7 +13400,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Package (0x03)
                 {
-                    "\\_SB.PCI0.SATA.PRT0", 
+                    "\\_SB.PCI0.SAT0.PRT0", 
                     One, 
                     Package (0x02)
                     {
@@ -13421,7 +13416,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Package (0x03)
                 {
-                    "\\_SB.PCI0.SATA.PRT1", 
+                    "\\_SB.PCI0.SAT0.PRT1", 
                     One, 
                     Package (0x02)
                     {
@@ -13437,7 +13432,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Package (0x03)
                 {
-                    "\\_SB.PCI0.SATA.PRT2", 
+                    "\\_SB.PCI0.SAT0.PRT2", 
                     One, 
                     Package (0x02)
                     {
@@ -13453,7 +13448,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Package (0x03)
                 {
-                    "\\_SB.PCI0.SATA.PRT3", 
+                    "\\_SB.PCI0.SAT0.PRT3", 
                     One, 
                     Package (0x02)
                     {
@@ -13591,7 +13586,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             {
                 Package (0x02)
                 {
-                    "\\_SB.PCI0.SATA", 
+                    "\\_SB.PCI0.SAT0", 
                     Package (One)
                     {
                         Package (0x03)
@@ -13619,7 +13614,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Package (0x02)
                 {
-                    "\\_SB.PCI0.SATA.PRT0", 
+                    "\\_SB.PCI0.SAT0.PRT0", 
                     Package (One)
                     {
                         Package (0x03)
@@ -13647,7 +13642,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Package (0x02)
                 {
-                    "\\_SB.PCI0.SATA.PRT1", 
+                    "\\_SB.PCI0.SAT0.PRT1", 
                     Package (One)
                     {
                         Package (0x03)
@@ -13675,7 +13670,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Package (0x02)
                 {
-                    "\\_SB.PCI0.SATA.PRT2", 
+                    "\\_SB.PCI0.SAT0.PRT2", 
                     Package (One)
                     {
                         Package (0x03)
@@ -13703,7 +13698,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Package (0x02)
                 {
-                    "\\_SB.PCI0.SATA.PRT3", 
+                    "\\_SB.PCI0.SAT0.PRT3", 
                     Package (One)
                     {
                         Package (0x03)
@@ -13795,7 +13790,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                                             One, 
                                             Package (One)
                                             {
-                                                "\\_SB.PCI0.SATA.PRT1"
+                                                "\\_SB.PCI0.SAT0.PRT1"
                                             }
                                         })
                                     }
@@ -14916,8 +14911,8 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Offset (0x8A), 
                 HKEN,   1, 
                 Offset (0x93), 
-                AH00,8,AH01,8, 
-                AH10,8,AH11,8, 
+                TAH0,   16, 
+                TAH1,   16, 
                 TSTP,   8, 
                 Offset (0x9C), 
                 CDT4,   8, 
@@ -14932,39 +14927,39 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 TH0R,   8, 
                 TH0L,   8, 
                 Offset (0xB0), 
-                B0P0,8,B0P1,8, 
+                B0PN,   16, 
                 Offset (0xB4), 
                 Offset (0xB6), 
                 Offset (0xB8), 
                 Offset (0xBA), 
                 Offset (0xBC), 
                 Offset (0xBE), 
-                B0T0,8,B0T1,8, 
-                B010,8,B011,8, 
-                B020,8,B021,8, 
-                B030,8,B031,8, 
-                B040,8,B041,8, 
+                B0TM,   16, 
+                B0C1,   16, 
+                B0C2,   16, 
+                B0C3,   16, 
+                B0C4,   16, 
                 Offset (0xD0), 
-                B1N0,8,B1N1,8, 
+                B1PN,   16, 
                 Offset (0xD4), 
                 Offset (0xD6), 
                 Offset (0xD8), 
                 Offset (0xDA), 
                 Offset (0xDC), 
                 Offset (0xDE), 
-                B1M0,8,B1M1,8, 
-                B110,8,B111,8, 
-                B120,8,B121,8, 
-                B130,8,B131,8, 
-                B140,8,B141,8, 
+                B1TM,   16, 
+                B1C1,   16, 
+                B1C2,   16, 
+                B1C3,   16, 
+                B1C4,   16, 
                 Offset (0xF0), 
                 Offset (0xF2), 
                 Offset (0xF4), 
-                B0S0,8,B0S1,8, 
+                B0SN,   16, 
                 Offset (0xF8), 
                 Offset (0xFA), 
                 Offset (0xFC), 
-                B1S0,8,B1S1,8,
+                B1SN,   16
             }
 
             Name (SMBF, Zero)
@@ -14978,7 +14973,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 CDFG,   1, 
                 ADDR,   8, 
                 CMDB,   8, 
-                BDAX,	256, 
+                BDAT,   256, 
                 BCNT,   8, 
                     ,   1, 
                 ALAD,   7, 
@@ -14996,7 +14991,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 CDF2,   1, 
                 ADD2,   8, 
                 CMD2,   8, 
-                BDAY,	256, 
+                BDA2,   256, 
                 BCN2,   8, 
                     ,   1, 
                 ALA2,   7, 
@@ -15021,7 +15016,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Field (SMBX, ByteAcc, NoLock, Preserve)
             {
                 Offset (0x04), 
-                T2B0,8,T2B1,8,
+                DT2B,   16
             }
 
             OperationRegion (NSBS, EmbeddedControl, 0x40, 0x04)
@@ -15087,46 +15082,6 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 If (LEqual (Arg0, 0x03))
                 {
                     Store (Arg1, ECFL)
-                }
-            }
-            Method (RE1B, 1, NotSerialized)
-            {
-                OperationRegion(ERAM, EmbeddedControl, Arg0, 1)
-                Field(ERAM, ByteAcc, NoLock, Preserve) { BYTE, 8 }
-                Return(BYTE)
-            }
-            Method (RECB, 2, Serialized)
-            {
-                ShiftRight(Arg1, 3, Arg1)
-                Name(TEMP, Buffer(Arg1) { })
-                Add(Arg0, Arg1, Arg1)
-                Store(0, Local0)
-                While (LLess(Arg0, Arg1))
-                {
-                    Store(RE1B(Arg0), Index(TEMP, Local0))
-                    Increment(Arg0)
-                    Increment(Local0)
-                }
-                Return(TEMP)
-            }
-            Method (WE1B, 2, NotSerialized)
-            {
-                OperationRegion(ERAM, EmbeddedControl, Arg0, 1)
-                Field(ERAM, ByteAcc, NoLock, Preserve) { BYTE, 8 }
-                Store(Arg1, BYTE)
-            }
-            Method (WECB, 3, Serialized)
-            {
-                ShiftRight(Arg1, 3, Arg1)
-                Name(TEMP, Buffer(Arg1) { })
-                Store(Arg2, TEMP)
-                Add(Arg0, Arg1, Arg1)
-                Store(0, Local0)
-                While (LLess(Arg0, Arg1))
-                {
-                    WE1B(Arg0, DerefOf(Index(TEMP, Local0)))
-                    Increment(Arg0)
-                    Increment(Local0)
                 }
             }
         }
@@ -17893,7 +17848,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         0x0F))
                 }
 
-                Store (B1B2(^^LPCB.EC0.B030,^^LPCB.EC0.B031), Index (BIXT, 0x08))
+                Store (^^LPCB.EC0.B0C3, Index (BIXT, 0x08))
                 Store (0x0001869F, Index (BIXT, 0x09))
                 Return (BIXT)
             }
@@ -18132,11 +18087,11 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             {
                 If (BSLF)
                 {
-                    Store (B1B2(B1S0,B1S1), Local0)
+                    Store (B1SN, Local0)
                 }
                 Else
                 {
-                    Store (B1B2(B0S0,B0S1), Local0)
+                    Store (B0SN, Local0)
                 }
             }
             Else
@@ -21459,7 +21414,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     }
                 }
 
-                WECB(0x1c,256,Zero)
+                Store (Zero, BDAT)
                 Store (Arg0, PRTC)
                 Store (SWTC (Arg0), Index (Local0, Zero))
                 If (LEqual (DerefOf (Index (Local0, Zero)), Zero))
@@ -21467,13 +21422,13 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     If (LEqual (Arg0, RDBL))
                     {
                         Store (BCNT, Index (Local0, One))
-                        Store (RECB(0x1c,256), Index (Local0, 0x02))
+                        Store (BDAT, Index (Local0, 0x02))
                     }
 
                     If (LEqual (Arg0, RDWD))
                     {
                         Store (0x02, Index (Local0, One))
-                        Store (B1B2(T2B0,T2B1), Index (Local0, 0x02))
+                        Store (DT2B, Index (Local0, 0x02))
                     }
 
                     If (LEqual (Arg0, RDBT))
@@ -21542,7 +21497,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
             If (LLessEqual (Local2, 0x03E8))
             {
-                WECB(0x1c,256,Zero)
+                Store (Zero, BDAT)
                 ShiftLeft (Arg1, One, Local3)
                 Store (Local3, ADDR)
                 If (LNotEqual (Arg0, WRQK))
@@ -21556,12 +21511,12 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 If (LEqual (Arg0, WRBL))
                 {
                     Store (Arg3, BCNT)
-                    WECB(0x1c,256,Arg4)
+                    Store (Arg4, BDAT)
                 }
 
                 If (LEqual (Arg0, WRWD))
                 {
-                    Store(ShiftRight(Arg4,8), T2B1) Store(Arg4, T2B0)
+                    Store (Arg4, DT2B)
                 }
 
                 If (LEqual (Arg0, WRBT))
@@ -21724,7 +21679,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         If (LOr (LEqual (Arg1, 0x0A), LEqual (Arg1, 0x0B)))
                         {
                             Store (DerefOf (Index (Arg6, Zero)), BCNT)
-                            WECB(0x1c,256,DerefOf (Index (Arg6, One)))
+                            Store (DerefOf (Index (Arg6, One)), BDAT)
                         }
                         Else
                         {
@@ -21741,7 +21696,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         If (LOr (LEqual (Arg1, 0x0A), LEqual (Arg1, 0x0B)))
                         {
                             Store (DerefOf (Index (Arg6, Zero)), BCN2)
-                            WECB(0x44,256,DerefOf (Index (Arg6, One)))
+                            Store (DerefOf (Index (Arg6, One)), BDA2)
                         }
                         Else
                         {
@@ -21778,7 +21733,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                             Store (DAT0, Index (Local1, One))
                             Store (DAT1, Index (Local1, 0x02))
                             Store (BCNT, Index (Local1, 0x03))
-                            Store (RECB(0x1c,256), Index (Local1, 0x04))
+                            Store (BDAT, Index (Local1, 0x04))
                         }
                         Else
                         {
@@ -21786,7 +21741,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                             Store (DA20, Index (Local1, One))
                             Store (DA21, Index (Local1, 0x02))
                             Store (BCN2, Index (Local1, 0x03))
-                            Store (RECB(0x44,256), Index (Local1, 0x04))
+                            Store (BDA2, Index (Local1, 0x04))
                         }
 
                         And (Local0, 0x1F, Local0)
@@ -22408,14 +22363,14 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Store (Arg0, T_0)
                     If (LEqual (T_0, Zero))
                     {
-                        Store (B1B2(AH00,AH01), Local0)
+                        Store (TAH0, Local0)
                         Break
                     }
                     Else
                     {
                         If (LEqual (T_0, One))
                         {
-                            Store (B1B2(AH10,AH11), Local0)
+                            Store (TAH1, Local0)
                             Break
                         }
                         Else
@@ -28032,7 +27987,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         }
     }
 
-    Scope (\_SB.PCI0.SATA)
+    Scope (\_SB.PCI0.SAT0)
     {
         Name (REGF, One)
         Method (_REG, 2, NotSerialized)  // _REG: Region Availability
@@ -32268,28 +32223,6 @@ Field (IGD2, AnyAcc, NoLock, Preserve)
             1240, 1290, 1340, 1400,
             })
         }
-    }
-    Method (B1B2, 2, NotSerialized) { Return(Or(Arg0, ShiftLeft(Arg1, 8))) }
-    Method (DTGP, 5, NotSerialized)
-    {
-        If (LEqual (Arg0, Buffer (0x10)
-        {
-            /* 0000 */	0xC6, 0xB7, 0xB5, 0xA0, 0x18, 0x13, 0x1C, 0x44,
-            /* 0008 */	0xB0, 0xC9, 0xFE, 0x69, 0x5E, 0xAF, 0x94, 0x9B
-        }))
-        {
-            If (LEqual (Arg1, One)) {
-                If (LEqual (Arg2, Zero)) {
-                    Store (Buffer (One) { 0x03 }, Arg4)
-                    Return (One)
-                }
-                If (LEqual (Arg2, One)) {
-                    Return (One)
-                }
-            }
-        }
-        Store (Buffer (One) { 0x00 }, Arg4)
-        Return (Zero)
     }
 }
 
