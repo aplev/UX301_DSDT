@@ -5343,33 +5343,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Device (IMEI)
             {
                 Name (_ADR, 0x00160000)
-                Method (_DSM, 4, NotSerialized)
-                {
-                    If (LEqual (Arg2, Zero)) { Return (Buffer(One) { 0x03 } ) }
-                    Return (Package()
-                    {
-                        "device-id", Buffer() { 0x3A, 0x9C, 0x00, 0x00 },
-                        "name", Buffer() { "pci8086,9c3a" },
-                        "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
-                        "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
-                    })
-                }
             }
             
             Device (MCHC)
             {
                 Name (_ADR, Zero)
-                Method (_DSM, 4, NotSerialized)
-                {
-                    If (LEqual (Arg2, Zero)) { Return (Buffer(One) { 0x03 } ) }
-                    Return (Package()
-                    {
-                        "built-in", Buffer(One) { 0x00 },
-                        "device-id", Buffer() { 0x04, 0x0a, 0x00, 0x00 },
-                        "name", Buffer() { "pci8086,0a04" },
-                        "subsystem-vendor-id", Buffer() { 0x6B, 0x10, 0x00, 0x00 },
-                    })
-                }
             }
         }
     }
@@ -12819,19 +12797,18 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Return (SCBF)
             }
         }
-        Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
-                { Store (Package (0x0E) {
-                "device-id", Buffer(0x04) { 0x03, 0x8c, 0x00, 0x00 },
-                "IOName", Buffer(0x0D) { "pci8086,8c03" },
-                "name", Buffer(0x0D) { "pci8086,8c03" },
-                "compatible", Buffer () { "SSD0" },
-                "subsystem-vendor-id", Buffer(0x04) { 0x86, 0x80, 0x00, 0x00 },
-                "sata-express-power-off", One,
-                "subsystem-id", Buffer(0x04) { 0x70, 0x72, 0x00, 0x00 }
-                }, Local0)
-                DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
-                Return (Local0)
-            }
+        Method (_DSM, 4, NotSerialized)
+        {
+            If (LEqual (Arg2, Zero)) { Return (Buffer(One) { 0x03 } ) }
+            Return (Package()
+            {
+                "device-id", Buffer() { 0x03, 0x8c, 0x00, 0x00 },
+                "compatible", Buffer() { "pci8086,8c03" },
+                "IOName", Buffer() { "pci8086,8c03" },
+                "name", Buffer() { "pci8086,8c03" },
+            })
+        }
+        
         }
 
         Device (SAT1)
@@ -13196,18 +13173,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Name (_CID, "smbus")  // _CID: Compatible ID
                 Name (_ADR, One)  // _ADR: Address
             }
-            
-            Method (_DSM, 4, NotSerialized)
-            {
-            If (LEqual (Arg2, Zero)) { Return (Buffer(One) { 0x03 } ) }
-            Return (Package()
-            {
-                "device-id", Buffer() { 0x22, 0x9c, 0x00, 0x00 },
-                "built-in", Buffer(One) { 0x00 },
-                "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
-                "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
-            })
-        }
         }
     }
 
@@ -15406,7 +15371,7 @@ DTB1, 8
                 Return (Ones)
             }
 
-            Name (_WDG, Buffer (0x28)
+            Name (WDG, Buffer (0x28)
             {
                 /* 0000 */   0xD0, 0x5E, 0x84, 0x97, 0x6D, 0x4E, 0xDE, 0x11,
                 /* 0008 */   0x8A, 0x39, 0x08, 0x00, 0x20, 0x0C, 0x9A, 0x66,
@@ -16422,7 +16387,7 @@ DTB1, 8
                 Return (0xFFFFFFFE)
             }
 
-            Method (_WED, 1, NotSerialized)  // _Wxx: Wake Event
+            Method (WED, 1, NotSerialized)  // _Wxx: Wake Event
             {
                 If (LEqual (Arg0, 0xFF))
                 {
@@ -26246,7 +26211,7 @@ Store (ShiftRight (Local4, 8), DTB1)
             }
         }
 
-        Method (_TDL, 0, NotSerialized)  // _TDL: T-State Depth Limit
+        Method (TDL, 0, NotSerialized)  // _TDL: T-State Depth Limit
         {
             If (LAnd (CondRefOf (\_PR.CPU0._TSS), CondRefOf (\_PR.CFGD)))
             {
@@ -27015,7 +26980,7 @@ Store (ShiftRight (Local4, 8), DTB1)
                 }
             }
 
-            Method (_TDL, 0, NotSerialized)  // _TDL: T-State Depth Limit
+            Method (TDL, 0, NotSerialized)  // _TDL: T-State Depth Limit
             {
                 If (LAnd (CondRefOf (\_PR.CPU0._TSS), CondRefOf (\_PR.CFGD)))
                 {
@@ -27518,7 +27483,7 @@ Store (ShiftRight (Local4, 8), DTB1)
             {
                 Store (Package (0x06)
                     {
-                        "hda-gfx", Buffer (0x0A) { "onboard-2" }, 
+                        "hda-gfx", Buffer (0x0A) { "onboard-1" }, 
                         "layout-id", Buffer (0x04) { 0x1C, 0x00, 0x00, 0x00 }, 
                         "PinConfigurations", Buffer (Zero) {}
                     }, Local0)
@@ -30833,14 +30798,15 @@ Field (IGD2, AnyAcc, NoLock, Preserve)
             }
             Method (_DSM, 4, NotSerialized)
             {
-                Store (Package (0x04)
+                If (LEqual (Arg2, Zero)) { Return (Buffer(One) { 0x03 } ) }
+                Return (Package()
                 {
-                    "AAPL,ig-platform-id", Buffer (0x04) { 0x08, 0x00, 0x2E, 0x0A },
-                    "hda-gfx", Buffer (0x0A) { "onboard-2" }
-                }, Local0)
-                DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
-                Return (Local0)
+                    "AAPL,ig-platform-id", Buffer() { 0x08, 0x00, 0x2E, 0x0A },
+                    "hda-gfx", Buffer() { "onboard-1" },
+                    "AAPL00,DualLink", Buffer() { 0x01, 0x00, 0x00, 0x00 },
+                })
             }
+            
         }
     }
     
