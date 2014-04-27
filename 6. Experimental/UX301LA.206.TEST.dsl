@@ -25093,6 +25093,14 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         }
     }
 
+    Scope (_GPE)
+    {
+    }
+
+    Scope (_SB.PCI0.LPCB.EC0)
+    {
+    }
+
     Scope (_SB.PCI0.XHC.RHUB.HS05)
     {
         Name (CAPD, Package (One)
