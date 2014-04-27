@@ -23292,17 +23292,14 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
     Scope (_SB)
     {
+        Device (PWRB)
+        {
+            Name (_HID, EisaId ("PNP0C0C"))  // _HID: Hardware ID
+        }
         Device (SLPB)
         {
             Name (_HID, EisaId ("PNP0C0E"))  // _HID: Hardware ID
-            Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
-            {
-                Return (Package (0x02)
-                {
-                    0x0B, 
-                    0x04
-                })
-            }
+            Name (_STA, 0x0B)  // _STA: Status
         }
     }
 

@@ -3546,7 +3546,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Store (PNL1, LNSL)
                 Store (OBF1, OBFF)
             }
-        }Device (RP02)
+        }
+        Device (RP02)
             {
                 Name (_ADR, 0x001C0001)  // _ADR: Address
                 OperationRegion (PXCS, PCI_Config, Zero, 0x0380)
@@ -11945,37 +11946,14 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 {
                     If (LEqual (Arg2, Zero))
                     {
-                        Return (Buffer (One)
-                        {
-                             0x03
-                        })
+                        Return (Buffer (One) { 0x03 })
                     }
-
                     Return (Package (0x08)
                     {
-                        "built-in", 
-                        Buffer (One)
-                        {
-                             0x00
-                        }, 
-
-                        "device-id", 
-                        Buffer (0x04)
-                        {
-                             0x04, 0x0A, 0x00, 0x00
-                        }, 
-
-                        "name", 
-                        Buffer (0x0D)
-                        {
-                            "pci8086,0a04"
-                        }, 
-
-                        "subsystem-vendor-id", 
-                        Buffer (0x04)
-                        {
-                             0x6B, 0x10, 0x00, 0x00
-                        }
+                        "built-in", Buffer (One) { 0x00 }, 
+                        "device-id", Buffer (0x04) { 0x04, 0x0A, 0x00, 0x00 }, 
+                        "name", Buffer (0x0D) { "pci8086,0a04" }, 
+                        "subsystem-vendor-id", Buffer (0x04) { 0x6B, 0x10, 0x00, 0x00 }
                     })
                 }
             }
