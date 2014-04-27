@@ -19,10 +19,6 @@
 
 DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 {
-    External (HDOS, MethodObj)    // 0 Arguments
-    External (IDAB, MethodObj)    // 0 Arguments
-    External (HNOT, MethodObj)    // 1 Arguments
-
     External (_PR_.AAC0, FieldUnitObj)
     External (_PR_.ACRT, FieldUnitObj)
     External (_PR_.APSV, FieldUnitObj)
@@ -59,13 +55,6 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
     External (_PR_.TAR0, FieldUnitObj)
     External (_PR_.TAR1, FieldUnitObj)
     External (_PR_.TAR2, FieldUnitObj)
-    
-    External (_SB_.IFFS.FFSS)
-    External (_SB_.PCCD.PENB)
-    External (_SB_.PCI0.PAUD.PUAM, MethodObj)    // 0 Arguments
-    External (_SB_.PCI0.XHC_.DUAM, MethodObj)    // 0 Arguments
-    External (_SB_.TPM_.PTS_, MethodObj)    // 1 Arguments
-    External (MDBG, IntObj)
     External (PDC0, IntObj)
     External (PDC1, IntObj)
     External (PDC2, IntObj)
@@ -74,8 +63,6 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
     External (PDC5, IntObj)
     External (PDC6, IntObj)
     External (PDC7, IntObj)
-    External (PS0X, MethodObj)    // 0 Arguments
-    External (PS3X, MethodObj)    // 0 Arguments
 
     Name (SMBS, 0x0580)
     Name (SMBL, 0x20)
@@ -7032,11 +7019,6 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     Store (One, AX15)
                 }
 
-                If (CondRefOf (\_SB.PCI0.XHC.PS0X))
-                {
-                    PS0X ()
-                }
-
                 If (LEqual (Local3, 0x03))
                 {
                     Store (0x03, D0D3)
@@ -7097,11 +7079,6 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 If (LEqual (PCHS, 0x02))
                 {
                     Store (Zero, AX15)
-                }
-
-                If (CondRefOf (\_SB.PCI0.XHC.PS3X))
-                {
-                    PS3X()
                 }
 
                 If (LEqual (Local3, 0x03))
@@ -8991,11 +8968,6 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         And (TEMP, 0xFFFFFFFC, TEMP)
                         Store (TEMP, Local0)
                     }
-
-                    If (CondRefOf (\_SB.PCI0.I2C0.PS0X))
-                    {
-                        PS0X()
-                    }
                 }
 
                 Method (_PS3, 0, Serialized)  // _PS3: Power State 3
@@ -9012,11 +8984,6 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                         Or (TEMP, 0x03, TEMP)
                         Store (TEMP, Local0)
-                    }
-
-                    If (CondRefOf (\_SB.PCI0.I2C0.PS3X))
-                    {
-                        PS3X()
                     }
                 }
             }
@@ -9176,11 +9143,6 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     ADBG ("I2C1 Ctrlr D0")
                     If (LNotEqual (^^SIRC.CNTR (0x03), Zero))
                     {
-                        If (CondRefOf (\_SB.PCI0.I2C1.PS0X))
-                        {
-                            PS0X()
-                        }
-
                         Add (^^SIRC.CNTR (0x03), 0x84, Local0)
                         OperationRegion (ICB1, SystemMemory, Local0, 0x04)
                         Field (ICB1, DWordAcc, NoLock, Preserve)
@@ -9758,11 +9720,6 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                         And (TEMP, 0xFFFFFFFC, TEMP)
                         Store (TEMP, Local0)
-                    }
-
-                    If (CondRefOf (\_SB.PCI0.SDHC.PS0X))
-                    {
-                        PS0X()
                     }
                 }
 
@@ -11298,10 +11255,6 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Method (_PS0, 0, Serialized)  // _PS0: Power State 0
                 {
                     ADBG ("WiFi1 Enter D0")
-                    If (CondRefOf (^PS0X))
-                    {
-                        PS0X()
-                    }
                 }
 
                 Method (_PS2, 0, Serialized)  // _PS2: Power State 2
@@ -11312,10 +11265,6 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Method (_PS3, 0, Serialized)  // _PS3: Power State 3
                 {
                     ADBG ("WiFi1 Enter D3")
-                    If (CondRefOf (^PS3X))
-                    {
-                        PS3X()
-                    }
                 }
 
                 Name (RBUF, ResourceTemplate ()
@@ -12669,13 +12618,6 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
     Method (ADBG, 1, Serialized)
     {
-        If (CondRefOf (MDBG))
-        {
-            MNIO (Arg0)
-            MNIO ("\n")
-            Return (MDBG)
-        }
-
         Return (Zero)
     }
 
@@ -12711,25 +12653,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 {
                     \_SB.PCI0.LPCB.EC0.SCTF (Zero, 0x03)
                 }
-
-                If (LAnd (And (ICNF, 0x10), CondRefOf (\_SB.IFFS.FFSS)))
-                {
-                    If (And (\_SB.IFFS.FFSS, One))
-                    {
-                        Store (One, \_SB.IAOE.FFSE)
-                    }
-                    Else
-                    {
-                        Store (Zero, \_SB.IAOE.FFSE)
-                    }
-                }
             }
-        }
-
-        If (LOr (LEqual (Arg0, 0x03), LEqual (Arg0, 0x04))) {}
-        If (CondRefOf (\_SB.TPM.PTS))
-        {
-            \_SB.TPM.PTS (Arg0)
         }
     }
 
@@ -12998,24 +12922,6 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     RPL1 ()
                 }
             }
-
-            P_CS ()
-        }
-    }
-
-    Method (P_CS, 0, Serialized)
-    {
-        If (CondRefOf (\_SB.PCI0.PAUD.PUAM))
-        {
-            \_SB.PCI0.PAUD.PUAM ()
-        }
-
-        If (LEqual (OSYS, 0x07DC))
-        {
-            If (CondRefOf (\_SB.PCI0.XHC.DUAM))
-            {
-                \_SB.PCI0.XHC.DUAM ()
-            }
         }
     }
 
@@ -13208,19 +13114,8 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                     If (And (CAP0, 0x20))
                     {
-                        If (CondRefOf (\_SB.PCCD.PENB))
-                        {
-                            If (LEqual (^PCCD.PENB, Zero))
-                            {
-                                And (CAP0, 0x1F, CAP0)
-                                Or (STS0, 0x10, STS0)
-                            }
-                        }
-                        Else
-                        {
                             And (CAP0, 0x1F, CAP0)
                             Or (STS0, 0x10, STS0)
-                        }
                     }
                 }
                 Else
@@ -14184,14 +14079,6 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 If (LGreaterEqual (DTSE, One))
                 {
                     Notify (\_TZ.THRM, 0x80)
-                }
-            }
-
-            If (CondRefOf (\_SB.PCCD.PENB))
-            {
-                If (LEqual (\_SB.PCCD.PENB, One))
-                {
-                    Notify (\_SB.PCCD, 0x80)
                 }
             }
         }
@@ -17098,15 +16985,6 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                     Break
                 }
-
-                If (CondRefOf (\_SB.PCCD.PENB))
-                {
-                    If (LEqual (^^PCCD.PENB, One))
-                    {
-                        Notify (PCCD, 0x82)
-                    }
-                }
-
                 Return (Zero)
             }
 
@@ -28506,14 +28384,6 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Method (_DOS, 1, NotSerialized)  // _DOS: Disable Output Switching
             {
                 Store (And (Arg0, 0x07), DSEN)
-                If (LEqual (And (Arg0, 0x03), Zero))
-                {
-                    If (CondRefOf (HDOS))
-                    {
-                        HDOS ()
-                    }
-                }
-
                 If (DRDY)
                 {
                     And (Arg0, 0x03, DOSF)
@@ -28524,12 +28394,6 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
             Method (_DOD, 0, NotSerialized)  // _DOD: Display Output Devices
             {
-                If (CondRefOf (IDAB))
-                {
-                    IDAB ()
-                }
-                Else
-                {
                     Store (Zero, NDID)
                     If (LNotEqual (DIDL, Zero))
                     {
@@ -28605,8 +28469,6 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     {
                         Store (SDDL (DD15), DIDF)
                     }
-                }
-
                 If (LEqual (NDID, One))
                 {
                     Name (TMP1, Package (One)
@@ -30653,16 +30515,7 @@ Field (IGD2, AnyAcc, NoLock, Preserve)
                         Notify (\_SB.PCI0.IGPU, Arg1)
                     }
                 }
-
-                If (CondRefOf (HNOT))
-                {
-                    HNOT (Arg0)
-                }
-                Else
-                {
-                    Notify (\_SB.PCI0.IGPU, 0x80)
-                }
-
+                Notify (\_SB.PCI0.IGPU, 0x80)
                 Return (Zero)
             }
 
@@ -31985,14 +31838,6 @@ Field (IGD2, AnyAcc, NoLock, Preserve)
                     Store (IBT1, Local0)
                     And (Local0, 0xF1, Local0)
                     Or (Local0, And (Arg0, 0x0E), Local0)
-                    If (CondRefOf (\_SB.IFFS.FFSS))
-                    {
-                        If (LAnd (And (\_SB.IFFS.FFSS, 0x03), And (Arg0, 0x02)))
-                        {
-                            Or (Local0, 0x04, Local0)
-                        }
-                    }
-
                     Store (Local0, IBT1)
                     \_SB.PCI0.LPCB.EC0.SCTF (One, Local0)
                 }
@@ -32001,14 +31846,6 @@ Field (IGD2, AnyAcc, NoLock, Preserve)
                     Store (IBT1, Local0)
                     And (Local0, 0xF1, Local0)
                     Or (Local0, And (Arg0, 0x0E), Local0)
-                    If (CondRefOf (\_SB.IFFS.FFSS))
-                    {
-                        If (LAnd (And (\_SB.IFFS.FFSS, 0x03), And (Arg0, 0x02)))
-                        {
-                            Or (Local0, 0x04, Local0)
-                        }
-                    }
-
                     Store (Local0, IBT1)
                     \_SB.PCI0.LPCB.EC0.SCTF (One, Local0)
                 }
@@ -32051,14 +31888,6 @@ Field (IGD2, AnyAcc, NoLock, Preserve)
                     Store (IBT1, Local0)
                     And (Local0, 0x8F, Local0)
                     Or (Local0, ShiftLeft (And (Arg0, 0x0E), 0x03), Local0)
-                    If (CondRefOf (\_SB.IFFS.FFSS))
-                    {
-                        If (LAnd (And (\_SB.IFFS.FFSS, 0x03), And (Arg0, 0x02)))
-                        {
-                            Or (Local0, 0x20, Local0)
-                        }
-                    }
-
                     Store (Local0, IBT1)
                 }
                 Else
@@ -32066,14 +31895,6 @@ Field (IGD2, AnyAcc, NoLock, Preserve)
                     Store (IBT1, Local0)
                     And (Local0, 0x8F, Local0)
                     Or (Local0, ShiftLeft (And (Arg0, 0x0E), 0x03), Local0)
-                    If (CondRefOf (\_SB.IFFS.FFSS))
-                    {
-                        If (LAnd (And (\_SB.IFFS.FFSS, 0x03), And (Arg0, 0x02)))
-                        {
-                            Or (Local0, 0x20, Local0)
-                        }
-                    }
-
                     Store (Local0, IBT1)
                 }
                 Return (Zero)
