@@ -11872,11 +11872,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         }
     }
 
-            
-
-            
-
-            Device (UHC3)
+            Device (USB2)
             {
                 Name (_ADR, 0x001D0000)  // _ADR: Address
                 Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
@@ -11900,8 +11896,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     })
                 }
                 
-
-                
             }
 
             Device (XHC1)
@@ -11911,18 +11905,23 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 {
                     Return (GPRW (0x6D, 0x03))
                 }
-                Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                Method (_DSM, 4, NotSerialized)
                 {
-                Store (Package (0x09)
+                    If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
+                    Return (Package()
                     {
-                        "AAPL,current-available", 0x0834, 
-                        "AAPL,current-extra", 0x0898, 
-                        "AAPL,current-extra-in-sleep", 0x0640, 
-                        "AAPL,max-port-current-in-sleep", 0x0834, 
-                        Buffer (0x01) { 0x00 } }, Local0)
-                DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
-                Return (Local0)
-                }  
+                        "AAPL,clock-id", Buffer() { 0x02 },
+                        "built-in", Buffer() { 0x00 },
+                        "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
+                        "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
+                        "AAPL,current-available", 2100,
+                        "AAPL,current-extra", 2200,
+                        "AAPL,current-extra-in-sleep", 1600,
+                        "AAPL,device-internal", 0x02,
+                        "AAPL,max-port-current-in-sleep", 2100,
+                    })
+                }
+                
             }
 
             Device (MCHC)
@@ -12205,7 +12204,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         Alias (SBV1, SDGV)
                         Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                         {
-                            Name (T_0, Zero)
+                            Name (T_0, Zero)  // T_x: Emitted by ASL Compiler
                             If (LEqual (Arg0, Buffer (0x10)
                                     {
                                         /* 0000 */   0x8F, 0x70, 0xFC, 0xA5, 0x75, 0x87, 0xA6, 0x4B,
@@ -12293,7 +12292,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         Alias (SBV2, SDGV)
                         Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                         {
-                            Name (T_0, Zero)
+                            Name (T_0, Zero)  // T_x: Emitted by ASL Compiler
                             If (LEqual (Arg0, Buffer (0x10)
                                     {
                                         /* 0000 */   0x8F, 0x70, 0xFC, 0xA5, 0x75, 0x87, 0xA6, 0x4B,
@@ -12381,7 +12380,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         Alias (SBV1, SDGV)
                         Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                         {
-                            Name (T_0, Zero)
+                            Name (T_0, Zero)  // T_x: Emitted by ASL Compiler
                             If (LEqual (Arg0, Buffer (0x10)
                                     {
                                         /* 0000 */   0x8F, 0x70, 0xFC, 0xA5, 0x75, 0x87, 0xA6, 0x4B,
@@ -12469,7 +12468,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         Alias (SBV2, SDGV)
                         Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                         {
-                            Name (T_0, Zero)
+                            Name (T_0, Zero)  // T_x: Emitted by ASL Compiler
                             If (LEqual (Arg0, Buffer (0x10)
                                     {
                                         /* 0000 */   0x8F, 0x70, 0xFC, 0xA5, 0x75, 0x87, 0xA6, 0x4B,
@@ -12556,13 +12555,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     }
                 }
             }
-
-            Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
-            {
-                Return (GPRW (0x6D, 0x03))
-            }
-
-        Device (RHUB)
+            
+            Device (RHUB)
         {
             Name (_ADR, Zero)  // _ADR: Address
             Device (PRT1)
@@ -12705,29 +12699,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             }
         }
 
-        OperationRegion (EHC1, PCI_Config, 0x10, 0x08)
-        Field (EHC1, AnyAcc, Lock, Preserve)
-        {
-            MBAS,   64
-        }
-
-        Method (LTEP, 0, NotSerialized)
-        {
-        }
-        Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+            Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
             {
-                Store (Package (0x0B)
-                    {
-                        "AAPL,current-available", 0x0834, 
-                        "AAPL,current-extra", 0x0898, 
-                        "AAPL,current-extra-in-sleep", 0x0640, 
-                        "AAPL,max-port-current-in-sleep", 0x0834, 
-                        "AAPL,device-internal", 0x00, 
-                        Buffer (0x01) { 0x00 } }, Local0)
-                DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
-                Return (Local0)
+                Return (GPRW (0x6D, 0x03))
             }
-    }
+        }
 
         Device (EHC2)
         {
@@ -12857,7 +12833,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         Alias (SBV1, SDGV)
                         Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                         {
-                            Name (T_0, Zero)
+                            Name (T_0, Zero)  // T_x: Emitted by ASL Compiler
                             If (LEqual (Arg0, Buffer (0x10)
                                     {
                                         /* 0000 */   0x8F, 0x70, 0xFC, 0xA5, 0x75, 0x87, 0xA6, 0x4B,
@@ -12951,7 +12927,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         Alias (SBV2, SDGV)
                         Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                         {
-                            Name (T_0, Zero)
+                            Name (T_0, Zero)  // T_x: Emitted by ASL Compiler
                             If (LEqual (Arg0, Buffer (0x10)
                                     {
                                         /* 0000 */   0x8F, 0x70, 0xFC, 0xA5, 0x75, 0x87, 0xA6, 0x4B,
@@ -13096,15 +13072,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     }
                 }
             }
-
-            Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
-            {
-                Return (GPRW (0x6D, 0x03))
-            }
-
             
-
-        Device (RHUB)
+            Device (RHUB)
         {
             Name (_ADR, Zero)  // _ADR: Address
             Device (PRT1)
@@ -13214,21 +13183,29 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 }
             }
         }
-        Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+
+            Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
             {
-                Store (Package (0x0B)
-                    {
-                        "AAPL,current-available", 0x0834, 
-                        "AAPL,current-extra", 0x0898, 
-                        "AAPL,current-extra-in-sleep", 0x0640, 
-                        "AAPL,max-port-current-in-sleep", 0x0834, 
-                        "AAPL,device-internal", 0x00, 
-                        Buffer (0x01) { 0x00 } }, Local0)
-                DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
-                Return (Local0)
+                Return (GPRW (0x6D, 0x03))
             }
-        
-    }
+            Method (_DSM, 4, NotSerialized)
+            {
+                If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
+                Return (Package()
+                {
+                    "AAPL,clock-id", Buffer() { 0x01 },
+                    "built-in", Buffer() { 0x00 },
+                    "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
+                    "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
+                    "AAPL,current-available", 2100,
+                    "AAPL,current-extra", 2200,
+                    "AAPL,current-extra-in-sleep", 1600,
+                    "AAPL,device-internal", 0x02,
+                    "AAPL,max-port-current-in-sleep", 2100,
+                })
+            }
+            
+        }
 
         Device (XHC)
         {
@@ -13281,8 +13258,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
             Method (PR2S, 1, Serialized)
             {
-                Name (T_1, Zero)
-                Name (T_0, Zero)
+                Name (T_1, Zero)  // T_x: Emitted by ASL Compiler
+                Name (T_0, Zero)  // T_x: Emitted by ASL Compiler
                 If (LEqual (And (CDID, 0xF000), 0x8000))
                 {
                     While (One)
@@ -13651,7 +13628,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 If (CondRefOf (\_SB.PCI0.XHC.PS3X))
                 {
-                    PS3X ()
+                    PS3X()
                 }
 
                 If (LEqual (Local3, 0x03))
@@ -14014,8 +13991,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                         Return (PLDP)
                     }
-
-        Name (CAPD, Package (One)
+                    Name (CAPD, Package (One)
         {
             Buffer (0x14)
             {
@@ -14032,7 +14008,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Return (CAPD)
             }
         }
-    }
+                }
 
                 Device (HS06)
                 {
@@ -25412,7 +25388,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                     If (LEqual (IIA0, 0x00010025))
                     {
-                        ^^PCI0.EHC1.LTEP ()
                         If (FGDP)
                         {
                             Return (Add (FGST, 0x00050000))
