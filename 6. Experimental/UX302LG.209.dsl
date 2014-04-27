@@ -26,9 +26,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
      * disassembler did not know how many arguments to assign to the
      * unresolved methods.
      */
-    External (HDOS, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
-    External (HNOT, MethodObj)    // Warning: Unresolved Method, guessing 1 arguments (may be incorrect, see warning above)
-    External (IDAB, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
     External (_PR_.CPU0._PPC, IntObj)
     External (_PR_.CPU0._PSS, PkgObj)
     External (_PR_.CPU0._PTC, MethodObj)    // 0 Arguments
@@ -19988,14 +19985,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             Method (_DOS, 1, NotSerialized)  // _DOS: Disable Output Switching
             {
                 Store (And (Arg0, 0x07), DSEN)
-                If (LEqual (And (Arg0, 0x03), Zero))
-                {
-                    If (CondRefOf (HDOS))
-                    {
-                        HDOS ()
-                    }
-                }
-
                 If (DRDY)
                 {
                     And (Arg0, 0x03, DOSF)
@@ -20006,12 +19995,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
             Method (_DOD, 0, NotSerialized)  // _DOD: Display Output Devices
             {
-                If (CondRefOf (IDAB))
-                {
-                    IDAB ()
-                }
-                Else
-                {
                     Store (Zero, NDID)
                     If (LNotEqual (DIDL, Zero))
                     {
@@ -20087,8 +20070,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     {
                         Store (SDDL (DD15), DIDF)
                     }
-                }
-
                 If (LEqual (NDID, One))
                 {
                     Name (TMP1, Package (One)
@@ -22136,16 +22117,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                         Notify (IGPU, Arg1)
                     }
                 }
-
-                If (CondRefOf (HNOT))
-                {
-                    HNOT (Arg0)
-                }
-                Else
-                {
-                    Notify (IGPU, 0x80)
-                }
-
+                Notify (IGPU, 0x80)
                 Return (Zero)
             }
 
