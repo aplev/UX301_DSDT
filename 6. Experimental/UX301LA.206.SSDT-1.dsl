@@ -3,50 +3,63 @@
  * AML Disassembler version 20131218-64 [Jan  8 2014]
  * Copyright (c) 2000 - 2013 Intel Corporation
  * 
- * Disassembly of iASLxBPyAk.aml, Sun Feb 16 01:00:20 2014
+ * Disassembly of iASLZdR3WY.aml, Sun Apr 27 20:33:42 2014
  *
  * Original Table Header:
  *     Signature        "SSDT"
- *     Length           0x00000AD8 (2776)
+ *     Length           0x00000539 (1337)
  *     Revision         0x01
- *     Checksum         0xE7
+ *     Checksum         0xAE
  *     OEM ID           "PmRef"
- *     OEM Table ID     "CpuPm"
+ *     OEM Table ID     "Cpu0Ist"
  *     OEM Revision     0x00003000 (12288)
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20120711 (538052369)
  */
-DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
+DefinitionBlock ("iASLZdR3WY.aml", "SSDT", 1, "PmRef", "Cpu0Ist", 0x00003000)
 {
-
     External (_PR_.CPU0, ProcessorObj)
-    External (_PR_.CPU0.ACST, MethodObj)    // 0 Arguments
-    External (_PR_.CPU0.APSS, PkgObj)
     External (_PR_.CPU1, ProcessorObj)
-    External (_PR_.CPU1.ACST, MethodObj)    // 0 Arguments
     External (_PR_.CPU2, ProcessorObj)
     External (_PR_.CPU3, ProcessorObj)
-    External (TCNT, FieldUnitObj)
-    
+    External (_PR_.CPU4, ProcessorObj)
+    External (_PR_.CPU5, ProcessorObj)
+    External (_PR_.CPU6, ProcessorObj)
+    External (_PR_.CPU7, ProcessorObj)
+    External (_PR_.CPU0.APSS, PkgObj)
+
+    External (_PR_.C3LT, FieldUnitObj)
+    External (_PR_.C6LT, FieldUnitObj)
+    External (_PR_.C7LT, FieldUnitObj)
+    External (_PR_.C3MW, FieldUnitObj)
+    External (_PR_.C6MW, FieldUnitObj)
+    External (_PR_.C7MW, FieldUnitObj)
+    External (_PR_.CDLT, FieldUnitObj)
+    External (_PR_.CDPW, FieldUnitObj)
+    External (_PR_.CDLV, FieldUnitObj)
+    External (_PR_.CDMW, FieldUnitObj)
+
     External (_PR_.CPPC, FieldUnitObj)
     External (_PR_.CFGD, FieldUnitObj)
+
+    External (TCNT, FieldUnitObj)
 
     Scope (\)
     {
         Name (SSDT, Package (0x0C)
         {
             "CPU0IST ", 
-            0x80000000, 
-            0x80000000, 
+            0xD898EA98, 
+            0x00000539, 
             "APIST   ", 
-            0x80000000, 
-            0x80000000, 
+            0xD9A39618, 
+            0x000005AA, 
             "CPU0CST ", 
-            0x80000000, 
-            0x80000000, 
+            0xD9A39C18, 
+            0x000003D3, 
             "APCST   ", 
-            0x80000000, 
-            0x80000000
+            0xD9A38D98, 
+            0x00000119
         })
         Name (\PDC0, 0x80000000)
         Name (\PDC1, 0x80000000)
@@ -61,43 +74,33 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
 
     Scope (\_PR.CPU0)
     {
-        Name (HI0, Zero)
-        Name (HC0, Zero)
         Name (_PPC, Zero)  // _PPC: Performance Present Capabilites
-        Method (_PDC, 1, NotSerialized)  // _PDC: Processor Driver Capabilities
+        Method (_PCT, 0, NotSerialized)  // _PCT: Performance Control
         {
-            If (CondRefOf (_PPC))
+            Store (\_PR.CPPC, \_PR.CPU0._PPC)
+            If (LAnd (And (CFGD, One), And (PDC0, One)))
             {
-                Store (CPPC, _PPC)
-            }
+                Return (Package (0x02)
+                {
+                    ResourceTemplate ()
+                    {
+                        Register (FFixedHW, 
+                            0x00,               // Bit Width
+                            0x00,               // Bit Offset
+                            0x0000000000000000, // Address
+                            ,)
+                    }, 
 
-            Store (CPDC (Arg0), Local0)
-            GCAP (Local0)
-        }
-        Name (_PCT, Package (0x02)  // _PCT: Performance Control
-        {
-            ResourceTemplate ()
-            {
-                Register (FFixedHW, 
-                    0x10,               // Bit Width
-                    0x00,               // Bit Offset
-                    0x0000000000000199, // Address
-                    ,)
-            }, 
-
-            ResourceTemplate ()
-            {
-                Register (FFixedHW, 
-                    0x10,               // Bit Width
-                    0x00,               // Bit Offset
-                    0x0000000000000198, // Address
-                    ,)
+                    ResourceTemplate ()
+                    {
+                        Register (FFixedHW, 
+                            0x00,               // Bit Width
+                            0x00,               // Bit Offset
+                            0x0000000000000000, // Address
+                            ,)
+                    }
+                })
             }
-        })
-        
-        Method (_CST, 0, NotSerialized)  // _CST: C-States
-        {
-            Return (\_PR.CPU0.ACST)
         }
 
         Name (PSDF, Zero)
@@ -118,7 +121,7 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
             Return (SPSD)
         }
 
-        Name (HPSD, Package (One)
+        Name (HPSD, Package (0x01)
         {
             Package (0x05)
             {
@@ -129,7 +132,7 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
                 0x80
             }
         })
-        Name (SPSD, Package (One)
+        Name (SPSD, Package (0x01)
         {
             Package (0x05)
             {
@@ -140,6 +143,18 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
                 0x80
             }
         })
+        Name (HI0, Zero)
+        Name (HC0, Zero)
+        Method (_PDC, 1, NotSerialized)  // _PDC: Processor Driver Capabilities
+        {
+            If (CondRefOf (\_PR.CPU0._PPC))
+            {
+                Store (CPPC, \_PR.CPU0._PPC)
+            }
+
+            Store (CPDC (Arg0), Local0)
+            GCAP (Local0)
+        }
 
         Method (_OSC, 4, NotSerialized)  // _OSC: Operating System Capabilities
         {
@@ -148,7 +163,7 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
             Return (Local0)
         }
 
-        Method (CPDC, 1, Serialized)
+        Method (CPDC, 1, NotSerialized)
         {
             CreateDWordField (Arg0, Zero, REVS)
             CreateDWordField (Arg0, 0x04, SIZE)
@@ -167,9 +182,10 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
                 }, REVS, SIZE, Local2))
         }
 
-        Method (COSC, 4, Serialized)
+        Method (COSC, 4, NotSerialized)
         {
             CreateDWordField (Arg3, Zero, STS0)
+            CreateDWordField (Arg3, 0x04, CAP0)
             CreateDWordField (Arg0, Zero, IID0)
             CreateDWordField (Arg0, 0x04, IID1)
             CreateDWordField (Arg0, 0x08, IID2)
@@ -199,7 +215,7 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
             Return (Arg3)
         }
 
-        Method (GCAP, 1, Serialized)
+        Method (GCAP, 1, NotSerialized)
         {
             CreateDWordField (Arg0, Zero, STS0)
             CreateDWordField (Arg0, 0x04, CAP0)
@@ -229,7 +245,226 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
 
             Return (Zero)
         }
-        
+        Name (C1TM, Package (0x04)
+        {
+            ResourceTemplate ()
+            {
+                Register (FFixedHW, 
+                    0x00,               // Bit Width
+                    0x00,               // Bit Offset
+                    0x0000000000000000, // Address
+                    ,)
+            }, 
+
+            One, 
+            One, 
+            0x03E8
+        })
+        Name (C3TM, Package (0x04)
+        {
+            ResourceTemplate ()
+            {
+                Register (SystemIO, 
+                    0x08,               // Bit Width
+                    0x00,               // Bit Offset
+                    0x0000000000001814, // Address
+                    ,)
+            }, 
+
+            0x02, 
+            Zero, 
+            0x01F4
+        })
+        Name (C6TM, Package (0x04)
+        {
+            ResourceTemplate ()
+            {
+                Register (SystemIO, 
+                    0x08,               // Bit Width
+                    0x00,               // Bit Offset
+                    0x0000000000001815, // Address
+                    ,)
+            }, 
+
+            0x02, 
+            Zero, 
+            0x015E
+        })
+        Name (C7TM, Package (0x04)
+        {
+            ResourceTemplate ()
+            {
+                Register (SystemIO, 
+                    0x08,               // Bit Width
+                    0x00,               // Bit Offset
+                    0x0000000000001816, // Address
+                    ,)
+            }, 
+
+            0x02, 
+            Zero, 
+            0xC8
+        })
+        Name (CDTM, Package (0x04)
+        {
+            ResourceTemplate ()
+            {
+                Register (SystemIO, 
+                    0x08,               // Bit Width
+                    0x00,               // Bit Offset
+                    0x0000000000001816, // Address
+                    ,)
+            }, 
+
+            0x03, 
+            Zero, 
+            Zero
+        })
+        Name (MWES, ResourceTemplate ()
+        {
+            Register (FFixedHW, 
+                0x01,               // Bit Width
+                0x02,               // Bit Offset
+                0x0000000000000000, // Address
+                0x01,               // Access Size
+                )
+        })
+        Name (AC2V, Zero)
+        Name (AC3V, Zero)
+        Name (C3ST, Package (0x04)
+        {
+            0x03, 
+            Package (0x00) {}, 
+            Package (0x00) {}, 
+            Package (0x00) {}
+        })
+        Name (C2ST, Package (0x03)
+        {
+            0x02, 
+            Package (0x00) {}, 
+            Package (0x00) {}
+        })
+        Name (C1ST, Package (0x02)
+        {
+            One, 
+            Package (0x00) {}
+        })
+        Name (CSTF, Zero)
+        Name (GEAR, Zero)
+        Method (_CST, 0, Serialized)  // _CST: C-States
+        {
+            If (LNot (CSTF))
+            {
+                Store (C3LT, Index (C3TM, 0x02))
+                Store (C6LT, Index (C6TM, 0x02))
+                Store (C7LT, Index (C7TM, 0x02))
+                Store (CDLT, Index (CDTM, 0x02))
+                Store (CDPW, Index (CDTM, 0x03))
+                Store (CDLV, Index (DerefOf (Index (CDTM, Zero)), 0x07))
+                If (LAnd (And (CFGD, 0x0800), And (PDC0, 0x0200)))
+                {
+                    Store (MWES, Index (C1TM, Zero))
+                    Store (MWES, Index (C3TM, Zero))
+                    Store (MWES, Index (C6TM, Zero))
+                    Store (MWES, Index (C7TM, Zero))
+                    Store (MWES, Index (CDTM, Zero))
+                    Store (C3MW, Index (DerefOf (Index (C3TM, Zero)), 0x07))
+                    Store (C6MW, Index (DerefOf (Index (C6TM, Zero)), 0x07))
+                    Store (C7MW, Index (DerefOf (Index (C7TM, Zero)), 0x07))
+                    Store (CDMW, Index (DerefOf (Index (CDTM, Zero)), 0x07))
+                }
+                Else
+                {
+                    If (LAnd (And (CFGD, 0x0800), And (PDC0, 0x0100)))
+                    {
+                        Store (MWES, Index (C1TM, Zero))
+                    }
+                }
+
+                Store (Ones, CSTF)
+            }
+
+            Store (Zero, AC2V)
+            Store (Zero, AC3V)
+            Store (C1TM, Index (C3ST, One))
+            If (And (CFGD, 0x20))
+            {
+                Store (C7TM, Index (C3ST, 0x02))
+                Store (Ones, AC2V)
+            }
+            Else
+            {
+                If (And (CFGD, 0x10))
+                {
+                    Store (C6TM, Index (C3ST, 0x02))
+                    Store (Ones, AC2V)
+                }
+                Else
+                {
+                    If (And (CFGD, 0x08))
+                    {
+                        Store (C3TM, Index (C3ST, 0x02))
+                        Store (Ones, AC2V)
+                    }
+                }
+            }
+
+            If (And (CFGD, 0x4000))
+            {
+                Store (CDTM, Index (C3ST, 0x03))
+                Store (Ones, AC3V)
+            }
+
+            If (LEqual (GEAR, One))
+            {
+                If (And (CFGD, 0x08))
+                {
+                    Store (C3TM, Index (C3ST, 0x02))
+                    Store (Ones, AC2V)
+                    Store (Zero, AC3V)
+                }
+                Else
+                {
+                    Store (Zero, AC2V)
+                    Store (Zero, AC3V)
+                }
+            }
+
+            If (LEqual (GEAR, 0x02))
+            {
+                Store (Zero, AC2V)
+                Store (Zero, AC3V)
+            }
+
+            If (LAnd (AC2V, AC3V))
+            {
+                Return (C3ST)
+            }
+            Else
+            {
+                If (AC2V)
+                {
+                    Store (DerefOf (Index (C3ST, One)), Index (C2ST, One))
+                    Store (DerefOf (Index (C3ST, 0x02)), Index (C2ST, 0x02))
+                    Return (C2ST)
+                }
+                Else
+                {
+                    If (AC3V)
+                    {
+                        Store (DerefOf (Index (C3ST, One)), Index (C2ST, One))
+                        Store (DerefOf (Index (C3ST, 0x03)), Index (C2ST, 0x02))
+                        Store (0x02, Index (DerefOf (Index (C2ST, 0x02)), One))
+                        Return (C2ST)
+                    }
+                    Else
+                    {
+                        Store (DerefOf (Index (C3ST, One)), Index (C1ST, One))
+                        Return (C1ST)
+                    }
+                }
+            }
+        }
         Name (_TPC, Zero)  // _TPC: Throttling Present Capabilities
         Method (_PTC, 0, NotSerialized)  // _PTC: Processor Throttling Control
         {
@@ -501,11 +736,7 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
         })
         Name (TSSF, Zero)
         Mutex (TSMO, 0x00)
-        Method (_PSS, 0, NotSerialized)
-        {
-            Return (\_PR_.CPU0.APSS)
-        }
-        Method (_TSS, 0, Serialized)  // _TSS: Throttling Supported States
+        Method (_TSS, 0, NotSerialized)  // _TSS: Throttling Supported States
         {
             If (LAnd (LNot (TSSF), CondRefOf (_PSS)))
             {
@@ -516,7 +747,7 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
                     Store (SizeOf (_PSS), LFMI)
                     Decrement (LFMI)
                     Name (LFMP, Zero)
-                    Store (DerefOf (Index (DerefOf (Index (\_PR_.CPU0.APSS, LFMI)), One)), 
+                    Store (DerefOf (Index (DerefOf (Index (_PSS, LFMI)), One)), 
                         LFMP)
                     Store (Zero, Local0)
                     If (And (CFGD, 0x2000))
@@ -554,12 +785,17 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
                 Return (TSMC)
             }
         }
-
+        
+        Method (_PSS, 0, NotSerialized)  // _PSS: Performance Supported States
+        {
+            Return (\_PR.CPU0.APSS)
+        }
+        
         Method (_TSD, 0, NotSerialized)  // _TSD: Throttling State Dependencies
         {
             If (LNot (And (PDC0, 0x04)))
             {
-                Return (Package (One)
+                Return (Package (0x01)
                 {
                     Package (0x05)
                     {
@@ -572,7 +808,7 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
                 })
             }
 
-            Return (Package (One)
+            Return (Package (0x01)
             {
                 Package (0x05)
                 {
@@ -590,19 +826,10 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
     {
         Name (HI1, Zero)
         Name (HC1, Zero)
-        Method (_PSS, 0, NotSerialized)
-        {
-            Return (\_PR_.CPU0.APSS)
-        }
         Method (_PDC, 1, NotSerialized)  // _PDC: Processor Driver Capabilities
         {
             Store (\_PR.CPU0.CPDC (Arg0), Local0)
             GCAP (Local0)
-        }
-        
-        Method (_CST, 0, NotSerialized)  // _CST: C-States
-        {
-            Return (\_PR_.CPU1.ACST)
         }
 
         Method (_OSC, 4, NotSerialized)  // _OSC: Operating System Capabilities
@@ -642,7 +869,7 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
             Return (Zero)
         }
 
-        Method (APCT, 0, Serialized)
+        Method (APCT, 0, NotSerialized)
         {
             If (LAnd (And (CFGD, 0x7A), LNot (And (SDTL, 0x20
                 ))))
@@ -654,7 +881,7 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
             }
         }
 
-        Method (APPT, 0, Serialized)
+        Method (APPT, 0, NotSerialized)
         {
             If (LAnd (And (CFGD, One), LNot (And (SDTL, 0x10
                 ))))
@@ -665,48 +892,6 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
                 Load (IST1, HI1)
             }
         }
-        
-        Name (_TPC, Zero)  // _TPC: Throttling Present Capabilities
-        Method (_PTC, 0, NotSerialized)  // _PTC: Processor Throttling Control
-        {
-            Return (\_PR.CPU0._PTC)
-        }
-
-        Method (_TSS, 0, NotSerialized)  // _TSS: Throttling Supported States
-        {
-            Return (\_PR.CPU0._TSS)
-        }
-
-        Method (_TSD, 0, NotSerialized)  // _TSD: Throttling State Dependencies
-        {
-            If (LNot (And (PDC0, 0x04)))
-            {
-                Return (Package (One)
-                {
-                    Package (0x05)
-                    {
-                        0x05, 
-                        Zero, 
-                        Zero, 
-                        0xFD, 
-                        TCNT
-                    }
-                })
-            }
-
-            Return (Package (One)
-            {
-                Package (0x05)
-                {
-                    0x05, 
-                    Zero, 
-                    One, 
-                    0xFC, 
-                    One
-                }
-            })
-        }
-        
         Method (_PPC, 0, NotSerialized)  // _PPC: Performance Present Capabilites
         {
             Return (\_PR.CPU0._PPC)
@@ -715,6 +900,11 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
         Method (_PCT, 0, NotSerialized)  // _PCT: Performance Control
         {
             Return (\_PR.CPU0._PCT)
+        }
+
+        Method (_PSS, 0, NotSerialized)  // _PSS: Performance Supported States
+        {
+            Return (\_PR.CPU0.APSS)
         }
 
         Name (PSDF, Zero)
@@ -735,7 +925,7 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
             Return (SPSD)
         }
 
-        Name (HPSD, Package (One)
+        Name (HPSD, Package (0x01)
         {
             Package (0x05)
             {
@@ -746,7 +936,7 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
                 0x80
             }
         })
-        Name (SPSD, Package (One)
+        Name (SPSD, Package (0x01)
         {
             Package (0x05)
             {
@@ -757,23 +947,58 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
                 0x80
             }
         })
+        Method (_CST, 0, NotSerialized)  // _CST: C-States
+        {
+            Return (\_PR.CPU0._CST)
+        }
+        Name (_TPC, Zero)  // _TPC: Throttling Present Capabilities
+        Method (_PTC, 0, NotSerialized)  // _PTC: Processor Throttling Control
+        {
+            Return (\_PR.CPU0._PTC)
+        }
+
+        Method (_TSS, 0, NotSerialized)  // _TSS: Throttling Supported States
+        {
+            Return (\_PR.CPU0._TSS)
+        }
+
+        Method (_TSD, 0, NotSerialized)  // _TSD: Throttling State Dependencies
+        {
+            If (LNot (And (PDC0, 0x04)))
+            {
+                Return (Package (0x01)
+                {
+                    Package (0x05)
+                    {
+                        0x05, 
+                        Zero, 
+                        Zero, 
+                        0xFD, 
+                        TCNT
+                    }
+                })
+            }
+
+            Return (Package (0x01)
+            {
+                Package (0x05)
+                {
+                    0x05, 
+                    Zero, 
+                    One, 
+                    0xFC, 
+                    One
+                }
+            })
+        }
     }
 
     Scope (\_PR.CPU2)
     {
-        Method (_PSS, 0, NotSerialized)
-        {
-            Return (\_PR_.CPU0.APSS)
-        }
         Method (_PDC, 1, NotSerialized)  // _PDC: Processor Driver Capabilities
         {
             Store (\_PR.CPU0.CPDC (Arg0), Local0)
             GCAP (Local0)
-        }
-        
-        Method (_CST, 0, NotSerialized)  // _CST: C-States
-        {
-            Return (\_PR.CPU1.ACST)
         }
 
         Method (_OSC, 4, NotSerialized)  // _OSC: Operating System Capabilities
@@ -812,48 +1037,6 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
             Store (PDC2, PDC0)
             Return (Zero)
         }
-        
-        Name (_TPC, Zero)  // _TPC: Throttling Present Capabilities
-        Method (_PTC, 0, NotSerialized)  // _PTC: Processor Throttling Control
-        {
-            Return (\_PR.CPU0._PTC)
-        }
-
-        Method (_TSS, 0, NotSerialized)  // _TSS: Throttling Supported States
-        {
-            Return (\_PR.CPU0._TSS)
-        }
-
-        Method (_TSD, 0, NotSerialized)  // _TSD: Throttling State Dependencies
-        {
-            If (LNot (And (PDC0, 0x04)))
-            {
-                Return (Package (One)
-                {
-                    Package (0x05)
-                    {
-                        0x05, 
-                        Zero, 
-                        Zero, 
-                        0xFD, 
-                        TCNT
-                    }
-                })
-            }
-
-            Return (Package (One)
-            {
-                Package (0x05)
-                {
-                    0x05, 
-                    Zero, 
-                    0x02, 
-                    0xFC, 
-                    One
-                }
-            })
-        }
-        
         Method (_PPC, 0, NotSerialized)  // _PPC: Performance Present Capabilites
         {
             Return (\_PR.CPU0._PPC)
@@ -862,6 +1045,11 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
         Method (_PCT, 0, NotSerialized)  // _PCT: Performance Control
         {
             Return (\_PR.CPU0._PCT)
+        }
+
+        Method (_PSS, 0, NotSerialized)  // _PSS: Performance Supported States
+        {
+            Return (\_PR.CPU0.APSS)
         }
 
         Name (PSDF, Zero)
@@ -882,7 +1070,7 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
             Return (SPSD)
         }
 
-        Name (HPSD, Package (One)
+        Name (HPSD, Package (0x01)
         {
             Package (0x05)
             {
@@ -893,7 +1081,7 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
                 0x80
             }
         })
-        Name (SPSD, Package (One)
+        Name (SPSD, Package (0x01)
         {
             Package (0x05)
             {
@@ -904,23 +1092,58 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
                 0x80
             }
         })
+        Method (_CST, 0, NotSerialized)  // _CST: C-States
+        {
+            Return (\_PR.CPU0._CST)
+        }
+        Name (_TPC, Zero)  // _TPC: Throttling Present Capabilities
+        Method (_PTC, 0, NotSerialized)  // _PTC: Processor Throttling Control
+        {
+            Return (\_PR.CPU0._PTC)
+        }
+
+        Method (_TSS, 0, NotSerialized)  // _TSS: Throttling Supported States
+        {
+            Return (\_PR.CPU0._TSS)
+        }
+
+        Method (_TSD, 0, NotSerialized)  // _TSD: Throttling State Dependencies
+        {
+            If (LNot (And (PDC0, 0x04)))
+            {
+                Return (Package (0x01)
+                {
+                    Package (0x05)
+                    {
+                        0x05, 
+                        Zero, 
+                        Zero, 
+                        0xFD, 
+                        TCNT
+                    }
+                })
+            }
+
+            Return (Package (0x01)
+            {
+                Package (0x05)
+                {
+                    0x05, 
+                    Zero, 
+                    0x02, 
+                    0xFC, 
+                    One
+                }
+            })
+        }
     }
 
     Scope (\_PR.CPU3)
     {
-        Method (_PSS, 0, NotSerialized)
-        {
-            Return (\_PR_.CPU0.APSS)
-        }
         Method (_PDC, 1, NotSerialized)  // _PDC: Processor Driver Capabilities
         {
             Store (\_PR.CPU0.CPDC (Arg0), Local0)
             GCAP (Local0)
-        }
-        
-        Method (_CST, 0, NotSerialized)  // _CST: C-States
-        {
-            Return (\_PR.CPU1.ACST)
         }
 
         Method (_OSC, 4, NotSerialized)  // _OSC: Operating System Capabilities
@@ -959,48 +1182,6 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
             Store (PDC3, PDC0)
             Return (Zero)
         }
-        
-        Name (_TPC, Zero)  // _TPC: Throttling Present Capabilities
-        Method (_PTC, 0, NotSerialized)  // _PTC: Processor Throttling Control
-        {
-            Return (\_PR.CPU0._PTC)
-        }
-
-        Method (_TSS, 0, NotSerialized)  // _TSS: Throttling Supported States
-        {
-            Return (\_PR.CPU0._TSS)
-        }
-
-        Method (_TSD, 0, NotSerialized)  // _TSD: Throttling State Dependencies
-        {
-            If (LNot (And (PDC0, 0x04)))
-            {
-                Return (Package (One)
-                {
-                    Package (0x05)
-                    {
-                        0x05, 
-                        Zero, 
-                        Zero, 
-                        0xFD, 
-                        TCNT
-                    }
-                })
-            }
-
-            Return (Package (One)
-            {
-                Package (0x05)
-                {
-                    0x05, 
-                    Zero, 
-                    0x03, 
-                    0xFC, 
-                    One
-                }
-            })
-        }
-        
         Method (_PPC, 0, NotSerialized)  // _PPC: Performance Present Capabilites
         {
             Return (\_PR.CPU0._PPC)
@@ -1009,6 +1190,11 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
         Method (_PCT, 0, NotSerialized)  // _PCT: Performance Control
         {
             Return (\_PR.CPU0._PCT)
+        }
+
+        Method (_PSS, 0, NotSerialized)  // _PSS: Performance Supported States
+        {
+            Return (\_PR.CPU0.APSS)
         }
 
         Name (PSDF, Zero)
@@ -1029,7 +1215,7 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
             Return (SPSD)
         }
 
-        Name (HPSD, Package (One)
+        Name (HPSD, Package (0x01)
         {
             Package (0x05)
             {
@@ -1040,7 +1226,7 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
                 0x80
             }
         })
-        Name (SPSD, Package (One)
+        Name (SPSD, Package (0x01)
         {
             Package (0x05)
             {
@@ -1051,6 +1237,630 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
                 0x80
             }
         })
+        Method (_CST, 0, NotSerialized)  // _CST: C-States
+        {
+            Return (\_PR.CPU0._CST)
+        }
+        Name (_TPC, Zero)  // _TPC: Throttling Present Capabilities
+        Method (_PTC, 0, NotSerialized)  // _PTC: Processor Throttling Control
+        {
+            Return (\_PR.CPU0._PTC)
+        }
+
+        Method (_TSS, 0, NotSerialized)  // _TSS: Throttling Supported States
+        {
+            Return (\_PR.CPU0._TSS)
+        }
+
+        Method (_TSD, 0, NotSerialized)  // _TSD: Throttling State Dependencies
+        {
+            If (LNot (And (PDC0, 0x04)))
+            {
+                Return (Package (0x01)
+                {
+                    Package (0x05)
+                    {
+                        0x05, 
+                        Zero, 
+                        Zero, 
+                        0xFD, 
+                        TCNT
+                    }
+                })
+            }
+
+            Return (Package (0x01)
+            {
+                Package (0x05)
+                {
+                    0x05, 
+                    Zero, 
+                    0x03, 
+                    0xFC, 
+                    One
+                }
+            })
+        }
+    }
+
+    Scope (\_PR.CPU4)
+    {
+        Method (_PDC, 1, NotSerialized)  // _PDC: Processor Driver Capabilities
+        {
+            Store (\_PR.CPU0.CPDC (Arg0), Local0)
+            GCAP (Local0)
+        }
+
+        Method (_OSC, 4, NotSerialized)  // _OSC: Operating System Capabilities
+        {
+            Store (\_PR.CPU0.COSC (Arg0, Arg1, Arg2, Arg3), Local0)
+            GCAP (Local0)
+            Return (Local0)
+        }
+
+        Method (GCAP, 1, NotSerialized)
+        {
+            CreateDWordField (Arg0, Zero, STS4)
+            CreateDWordField (Arg0, 0x04, CAP4)
+            If (LOr (LEqual (STS4, 0x06), LEqual (STS4, 0x0A)))
+            {
+                Return (Zero)
+            }
+
+            If (And (STS4, One))
+            {
+                And (CAP4, 0x0BFF, CAP4)
+                Return (Zero)
+            }
+
+            Or (And (PDC4, 0x7FFFFFFF), CAP4, PDC4)
+            If (LEqual (And (PDC4, 0x09), 0x09))
+            {
+                \_PR.CPU1.APPT ()
+            }
+
+            If (And (PDC4, 0x18))
+            {
+                \_PR.CPU1.APCT ()
+            }
+
+            Store (PDC4, PDC0)
+            Return (Zero)
+        }
+        Method (_PPC, 0, NotSerialized)  // _PPC: Performance Present Capabilites
+        {
+            Return (\_PR.CPU0._PPC)
+        }
+
+        Method (_PCT, 0, NotSerialized)  // _PCT: Performance Control
+        {
+            Return (\_PR.CPU0._PCT)
+        }
+
+        Method (_PSS, 0, NotSerialized)  // _PSS: Performance Supported States
+        {
+            Return (\_PR.CPU0.APSS)
+        }
+
+        Name (PSDF, Zero)
+        Method (_PSD, 0, NotSerialized)  // _PSD: Power State Dependencies
+        {
+            If (LNot (PSDF))
+            {
+                Store (TCNT, Index (DerefOf (Index (HPSD, Zero)), 0x04))
+                Store (TCNT, Index (DerefOf (Index (SPSD, Zero)), 0x04))
+                Store (Ones, PSDF)
+            }
+
+            If (And (PDC0, 0x0800))
+            {
+                Return (HPSD)
+            }
+
+            Return (SPSD)
+        }
+
+        Name (HPSD, Package (0x01)
+        {
+            Package (0x05)
+            {
+                0x05, 
+                Zero, 
+                Zero, 
+                0xFE, 
+                0x80
+            }
+        })
+        Name (SPSD, Package (0x01)
+        {
+            Package (0x05)
+            {
+                0x05, 
+                Zero, 
+                Zero, 
+                0xFC, 
+                0x80
+            }
+        })
+        Method (_CST, 0, NotSerialized)  // _CST: C-States
+        {
+            Return (\_PR.CPU0._CST)
+        }
+        Name (_TPC, Zero)  // _TPC: Throttling Present Capabilities
+        Method (_PTC, 0, NotSerialized)  // _PTC: Processor Throttling Control
+        {
+            Return (\_PR.CPU0._PTC)
+        }
+
+        Method (_TSS, 0, NotSerialized)  // _TSS: Throttling Supported States
+        {
+            Return (\_PR.CPU0._TSS)
+        }
+
+        Method (_TSD, 0, NotSerialized)  // _TSD: Throttling State Dependencies
+        {
+            If (LNot (And (PDC0, 0x04)))
+            {
+                Return (Package (0x01)
+                {
+                    Package (0x05)
+                    {
+                        0x05, 
+                        Zero, 
+                        Zero, 
+                        0xFD, 
+                        TCNT
+                    }
+                })
+            }
+
+            Return (Package (0x01)
+            {
+                Package (0x05)
+                {
+                    0x05, 
+                    Zero, 
+                    0x04, 
+                    0xFC, 
+                    One
+                }
+            })
+        }
+    }
+
+    Scope (\_PR.CPU5)
+    {
+        Method (_PDC, 1, NotSerialized)  // _PDC: Processor Driver Capabilities
+        {
+            Store (\_PR.CPU0.CPDC (Arg0), Local0)
+            GCAP (Local0)
+        }
+
+        Method (_OSC, 4, NotSerialized)  // _OSC: Operating System Capabilities
+        {
+            Store (\_PR.CPU0.COSC (Arg0, Arg1, Arg2, Arg3), Local0)
+            GCAP (Local0)
+            Return (Local0)
+        }
+
+        Method (GCAP, 1, NotSerialized)
+        {
+            CreateDWordField (Arg0, Zero, STS5)
+            CreateDWordField (Arg0, 0x04, CAP5)
+            If (LOr (LEqual (STS5, 0x06), LEqual (STS5, 0x0A)))
+            {
+                Return (Zero)
+            }
+
+            If (And (STS5, One))
+            {
+                And (CAP5, 0x0BFF, CAP5)
+                Return (Zero)
+            }
+
+            Or (And (PDC5, 0x7FFFFFFF), CAP5, PDC5)
+            If (LEqual (And (PDC5, 0x09), 0x09))
+            {
+                \_PR.CPU1.APPT ()
+            }
+
+            If (And (PDC5, 0x18))
+            {
+                \_PR.CPU1.APCT ()
+            }
+
+            Store (PDC5, PDC0)
+            Return (Zero)
+        }
+        Method (_PPC, 0, NotSerialized)  // _PPC: Performance Present Capabilites
+        {
+            Return (\_PR.CPU0._PPC)
+        }
+
+        Method (_PCT, 0, NotSerialized)  // _PCT: Performance Control
+        {
+            Return (\_PR.CPU0._PCT)
+        }
+
+        Method (_PSS, 0, NotSerialized)  // _PSS: Performance Supported States
+        {
+            Return (\_PR.CPU0.APSS)
+        }
+
+        Name (PSDF, Zero)
+        Method (_PSD, 0, NotSerialized)  // _PSD: Power State Dependencies
+        {
+            If (LNot (PSDF))
+            {
+                Store (TCNT, Index (DerefOf (Index (HPSD, Zero)), 0x04))
+                Store (TCNT, Index (DerefOf (Index (SPSD, Zero)), 0x04))
+                Store (Ones, PSDF)
+            }
+
+            If (And (PDC0, 0x0800))
+            {
+                Return (HPSD)
+            }
+
+            Return (SPSD)
+        }
+
+        Name (HPSD, Package (0x01)
+        {
+            Package (0x05)
+            {
+                0x05, 
+                Zero, 
+                Zero, 
+                0xFE, 
+                0x80
+            }
+        })
+        Name (SPSD, Package (0x01)
+        {
+            Package (0x05)
+            {
+                0x05, 
+                Zero, 
+                Zero, 
+                0xFC, 
+                0x80
+            }
+        })
+        Method (_CST, 0, NotSerialized)  // _CST: C-States
+        {
+            Return (\_PR.CPU0._CST)
+        }
+        Name (_TPC, Zero)  // _TPC: Throttling Present Capabilities
+        Method (_PTC, 0, NotSerialized)  // _PTC: Processor Throttling Control
+        {
+            Return (\_PR.CPU0._PTC)
+        }
+
+        Method (_TSS, 0, NotSerialized)  // _TSS: Throttling Supported States
+        {
+            Return (\_PR.CPU0._TSS)
+        }
+
+        Method (_TSD, 0, NotSerialized)  // _TSD: Throttling State Dependencies
+        {
+            If (LNot (And (PDC0, 0x04)))
+            {
+                Return (Package (0x01)
+                {
+                    Package (0x05)
+                    {
+                        0x05, 
+                        Zero, 
+                        Zero, 
+                        0xFD, 
+                        TCNT
+                    }
+                })
+            }
+
+            Return (Package (0x01)
+            {
+                Package (0x05)
+                {
+                    0x05, 
+                    Zero, 
+                    0x05, 
+                    0xFC, 
+                    One
+                }
+            })
+        }
+    }
+
+    Scope (\_PR.CPU6)
+    {
+        Method (_PDC, 1, NotSerialized)  // _PDC: Processor Driver Capabilities
+        {
+            Store (\_PR.CPU0.CPDC (Arg0), Local0)
+            GCAP (Local0)
+        }
+
+        Method (_OSC, 4, NotSerialized)  // _OSC: Operating System Capabilities
+        {
+            Store (\_PR.CPU0.COSC (Arg0, Arg1, Arg2, Arg3), Local0)
+            GCAP (Local0)
+            Return (Local0)
+        }
+
+        Method (GCAP, 1, NotSerialized)
+        {
+            CreateDWordField (Arg0, Zero, STS6)
+            CreateDWordField (Arg0, 0x04, CAP6)
+            If (LOr (LEqual (STS6, 0x06), LEqual (STS6, 0x0A)))
+            {
+                Return (Zero)
+            }
+
+            If (And (STS6, One))
+            {
+                And (CAP6, 0x0BFF, CAP6)
+                Return (Zero)
+            }
+
+            Or (And (PDC6, 0x7FFFFFFF), CAP6, PDC6)
+            If (LEqual (And (PDC6, 0x09), 0x09))
+            {
+                \_PR.CPU1.APPT ()
+            }
+
+            If (And (PDC6, 0x18))
+            {
+                \_PR.CPU1.APCT ()
+            }
+
+            Store (PDC6, PDC0)
+            Return (Zero)
+        }
+        Method (_PPC, 0, NotSerialized)  // _PPC: Performance Present Capabilites
+        {
+            Return (\_PR.CPU0._PPC)
+        }
+
+        Method (_PCT, 0, NotSerialized)  // _PCT: Performance Control
+        {
+            Return (\_PR.CPU0._PCT)
+        }
+
+        Method (_PSS, 0, NotSerialized)  // _PSS: Performance Supported States
+        {
+            Return (\_PR.CPU0.APSS)
+        }
+
+        Name (PSDF, Zero)
+        Method (_PSD, 0, NotSerialized)  // _PSD: Power State Dependencies
+        {
+            If (LNot (PSDF))
+            {
+                Store (TCNT, Index (DerefOf (Index (HPSD, Zero)), 0x04))
+                Store (TCNT, Index (DerefOf (Index (SPSD, Zero)), 0x04))
+                Store (Ones, PSDF)
+            }
+
+            If (And (PDC0, 0x0800))
+            {
+                Return (HPSD)
+            }
+
+            Return (SPSD)
+        }
+
+        Name (HPSD, Package (0x01)
+        {
+            Package (0x05)
+            {
+                0x05, 
+                Zero, 
+                Zero, 
+                0xFE, 
+                0x80
+            }
+        })
+        Name (SPSD, Package (0x01)
+        {
+            Package (0x05)
+            {
+                0x05, 
+                Zero, 
+                Zero, 
+                0xFC, 
+                0x80
+            }
+        })
+        Method (_CST, 0, NotSerialized)  // _CST: C-States
+        {
+            Return (\_PR.CPU0._CST)
+        }
+        Name (_TPC, Zero)  // _TPC: Throttling Present Capabilities
+        Method (_PTC, 0, NotSerialized)  // _PTC: Processor Throttling Control
+        {
+            Return (\_PR.CPU0._PTC)
+        }
+
+        Method (_TSS, 0, NotSerialized)  // _TSS: Throttling Supported States
+        {
+            Return (\_PR.CPU0._TSS)
+        }
+
+        Method (_TSD, 0, NotSerialized)  // _TSD: Throttling State Dependencies
+        {
+            If (LNot (And (PDC0, 0x04)))
+            {
+                Return (Package (0x01)
+                {
+                    Package (0x05)
+                    {
+                        0x05, 
+                        Zero, 
+                        Zero, 
+                        0xFD, 
+                        TCNT
+                    }
+                })
+            }
+
+            Return (Package (0x01)
+            {
+                Package (0x05)
+                {
+                    0x05, 
+                    Zero, 
+                    0x06, 
+                    0xFC, 
+                    One
+                }
+            })
+        }
+    }
+
+    Scope (\_PR.CPU7)
+    {
+        Method (_PDC, 1, NotSerialized)  // _PDC: Processor Driver Capabilities
+        {
+            Store (\_PR.CPU0.CPDC (Arg0), Local0)
+            GCAP (Local0)
+        }
+
+        Method (_OSC, 4, NotSerialized)  // _OSC: Operating System Capabilities
+        {
+            Store (\_PR.CPU0.COSC (Arg0, Arg1, Arg2, Arg3), Local0)
+            GCAP (Local0)
+            Return (Local0)
+        }
+
+        Method (GCAP, 1, NotSerialized)
+        {
+            CreateDWordField (Arg0, Zero, STS7)
+            CreateDWordField (Arg0, 0x04, CAP7)
+            If (LOr (LEqual (STS7, 0x06), LEqual (STS7, 0x0A)))
+            {
+                Return (Zero)
+            }
+
+            If (And (STS7, One))
+            {
+                And (CAP7, 0x0BFF, CAP7)
+                Return (Zero)
+            }
+
+            Or (And (PDC7, 0x7FFFFFFF), CAP7, PDC7)
+            If (LEqual (And (PDC7, 0x09), 0x09))
+            {
+                \_PR.CPU1.APPT ()
+            }
+
+            If (And (PDC7, 0x18))
+            {
+                \_PR.CPU1.APCT ()
+            }
+
+            Store (PDC7, PDC0)
+            Return (Zero)
+        }
+        Method (_PPC, 0, NotSerialized)  // _PPC: Performance Present Capabilites
+        {
+            Return (\_PR.CPU0._PPC)
+        }
+
+        Method (_PCT, 0, NotSerialized)  // _PCT: Performance Control
+        {
+            Return (\_PR.CPU0._PCT)
+        }
+
+        Method (_PSS, 0, NotSerialized)  // _PSS: Performance Supported States
+        {
+            Return (\_PR.CPU0.APSS)
+        }
+
+        Name (PSDF, Zero)
+        Method (_PSD, 0, NotSerialized)  // _PSD: Power State Dependencies
+        {
+            If (LNot (PSDF))
+            {
+                Store (TCNT, Index (DerefOf (Index (HPSD, Zero)), 0x04))
+                Store (TCNT, Index (DerefOf (Index (SPSD, Zero)), 0x04))
+                Store (Ones, PSDF)
+            }
+
+            If (And (PDC0, 0x0800))
+            {
+                Return (HPSD)
+            }
+
+            Return (SPSD)
+        }
+
+        Name (HPSD, Package (0x01)
+        {
+            Package (0x05)
+            {
+                0x05, 
+                Zero, 
+                Zero, 
+                0xFE, 
+                0x80
+            }
+        })
+        Name (SPSD, Package (0x01)
+        {
+            Package (0x05)
+            {
+                0x05, 
+                Zero, 
+                Zero, 
+                0xFC, 
+                0x80
+            }
+        })
+        Method (_CST, 0, NotSerialized)  // _CST: C-States
+        {
+            Return (\_PR.CPU0._CST)
+        }
+        Name (_TPC, Zero)  // _TPC: Throttling Present Capabilities
+        Method (_PTC, 0, NotSerialized)  // _PTC: Processor Throttling Control
+        {
+            Return (\_PR.CPU0._PTC)
+        }
+
+        Method (_TSS, 0, NotSerialized)  // _TSS: Throttling Supported States
+        {
+            Return (\_PR.CPU0._TSS)
+        }
+
+        Method (_TSD, 0, NotSerialized)  // _TSD: Throttling State Dependencies
+        {
+            If (LNot (And (PDC0, 0x04)))
+            {
+                Return (Package (0x01)
+                {
+                    Package (0x05)
+                    {
+                        0x05, 
+                        Zero, 
+                        Zero, 
+                        0xFD, 
+                        TCNT
+                    }
+                })
+            }
+
+            Return (Package (0x01)
+            {
+                Package (0x05)
+                {
+                    0x05, 
+                    Zero, 
+                    0x07, 
+                    0xFC, 
+                    One
+                }
+            })
+        }
     }
 }
 

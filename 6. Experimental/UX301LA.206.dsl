@@ -19,7 +19,6 @@
 
 DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 {
-    External (_PR_.CPU0, ProcessorObj)
     External (_PR_.CPU0._PPC, IntObj)
     External (_PR_.CPU0._PSS, PkgObj)
     External (_PR_.CPU0._TPC, IntObj)
@@ -27,13 +26,6 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
     External (_PR_.CPU0._TSS, MethodObj)    // 0 Arguments
     External (_PR_.CPU0.TSMC, PkgObj)
     External (_PR_.CPU0.TSMF, PkgObj)
-    External (_PR_.CPU1, ProcessorObj)
-    External (_PR_.CPU2, ProcessorObj)
-    External (_PR_.CPU3, ProcessorObj)
-    External (_PR_.CPU4, ProcessorObj)
-    External (_PR_.CPU5, ProcessorObj)
-    External (_PR_.CPU6, ProcessorObj)
-    External (_PR_.CPU7, ProcessorObj)
     External (PDC0, IntObj)
     External (PDC1, IntObj)
     External (PDC2, IntObj)
@@ -12755,15 +12747,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
     Method (PNOT, 0, Serialized)
     {
-        If (CondRefOf (\_SB.PCCD.PENB))
-        {
-            Store (0x82, Local0)
-        }
-        Else
-        {
-            Store (0x80, Local0)
-        }
-
+        Store (0x80, Local0)
         If (LGreater (TCNT, One))
         {
             If (And (PDC0, 0x08))
@@ -26256,15 +26240,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         {
             Name (T_0, Zero)  // _T_x: Emitted by ASL Compiler
             Store (Arg0, \_PR.CPU0._PPC)
-            If (CondRefOf (\_SB.PCCD.PENB))
-            {
-                Store (0x82, Local0)
-            }
-            Else
-            {
-                Store (0x80, Local0)
-            }
-
+            Store (0x80, Local0)
             While (One)
             {
                 Store (ToInteger (TCNT), T_0)
@@ -27353,15 +27329,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             {
                 Name (T_0, Zero)  // _T_x: Emitted by ASL Compiler
                 Store (Arg0, \_PR.CPU0._PPC)
-                If (CondRefOf (\_SB.PCCD.PENB))
-                {
-                    Store (0x82, Local0)
-                }
-                Else
-                {
-                    Store (0x80, Local0)
-                }
-
+                Store (0x80, Local0)
                 While (One)
                 {
                     Store (ToInteger (TCNT), T_0)

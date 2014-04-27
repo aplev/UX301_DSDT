@@ -35,6 +35,13 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
     External (_PR_.CPU0.TSMC, PkgObj)
     External (_PR_.CPU0.TSMF, PkgObj)
     External (PDC0, IntObj)
+    External (PDC1, IntObj)
+    External (PDC2, IntObj)
+    External (PDC3, IntObj)
+    External (PDC4, IntObj)
+    External (PDC5, IntObj)
+    External (PDC6, IntObj)
+    External (PDC7, IntObj)
 
     Name (SMBS, 0x0580)
     Name (SMBL, 0x20)
@@ -2334,15 +2341,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         {
             Name (T_0, Zero)
             Store (Arg0, \_PR.CPU0._PPC)
-            If (CondRefOf (\_SB.PCCD.PENB))
-            {
-                Store (0x82, Local0)
-            }
-            Else
-            {
-                Store (0x80, Local0)
-            }
-
+            Store (0x80, Local0)
             While (One)
             {
                 Store (ToInteger (TCNT), T_0)
@@ -30264,15 +30263,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             {
                 Name (T_0, Zero)
                 Store (Arg0, \_PR.CPU0._PPC)
-                If (CondRefOf (\_SB.PCCD.PENB))
-                {
-                    Store (0x82, Local0)
-                }
-                Else
-                {
-                    Store (0x80, Local0)
-                }
-
+                Store (0x80, Local0)
                 While (One)
                 {
                     Store (ToInteger (TCNT), T_0)
@@ -33909,6 +33900,86 @@ DefinitionBlock ("dsdt.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
     Method (PNOT, 0, Serialized)
     {
+        Store (0x80, Local0)
+        If (LGreater (TCNT, One))
+        {
+            If (And (PDC0, 0x08))
+            {
+                Notify (\_PR.CPU0, Local0)
+                If (And (PDC0, 0x10))
+                {
+                    Notify (\_PR.CPU0, 0x81)
+                }
+            }
+
+            If (And (PDC1, 0x08))
+            {
+                Notify (\_PR.CPU1, Local0)
+                If (And (PDC1, 0x10))
+                {
+                    Notify (\_PR.CPU1, 0x81)
+                }
+            }
+
+            If (And (PDC2, 0x08))
+            {
+                Notify (\_PR.CPU2, Local0)
+                If (And (PDC2, 0x10))
+                {
+                    Notify (\_PR.CPU2, 0x81)
+                }
+            }
+
+            If (And (PDC3, 0x08))
+            {
+                Notify (\_PR.CPU3, Local0)
+                If (And (PDC3, 0x10))
+                {
+                    Notify (\_PR.CPU3, 0x81)
+                }
+            }
+
+            If (And (PDC4, 0x08))
+            {
+                Notify (\_PR.CPU4, Local0)
+                If (And (PDC4, 0x10))
+                {
+                    Notify (\_PR.CPU4, 0x81)
+                }
+            }
+
+            If (And (PDC5, 0x08))
+            {
+                Notify (\_PR.CPU5, Local0)
+                If (And (PDC5, 0x10))
+                {
+                    Notify (\_PR.CPU5, 0x81)
+                }
+            }
+
+            If (And (PDC6, 0x08))
+            {
+                Notify (\_PR.CPU6, Local0)
+                If (And (PDC6, 0x10))
+                {
+                    Notify (\_PR.CPU6, 0x81)
+                }
+            }
+
+            If (And (PDC7, 0x08))
+            {
+                Notify (\_PR.CPU7, Local0)
+                If (And (PDC7, 0x10))
+                {
+                    Notify (\_PR.CPU7, 0x81)
+                }
+            }
+        }
+        Else
+        {
+            Notify (\_PR.CPU0, Local0)
+            Notify (\_PR.CPU0, 0x81)
+        }
     }
 
     OperationRegion (MBAR, SystemMemory, Add (ShiftLeft (\_SB.PCI0.MHBR, 0x0F), 0x5000), 0x1000)
