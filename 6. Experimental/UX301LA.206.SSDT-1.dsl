@@ -27,6 +27,9 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
     External (_PR_.CPU2, ProcessorObj)
     External (_PR_.CPU3, ProcessorObj)
     External (TCNT, FieldUnitObj)
+    
+    External (_PR_.CPPC, FieldUnitObj)
+    External (_PR_.CFGD, FieldUnitObj)
 
     Scope (\)
     {
@@ -56,54 +59,6 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
         Name (\SDTL, Zero)
     }
 
-    Scope (\_PR)
-    {
-        OperationRegion (PPMT, SystemMemory, 0xDAA6CE98, 0x003A)
-        Field (PPMT, AnyAcc, Lock, Preserve)
-        {
-            PGRV,   8, 
-            CFGD,   32, 
-            Offset (0x06), 
-            ACRT,   8, 
-            APSV,   8, 
-            AAC0,   8, 
-            CPID,   32, 
-            CPPC,   8, 
-            CCTP,   8, 
-            CLVL,   8, 
-            CBMI,   8, 
-            PL10,   16, 
-            PL20,   16, 
-            PLW0,   8, 
-            CTC0,   8, 
-            TAR0,   8, 
-            PPC0,   8, 
-            PL11,   16, 
-            PL21,   16, 
-            PLW1,   8, 
-            CTC1,   8, 
-            TAR1,   8, 
-            PPC1,   8, 
-            PL12,   16, 
-            PL22,   16, 
-            PLW2,   8, 
-            CTC2,   8, 
-            TAR2,   8, 
-            PPC2,   8, 
-            C3MW,   8, 
-            C6MW,   8, 
-            C7MW,   8, 
-            CDMW,   8, 
-            C3LT,   16, 
-            C6LT,   16, 
-            C7LT,   16, 
-            CDLT,   16, 
-            CDLV,   16, 
-            CDPW,   16, 
-            MPMF,   8
-        }
-    }
-
     Scope (\_PR.CPU0)
     {
         Name (HI0, Zero)
@@ -118,7 +73,6 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
 
             Store (CPDC (Arg0), Local0)
             GCAP (Local0)
-            Return (Local0)
         }
         Name (_PCT, Package (0x02)  // _PCT: Performance Control
         {
@@ -644,7 +598,6 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
         {
             Store (\_PR.CPU0.CPDC (Arg0), Local0)
             GCAP (Local0)
-            Return (Local0)
         }
         
         Method (_CST, 0, NotSerialized)  // _CST: C-States
@@ -816,7 +769,6 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
         {
             Store (\_PR.CPU0.CPDC (Arg0), Local0)
             GCAP (Local0)
-            Return (Local0)
         }
         
         Method (_CST, 0, NotSerialized)  // _CST: C-States
@@ -964,7 +916,6 @@ DefinitionBlock ("iASLxBPyAk.aml", "SSDT", 1, "PmRef", "CpuPm", 0x00003000)
         {
             Store (\_PR.CPU0.CPDC (Arg0), Local0)
             GCAP (Local0)
-            Return (Local0)
         }
         
         Method (_CST, 0, NotSerialized)  // _CST: C-States
