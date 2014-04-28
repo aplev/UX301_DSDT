@@ -6193,21 +6193,22 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Return (GPRW (0x6D, 0x03))
             }
             Method (_DSM, 4, NotSerialized)
+            {
+                If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
+                Return (Package()
                 {
-                    If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
-                    Return (Package()
-                    {
-                        "AAPL,clock-id", Buffer() { 0x01 },
-                        "built-in", Buffer() { 0x00 },
-                        "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
-                        "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
-                        "AAPL,current-available", 2100,
-                        "AAPL,current-extra", 2200,
-                        "AAPL,current-extra-in-sleep", 1600,
-                        "AAPL,device-internal", 0x02,
-                        "AAPL,max-port-current-in-sleep", 2100,
-                    })
-                }
+                    "AAPL,clock-id", Buffer() { 0x01 },
+                    "built-in", Buffer() { 0x00 },
+                    "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
+                    "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
+                    "AAPL,current-available", 2100,
+                    "AAPL,current-extra", 2200,
+                    "AAPL,current-extra-in-sleep", 1600,
+                    "AAPL,device-internal", 0x02,
+                    "AAPL,max-port-current-in-sleep", 2100,
+                })
+            }
+            
         }
 
         Device (EHC2)
@@ -6598,6 +6599,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     "AAPL,max-port-current-in-sleep", 2100,
                 })
             }
+            
             
         }
 
@@ -8347,23 +8349,24 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             {
                 Return (GPRW (0x6D, 0x03))
             }
-            
             Method (_DSM, 4, NotSerialized)
+            {
+                If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
+                Return (Package()
                 {
-                    If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
-                    Return (Package()
-                    {
-                        "AAPL,clock-id", Buffer() { 0x02 },
-                        "built-in", Buffer() { 0x00 },
-                        "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
-                        "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
-                        "AAPL,current-available", 2100,
-                        "AAPL,current-extra", 2200,
-                        "AAPL,current-extra-in-sleep", 1600,
-                        "AAPL,device-internal", 0x02,
-                        "AAPL,max-port-current-in-sleep", 2100,
-                    })
-                }
+                    "AAPL,clock-id", Buffer() { 0x02 },
+                    "built-in", Buffer() { 0x00 },
+                    "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
+                    "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
+                    "AAPL,current-available", 2100,
+                    "AAPL,current-extra", 2200,
+                    "AAPL,current-extra-in-sleep", 1600,
+                    "AAPL,device-internal", 0x02,
+                    "AAPL,max-port-current-in-sleep", 2100,
+                })
+            }
+            
+            
         }
 
         Device (HDEF)
