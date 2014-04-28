@@ -1449,9 +1449,9 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 CreateDWordField (Local0, Zero, CDW1)
                 CreateDWordField (Local0, 0x04, CDW2)
                 CreateDWordField (Local0, 0x08, CDW3)
-                If (^XHC.CUID (Arg0))
+                If (^XHC1.CUID (Arg0))
                 {
-                    Return (^XHC.POSC (Arg1, Arg2, Arg3))
+                    Return (^XHC1.POSC (Arg1, Arg2, Arg3))
                 }
                 Else
                 {
@@ -1459,7 +1459,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     {
                         If (LEqual (XCNT, Zero))
                         {
-                            ^XHC.XSEL ()
+                            ^XHC1.XSEL ()
                             Increment (XCNT)
                         }
                     }
@@ -3914,7 +3914,6 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                             0x01,               // Alignment
                             0x08,               // Length
                             )
-                        
                     })
                 }
 
@@ -5273,58 +5272,6 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                     }
                 }
             }
-
-            Device (USB2)
-            {
-                Name (_ADR, 0x001D0000)  // _ADR: Address
-                Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
-                {
-                    Return (GPRW (0x6D, 0x03))
-                }
-                Method (_DSM, 4, NotSerialized)
-                {
-                    If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
-                    Return (Package()
-                    {
-                        "AAPL,clock-id", Buffer() { 0x01 },
-                        "built-in", Buffer() { 0x00 },
-                        "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
-                        "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
-                        "AAPL,current-available", 2100,
-                        "AAPL,current-extra", 2200,
-                        "AAPL,current-extra-in-sleep", 1600,
-                        "AAPL,device-internal", 0x02,
-                        "AAPL,max-port-current-in-sleep", 2100,
-                    })
-                }
-                
-            }
-
-            Device (XHC1)
-            {
-                Name (_ADR, 0x00140000)  // _ADR: Address
-                Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
-                {
-                    Return (GPRW (0x6D, 0x03))
-                }
-                Method (_DSM, 4, NotSerialized)
-                {
-                    If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
-                    Return (Package()
-                    {
-                        "AAPL,clock-id", Buffer() { 0x02 },
-                        "built-in", Buffer() { 0x00 },
-                        "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
-                        "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
-                        "AAPL,current-available", 2100,
-                        "AAPL,current-extra", 2200,
-                        "AAPL,current-extra-in-sleep", 1600,
-                        "AAPL,device-internal", 0x02,
-                        "AAPL,max-port-current-in-sleep", 2100,
-                    })
-                }
-                
-            }
             Device (MCHC)
             {
                 Name (_ADR, Zero)
@@ -6245,6 +6192,22 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             {
                 Return (GPRW (0x6D, 0x03))
             }
+            Method (_DSM, 4, NotSerialized)
+                {
+                    If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
+                    Return (Package()
+                    {
+                        "AAPL,clock-id", Buffer() { 0x01 },
+                        "built-in", Buffer() { 0x00 },
+                        "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
+                        "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
+                        "AAPL,current-available", 2100,
+                        "AAPL,current-extra", 2200,
+                        "AAPL,current-extra-in-sleep", 1600,
+                        "AAPL,device-internal", 0x02,
+                        "AAPL,max-port-current-in-sleep", 2100,
+                    })
+                }
         }
 
         Device (EHC2)
@@ -6638,7 +6601,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             
         }
 
-        Device (XHC)
+        Device (XHC1)
         {
             Name (_ADR, 0x00140000)  // _ADR: Address
             Method (DEP, 0, NotSerialized)  // _DEP: Dependencies
@@ -8384,6 +8347,23 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
             {
                 Return (GPRW (0x6D, 0x03))
             }
+            
+            Method (_DSM, 4, NotSerialized)
+                {
+                    If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
+                    Return (Package()
+                    {
+                        "AAPL,clock-id", Buffer() { 0x02 },
+                        "built-in", Buffer() { 0x00 },
+                        "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
+                        "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
+                        "AAPL,current-available", 2100,
+                        "AAPL,current-extra", 2200,
+                        "AAPL,current-extra-in-sleep", 1600,
+                        "AAPL,device-internal", 0x02,
+                        "AAPL,max-port-current-in-sleep", 2100,
+                    })
+                }
         }
 
         Device (HDEF)
@@ -12725,7 +12705,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
         If (LOr (LEqual (Arg0, 0x03), LEqual (Arg0, 0x04)))
         {
-            \_SB.PCI0.XHC.XWAK ()
+            \_SB.PCI0.XHC1.XWAK ()
             \_SB.PCI0.LPCB.EC0.WRAM (0x0533, 0x69)
             \_SB.PCI0.LPCB.EC0.WRAM (0x0534, 0x64)
         }
@@ -13199,7 +13179,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Package (0x02)
                 {
-                    "\\_SB.PCI0.XHC", 
+                    "\\_SB.PCI0.XHC1", 
                     0xFFFFFFFF
                 }, 
 
@@ -13442,7 +13422,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
 
                 Package (0x03)
                 {
-                    "\\_SB.PCI0.XHC", 
+                    "\\_SB.PCI0.XHC1", 
                     One, 
                     Package (0x02)
                     {
@@ -14016,9 +13996,9 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
                 Notify (\_SB.PCI0.EHC2, 0x02)
             }
 
-            If (LAnd (\_SB.PCI0.XHC.PMEE, \_SB.PCI0.XHC.PMES))
+            If (LAnd (\_SB.PCI0.XHC1.PMEE, \_SB.PCI0.XHC1.PMES))
             {
-                Notify (\_SB.PCI0.XHC, 0x02)
+                Notify (\_SB.PCI0.XHC1, 0x02)
             }
 
             If (LAnd (\_SB.PCI0.HDEF.PMEE, \_SB.PCI0.HDEF.PMES))
@@ -24975,15 +24955,7 @@ DefinitionBlock ("./DSDT.aml", "DSDT", 2, "_ASUS_", "Notebook", 0x00000012)
         }
     }
 
-    Scope (_GPE)
-    {
-    }
-
-    Scope (_SB.PCI0.LPCB.EC0)
-    {
-    }
-
-    Scope (_SB.PCI0.XHC.RHUB.HS05)
+    Scope (_SB.PCI0.XHC1.RHUB.HS05)
     {
         Name (CAPD, Package (One)
         {
