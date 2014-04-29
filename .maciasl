@@ -1,32 +1,23 @@
-1.0        6. Experimental/DSDT Patches/[ALL] 1. APPLE Names.txt
-1.0        6. Experimental/DSDT Patches/[ALL] 2. DTGP.txt
-1.0        6. Experimental/DSDT Patches/[ALL] 3. Rename GFX0 IGPU.txt
-1.0        6. Experimental/DSDT Patches/[ALL] 5. IRQ Flags.txt
-1.0        6. Experimental/DSDT Patches/[ALL] 6. MCHC Device.txt
-1.0        6. Experimental/DSDT Patches/[ALL] 7. SMBus Device.txt
-1.0        6. Experimental/DSDT Patches/[ALL] AC Power.txt
-1.0        6. Experimental/DSDT Patches/[ALL] Audio HDAU ID1.txt
-1.0        6. Experimental/DSDT Patches/[ALL] Audio HDEF ID1.txt
-1.0        6. Experimental/DSDT Patches/[ALL] FixShutdown.txt
-1.0        6. Experimental/DSDT Patches/[ALL] FixWake.txt
-1.0        6. Experimental/DSDT Patches/[ALL] HD3000 Graphics.txt
-1.0        6. Experimental/DSDT Patches/[ALL] HD4000 Graphics.txt
-1.0        6. Experimental/DSDT Patches/[ALL] HPET Device.txt
-1.0        6. Experimental/DSDT Patches/[ALL] IMEI Device (Haswell).txt
-1.0        6. Experimental/DSDT Patches/[ALL] IMEI Device (Ivy).txt
-1.0        6. Experimental/DSDT Patches/[ALL] IMEI Device (Sandy).txt
-1.0        6. Experimental/DSDT Patches/[ALL] Nvidia PowerOff.txt
-1.0        6. Experimental/DSDT Patches/[ALL] PNLF (Haswell).txt
-1.0        6. Experimental/DSDT Patches/[ALL] PNLF (Sandy+Ivy).txt
-1.0        6. Experimental/DSDT Patches/[ALL] SATA (Haswell).txt
-1.0        6. Experimental/DSDT Patches/[ALL] USB (Ivy).txt
-1.0        6. Experimental/DSDT Patches/[ALL] USB (Sandy).txt
-1.0        6. Experimental/DSDT Patches/[ASUS] ALS Sensor (Haswell).txt
-1.0        6. Experimental/DSDT Patches/[ASUS] ALS Sensor (Ivy+Sandy).txt
-1.0        6. Experimental/DSDT Patches/[ASUS] Batterypatch UX3xxxx.txt
-1.0        6. Experimental/DSDT Patches/[ASUS] Brightness Keys.txt
-1.0        6. Experimental/DSDT Patches/[ASUS] KeyBacklight (Haswell).txt
-1.0        6. Experimental/DSDT Patches/[ASUS] KeyBacklight (Sandy+Ivy).txt
-1.0        6. Experimental/DSDT Patches/[ASUS] KeyBacklight 16LVL (Haswell).txt
-1.0        6. Experimental/DSDT Patches/[ASUS] KeyBacklight 16LVL (Sandy+Ivy).txt
-1.0        6. Experimental/DSDT Patches/[ASUS] Wifi+BT KeyToggle.txt
+[1.0]        ALL        DSDT-Patches/[IMEI-Device(Haswell).txt
+[1.0]        ALL        DSDT-Patches/AC-Power.txt
+[1.0]        ALL        DSDT-Patches/APPLE Names.txt
+[1.0]        ALL        DSDT-Patches/Audio-HDAU-ID1.txt
+[1.0]        ALL        DSDT-Patches/AudioHDEF-ID1.txt
+[1.0]        ALL        DSDT-Patches/DTGP.txt
+[1.0]        ALL        DSDT-Patches/FixShutdown.txt
+[1.0]        ALL        DSDT-Patches/FixWake.txt
+[1.0]        ALL        DSDT-Patches/HD3000-Graphics.txt
+[1.0]        ALL        DSDT-Patches/HD4000Graphics.txt
+[1.0]        ALL        DSDT-Patches/HPET-Device.txt
+[1.0]        ALL        DSDT-Patches/IMEI-Device(Ivy).txt
+[1.0]        ALL        DSDT-Patches/IMEI-Device(Sandy).txt
+[1.0]        ALL        DSDT-Patches/IRQ-Flags.txt
+[1.0]        ALL        DSDT-Patches/MCHC-Device.txt
+[1.0]        ALL        DSDT-Patches/Nvidia-PowerOff.txt
+[1.0]        ALL        DSDT-Patches/PNLF(Haswell).txt
+[1.0]        ALL        DSDT-Patches/PNLF(Sandy+Ivy).txt
+[1.0]        ALL        DSDT-Patches/Rename-GFX0-IGPU.txt
+[1.0]        ALL        DSDT-Patches/SATA(Haswell).txt
+[1.0]        ALL        DSDT-Patches/SMBus-Device.txt
+[1.0]        ALL        DSDT-Patches/USB(Ivy).txt
+[1.0]        ALL        DSDT-Patches/USB(Sandy).txt
