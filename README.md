@@ -1,4 +1,4 @@
-ASUS UX-Series OSX Support!
+ASUS OSX Support!
 ==========
 
 <br>Im Going to Support any ASUS UX Series Notebooks!
