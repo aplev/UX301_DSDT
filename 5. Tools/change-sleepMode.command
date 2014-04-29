@@ -5,7 +5,6 @@ clear
 }
 
 
-
 memoMSG() {
 
 # Programm attributes
